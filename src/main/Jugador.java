@@ -15,4 +15,10 @@ public class Jugador {
 
         mano = mazo.repartir(cantidad);
     }
+
+    public int getCantidadCartas() {
+        return mano.size();
+    }
+
+
 }

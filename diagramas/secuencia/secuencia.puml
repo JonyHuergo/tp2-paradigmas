@@ -1,0 +1,29 @@
+@startuml Diagrama de secuencia
+
+title Inicializacion de Objetos
+
+actor NOMBRE_A_DEFINIR
+participant "cA:Corazon" as  Carta1
+participant "cK:Corazon" as  Carta2
+participant "cQ:Corazon" as  Carta3
+participant "cJ:Corazon" as  Carta4
+participant "c10:Corazon" as  Carta5
+participant "mano:ManoPoker" as Mano
+participant ":PuntuacionPorManoEscaleraReal" as PuntuacionPorManoEscaleraReal
+
+NOMBRE_A_DEFINIR -> Carta1: Corazon('A')
+NOMBRE_A_DEFINIR -> Carta2: Corazon('K')
+NOMBRE_A_DEFINIR -> Carta3: Corazon('Q')
+NOMBRE_A_DEFINIR -> Carta4: Corazon('J')
+NOMBRE_A_DEFINIR -> Carta5: Corazon('10')
+NOMBRE_A_DEFINIR -> Mano: ManoPoker([cA, cK, cQ, cJ, c10])
+Mano -> Mano: determinarPuntuacionPorMano()
+Mano -> PuntuacionPorManoEscaleraReal: equals()
+Mano <-- PuntuacionPorManoEscaleraReal
+
+
+
+
+
+
+@enduml

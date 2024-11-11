@@ -1,0 +1,122 @@
+@startuml Diagrama de Clases
+
+skinparam classAttributeIconSize 0
+
+title Diagrama de Clases Jugador
+
+class Jugador { 
+    -nombre
+    
+}
+
+class PuntajeJugador {
+    -Integer puntaje
+}
+
+class CartaPoker {
+    -Integer puntaje
+    -String palo
+    +puntajeEsIgual(Carta carta)
+    +paloEsIgual(Carta carta)
+    +esInmediatamenteSuperior(Carta carta)
+    +esInmediatamenteInferior(Carta carta)
+}
+
+
+class Mazo {
+    ' +pedirCartas(Integer cantidad)
+    +repartirCartas(CartasDisponibles)
+}
+
+class CartasDisponibles {
+    +agregarCarta(Carta carta)
+}
+
+class ManoPoker {
+    -limite
+    -listadoCartas
+    +agregarCarta(Carta carta)
+    +sacarCarta(Carta carta)
+    ' +determinarPuntuacionPorMano(CartarPoker)
+    ' +setPuntuacionPorMano(PuntuacionPorMano)
+    +evaluar()
+}
+
+/'
+ ManoPoker.agregar(Carta carta){
+
+ }
+
+
+ ManoPoker.evaluar(PuntajeJugador, Comodines){
+    var valor_numerico, multiplicador, puntuacion
+
+    for each CartaPoker in CartasPoker{
+        valor_numerico = CartaPoker.sumar(valor_numerico);
+    }
+
+    for each Comodin in Comodines{
+        multiplicador = Comodin.sumar(multiplicador);
+    }
+
+    determinarPuntuacionPorMano(CartarPoker);
+    puntuacion = PuntuacionPorMano.calcular(valor_numerico, multiplicador);
+    PuntaJugador.sumar(puntuacion);
+  }
+'/
+
+' interfaz, sus hijas implementa el metodo de manera !=
+
+
+abstract class PuntuacionPorMano { 
+    -Integer puntajeBase
+    -Integer multiplicadorBase
+    +definirTipoDeMano(listadoCartas)
+    ' +setPuntajeBase(Integer)
+    ' +setMultiplicadorBase(Integer)
+    +calcular(listadoCartas)
+    -esEscalera(listadoCartas)
+    -esPar(listadoCartas)
+}
+
+' class PuntuacionPorManoEscaleraReal {
+'     +calcular
+' }
+
+
+Jugador --> CartasDisponibles
+Jugador --> Mazo
+Jugador --> ManoPoker
+Jugador --> PuntajeJugador
+
+ManoPoker *-- PuntuacionPorMano
+ManoPoker --> "5" CartaPoker
+' PuntuacionPorManoEscaleraReal -up-|> PuntuacionPorMano 
+
+/' 
+Posible manera de conseguir la mano?
+def evaluate_hand(self):
+        """Determine the type of poker hand."""
+        rank_counts = self.get_rank_counts()
+        values = list(rank_counts.values())
+        
+        if self.is_flush() and self.is_straight():
+            return "Straight Flush"
+        elif 4 in values:
+            return "Four of a Kind"
+        elif 3 in values and 2 in values:
+            return "Full House"
+        elif self.is_flush():
+            return "Flush"
+        elif self.is_straight():
+            return "Straight"
+        elif 3 in values:
+            return "Three of a Kind"
+        elif values.count(2) == 2:
+            return "Two Pair"
+        elif 2 in values:
+            return "One Pair"
+        else:
+            return "High Card" '/
+
+@enduml

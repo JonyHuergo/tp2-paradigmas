@@ -1,0 +1,13 @@
+@startuml Diagrama de secuencia 2, determinarPuntuacionPorMano
+
+title Caso donde se pide a una mano de póquer que se evalúe y se le asigne puntaje a un jugador
+
+actor NOMBRE_A_DEFINIR
+participant "mano:ManoPoker" as Mano
+participant "PuntuacionPorMano" as PuntuacionPorMano
+participant "PuntuacionPorManoEscaleraReal" as PuntuacionPorManoEscaleraReal
+NOMBRE_A_DEFINIR -> Mano:determinarPuntuacionPorMano()
+Mano -> PuntuacionPorMano:calcular(sumaValoresBase)
+PuntuacionPorMano -> PuntuacionPorManoEscaleraReal: AumentoPorManoDePoker(sumaValoresBase)
+PuntuacionPorManoEscaleraReal --> PuntuacionPorManoEscaleraReal: ValorTotal
+@enduml

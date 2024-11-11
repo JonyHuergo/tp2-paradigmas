@@ -1,6 +1,7 @@
 package main;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collections;
 
 public class Mazo {
@@ -23,5 +24,14 @@ public class Mazo {
             }
         }
         Collections.shuffle(cartas);
+    }
+
+
+    public ArrayList<Carta> repartir(int cantidad) {
+        ArrayList<Carta> mano = new ArrayList<>();
+        for (int i = 0; i < cantidad && !cartas.isEmpty(); i++) {
+            mano.add(cartas.remove(0));
+        }
+        return mano;
     }
 }

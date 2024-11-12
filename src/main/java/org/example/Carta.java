@@ -1,4 +1,4 @@
-package main;
+package org.example;
 
 public class Carta {
     private String palo;

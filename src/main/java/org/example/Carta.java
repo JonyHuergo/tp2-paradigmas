@@ -11,6 +11,7 @@ public class Carta {
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = valor;
+        puntaje = new Puntaje(valor);
     }
 
     public int getValor(){
@@ -55,7 +56,7 @@ public class Carta {
     }
 
     public int actualizarPuntajeTotal(int puntajeTotal) {
-        return puntajeTotal + puntaje;
+        return puntajeTotal + puntaje.getValor();
     }
 
     public int actualizarMultiplicadorTotal(int multiplicadorTotal) {

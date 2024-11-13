@@ -21,7 +21,7 @@ public class Jugador {
         mano = mazo.repartir(cantidad);
     }
 
-    public int getCartasEnMano() { // Se va a necesitar en un futuro
+    public ArrayList<Carta> getCartasEnMano() { // Se va a necesitar en un futuro
         return mano;
     }
 
@@ -33,12 +33,14 @@ public class Jugador {
     }
 
     public void jugar(ManoPoker manoJugada){// nose si recibe la manoPoker por parametro despues vemos
-
+        /*
         puntaje = puntaje.sumarCon(manoJugada.evaluar());
         multiplicador = manoJugada.getMultiplicadorBase();
         puntaje = puntaje.sumarCon(manoJugada.calcularConModificadores());
         multiplicador = 
 
         Ronda.pasarTurno();
+        */
+
     }
 }

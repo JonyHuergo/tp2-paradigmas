@@ -3,7 +3,7 @@ package org.example;
 import java.util.ArrayList;
 
 public class ManoPoker {
-    private ArrayList<Carta> cartas;
+    private ArrayList<Carta> cartas = new ArrayList<Carta>();
     private PuntuacionPorMano puntuacionPorMano = new PuntuacionPorMano();
 
     public ManoPoker() {

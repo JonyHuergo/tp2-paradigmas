@@ -7,7 +7,7 @@ public class Juego {
     private boolean juegoGanado = false;
 
     public void jugar(){
-
+        /*
         while(ronda.puntajeSuperoElLimite(jugador.jugar()) && cantidadRondas > 0){
 
 
@@ -19,6 +19,7 @@ public class Juego {
             juegoGanado = true;
         }
         juegoGanado = false;
+        */
     }
     public void PartidaPerdida(){
 

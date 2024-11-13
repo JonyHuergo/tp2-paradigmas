@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class casosDeUsoTest {
+public class CasosDeUsoTest {
     @Test
     public void test01TieneCartasSuficientes() {
         Mazo mazo = new Mazo();
@@ -55,26 +55,31 @@ public class casosDeUsoTest {
         //Comodin
     }
 
-    //Verificar que al modificar una carta al utilizar un tarot que cambia sus puntos por 10,
-    // se aplique el puntaje correcto en el mazo.
     @Test
-    public void test06TarotAgregar10PuntosModificaPuntosCorrectamente(){
-        Puntaje puntajeEsperado = new Puntaje(30);
+    public void test06TarotAgregar10PuntosModificaPuntosCorrectamente() {
+        Puntaje puntajeEsperado = new Puntaje(19); // (5 por mano (carta alta) + 4 por la carta + 10 por tarot) * 1 por mano
+        Carta carta = new Carta("Diamante", 4);
         TarotAgregar10Puntos tarot = new TarotAgregar10Puntos();
-        Carta carta = new Carta("Diamante", 1);
-        tarot.aplicarEfecto(carta);
         ManoPoker manoJugada = new ManoPoker();
-        Puntaje manoJugada.evaluar();
+        
+        tarot.aplicarEfecto(carta);
+        manoJugada.agregarCarta(carta);
+        Puntaje puntajeObtenido = manoJugada.evaluar();
 
+        assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 19.");
     }
 
-    //Verificar que al modificar una carta utilizando un tarot que cambia su multiplicador
-    // a un x6 se aplique el valor correspondiente.
     @Test
-    public void test07TarotPorSiesModificaPuntosCorrectamente(){
+    public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
+        Puntaje puntajeEsperado = new Puntaje(54); // (5 por mano (carta alta) + 4 por la carta) * 6 por tarot
+        Carta carta = new Carta("Diamante", 4);
         TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6();
-        Carta carta = new Carta("Diamante", 5);
-        tarot.aplicarEfecto(carta);
         ManoPoker manoJugada = new ManoPoker();
+        
+        tarot.aplicarEfecto(carta);
+        manoJugada.agregarCarta(carta);
+        Puntaje puntajeObtenido = manoJugada.evaluar();
+
+        assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 54.");
     }
 }

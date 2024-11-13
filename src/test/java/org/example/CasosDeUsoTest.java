@@ -32,11 +32,11 @@ public class CasosDeUsoTest {
 
     @Test
     public void test04EvaluarMano(){
-        Puntaje puntajeEsperado = new Puntaje(800);
+        Puntaje puntajeEsperado = new Puntaje(920); // (100 por mano (escalera de color) + 15 por las cartas) * 8 por mano
         ManoPoker manoJugada = new ManoPoker();
         for (int i = 1; i <= 5; i++) {
-            Carta c1 = new Carta("diamantes", i);
-            manoJugada.agregarCarta(c1);
+            Carta carta = new Carta("diamantes", i);
+            manoJugada.agregarCarta(carta);
         }
         assertTrue(puntajeEsperado.equals(manoJugada.evaluar()));
     }

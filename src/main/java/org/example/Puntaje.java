@@ -21,6 +21,7 @@ public class Puntaje {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         Puntaje puntaje = (Puntaje) obj;
-        return puntaje.getValor() == valor;
+        //return puntaje.getValor() == valor;
+        return this.valor == puntaje.valor;
     }
 }

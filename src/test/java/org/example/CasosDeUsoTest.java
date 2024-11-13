@@ -10,7 +10,7 @@ public class CasosDeUsoTest {
         Mazo mazo = new Mazo();
         int cartasEsperadas = 52;
 
-        int cartasObtenidas = mazo.getCartas().size();
+        int cartasObtenidas = mazo.cantidadDeCartas();
 
         assertEquals(cartasObtenidas, cartasEsperadas);
     }
@@ -18,13 +18,16 @@ public class CasosDeUsoTest {
     @Test
     public void test02RepartirCartas() {
         Jugador jugador = new Jugador();
+        int cartasEsperadasJugador = 8;
+        int cartasEsperadasMazo = 44;
+        
         jugador.repartirCartas(8);
+        int cartasObtenidasJugador = jugador.getCartasEnMano().size();
+        int cartasObtenidasMazo = mazo.cantidadDeCartas();
 
-        int cartasEsperadas = 8;
-        int cartasObtenidas = jugador.getCantidadCartas();
-
-        assertEquals(cartasEsperadas, cartasObtenidas);
-//        assertTrue(true, "El mazo debería tener 44 cartas después de repartir 8.");
+        // Les parece bien que haya dos asserts? Lo dividirian en dos tests?
+        assertEquals(cartasEsperadasJugador, cartasObtenidasJugador, "El jugador debería tener 8 cartas en su mano después de repartir.");
+        assertEquals(cartasEsperadasMazo, cartasObtenidasMazo, "El mazo debería tener 44 cartas después de repartir 8.");
     }
 
     @Test
@@ -32,12 +35,11 @@ public class CasosDeUsoTest {
         Puntaje puntajeEsperado = new Puntaje(800);
         ManoPoker manoJugada = new ManoPoker();
         for (int i = 1; i <= 5; i++) {
-            Carta c1 = new Carta("Diamante", i);
+            Carta c1 = new Carta("diamantes", i);
             manoJugada.agregarCarta(c1);
         }
         assertTrue(puntajeEsperado.equals(manoJugada.evaluar()));
     }
-
 
     @Test
     public void test03JugarMano(){
@@ -49,7 +51,7 @@ public class CasosDeUsoTest {
         Puntaje puntajeEsperado = new Puntaje(30);
         ManoPoker manoJugada = new ManoPoker();
         for (int i = 1; i <= 5; i++) {
-            Carta c1 = new Carta("Diamante", i);
+            Carta c1 = new Carta("diamantes", i);
             manoJugada.agregarCarta(c1);
         }
         //Comodin
@@ -58,7 +60,7 @@ public class CasosDeUsoTest {
     @Test
     public void test06TarotAgregar10PuntosModificaPuntosCorrectamente() {
         Puntaje puntajeEsperado = new Puntaje(19); // (5 por mano (carta alta) + 4 por la carta + 10 por tarot) * 1 por mano
-        Carta carta = new Carta("Diamante", 4);
+        Carta carta = new Carta("diamantes", 4);
         TarotAgregar10Puntos tarot = new TarotAgregar10Puntos();
         ManoPoker manoJugada = new ManoPoker();
         
@@ -72,7 +74,7 @@ public class CasosDeUsoTest {
     @Test
     public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
         Puntaje puntajeEsperado = new Puntaje(54); // (5 por mano (carta alta) + 4 por la carta) * 6 por tarot
-        Carta carta = new Carta("Diamante", 4);
+        Carta carta = new Carta("diamantes", 4);
         TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6();
         ManoPoker manoJugada = new ManoPoker();
         

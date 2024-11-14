@@ -5,10 +5,15 @@ skinparam classAttributeIconSize 0
 title Diagrama de Clases
 
 class Juego {
-    +jugarRonda()
+    +Juego(limitesPorRonda: Puntaje[8], limitesPorTurno: Puntaje[8][5])
+    +jugar()
 }
-class ronda { 
 
+class Ronda { 
+    -limiteDePuntos: Puntaje
+    -limitesDePuntosPorTurno: Puntaje[5]
+    +Ronda(limiteDePuntos: Puntaje,limiteDePuntosPorTurno: Puntaje[5])
+    +esGanada()
 }
 
 class Panel {
@@ -16,49 +21,58 @@ class Panel {
 }
 
 class Jugador { 
+    -puntaje: Puntaje
+    -mazo: Mazo
+    -mano: ArrayList<Carta>
+    +repartirCartas()
+}
+
+'--------------------------------------------------------
+'class PuntajeJugador {
     
-}
+'}
+'class Carta {
 
-class PuntajeJugador {
+'}
+
+'class CartaPoker {
+'    -puntaje: Puntaje
+'    -palo: String
+'    +puntajeEsIgual(carta: Carta): boolean
+'    +paloEsIgual(carta: Carta): boolean
+'    +esInmediatamenteSuperior(carta: Carta): boolean
+'    +esInmediatamenteInferior(carta: Carta): boolean
+'    +agregarPuntos(puntos: Puntaje)
+'    +modificarMultiplicador()
+'}
+
+'class Mazo {
+'    +repartir(cantidad: int): ArrayList<Carta>
+'}
+
+'class ManoPoker {
+'    -limite
+'    +agregarCarta(Carta carta)
+'    +sacarCarta(Carta carta)
+'    +evaluar()
+'}
+'------------------------------------------------------
+
+'class CartaComodin{
+
+'}
+
+'class CartaTarot {
+
+'}
+
+
+
+'class CartasDisponibles {
     
-}
+'}
 
-class Carta {
 
-}
-
-class CartaPoker {
-    -Integer puntaje
-    -String palo
-    +puntajeEsIgual(Carta carta)
-    +paloEsIgual(Carta carta)
-    +esInmediatamenteSuperior(Carta carta)
-    +esInmediatamenteInferior(Carta carta)
-}
-
-class CartaComodin{
-
-}
-
-class CartaTarot {
-
-}
-
-class Mazo {
-    +pedirCartas(Integer cantidad)
-}
-
-class CartasDisponibles {
-    
-}
-
-class ManoPoker {
-    -limite
-    +agregarCarta(Carta carta)
-    +sacarCarta(Carta carta)
-    +determinarPuntuacionPorMano(CartarPoker)
-    +evaluar()
-}
 
 /'
  ManoPoker.agregar(Carta carta){
@@ -84,21 +98,24 @@ class ManoPoker {
 '/
 
 ' interfaz, sus hijas implementa el metodo de manera !=
-abstract class PuntuacionPorMano { 
-    +calcular
-}
+'abstract class PuntuacionPorMano { 
+'    +calcular()
+'}
 
-class PuntuacionPorManoEscaleraReal {
+'class PuntuacionPorManoEscaleraReal {
 
-}
+'}
 
 
 Juego *--> Jugador
+Juego "1" *--> "8" Ronda
 Juego *--> Panel
-Jugador "1" --> "8" Carta
-ManoPoker --> PuntuacionPorMano
-ManoPoker --> "*" CartaPoker
-PuntuacionPorManoEscaleraReal --|> PuntuacionPorMano 
+'Jugador "1" --> "8" Carta
+'Jugador "1" *--> "1" Mazo
+'Mazo *-left-> "52" Carta
+'ManoPoker --> PuntuacionPorMano
+'ManoPoker --> "*" CartaPoker
+'PuntuacionPorManoEscaleraReal --|> PuntuacionPorMano 
 
 /' 
 Posible manera de conseguir la mano?

@@ -82,6 +82,6 @@ public class CasosDeUsoTest {
         manoJugada.agregarCarta(carta);
         Puntaje puntajeObtenido = manoJugada.evaluar();
 
-        assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 54.");
+        assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 63.");
     }
 }

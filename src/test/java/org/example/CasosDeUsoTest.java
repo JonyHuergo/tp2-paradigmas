@@ -73,7 +73,7 @@ public class CasosDeUsoTest {
 
     @Test
     public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
-        Puntaje puntajeEsperado = new Puntaje(54); // (5 por mano (carta alta) + 4 por la carta) * 6 por tarot
+        Puntaje puntajeEsperado = new Puntaje(63); // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
         Carta carta = new Carta("diamantes", 4);
         TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6();
         ManoPoker manoJugada = new ManoPoker();

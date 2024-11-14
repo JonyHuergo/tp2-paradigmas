@@ -55,6 +55,9 @@ public class PuntuacionPorMano {
     }
 
     private boolean esEscaleraColor(ArrayList<Carta> cartas){
+        if (cartas.size() == 1) {
+            return false;
+        }
         if (esEscalera(cartas) && esColor(cartas)) {
             return true;
         } else return true;

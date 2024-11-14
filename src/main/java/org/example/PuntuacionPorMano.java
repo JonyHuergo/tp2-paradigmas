@@ -51,13 +51,22 @@ public class PuntuacionPorMano {
     }
 
     private boolean esEscaleraReal(ArrayList<Carta> cartas){ // Revisar
-        return esColor(cartas) && esEscalera(cartas);
+        return esColor(cartas) && esEscalera(cartas) && contieneAs(cartas);
+    }
+
+    private boolean contieneAs(ArrayList<Carta> cartas){
+        for (Carta carta : cartas) {
+            if (carta.getValue() == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean esEscaleraColor(ArrayList<Carta> cartas){
         if (esEscalera(cartas) && esColor(cartas)) {
             return true;
-        } else return true;
+        } else return false;
     }
 
     private boolean esPoker(ArrayList<Carta> cartas){
@@ -78,7 +87,7 @@ public class PuntuacionPorMano {
 
     private boolean esColor(ArrayList<Carta> cartas){
         if (cartas.size() == 5) {
-            for (int i = 0; i < cartas.size() - 1; i++) {
+            for (int i = 1; i < cartas.size(); i++) {
                 if (!cartas.get(i).paloEsIgual(cartas.get(0))) {
                     return false;
                 }

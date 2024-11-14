@@ -9,7 +9,7 @@ public class Ronda {
     }
     public void pasarTurno(Puntaje puntajeTotal){
         this.turno -= 1;
-        if(limiteDePuntos <= puntajeTotal);
+        if(limiteDePuntos.esMenorA(puntajeTotal));
             System.out.println("siguiente ronda!");
         if(turno <= 0){
             System.out.println("perdiste!");

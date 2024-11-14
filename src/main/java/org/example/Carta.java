@@ -11,6 +11,8 @@ public class Carta {
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = valor;
+        this.multiplicador = 0;
+        puntaje = new Puntaje(valor);
     }
 
     public int getValor(){
@@ -51,11 +53,11 @@ public class Carta {
     }
 
     public void agregarPuntos(Puntaje puntos) {
-        this.puntaje.sumarCon(puntos);
+        puntaje = this.puntaje.sumarCon(puntos);
     }
 
     public int actualizarPuntajeTotal(int puntajeTotal) {
-        return puntajeTotal + puntaje;
+        return puntajeTotal + puntaje.getValor();
     }
 
     public int actualizarMultiplicadorTotal(int multiplicadorTotal) {

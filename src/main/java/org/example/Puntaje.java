@@ -16,6 +16,9 @@ public class Puntaje {
         return valor;
     }
 
+    public boolean esMenorA(Puntaje otroPuntaje){
+        return valor > otroPuntaje.getValor();
+    }
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;

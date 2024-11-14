@@ -19,7 +19,7 @@ public class CasosDeUsoTest {
     public void test02RepartirCartas() {
         Jugador jugador = new Jugador();
         int cartasEsperadasJugador = 8;
-        int cartasEsperadasMazo = 44;
+        //int cartasEsperadasMazo = 44;
         
         jugador.repartirCartas(8);
         int cartasObtenidasJugador = jugador.getCartasEnMano().size();

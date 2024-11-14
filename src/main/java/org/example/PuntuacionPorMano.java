@@ -51,7 +51,16 @@ public class PuntuacionPorMano {
     }
 
     private boolean esEscaleraReal(ArrayList<Carta> cartas){ // Revisar
-        return esColor(cartas) && esEscalera(cartas);
+        return esColor(cartas) && esEscalera(cartas) && contieneAs(cartas);
+    }
+
+    private boolean contieneAs(ArrayList<Carta> cartas){
+        for (Carta carta : cartas) {
+            if (carta.getValue() == 1) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean esEscaleraColor(ArrayList<Carta> cartas){

@@ -11,8 +11,9 @@ public class Puntaje {
         return new Puntaje(this.valor + otroPuntaje.getValor());
     }
 
-    public int getValor() {
+    public Puntaje multiplicarCon(Puntaje otroPuntaje){ return new Puntaje(this.valor * otroPuntaje.getValor()); }
 
+    public int getValor() {
         return valor;
     }
 

@@ -1,8 +1,10 @@
 package org.example;
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CasosDeUsoTest {
     @Test
@@ -48,13 +50,25 @@ public class CasosDeUsoTest {
 
     @Test
     public void test05EvaluarManoConComodin(){
-        Puntaje puntajeEsperado = new Puntaje(30);
         ManoPoker manoJugada = new ManoPoker();
         for (int i = 1; i <= 5; i++) {
             Carta c1 = new Carta("diamantes", i);
             manoJugada.agregarCarta(c1);
         }
-        //Comodin
+        ArrayList<Comodin> comodines = new ArrayList<Comodin>();
+        comodines.add(new Comodin(10,2));
+        comodines.add(new Comodin(10,5));
+        ManoComodines mano1Comodines = new ManoComodines(comodines);
+
+        ArrayList<Comodin> comodines2 = new ArrayList<Comodin>();
+        comodines2.add(new Comodin(10,5));
+        comodines2.add(new Comodin(10,2));
+        ManoComodines mano2Comodines = new ManoComodines(comodines2);
+
+        Puntaje puntajeObtenido1 = mano1Comodines.aplicarComodines(manoJugada);
+        Puntaje puntajeObtenido2 = mano2Comodines.aplicarComodines(manoJugada);
+
+        assertFalse(puntajeObtenido1.equals(puntajeObtenido2));
     }
 
     @Test

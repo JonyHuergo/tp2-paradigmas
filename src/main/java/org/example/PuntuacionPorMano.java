@@ -56,7 +56,7 @@ public class PuntuacionPorMano {
 
     private boolean contieneAs(ArrayList<Carta> cartas){
         for (Carta carta : cartas) {
-            if (carta.getValue() == 1) {
+            if (carta.getValor() == 1) {
                 return true;
             }
         }

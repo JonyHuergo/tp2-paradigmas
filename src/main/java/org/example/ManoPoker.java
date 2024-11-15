@@ -1,10 +1,17 @@
-package main;
+package org.example;
 
 import java.util.ArrayList;
 
 public class ManoPoker {
-    private ArrayList<Carta> cartas = new ArrayList<>();
+    private ArrayList<Carta> cartas = new ArrayList<Carta>();
     private PuntuacionPorMano puntuacionPorMano = new PuntuacionPorMano();
+
+    public ManoPoker() {
+
+    }
+    public ManoPoker(ArrayList<Carta> cartas){
+        this.cartas = cartas;
+    }
 
     public void agregarCarta(Carta carta) {
         cartas.add(carta);

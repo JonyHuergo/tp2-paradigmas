@@ -1,7 +1,6 @@
-package main;
+package org.example;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
 
 public class Mazo {
@@ -12,8 +11,13 @@ public class Mazo {
         inicializarMazo();
     }
 
-    public ArrayList<Carta> getCartas(){
+    /* public ArrayList<Carta> getCartas(){
         return cartas;
+    } */
+
+    // Se va a necesitar en un futuro (el juego siempre muestra cuantas cartas tiene el mazo ej: 44/52)
+    public int cantidadDeCartas(){ 
+        return cartas.size();
     }
 
     private void inicializarMazo() {
@@ -25,7 +29,6 @@ public class Mazo {
         }
         Collections.shuffle(cartas);
     }
-
 
     public ArrayList<Carta> repartir(int cantidad) {
         ArrayList<Carta> mano = new ArrayList<>();

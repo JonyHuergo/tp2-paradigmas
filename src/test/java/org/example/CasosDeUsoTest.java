@@ -75,7 +75,7 @@ public class CasosDeUsoTest {
     public void test06TarotAgregar10PuntosModificaPuntosCorrectamente() {
         Puntaje puntajeEsperado = new Puntaje(19); // (5 por mano (carta alta) + 4 por la carta + 10 por tarot) * 1 por mano
         Carta carta = new Carta("diamantes", 4);
-        TarotAgregar10Puntos tarot = new TarotAgregar10Puntos();
+        TarotAgregar10Puntos tarot = new TarotAgregar10Puntos("Agregador10pts", "Agrega10pts", new Efecto(10, 1), "cualquiera", "cualquiera");
         ManoPoker manoJugada = new ManoPoker();
         
         tarot.aplicarEfecto(carta);
@@ -89,7 +89,7 @@ public class CasosDeUsoTest {
     public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
         Puntaje puntajeEsperado = new Puntaje(63); // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
         Carta carta = new Carta("diamantes", 4);
-        TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6();
+        TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6("MultiplicadorX6", "multiplicador añade 6pts", new Efecto(1, 6), "cualquiera", "cualquiera");
         ManoPoker manoJugada = new ManoPoker();
         
         tarot.aplicarEfecto(carta);

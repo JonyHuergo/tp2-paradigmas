@@ -1,19 +1,33 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 public class Carta {
+    private String nombre;
     private String palo;
     private int valor;
-    private Puntaje puntaje;
+    private Puntaje puntos;
     private int multiplicador;
 
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = valor;
         this.multiplicador = 0;
-        puntaje = new Puntaje(valor);
+        puntos = new Puntaje(valor);
     }
+
+    @JsonCreator
+    public Carta(@JsonProperty("nombre")String nombre, @JsonProperty("palo")String palo, @JsonProperty("numero") int valor, @JsonProperty("puntos")int puntos, @JsonProperty("multiplicador") int multiplicador) {
+        this.nombre = nombre;
+        this.palo = palo;
+        this.valor = valor;
+        this.puntos = new Puntaje(puntos);
+        this.multiplicador = multiplicador;
+    }
+
 
     public int getValor(){
         return this.valor;
@@ -53,11 +67,11 @@ public class Carta {
     }
 
     public void agregarPuntos(Puntaje puntos) {
-        puntaje = this.puntaje.sumarCon(puntos);
+        this.puntos = this.puntos.sumarCon(puntos);
     }
 
     public int actualizarPuntajeTotal(int puntajeTotal) {
-        return puntajeTotal + puntaje.getValor();
+        return puntajeTotal + puntos.getValor();
     }
 
     public int actualizarMultiplicadorTotal(int multiplicadorTotal) {

@@ -1,9 +1,13 @@
 package org.example;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Puntaje {
     private int valor;
 
-    public Puntaje(int valor) {
+    @JsonCreator
+    public Puntaje(@JsonProperty("puntajeASuperar") int valor) {
         this.valor = valor;
     }
 
@@ -28,4 +32,6 @@ public class Puntaje {
         //return puntaje.getValor() == valor;
         return this.valor == puntaje.valor;
     }
+
 }
+

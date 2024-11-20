@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Tarot.Tarot;
+
 //Cambia multiplicador de la carta a un x6
 public class TarotMultiplicadorX6 extends Tarot {
 

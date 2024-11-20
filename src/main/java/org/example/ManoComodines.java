@@ -3,18 +3,19 @@ package org.example;
 import java.util.ArrayList;
 
 public class ManoComodines {
-    private ArrayList<Comodin> comodines = new ArrayList<Comodin>();
+    private ArrayList<Comodin> comodines = new ArrayList<>();
+
+    public ManoComodines() {
+
+    }
 
     public ManoComodines(ArrayList<Comodin> comodines) {
         this.comodines = comodines;
     }
 
-    public Puntaje aplicarComodines(ManoPoker manoPoker){
-        Puntaje puntajeBase = manoPoker.evaluar();
+    public void aplicarComodines(ManoPoker manoPoker){
         for (Comodin comodin : comodines) {
-            puntajeBase = comodin.aplicarModificacionPuntaje(puntajeBase);
-            puntajeBase = comodin.aplicarModificacionMultiplicador(puntajeBase);
+            comodin.aplicarEfecto(manoPoker);
         }
-        return puntajeBase;
     }
 }

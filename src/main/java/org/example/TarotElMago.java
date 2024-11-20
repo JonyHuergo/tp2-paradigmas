@@ -2,8 +2,9 @@ package org.example;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.example.Tarot.Tarot;
 
-public class TarotElMago extends Tarot{
+public class TarotElMago extends Tarot {
 /*
     public TarotElMago() {
         super();

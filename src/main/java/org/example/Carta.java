@@ -7,24 +7,76 @@ import java.util.Objects;
 
 public class Carta {
     private String nombre;
-    private String palo;
+    private Palo palo;
     private int valor;
-    private Puntaje puntos;
+    private int puntos;
     private int multiplicador;
 
+    public enum Palo {
+        TREBOL, CORAZONES, PICAS, DIAMANTES;
+
+        public static Palo fromString(String palo) {
+            switch (palo.toLowerCase()) {
+                case "trebol": return TREBOL;
+                case "corazones": return CORAZONES;
+                case "picas": return PICAS;
+                case "diamantes": return DIAMANTES;
+                default: throw new IllegalArgumentException("Palo desconocido: " + palo);
+            }
+        }
+    }
+
+    /*public enum Valor {
+        AS(1), DOS(2), TRES(3), CUATRO(4), CINCO(5),
+        SEIS(6), SIETE(7), OCHO(8), NUEVE(9), DIEZ(10),
+        JOTA(11), REINA(12), REY(13);
+
+        private final int value;
+
+        Valor(int value) {
+            this.value = value;
+        }
+
+        public static Valor fromString(String numero) {
+            switch (numero.toLowerCase()) {
+                case "as": return AS;
+                case "2": return DOS;
+                case "3": return TRES;
+                case "4": return CUATRO;
+                case "5": return CINCO;
+                case "6": return SEIS;
+                case "7": return SIETE;
+                case "8": return OCHO;
+                case "9": return NUEVE;
+                case "10": return DIEZ;
+                case "jota": return JOTA;
+                case "reina": return REINA;
+                case "rey": return REY;
+                default: throw new IllegalArgumentException("Valor desconocido: " + numero);
+            }
+        }
+    }*/
+
     public Carta(String palo, int valor) {
-        this.palo = palo;
+        this.nombre = valor + " de " + palo;
+        this.palo = Palo.fromString(palo);
         this.valor = valor;
         this.multiplicador = 0;
-        puntos = new Puntaje(valor);
+        puntos = valor;
     }
 
     @JsonCreator
-    public Carta(@JsonProperty("nombre")String nombre, @JsonProperty("palo")String palo, @JsonProperty("numero") int valor, @JsonProperty("puntos")int puntos, @JsonProperty("multiplicador") int multiplicador) {
+    public Carta(
+            @JsonProperty("nombre") String nombre,
+            @JsonProperty("palo") String palo,
+            @JsonProperty("numero") int valor,
+            @JsonProperty("puntos") int puntos,
+            @JsonProperty("multiplicador") int multiplicador) {
+
         this.nombre = nombre;
-        this.palo = palo;
+        this.palo = Palo.fromString(palo);
         this.valor = valor;
-        this.puntos = new Puntaje(puntos);
+        this.puntos = puntos;
         this.multiplicador = multiplicador;
     }
 
@@ -33,7 +85,7 @@ public class Carta {
         return this.valor;
     }
 
-    public String getPalo(){
+    public Palo getPalo(){
         return this.palo;
     }
 
@@ -45,7 +97,7 @@ public class Carta {
         return valorCarta == valor;
     }
 
-    public boolean paloEsIgual(String paloCarta){
+    public boolean paloEsIgual(Palo paloCarta){
         return Objects.equals(paloCarta, palo);
     }
 
@@ -66,12 +118,12 @@ public class Carta {
         this.multiplicador = multiplicador;
     }
 
-    public void agregarPuntos(Puntaje puntos) {
-        this.puntos = this.puntos.sumarCon(puntos);
+    public void agregarPuntos(int puntos) {
+        this.puntos += puntos;
     }
 
     public int actualizarPuntajeTotal(int puntajeTotal) {
-        return puntajeTotal + puntos.getValor();
+        return puntajeTotal + puntos;
     }
 
     public int actualizarMultiplicadorTotal(int multiplicadorTotal) {

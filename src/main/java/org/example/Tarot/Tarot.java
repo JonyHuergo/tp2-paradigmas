@@ -1,10 +1,10 @@
-package org.example;
+package org.example.Tarot;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import java.util.ArrayList;
+import org.example.*;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -32,15 +32,20 @@ import java.util.ArrayList;
 public abstract class Tarot {
     private String nombre;
     private String descripcion;
-    private Puntaje puntos;
-    private Puntaje multiplicador;
+    private int puntos;
+    private int multiplicador;
     private String sobre;
     private String ejemplar;
 
     public Tarot(){};
 
     @JsonCreator
-    public Tarot(@JsonProperty("nombre") String nombre, @JsonProperty("descripcion") String descripcion, @JsonProperty("efecto") Efecto efecto, @JsonProperty("sobre")String sobre, @JsonProperty("ejemplar")String ejemplar) {
+    public Tarot(
+            @JsonProperty("nombre") String nombre,
+            @JsonProperty("descripcion") String descripcion,
+            @JsonProperty("efecto") Efecto efecto,
+            @JsonProperty("sobre")String sobre,
+            @JsonProperty("ejemplar")String ejemplar) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.sobre = sobre;

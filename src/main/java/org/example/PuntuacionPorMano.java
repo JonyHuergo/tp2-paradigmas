@@ -3,17 +3,30 @@ package org.example;
 import java.util.ArrayList;
 
 public class PuntuacionPorMano {
-    private int puntajeBase;
-    private int multiplicadorBase;
+    private int puntajeBase = 0;
+    private int multiplicadorBase = 0;
+/*   private ManoComodines manoComodines;
 
-    public Puntaje calcular(ArrayList<Carta> cartas){
+    public PuntuacionPorMano(ManoComodines manoComodines){
+        this.manoComodines = manoComodines;
+   }
+
+ */
+
+    public PuntuacionPorMano calcular(ArrayList<Carta> cartas, ManoComodines manoComodines) {
         definirTipoDeMano(cartas);
+
         for (Carta carta : cartas) {
-            puntajeBase = carta.actualizarPuntajeTotal(puntajeBase);
-            multiplicadorBase = carta.actualizarMultiplicadorTotal(multiplicadorBase);
+            this.puntajeBase = carta.actualizarPuntajeTotal(puntajeBase);
+            this.multiplicadorBase = carta.actualizarMultiplicadorTotal(multiplicadorBase);
         }
-        return new Puntaje(puntajeBase * multiplicadorBase);
+
+        //manoComodines.aplicarComodines(cartas);
+
+        return this;
     }
+
+
 
     private void definirTipoDeMano(ArrayList<Carta> cartas){
 

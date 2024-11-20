@@ -6,6 +6,7 @@ public class ManoPoker {
     private ArrayList<Carta> cartas = new ArrayList<Carta>();
     private PuntuacionPorMano puntuacionPorMano = new PuntuacionPorMano();
 
+
     public ManoPoker() {
 
     }
@@ -21,7 +22,9 @@ public class ManoPoker {
         cartas.remove(carta);
     }
 
-    public Puntaje evaluar(){
-        return (puntuacionPorMano.calcular(cartas));
+    public int evaluar(ManoComodines manoComodines){
+        puntuacionPorMano.calcular(cartas, manoComodines);
+        manoComodines.aplicarComodines(cartas, this);
+        return (puntuacionPorMano.calcular(cartas, manoComodines));
     }
 }

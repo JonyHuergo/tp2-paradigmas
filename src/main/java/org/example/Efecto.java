@@ -6,20 +6,20 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 public class Efecto {
-    private Puntaje puntos;
-    private Puntaje multiplicador;
+    private int puntos;
+    private int multiplicador;
 
     @JsonCreator
     public Efecto(@JsonProperty("puntos") int puntos, @JsonProperty("multiplicador") int multiplicador) {
-        this.puntos = new Puntaje(puntos);
-        this.multiplicador = new Puntaje(multiplicador);
+        this.puntos = puntos;
+        this.multiplicador = multiplicador;
     }
 
-    public Puntaje getPuntos() {
+    public int getPuntos() {
         return this.puntos;
     }
 
-    public Puntaje getMultiplicador() {
+    public int getMultiplicador() {
         return this.multiplicador;
     }
 }

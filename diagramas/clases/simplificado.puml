@@ -5,7 +5,6 @@ skinparam classAttributeIconSize 0
 title Diagrama de Clases Simplificado
 
 class AnalizadorMano {
-    - EvaluadorMano evaluadorInicial
     + AnalizadorMano()
     + Mano analizarMano(ArrayList<Carta> cartas)
 }
@@ -31,8 +30,6 @@ class Carta {
 }
 
 class Juego {
-    - Jugador jugador
-    - Ronda ronda
     - int cantidadRondas
     - boolean juegoGanado
     + void jugar()
@@ -40,7 +37,6 @@ class Juego {
 }
 
 class Jugador {
-    - Mazo mazo
     - String nombre
     - ArrayList<Carta> mano
     - ArrayList<Carta> manoElegida
@@ -54,9 +50,6 @@ class Jugador {
 }
 
 class ManoPoker {
-    - ArrayList<Carta> cartas
-    - AnalizadorMano analizadorMano
-    - Mano tipoDeMano
     + ManoPoker()
     + ManoPoker(ArrayList<Carta> cartas)
     + void agregarCarta(Carta carta)
@@ -67,7 +60,6 @@ class ManoPoker {
 }
 
 class Mazo {
-    - ArrayList<Carta> cartas
     + Mazo()
     + int cantidadDeCartas()
     + ArrayList<Carta> repartir(int cantidad)
@@ -102,23 +94,23 @@ abstract class Mano {
     + int getMultiplicadorBase()
 }
 
-Mazo --> Carta
+Mazo "1" o-- "0..*" Carta
 
-AnalizadorMano --> EvaluadorMano
-AnalizadorMano --> Mano
-AnalizadorMano --> Carta
+AnalizadorMano "1" *-- "1" EvaluadorMano
+AnalizadorMano ..> Mano
+AnalizadorMano ..> Carta
 
 Juego "1" o-- "1" Jugador
 Juego "1" *-- "1..*" Ronda
 
-Jugador --> ManoPoker
+Jugador "1" o-- "1" ManoPoker
+Jugador "1" --> "1" Mazo
+Jugador ..> Carta
 
-ManoPoker --> Carta
-ManoPoker --> AnalizadorMano
-ManoPoker --> Mano
+ManoPoker "1" o-- "0..*" Carta
+ManoPoker "1" --> "1" AnalizadorMano
+ManoPoker "1" --> "1" Mano
 
-Ronda --> Tienda
-
-Tarot --> Carta
+Tarot ..> Carta
 
 @enduml

@@ -93,9 +93,16 @@ class PuntuacionPorMano {
 }
 
 class Ronda {
-    - Puntaje limiteDePuntos
+    - int numero
+    - int manos
+    - int descartes
     - int turno
-    + Ronda(Puntaje limiteDePuntos)
+    - int limiteDePuntos
+    - Tienda tienda
+
+    + Ronda(int numero, int manos, int descartes, int limiteDePuntos, Tienda tienda)
+    + Ronda(int limiteDePuntos)
+    + boolean esGanada(Jugador jugador)
     + void pasarTurno(Puntaje puntajeTotal)
 }
 
@@ -238,6 +245,7 @@ AnalizadorMano --> EvaluadorMano
 AnalizadorMano --> Mano
 AnalizadorMano --> Carta
 
+
 EvaluadorAbstracto ..|> EvaluadorMano
 
 Juego --> Jugador
@@ -249,6 +257,12 @@ ManoPoker --> Carta
 ManoPoker --> AnalizadorMano
 ManoPoker --> Mano
 ManoPoker --> PuntuacionPorMano
+
+PuntuacionPorMano --> Mano
+PuntuacionPorMano --> Carta
+
+Ronda --> Tienda
+Ronda --> Jugador
 
 PuntuacionPorMano --> Puntaje
 PuntuacionPorMano --> Mano

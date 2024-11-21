@@ -1,14 +1,14 @@
 package org.example.Manos;
 
-public class EscaleraReal extends Mano{
+public class EscaleraColor extends Mano{
 
-    public EscaleraReal (){
-        super("Escalera Real", 100, 8);
+    public EscaleraColor (){
+        super("Escalera Color", 100, 8);
     }
 
 //    @Override
 //    public String getNombre() {
-//        return "Escalera Real";
+//        return "Escalera Color";
 //    }
 //
 //    @Override

@@ -1,15 +1,15 @@
 package org.example;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Mazo {
     private ArrayList<Carta> cartas = new ArrayList<>();
 
+    public Mazo() {
+        cartas = new ArrayList<>();
+        inicializarMazo();
+    }
 
     /* public ArrayList<Carta> getCartas(){
         return cartas;
@@ -20,19 +20,15 @@ public class Mazo {
         return cartas.size();
     }
 
-    @JsonCreator
-    public Mazo() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        try {
-            Mazo mazo = objectMapper.readValue(new File("src/main/resources/mazo.json"), Mazo.class);
-            System.out.println(mazo);
-        } catch (IOException e) {
-            // Maneja las excepciones
-            e.printStackTrace();
+    private void inicializarMazo() {
+        String[] palos = {"corazones", "diamantes", "tréboles", "picas"};
+        for (String palo : palos) {
+            for (int i = 1; i <= 13; i++) {
+                cartas.add(new Carta(palo, i));
+            }
         }
+        Collections.shuffle(cartas);
     }
-
-
 
     public ArrayList<Carta> repartir(int cantidad) {
         ArrayList<Carta> mano = new ArrayList<>();

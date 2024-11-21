@@ -6,45 +6,37 @@ title Diagrama de Clases Jugador
 
 class Jugador { 
     -nombre
-    -mano: ArrayList<Carta>
-    +repartirCartas(cantidad: int)
     
 }
 
-class Puntaje{
-    -valor: int
-    +sumarCon(otroPuntaje: Puntaje)
-    +multiplicarCon(otroPuntaje: Puntaje)
-    +equals()
+class PuntajeJugador {
+    -Integer puntaje
 }
 
-class Carta {
-    -puntaje: int
-    -palo: String
-    +puntajeEsIgual(carta: Carta)
-    +paloEsIgual(carta: Carta)
-    +esInmediatamenteSuperior(carta: Carta)
-    +esInmediatamenteInferior(carta: Carta)
-    +agregarPuntos(puntos: Puntaje)
-    +modificarMultiplicador(multiplicador: int)
+class CartaPoker {
+    -Integer puntaje
+    -String palo
+    +puntajeEsIgual(Carta carta)
+    +paloEsIgual(Carta carta)
+    +esInmediatamenteSuperior(Carta carta)
+    +esInmediatamenteInferior(Carta carta)
 }
 
 
 class Mazo {
     ' +pedirCartas(Integer cantidad)
-    +repartir(cantidad: int)
+    +repartirCartas(CartasDisponibles)
 }
 
-
-'class CartasDisponibles {
-'    +agregarCarta(Carta carta)
-'}
+class CartasDisponibles {
+    +agregarCarta(Carta carta)
+}
 
 class ManoPoker {
-'    -limite
-    -cartas: ArrayList<Carta>
-    +agregarCarta(carta: Carta)
-    +sacarCarta(carta: Carta)
+    -limite
+    -listadoCartas
+    +agregarCarta(Carta carta)
+    +sacarCarta(Carta carta)
     ' +determinarPuntuacionPorMano(CartarPoker)
     ' +setPuntuacionPorMano(PuntuacionPorMano)
     +evaluar()
@@ -77,14 +69,14 @@ class ManoPoker {
 
 
 abstract class PuntuacionPorMano { 
-    -puntajeBase: int
-    -multiplicadorBase: int
-    +definirTipoDeMano(cartas: ArrayList<carta>)
+    -Integer puntajeBase
+    -Integer multiplicadorBase
+    +definirTipoDeMano(listadoCartas)
     ' +setPuntajeBase(Integer)
     ' +setMultiplicadorBase(Integer)
-    +calcular(cartas: ArrayList<carta>): Puntaje
-    -esEscalera(cartas: ArrayList<carta>): boolean
-    -esPar(cartas: ArrayList<carta>): boolean
+    +calcular(listadoCartas)
+    -esEscalera(listadoCartas)
+    -esPar(listadoCartas)
 }
 
 ' class PuntuacionPorManoEscaleraReal {
@@ -92,14 +84,13 @@ abstract class PuntuacionPorMano {
 ' }
 
 
-'Jugador --> CartasDisponibles
-Jugador *--> Mazo
-Mazo *--> "52" Carta
+Jugador --> CartasDisponibles
+Jugador --> Mazo
 Jugador --> ManoPoker
-Jugador *--> Puntaje
+Jugador --> PuntajeJugador
 
 ManoPoker *-- PuntuacionPorMano
-ManoPoker --> "5" Carta
+ManoPoker --> "5" CartaPoker
 ' PuntuacionPorManoEscaleraReal -up-|> PuntuacionPorMano 
 
 /' 

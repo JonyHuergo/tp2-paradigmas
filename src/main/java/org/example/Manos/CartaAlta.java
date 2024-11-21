@@ -1,23 +1,22 @@
 package org.example.Manos;
 
-public class EscaleraReal extends Mano{
+public class CartaAlta extends Mano{
 
-    public EscaleraReal (){
-        super("Escalera Real", 100, 8);
+    public CartaAlta (){
+        super("Carta Alta", 5, 1);
     }
-
 //    @Override
 //    public String getNombre() {
-//        return "Escalera Real";
+//        return "Carta Alta";
 //    }
 //
 //    @Override
 //    public int getPuntajeBase(){
-//        return 100;
+//        return 5;
 //    }
 //
 //    @Override
 //    public int getMultiplicadorBase(){
-//        return 8;
+//        return 1;
 //    }
 }

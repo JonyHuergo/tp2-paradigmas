@@ -28,7 +28,7 @@ public class ManoPoker {
         cartas.remove(carta);
     }
 
-    public Puntaje evaluar(){
+    public int evaluar(){
         tipoDeMano = calcularMano();
         return(tipoDeMano.calcular(cartas));
 //        return (puntuacionPorMano.calcular(cartas, tipoDeMano));

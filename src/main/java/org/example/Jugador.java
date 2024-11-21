@@ -8,12 +8,11 @@ public class Jugador {
     private ArrayList<Carta> mano = new ArrayList<>();
     private ArrayList<Carta> manoElegida = new ArrayList<>();
     private ManoPoker manoPoker;
-    private Puntaje puntaje;
-    private Puntaje multiplicador;
+    private int puntaje;
 
     public Jugador(){
         mazo = new Mazo();
-        puntaje = new Puntaje(0);
+        puntaje = 0;
     }
 
     public void repartirCartas(int cantidad) {

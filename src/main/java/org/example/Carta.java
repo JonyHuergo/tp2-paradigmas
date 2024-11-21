@@ -5,14 +5,14 @@ import java.util.Objects;
 public class Carta {
     private String palo;
     private int valor;
-    private Puntaje puntaje;
+    private int puntaje;
     private int multiplicador;
 
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = valor;
         this.multiplicador = 0;
-        puntaje = new Puntaje(valor);
+        this.puntaje = valor;
     }
 
     public int getValor(){
@@ -52,12 +52,12 @@ public class Carta {
         this.multiplicador = multiplicador;
     }
 
-    public void agregarPuntos(Puntaje puntos) {
-        puntaje = this.puntaje.sumarCon(puntos);
+    public void agregarPuntos(int puntos) {
+        puntaje = this.puntaje + puntos;
     }
 
     public int actualizarPuntajeTotal(int puntajeTotal) {
-        return puntajeTotal + puntaje.getValor();
+        return puntajeTotal + this.puntaje;
     }
 
     public int actualizarMultiplicadorTotal(int multiplicadorTotal) {

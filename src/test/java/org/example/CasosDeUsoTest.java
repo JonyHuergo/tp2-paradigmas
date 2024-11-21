@@ -38,20 +38,20 @@ public class CasosDeUsoTest {
 
     @Test
     public void test04EvaluarMano(){
-        Puntaje puntajeEsperado = new Puntaje(920); // (100 por mano (escalera de color) + 15 por las cartas) * 8 por mano
+        int puntajeEsperado = 920; // (100 por mano (escalera de color) + 15 por las cartas) * 8 por mano
         ManoPoker manoJugada = new ManoPoker();
         for (int i = 1; i <= 5; i++) {
             Carta carta = new Carta("diamantes", i);
             manoJugada.agregarCarta(carta);
         }
 
-        Puntaje puntajeObtenido = manoJugada.evaluar();
-        assertTrue(puntajeEsperado.equals(puntajeObtenido));
+        int puntajeObtenido = manoJugada.evaluar();
+        assertEquals(puntajeEsperado,puntajeObtenido);
     }
 
     @Test
     public void test05EvaluarManoConComodin(){
-        Puntaje puntajeEsperado = new Puntaje(30);
+        int puntajeEsperado = 30;
         ManoPoker manoJugada = new ManoPoker();
         for (int i = 1; i <= 5; i++) {
             Carta c1 = new Carta("diamantes", i);
@@ -62,28 +62,28 @@ public class CasosDeUsoTest {
 
     @Test
     public void test06TarotAgregar10PuntosModificaPuntosCorrectamente() {
-        Puntaje puntajeEsperado = new Puntaje(19); // (5 por mano (carta alta) + 4 por la carta + 10 por tarot) * 1 por mano
+        int puntajeEsperado = 19; // (5 por mano (carta alta) + 4 por la carta + 10 por tarot) * 1 por mano
         Carta carta = new Carta("diamantes", 4);
         TarotAgregar10Puntos tarot = new TarotAgregar10Puntos();
         ManoPoker manoJugada = new ManoPoker();
         
         tarot.aplicarEfecto(carta);
         manoJugada.agregarCarta(carta);
-        Puntaje puntajeObtenido = manoJugada.evaluar();
+        int puntajeObtenido = manoJugada.evaluar();
 
         assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 19.");
     }
 
     @Test
     public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
-        Puntaje puntajeEsperado = new Puntaje(63); // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
+        int puntajeEsperado = 63; // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
         Carta carta = new Carta("diamantes", 4);
         TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6();
         ManoPoker manoJugada = new ManoPoker();
         
         tarot.aplicarEfecto(carta);
         manoJugada.agregarCarta(carta);
-        Puntaje puntajeObtenido = manoJugada.evaluar();
+        int puntajeObtenido = manoJugada.evaluar();
 
         assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 63.");
     }

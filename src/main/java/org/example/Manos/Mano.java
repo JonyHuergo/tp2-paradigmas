@@ -1,7 +1,6 @@
 package org.example.Manos;
 
 import org.example.Carta;
-import org.example.Puntaje;
 
 import java.util.ArrayList;
 
@@ -26,11 +25,11 @@ public abstract class Mano {
         return multiplicadorBase;
     };
 
-    public Puntaje calcular(ArrayList<Carta> cartas){
+    public int calcular(ArrayList<Carta> cartas){
         for (Carta carta : cartas) {
             puntajeBase = carta.actualizarPuntajeTotal(puntajeBase);
             multiplicadorBase = carta.actualizarMultiplicadorTotal(multiplicadorBase);
         }
-        return new Puntaje(puntajeBase * multiplicadorBase);
+        return (puntajeBase * multiplicadorBase);
     }
 }

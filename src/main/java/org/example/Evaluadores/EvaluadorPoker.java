@@ -1,6 +1,8 @@
 package org.example.Evaluadores;
 
 import org.example.Carta;
+import org.example.Manos.Mano;
+import org.example.Manos.Poker;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -9,9 +11,9 @@ import java.util.stream.Collectors;
 public class EvaluadorPoker extends EvaluadorAbstracto{
 
     @Override
-    public String evaluarMano(ArrayList<Carta> cartas) {
+    public Mano evaluarMano(ArrayList<Carta> cartas) {
         if (tieneRepetidos(cartas, 4)) {
-            return "Poker";
+            return new Poker();
         }
         return null;
     }

@@ -1,6 +1,8 @@
 package org.example.Evaluadores;
 
 import org.example.Carta;
+import org.example.Manos.EscaleraColor;
+import org.example.Manos.Mano;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -8,9 +10,9 @@ import java.util.Comparator;
 public class EvaluadorEscaleraColor extends EvaluadorAbstracto {
 
     @Override
-    public String evaluarMano(ArrayList<Carta> cartas) {
+    public Mano evaluarMano(ArrayList<Carta> cartas) {
         if (esEscalera(cartas) && esColor(cartas)) {
-            return "Escalera Color";
+            return new EscaleraColor();
         }
         return null;
     }

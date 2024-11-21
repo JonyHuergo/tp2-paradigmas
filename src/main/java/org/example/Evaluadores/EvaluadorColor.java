@@ -1,15 +1,17 @@
 package org.example.Evaluadores;
 
 import org.example.Carta;
+import org.example.Manos.Color;
+import org.example.Manos.Mano;
 
 import java.util.ArrayList;
 
 public class EvaluadorColor extends EvaluadorAbstracto {
 
     @Override
-    public String evaluarMano(ArrayList<Carta> cartas) {
+    public Mano evaluarMano(ArrayList<Carta> cartas) {
         if (esColor(cartas)) {
-            return "Color";
+            return new Color();
         }
         return null;
     }

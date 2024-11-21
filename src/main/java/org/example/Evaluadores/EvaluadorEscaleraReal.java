@@ -1,15 +1,17 @@
 package org.example.Evaluadores;
 
 import org.example.Carta;
+import org.example.Manos.EscaleraReal;
+import org.example.Manos.Mano;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
 public class EvaluadorEscaleraReal extends EvaluadorAbstracto {
     @Override
-    protected String evaluarMano(ArrayList<Carta> cartas) {
+    protected Mano evaluarMano(ArrayList<Carta> cartas) {
         if (esColor(cartas) && esEscalera(cartas) && contieneAs(cartas)) {
-            return "Escalera Real";
+            return new EscaleraReal();
         }
         return null;
     }

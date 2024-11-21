@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.Evaluadores.*;
+import org.example.Manos.Mano;
 
 import java.util.ArrayList;
 
@@ -31,7 +32,7 @@ public class AnalizadorMano {
         this.evaluadorInicial = escaleraReal;
     }
 
-    public String analizarMano(ArrayList<Carta> cartas) {
+    public Mano analizarMano(ArrayList<Carta> cartas) {
         return evaluadorInicial.evaluar(cartas);
     }
 }

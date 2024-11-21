@@ -16,7 +16,8 @@ public class ManoPoker {
     }
     public ManoPoker(ArrayList<Carta> cartas){
         this.cartas = cartas;
-        this.tipoDeMano = calcularMano();
+//        this.tipoDeMano = calcularMano();
+        this.analizadorMano = new AnalizadorMano();
 
     }
 

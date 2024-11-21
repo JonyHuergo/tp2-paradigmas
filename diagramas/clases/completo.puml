@@ -96,12 +96,14 @@ class Ronda {
     - int numero
     - int manos
     - int descartes
+    - int turno
     - int limiteDePuntos
     - Tienda tienda
 
     + Ronda(int numero, int manos, int descartes, int limiteDePuntos, Tienda tienda)
     + Ronda(int limiteDePuntos)
     + boolean esGanada(Jugador jugador)
+    + void pasarTurno(Puntaje puntajeTotal)
 }
 
 abstract class Tarot {
@@ -243,6 +245,9 @@ AnalizadorMano --> EvaluadorMano
 AnalizadorMano --> Mano
 AnalizadorMano --> Carta
 
+
+EvaluadorAbstracto ..|> EvaluadorMano
+
 Juego --> Jugador
 Juego --> Ronda
 
@@ -258,6 +263,12 @@ PuntuacionPorMano --> Carta
 
 Ronda --> Tienda
 Ronda --> Jugador
+
+PuntuacionPorMano --> Puntaje
+PuntuacionPorMano --> Mano
+PuntuacionPorMano --> Carta
+
+Ronda --> Puntaje
 
 Tarot --> Carta
 

@@ -30,7 +30,7 @@ public class ManoPoker {
     }
 
     public Puntaje evaluar(){
-        return (puntuacionPorMano.calcular(cartas));
+        return (puntuacionPorMano.calcular(cartas, tipoDeMano));
     }
 
     public String obtenerNombreTipoDeMano() {

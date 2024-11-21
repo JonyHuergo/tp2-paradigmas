@@ -1,38 +1,26 @@
 package org.example;
 
-import java.util.ArrayList;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.List;
-
-@JsonIgnoreProperties(ignoreUnknown = true) // Ignora las propiedades no mapeadas
 public class Juego {
-    private ArrayList<Ronda> rondas = new ArrayList<Ronda>();
-    private int numeroRonda = 0;
-    private int cantidadRondas = 8;
-    private boolean juegoGanado = false;
     private Jugador jugador;
-
-    @JsonCreator
-    public Juego(@JsonProperty("rondas") ArrayList<Ronda> rondas){
-        this.rondas = rondas;
-    }
+    private Ronda ronda;
+    private int cantidadRondas;
+    private boolean juegoGanado = false;
 
     public void jugar(){
+        /*
+        while(ronda.puntajeSuperoElLimite(jugador.jugar()) && cantidadRondas > 0){
 
-        while(rondas.get(numeroRonda).esGanada(jugador) && numeroRonda <= cantidadRondas){
-            numeroRonda++;
+
+
+            cantidadRondas--;
         }
 
-        if (numeroRonda == 8) {
+        if (cantidadRondas == 0) {
             juegoGanado = true;
         }
         juegoGanado = false;
+        */
     }
-
     public void PartidaPerdida(){
 
     }

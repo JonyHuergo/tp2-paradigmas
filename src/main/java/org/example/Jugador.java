@@ -8,23 +8,22 @@ public class Jugador {
     private ArrayList<Carta> mano = new ArrayList<>();
     private ArrayList<Carta> manoElegida = new ArrayList<>();
     private ManoPoker manoPoker;
-    private int puntaje;
-    private int multiplicador;
+    private Puntaje puntaje;
+    private Puntaje multiplicador;
 
     public Jugador(){
         mazo = new Mazo();
-        puntaje = 0;
+        puntaje = new Puntaje(0);
     }
 
-    public int repartirCartas(int cantidad) {
+    public void repartirCartas(int cantidad) {
+
         mano = mazo.repartir(cantidad);
-        return mano.size();
     }
 
-//    public ArrayList<Carta> getCartasEnMano() {
-//        return mano;
-//    }
-
+    public ArrayList<Carta> getCartasEnMano() { // Se va a necesitar en un futuro
+        return mano;
+    }
 
     public void elegirCartas(ArrayList<Integer> posicionesCartas){
         for (int i = 0; i < posicionesCartas.size(); i++) {
@@ -34,14 +33,14 @@ public class Jugador {
     }
 
     public void jugar(ManoPoker manoJugada){// nose si recibe la manoPoker por parametro despues vemos
+        /*
+        puntaje = puntaje.sumarCon(manoJugada.evaluar());
+        multiplicador = manoJugada.getMultiplicadorBase();
+        puntaje = puntaje.sumarCon(manoJugada.calcularConModificadores());
+        multiplicador = 
 
-//        puntaje = puntaje.sumarCon(manoJugada.evaluar());
-//        multiplicador = manoJugada.getMultiplicadorBase();
-//        puntaje = puntaje.sumarCon(manoJugada.calcularConModificadores());
-//        multiplicador =
-//
-//        Ronda.pasarTurno();
-
+        Ronda.pasarTurno();
+        */
 
     }
 }

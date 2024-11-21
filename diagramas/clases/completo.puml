@@ -13,7 +13,7 @@ class AnalizadorMano {
 class Carta {
     - String palo
     - int valor
-    - Puntaje puntaje
+    - int puntaje
     - int multiplicador
     + Carta(String palo, int valor)
     + int getValor()
@@ -25,7 +25,7 @@ class Carta {
     + boolean esInmediatamenteSuperior(Carta carta)
     + boolean esInmediatamenteInferior(Carta carta)
     + void modificarMultiplicador(int multiplicador)
-    + void agregarPuntos(Puntaje puntos)
+    + void agregarPuntos(int puntos)
     + int actualizarPuntajeTotal(int puntajeTotal)
     + int actualizarMultiplicadorTotal(int multiplicadorTotal)
 }
@@ -45,8 +45,7 @@ class Jugador {
     - ArrayList<Carta> mano
     - ArrayList<Carta> manoElegida
     - ManoPoker manoPoker
-    - Puntaje puntaje
-    - Puntaje multiplicador
+    - int puntaje
     + Jugador()
     + void repartirCartas(int cantidad)
     + ArrayList<Carta> getCartasEnMano()
@@ -56,14 +55,13 @@ class Jugador {
 
 class ManoPoker {
     - ArrayList<Carta> cartas
-    - PuntuacionPorMano puntuacionPorMano
     - AnalizadorMano analizadorMano
     - Mano tipoDeMano
     + ManoPoker()
     + ManoPoker(ArrayList<Carta> cartas)
     + void agregarCarta(Carta carta)
     + void removerCarta(Carta carta)
-    + Puntaje evaluar()
+    + int evaluar()
     + String obtenerNombreTipoDeMano()
     + Mano calcularMano()
 }
@@ -74,22 +72,6 @@ class Mazo {
     + int cantidadDeCartas()
     + ArrayList<Carta> repartir(int cantidad)
     - void inicializarMazo()
-}
-
-class Puntaje {
-    - int valor
-    + Puntaje(int valor)
-    + Puntaje sumarCon(Puntaje otroPuntaje)
-    + int getValor()
-    + boolean esMenorA(Puntaje otroPuntaje)
-    + boolean equals(Object obj)
-}
-
-class PuntuacionPorMano {
-    - int puntajeBase
-    - int multiplicadorBase
-    + Puntaje calcular(ArrayList<Carta> cartas, Mano mano)
-    - void definirTipoDeMano(ArrayList<Carta> cartas, Mano mano)
 }
 
 class Ronda {
@@ -251,10 +233,6 @@ Jugador --> ManoPoker
 ManoPoker --> Carta
 ManoPoker --> AnalizadorMano
 ManoPoker --> Mano
-ManoPoker --> PuntuacionPorMano
-
-PuntuacionPorMano --> Mano
-PuntuacionPorMano --> Carta
 
 Ronda --> Tienda
 Ronda --> Jugador

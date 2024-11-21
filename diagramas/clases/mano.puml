@@ -1,0 +1,73 @@
+@startuml Diagrama de Clases Mano
+
+skinparam classAttributeIconSize 0
+
+title Diagrama de Clases Mano
+
+abstract class Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class CartaAlta extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Color extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class DoblePar extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Escalera extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class EscaleraColor extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class EscaleraReal extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Full extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Par extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Poker extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Trio extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+@enduml

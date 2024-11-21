@@ -31,6 +31,12 @@ public class CasosDeUsoTest {
     }
 
     @Test
+    public void test03JugarMano(){
+        //work in progress
+    }
+
+
+    @Test
     public void test04EvaluarMano(){
         Puntaje puntajeEsperado = new Puntaje(920); // (100 por mano (escalera de color) + 15 por las cartas) * 8 por mano
         ManoPoker manoJugada = new ManoPoker();
@@ -41,11 +47,6 @@ public class CasosDeUsoTest {
 
         Puntaje puntajeObtenido = manoJugada.evaluar();
         assertTrue(puntajeEsperado.equals(puntajeObtenido));
-    }
-
-    @Test
-    public void test03JugarMano(){
-        //work in progress
     }
 
     @Test

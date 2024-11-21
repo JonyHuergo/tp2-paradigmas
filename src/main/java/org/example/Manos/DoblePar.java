@@ -1,18 +1,23 @@
 package org.example.Manos;
 
 public class DoblePar extends Mano{
-    @Override
-    public String getNombre() {
-        return "Doble Par";
+
+    public DoblePar (){
+        super("Doble Par", 20, 2);
     }
 
-    @Override
-    public int getPuntajeBase(){
-        return 20;
-    }
-
-    @Override
-    public int getMultiplicadorBase(){
-        return 2;
-    }
+//    @Override
+//    public String getNombre() {
+//        return "Doble Par";
+//    }
+//
+//    @Override
+//    public int getPuntajeBase(){
+//        return 20;
+//    }
+//
+//    @Override
+//    public int getMultiplicadorBase(){
+//        return 2;
+//    }
 }

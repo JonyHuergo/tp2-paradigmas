@@ -6,7 +6,6 @@ import java.util.ArrayList;
 
 public class ManoPoker {
     private ArrayList<Carta> cartas = new ArrayList<Carta>();
-    private PuntuacionPorMano puntuacionPorMano = new PuntuacionPorMano();
     private AnalizadorMano analizadorMano;
     private Mano tipoDeMano;
 
@@ -31,7 +30,8 @@ public class ManoPoker {
 
     public Puntaje evaluar(){
         tipoDeMano = calcularMano();
-        return (puntuacionPorMano.calcular(cartas, tipoDeMano));
+        return(tipoDeMano.calcular(cartas));
+//        return (puntuacionPorMano.calcular(cartas, tipoDeMano));
     }
 
     public String obtenerNombreTipoDeMano() {

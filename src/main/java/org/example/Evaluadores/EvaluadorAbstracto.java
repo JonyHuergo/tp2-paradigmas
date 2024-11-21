@@ -16,6 +16,9 @@ public abstract class EvaluadorAbstracto implements EvaluadorMano {
     @Override
     public Mano evaluar(ArrayList<Carta> cartas) {
         Mano resultado = evaluarMano(cartas);
+        if (cartas.size() == 1) {
+            return new CartaAlta();
+        }
         if (resultado != null) {
             return resultado; // Si encuentra el tipo de mano, lo devuelve
         }

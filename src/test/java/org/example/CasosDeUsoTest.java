@@ -38,7 +38,9 @@ public class CasosDeUsoTest {
             Carta carta = new Carta("diamantes", i);
             manoJugada.agregarCarta(carta);
         }
-        assertTrue(puntajeEsperado.equals(manoJugada.evaluar()));
+
+        Puntaje puntajeObtenido = manoJugada.evaluar();
+        assertTrue(puntajeEsperado.equals(puntajeObtenido));
     }
 
     @Test

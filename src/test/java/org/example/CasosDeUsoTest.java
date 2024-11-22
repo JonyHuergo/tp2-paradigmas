@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Manos.EscaleraColor;
+import org.example.Manos.Mano;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -19,20 +21,26 @@ public class CasosDeUsoTest {
     public void test02RepartirCartas() {
         Jugador jugador = new Jugador();
         int cartasEsperadasJugador = 8;
-        //int cartasEsperadasMazo = 44;
         
         jugador.repartirCartas(8);
-        int cartasObtenidasJugador = jugador.getCartasEnMano().size();
-        //int cartasObtenidasMazo = mazo.cantidadDeCartas();
+        int cartasObtenidasJugador = jugador.cantidadDeCartasEnMano();
 
-        // Les parece bien que haya dos asserts? Lo dividirian en dos tests?
         assertEquals(cartasEsperadasJugador, cartasObtenidasJugador, "El jugador debería tener 8 cartas en su mano después de repartir.");
-        //assertEquals(cartasEsperadasMazo, cartasObtenidasMazo, "El mazo debería tener 44 cartas después de repartir 8.");
     }
 
     @Test
     public void test03JugarMano(){
-        //work in progress
+        String manoEsperada = "Escalera Color";
+        ManoPoker manoPoker = new ManoPoker();
+        for (int i = 1; i <= 5; i++) {
+            Carta carta = new Carta("diamantes", i);
+            manoPoker.agregarCarta(carta);
+        }
+
+        String manoObtenida = manoPoker.obtenerNombreTipoDeMano();
+
+
+        assertEquals(manoEsperada, manoObtenida);
     }
 
 

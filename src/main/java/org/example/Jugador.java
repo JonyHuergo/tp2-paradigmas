@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class Jugador {
     private Mazo mazo;
     private String nombre;
-    private ArrayList<Carta> mano = new ArrayList<>();
-    private ArrayList<Carta> manoElegida = new ArrayList<>();
+    private ArrayList<Carta> mano = new ArrayList<>();  // cambiar debido al problema con new
+    private ArrayList<Carta> manoElegida = new ArrayList<>(); // cambiar debido al problema con new
     private ManoPoker manoPoker;
     private int puntaje;
 
@@ -15,16 +15,28 @@ public class Jugador {
         puntaje = 0;
     }
 
+    public Jugador(Mazo mazo){
+        this.mazo = mazo;
+        puntaje = 0;
+    }
+
+    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
+        this.mazo = mazo;
+        this.mano = mano;
+        this.manoElegida = manoElegida;
+        puntaje = 0;
+    }
+
     public void repartirCartas(int cantidad) {
 
         mano = mazo.repartir(cantidad);
     }
 
-    public ArrayList<Carta> getCartasEnMano() { // Se va a necesitar en un futuro
-        return mano;
+    public int cantidadDeCartasEnMano(){
+        return mano.size();
     }
 
-    public void elegirCartas(ArrayList<Integer> posicionesCartas){
+    public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
         for (int i = 0; i < posicionesCartas.size(); i++) {
             manoElegida.add(mano.get(posicionesCartas.get(i)));
         }

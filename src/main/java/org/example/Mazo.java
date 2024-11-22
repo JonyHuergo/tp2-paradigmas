@@ -16,7 +16,7 @@ public class Mazo {
     } */
 
     // Se va a necesitar en un futuro (el juego siempre muestra cuantas cartas tiene el mazo ej: 44/52)
-    public int cantidadDeCartas(){ 
+    public int cantidadDeCartas(){
         return cartas.size();
     }
 

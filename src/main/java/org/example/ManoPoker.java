@@ -15,7 +15,6 @@ public class ManoPoker {
     }
     public ManoPoker(ArrayList<Carta> cartas){
         this.cartas = cartas;
-//        this.tipoDeMano = calcularMano();
         this.analizadorMano = new AnalizadorMano();
 
     }
@@ -31,11 +30,14 @@ public class ManoPoker {
     public int evaluar(){
         tipoDeMano = calcularMano();
         return(tipoDeMano.calcular(cartas));
-//        return (puntuacionPorMano.calcular(cartas, tipoDeMano));
     }
 
     public String obtenerNombreTipoDeMano() {
         return analizadorMano.analizarMano(cartas).getNombre();
+    }
+
+    public Mano obtenerTipoDeMano() {
+        return analizadorMano.analizarMano(cartas);
     }
 
     public Mano calcularMano(){

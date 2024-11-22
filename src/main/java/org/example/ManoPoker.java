@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.Comodin.Comodin;
 import org.example.Manos.Mano;
 
 import java.util.ArrayList;
@@ -30,6 +31,11 @@ public class ManoPoker {
     public int evaluar(){
         tipoDeMano = calcularMano();
         return(tipoDeMano.calcular(cartas));
+    }
+
+    public int evaluar(Comodin comodin){
+        tipoDeMano = calcularMano();
+        return(tipoDeMano.calcular(cartas, comodin));
     }
 
     public String obtenerNombreTipoDeMano() {

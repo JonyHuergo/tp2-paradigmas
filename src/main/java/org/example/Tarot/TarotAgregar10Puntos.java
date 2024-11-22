@@ -1,4 +1,6 @@
-package org.example;
+package org.example.Tarot;
+
+import org.example.Carta;
 
 public class TarotAgregar10Puntos  extends Tarot {
     @Override

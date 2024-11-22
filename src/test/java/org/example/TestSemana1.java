@@ -1,12 +1,12 @@
 package org.example;
 
-import org.example.Manos.EscaleraColor;
-import org.example.Manos.Mano;
+import org.example.Tarot.TarotAgregar10Puntos;
+import org.example.Tarot.TarotMultiplicadorX6;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CasosDeUsoTest {
+public class TestSemana1 {
     @Test
     public void test01TieneCartasSuficientes() {
         Mazo mazo = new Mazo();

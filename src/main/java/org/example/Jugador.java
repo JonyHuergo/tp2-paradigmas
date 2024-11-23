@@ -48,7 +48,7 @@ public class Jugador {
     }
 
     public void evaluarMano(){
-        manoPoker.calcularMano();
+        manoPoker.definirTipodeMano();
         manoPoker.sumarValorCartas();
         for (Comodin comodin : comodines) {
             comodin.usar(this);
@@ -60,6 +60,18 @@ public class Jugador {
         return(this.puntaje == puntaje);
     }
 
+    public void actualizarMult(int mult){
+        manoPoker.actualizarMultiplicadorBase(mult);
+    }
+
+    public void setManoPoker(ManoPoker manoPoker) {
+        this.manoPoker = manoPoker;
+    }
+
+    public void setComodines(ArrayList<Comodin> comodines) {
+        this.comodines = comodines;
+    }
+
         public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
         for (int i = 0; i < posicionesCartas.size(); i++) {
             manoElegida.add(mano.get(posicionesCartas.get(i)));
@@ -67,9 +79,6 @@ public class Jugador {
         manoPoker = new ManoPoker(manoElegida);
     }
 
-    public void actualizarMult(int mult){
-        manoPoker.actualizarMultiplicadorBase(mult);
-    }
 
     public void jugar(ManoPoker manoJugada){
         /*
@@ -80,13 +89,5 @@ public class Jugador {
 
         Ronda.pasarTurno();
         */
-    }
-
-    public void setManoPoker(ManoPoker manoPoker) {
-        this.manoPoker = manoPoker;
-    }
-
-    public void setComodines(ArrayList<Comodin> comodines) {
-        this.comodines = comodines;
     }
 }

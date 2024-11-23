@@ -4,13 +4,15 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 public class EvaluadorTest {
 
     @Test
     public void testEvaluadorEscaleraReal() {
         String valorEsperado = "Escalera Real";
         ArrayList<Carta> cartas = new ArrayList<>();
-        cartas.add(new Carta("Corazones",14 )); // As
+        cartas.add(new Carta("Corazones", 14)); // As
         cartas.add(new Carta("Corazones", 13)); // Rey
         cartas.add(new Carta("Corazones", 12)); // Reina
         cartas.add(new Carta("Corazones", 11)); // Jota
@@ -18,8 +20,10 @@ public class EvaluadorTest {
 
         // Crear una mano de póker
         ManoPoker mano = new ManoPoker(cartas);
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-        assertEquals(valorEsperado, valorObtenido);
+        mano.definirTipodeMano();
+
+        // Comprobar que el tipo de mano es "Escalera Real"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -37,12 +41,10 @@ public class EvaluadorTest {
 
         // Crear una mano de póker
         ManoPoker mano = new ManoPoker(cartas);
-
-        // Obtener el tipo de mano
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
+        mano.definirTipodeMano();
 
         // Comprobar que el tipo de mano es "Par"
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -60,12 +62,10 @@ public class EvaluadorTest {
 
         // Crear una mano de póker
         ManoPoker mano = new ManoPoker(cartas);
-
-        // Obtener el tipo de mano
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
+        mano.definirTipodeMano();
 
         // Comprobar que el tipo de mano es "Escalera"
-        assertEquals(valorEsperado, valorObtenido);
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -83,12 +83,10 @@ public class EvaluadorTest {
 
         // Crear una mano de póker
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Comprobar que el tipo de mano es "Escalera"
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Carta Alta"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
     @Test
     public void testEvaluadorTrio() {
@@ -104,12 +102,10 @@ public class EvaluadorTest {
 
         // Crear la mano de póker con las cartas
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano y verificar que sea Trío
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Verificar si la mano ha sido clasificada correctamente como Trío
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Trio"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -126,12 +122,10 @@ public class EvaluadorTest {
 
         // Crear la mano de póker con las cartas
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano y verificar que sea Color
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Verificar si la mano ha sido clasificada correctamente como Color
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Color"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -148,12 +142,10 @@ public class EvaluadorTest {
 
         // Crear la mano de póker con las cartas
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano y verificar que sea Doble Par
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Verificar si la mano ha sido clasificada correctamente como Doble Par
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Doble Par"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -170,12 +162,10 @@ public class EvaluadorTest {
 
         // Crear la mano de póker con las cartas
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano y verificar que sea Full
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Verificar si la mano ha sido clasificada correctamente como Full
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Full"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -192,12 +182,10 @@ public class EvaluadorTest {
 
         // Crear la mano de póker con las cartas
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano y verificar que sea Poker
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Verificar si la mano ha sido clasificada correctamente como Poker
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Poker"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
     @Test
@@ -214,12 +202,10 @@ public class EvaluadorTest {
 
         // Crear la mano de póker con las cartas
         ManoPoker mano = new ManoPoker(cartas);
+        mano.definirTipodeMano();
 
-        // Obtener el tipo de mano y verificar que sea Escalera Color
-        String valorObtenido = mano.obtenerNombreTipoDeMano();
-
-        // Verificar si la mano ha sido clasificada correctamente como Escalera Color
-        assertEquals(valorEsperado, valorObtenido);
+        // Comprobar que el tipo de mano es "Escalera Color"
+        assertTrue(mano.manoNombreEsIgual(valorEsperado));
     }
 
 }

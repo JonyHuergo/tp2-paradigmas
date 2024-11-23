@@ -37,10 +37,9 @@ public class TestSemana1 {
             manoPoker.agregarCarta(carta);
         }
 
-        String manoObtenida = manoPoker.obtenerNombreTipoDeMano();
+        manoPoker.definirTipodeMano();
 
-
-        assertEquals(manoEsperada, manoObtenida);
+        assertTrue(manoPoker.manoNombreEsIgual(manoEsperada));
     }
 
 

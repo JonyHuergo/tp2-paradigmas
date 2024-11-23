@@ -12,20 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class TestSemana2 {
     @Test
     public void test01ComodinSuma8AlMultiplicador() {
-        int puntajeEsperado = 90;
+        int puntajeEsperado = 90; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 10 * 9 por el comodin
 
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
         Comodin comodin = new Comodin(0,8,1);
-        ArrayList<Comodin> comodines = null;
+        ArrayList<Comodin> comodines = new ArrayList<Comodin>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
         jugador.evaluarMano();
 
-//        int puntajeObtenido = manoPoker.evaluar(comodin);
         assertTrue(jugador.puntajeEsIgual(puntajeEsperado));
     }
 

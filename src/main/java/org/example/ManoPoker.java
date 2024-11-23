@@ -16,7 +16,7 @@ public class ManoPoker {
     }
     public ManoPoker(ArrayList<Carta> cartas){
         this.cartas = cartas;
-        this.analizadorMano = new AnalizadorMano();
+        this.analizadorMano = new AnalizadorMano(); // fijarse el new
     }
 
     public void agregarCarta(Carta carta) {
@@ -32,22 +32,8 @@ public class ManoPoker {
         return(tipoDeMano.calcular(cartas));
     }
 
-    public int evaluarNuevo(Comodin comodin){
+    public void definirTipodeMano(){
         tipoDeMano = calcularMano();
-        tipoDeMano.sumarValorCartas(cartas);
-        return tipoDeMano.hacerCalculo();
-    }
-
-    public String obtenerNombreTipoDeMano() {
-        return analizadorMano.analizarMano(cartas).getNombre(); // no esta bien el getter ess (getter eradicator)
-    }
-
-    public Mano obtenerTipoDeMano() {
-        return analizadorMano.analizarMano(cartas);
-    }
-
-    public Mano calcularMano(){
-        return analizadorMano.analizarMano(cartas);
     }
 
     public void sumarValorCartas(){
@@ -56,6 +42,20 @@ public class ManoPoker {
 
     public int hacerCalculo(){
         return tipoDeMano.hacerCalculo();
+    }
+
+//    public String obtenerNombreTipoDeMano() {
+////        return analizadorMano.analizarMano(cartas).getNombre(); // no esta bien el getter ess (getter eradicator)
+////        return analizadorMano.calcularNombre(cartas);
+//    }
+
+    public boolean manoNombreEsIgual(String nombre){
+        return(tipoDeMano.nombreEsIgual(nombre));
+    }
+
+
+    public Mano calcularMano(){
+        return analizadorMano.analizarMano(cartas);
     }
 
     public void actualizarPuntajeBase(int puntaje) {

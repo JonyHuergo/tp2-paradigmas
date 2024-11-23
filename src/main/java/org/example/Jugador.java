@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.Comodin.Comodin;
+
 import java.util.ArrayList;
 
 public class Jugador {
@@ -8,6 +10,7 @@ public class Jugador {
     private ArrayList<Carta> mano = new ArrayList<>();  // cambiar debido al problema con new
     private ArrayList<Carta> manoElegida = new ArrayList<>(); // cambiar debido al problema con new
     private ManoPoker manoPoker;
+    private ArrayList<Comodin> comodines;
     private int puntaje;
 
     public Jugador(){
@@ -27,6 +30,14 @@ public class Jugador {
         puntaje = 0;
     }
 
+    public Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines){
+        this.mazo = mazo;
+        this.mano = mano;
+        this.manoPoker = manoPoker;
+        puntaje = 0;
+        this.comodines = comodines;
+    }
+
     public void repartirCartas(int cantidad) {
 
         mano = mazo.repartir(cantidad);
@@ -36,22 +47,46 @@ public class Jugador {
         return mano.size();
     }
 
-    public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
+    public void evaluarMano(){
+        manoPoker.calcularMano();
+        manoPoker.sumarValorCartas();
+        for (Comodin comodin : comodines) {
+            comodin.usar(this);
+        }
+        puntaje += manoPoker.hacerCalculo();
+    }
+
+    public boolean puntajeEsIgual(int puntaje){
+        return(this.puntaje == puntaje);
+    }
+
+        public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
         for (int i = 0; i < posicionesCartas.size(); i++) {
             manoElegida.add(mano.get(posicionesCartas.get(i)));
         }
         manoPoker = new ManoPoker(manoElegida);
     }
 
-    public void jugar(ManoPoker manoJugada){// nose si recibe la manoPoker por parametro despues vemos
+    public void actualizarMult(int mult){
+        manoPoker.actualizarMultiplicadorBase(mult);
+    }
+
+    public void jugar(ManoPoker manoJugada){
         /*
         puntaje = puntaje.sumarCon(manoJugada.evaluar());
         multiplicador = manoJugada.getMultiplicadorBase();
         puntaje = puntaje.sumarCon(manoJugada.calcularConModificadores());
-        multiplicador = 
+        multiplicador =
 
         Ronda.pasarTurno();
         */
+    }
 
+    public void setManoPoker(ManoPoker manoPoker) {
+        this.manoPoker = manoPoker;
+    }
+
+    public void setComodines(ArrayList<Comodin> comodines) {
+        this.comodines = comodines;
     }
 }

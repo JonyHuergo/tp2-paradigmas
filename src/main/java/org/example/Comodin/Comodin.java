@@ -1,5 +1,7 @@
 package org.example.Comodin;
 
+import org.example.Jugador;
+
 public class Comodin {
     private String nombre;
     private String descripcion;
@@ -15,8 +17,10 @@ public class Comodin {
         this.activacion = new ActivacionSiempre();
     }
 
-    public boolean cumpleCondicion(String nombreMano){
-        return(activacion.revisarCondicion(nombreMano));
+    public void usar(Jugador jugador){
+        if (activacion.revisarCondicion(jugador)){
+            jugador.actualizarMult(multiplicadorAdicional);
+        }
     }
 
     public int actualizarPuntajeTotal(int puntajeTotal) {

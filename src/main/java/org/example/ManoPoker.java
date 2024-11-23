@@ -17,7 +17,6 @@ public class ManoPoker {
     public ManoPoker(ArrayList<Carta> cartas){
         this.cartas = cartas;
         this.analizadorMano = new AnalizadorMano();
-
     }
 
     public void agregarCarta(Carta carta) {
@@ -33,13 +32,14 @@ public class ManoPoker {
         return(tipoDeMano.calcular(cartas));
     }
 
-    public int evaluar(Comodin comodin){
+    public int evaluarNuevo(Comodin comodin){
         tipoDeMano = calcularMano();
-        return(tipoDeMano.calcular(cartas, comodin));
+        tipoDeMano.sumarValorCartas(cartas);
+        return tipoDeMano.hacerCalculo();
     }
 
     public String obtenerNombreTipoDeMano() {
-        return analizadorMano.analizarMano(cartas).getNombre();
+        return analizadorMano.analizarMano(cartas).getNombre(); // no esta bien el getter ess (getter eradicator)
     }
 
     public Mano obtenerTipoDeMano() {
@@ -48,5 +48,25 @@ public class ManoPoker {
 
     public Mano calcularMano(){
         return analizadorMano.analizarMano(cartas);
+    }
+
+    public void sumarValorCartas(){
+        tipoDeMano.sumarValorCartas(cartas);
+    }
+
+    public int hacerCalculo(){
+        return tipoDeMano.hacerCalculo();
+    }
+
+    public void actualizarPuntajeBase(int puntaje) {
+        tipoDeMano.actualizarPuntajeBase(puntaje);
+    }
+
+    public void actualizarMultiplicadorBase(int mult) {
+        tipoDeMano.actualizarMultiplicadorBase(mult);
+    }
+
+    public void multiplicarMultiplicadorBase(int mult) {
+        tipoDeMano.multiplicarMultiplicadorBase(mult);
     }
 }

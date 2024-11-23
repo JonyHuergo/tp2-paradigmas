@@ -35,9 +35,4 @@ public class AnalizadorMano {
     public Mano analizarMano(ArrayList<Carta> cartas) {
         return evaluadorInicial.evaluar(cartas);
     }
-
-//    public String calcularNombre(ArrayList<Carta> cartas) {
-//        this.analizarMano(cartas).nombreEsIgual
-//
-//    }
 }

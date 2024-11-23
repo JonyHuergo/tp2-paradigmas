@@ -72,6 +72,10 @@ public class Jugador {
         this.comodines = comodines;
     }
 
+    public boolean tieneManoDeTipo(String manoEsperada){
+        return(manoPoker.manoNombreEsIgual(manoEsperada));
+    }
+
         public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
         for (int i = 0; i < posicionesCartas.size(); i++) {
             manoElegida.add(mano.get(posicionesCartas.get(i)));

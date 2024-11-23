@@ -44,10 +44,6 @@ public class ManoPoker {
         return tipoDeMano.hacerCalculo();
     }
 
-//    public String obtenerNombreTipoDeMano() {
-////        return analizadorMano.analizarMano(cartas).getNombre(); // no esta bien el getter ess (getter eradicator)
-////        return analizadorMano.calcularNombre(cartas);
-//    }
 
     public boolean manoNombreEsIgual(String nombre){
         return(tipoDeMano.nombreEsIgual(nombre));

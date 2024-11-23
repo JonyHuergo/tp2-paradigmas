@@ -17,6 +17,13 @@ public class Comodin {
         this.activacion = new ActivacionSiempre();
     }
 
+    public Comodin(int puntajeAdicional, int multiplicadorAdicional, int multiplicadorAumento, Activacion activacion) {
+        this.puntajeAdicional = puntajeAdicional;
+        this.multiplicadorAdicional = multiplicadorAdicional;
+        this.multiplicadorAumento = multiplicadorAumento;
+        this.activacion = activacion;
+    }
+
     public void usar(Jugador jugador){
         if (activacion.revisarCondicion(jugador)){
             jugador.actualizarMult(multiplicadorAdicional);

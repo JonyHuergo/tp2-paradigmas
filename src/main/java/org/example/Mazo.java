@@ -43,9 +43,10 @@ public class Mazo {
         int cartasARepartir = limiteCartas - cartasDisponibles.size();
 
         Random random = new Random();
-        int pos = random.nextInt(cartas.size() - 1);
+//        int pos = random.nextInt(cartas.size() - 1);
 
         for (int i = 0; i < cartasARepartir && !cartas.isEmpty(); i++) {
+            int pos = random.nextInt(cartas.size());
             cartasDisponibles.add(cartas.remove(pos));
         }
     }

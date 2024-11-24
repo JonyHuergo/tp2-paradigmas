@@ -12,6 +12,7 @@ public class Jugador {
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines;
     private int puntaje;
+    private int descartes = 3;
 
     public Jugador(){
         mazo = new Mazo();
@@ -60,8 +61,16 @@ public class Jugador {
         return(this.puntaje == puntaje);
     }
 
+    public void actualizarPuntajeBase(int puntajeBase){
+        manoPoker.actualizarPuntajeBase(puntajeBase);
+    }
+
     public void actualizarMult(int mult){
         manoPoker.actualizarMultiplicadorBase(mult);
+    }
+
+    public void multiplicarMult(int mult){
+        manoPoker.multiplicarMultiplicadorBase(mult);
     }
 
     public void setManoPoker(ManoPoker manoPoker) {
@@ -94,4 +103,13 @@ public class Jugador {
         Ronda.pasarTurno();
         */
     }
+    public boolean tieneDescartes(){
+        return(descartes>0);
+    }
+
+    public int calcularPuntosPorDescarte(int puntosPorDescarte) {
+        return(puntosPorDescarte*descartes);
+    }
+
+
 }

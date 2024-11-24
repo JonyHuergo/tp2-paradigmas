@@ -24,4 +24,8 @@ public class Juego {
     public void PartidaPerdida(){
 
     }
+
+    public void hacerJugada(){
+        jugador.crearJugada();
+    }
 }

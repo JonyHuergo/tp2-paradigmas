@@ -11,7 +11,7 @@ public class EvaluadorEscaleraColor extends EvaluadorAbstracto {
 
     @Override
     public Mano evaluarMano(ArrayList<Carta> cartas) {
-        if (esEscalera(cartas) && esColor(cartas)) {
+        if (cartas.size() == 5 && esEscalera(cartas) && esColor(cartas)) {
             return new EscaleraColor();
         }
         return null;

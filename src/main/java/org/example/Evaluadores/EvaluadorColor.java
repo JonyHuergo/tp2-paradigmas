@@ -17,12 +17,15 @@ public class EvaluadorColor extends EvaluadorAbstracto {
     }
 
     private boolean esColor(ArrayList<Carta> cartas) {
-        String palo = cartas.get(0).getPalo();
-        for (Carta carta : cartas) {
-            if (!carta.getPalo().equals(palo)) {
-                return false;
+        if (cartas.size() == 5) {
+            String palo = cartas.get(0).getPalo();
+            for (Carta carta : cartas) {
+                if (!carta.getPalo().equals(palo)) {
+                    return false;
+                }
             }
-        }
-        return true;
+            return true;
+        };
+        return false;
     }
 }

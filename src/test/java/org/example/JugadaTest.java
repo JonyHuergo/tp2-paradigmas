@@ -26,7 +26,7 @@ public class JugadaTest {
         Jugada jugada = new Jugada(manoPoker, new ArrayList<Comodin>(), 3);
         int puntajeObtenido = jugada.evaluarJugada();
 
-        assertEquals(puntajeObtenido, puntajeEsperado);
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test

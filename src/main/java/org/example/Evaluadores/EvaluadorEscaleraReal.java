@@ -10,7 +10,7 @@ import java.util.Comparator;
 public class EvaluadorEscaleraReal extends EvaluadorAbstracto {
     @Override
     protected Mano evaluarMano(ArrayList<Carta> cartas) {
-        if (esColor(cartas) && esEscalera(cartas) && contieneAs(cartas)) {
+        if (cartas.size() == 5 && esColor(cartas) && esEscalera(cartas) && contieneAs(cartas)) {
             return new EscaleraReal();
         }
         return null;

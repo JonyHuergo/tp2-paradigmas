@@ -10,7 +10,7 @@ public class Jugador {
     private ArrayList<Carta> cartasDisponibles = new ArrayList<>();  // cambiar debido al problema con new
     private int limiteCartas = 8;
     private ManoPoker manoPoker;
-    private ArrayList<Comodin> comodines;
+    private ArrayList<Comodin> comodines = new ArrayList<>();
     private int puntaje;
     private int descartes = 3;
     private int jugadas = 5;
@@ -42,32 +42,6 @@ public class Jugador {
         this.comodines = comodines;
     }
 
-//    public void repartirCartas(int cantidad) {       lo cambie porque se perdian las cartas viejas
-//        cartasDisponibles = mazo.repartir(cantidad);
-//    }
-
-    public void repartirCartas() {
-        mazo.repartir(cartasDisponibles,limiteCartas);
-    }
-
-
-    public int cantidadDeCartasDisponibles(){
-        return cartasDisponibles.size();
-    }
-
-    public void evaluarMano(){
-        manoPoker.definirTipodeMano();
-        manoPoker.sumarValorCartas();
-        for (Comodin comodin : comodines) {
-            comodin.usar(this);
-        }
-        puntaje += manoPoker.hacerCalculo();
-    }
-
-    public boolean puntajeEsIgual(int puntaje){
-        return(this.puntaje == puntaje);
-    }
-
     public void actualizarPuntajeBase(int puntajeBase){
         manoPoker.actualizarPuntajeBase(puntajeBase);
     }
@@ -92,6 +66,14 @@ public class Jugador {
         this.mazo = mazo;
     }
 
+    public int cantidadDeCartasDisponibles(){
+        return cartasDisponibles.size();
+    }
+
+    public boolean puntajeEsIgual(int puntaje){
+        return(this.puntaje == puntaje);
+    }
+
     public boolean tieneManoDeTipo(String manoEsperada){
         return(manoPoker.manoNombreEsIgual(manoEsperada));
     }
@@ -104,21 +86,46 @@ public class Jugador {
         return(puntosPorDescarte*descartes);
     }
 
-    public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
-//        for (int i = 0; i < posicionesCartas.size(); i++) {
-//            manoElegida.add(mano.get(posicionesCartas.get(i)));
-//        }
-//        manoPoker = new ManoPoker(manoElegida);
+    public void repartirCartas() {          // como hacemos para que no se reparta una misma carta dos veces? estado de carta?
+        mazo.repartir(cartasDisponibles,limiteCartas);
     }
 
+    public void elegirCarta(int pos){
+        Carta cartaElegida = cartasDisponibles.remove(pos);
+//        cartasDisponibles.remove(pos);
+        manoPoker.agregarCarta(cartaElegida);
+    }
 
-    public void jugar(){
+    public void evaluarMano(){              // este hay que cambiar, el puntaje depende de las jugadas
+        manoPoker.definirTipodeMano();
+        manoPoker.sumarValorCartas();
+        for (Comodin comodin : comodines) {
+            comodin.usar(this);
+        }
+        puntaje += manoPoker.hacerCalculo();
+    }
+
+    public void reiniciarMano(){            // la mano que fue jugada se pierde
+        manoPoker = new ManoPoker();
+        repartirCartas();
+    }
+
+    public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes);
         listadoJugadas.add(jugadaActual);
         jugadas = jugadas - 1;
+        reiniciarMano();
     }
 
-    public void evaluarJugadaActual(){
-        jugadaActual.evaluarJugada();
+    public int evaluarJugadaActual(){
+        return(jugadaActual.evaluarJugada());
+    }
+
+    public int evaluarJugadas(){
+        int aux = 0;
+        for (Jugada jugada : listadoJugadas) {
+            aux = jugada.evaluarJugada();
+        }
+        return(aux);
     }
 }

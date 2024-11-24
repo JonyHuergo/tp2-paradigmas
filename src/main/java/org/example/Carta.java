@@ -37,7 +37,6 @@ public class Carta {
 
     public boolean paloEsIgual(Carta carta){
         return carta.paloEsIgual(this.palo);
-        //return this.paloEsIgual(carta.getPalo());
     }
 
     public boolean esInmediatamenteSuperior(Carta carta){

@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.Tarot.TarotAgregar10Puntos;
-import org.example.Tarot.TarotMultiplicadorX6;
+import org.example.Tarot.TarotAgregaPuntos;
+import org.example.Tarot.TarotMultiplicador;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,9 +21,9 @@ public class TestSemana1 {
     public void test02RepartirCartas() {
         Jugador jugador = new Jugador();
         int cartasEsperadasJugador = 8;
-        
-        jugador.repartirCartas(8);
-        int cartasObtenidasJugador = jugador.cantidadDeCartasEnMano();
+
+        jugador.repartirCartas();
+        int cartasObtenidasJugador = jugador.cantidadDeCartasDisponibles(); //
 
         assertEquals(cartasEsperadasJugador, cartasObtenidasJugador, "El jugador debería tener 8 cartas en su mano después de repartir.");
     }
@@ -71,7 +71,7 @@ public class TestSemana1 {
     public void test06TarotAgregar10PuntosModificaPuntosCorrectamente() {
         int puntajeEsperado = 19; // (5 por mano (carta alta) + 4 por la carta + 10 por tarot) * 1 por mano
         Carta carta = new Carta("diamantes", 4);
-        TarotAgregar10Puntos tarot = new TarotAgregar10Puntos();
+        TarotAgregaPuntos tarot = new TarotAgregaPuntos(10);
         ManoPoker manoJugada = new ManoPoker();
         
         tarot.aplicarEfecto(carta);
@@ -85,7 +85,7 @@ public class TestSemana1 {
     public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
         int puntajeEsperado = 63; // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
         Carta carta = new Carta("diamantes", 4);
-        TarotMultiplicadorX6 tarot = new TarotMultiplicadorX6();
+        TarotMultiplicador tarot = new TarotMultiplicador(6);
         ManoPoker manoJugada = new ManoPoker();
         
         tarot.aplicarEfecto(carta);

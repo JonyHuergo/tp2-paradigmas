@@ -7,8 +7,8 @@ import java.util.ArrayList;
 public class Jugador {
     private Mazo mazo;
     private String nombre;
-    private ArrayList<Carta> mano = new ArrayList<>();  // cambiar debido al problema con new
-//    private ArrayList<Carta> manoElegida = new ArrayList<>(); // cambiar debido al problema con new
+    private ArrayList<Carta> cartasDisponibles = new ArrayList<>();  // cambiar debido al problema con new
+    private int limiteCartas = 8;
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines;
     private int puntaje;
@@ -36,18 +36,23 @@ public class Jugador {
 
     public Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines){
         this.mazo = mazo;
-        this.mano = mano;
+        this.cartasDisponibles = mano;
         this.manoPoker = manoPoker;
         puntaje = 0;
         this.comodines = comodines;
     }
 
-    public void repartirCartas(int cantidad) {
-        mano = mazo.repartir(cantidad);
+//    public void repartirCartas(int cantidad) {       lo cambie porque se perdian las cartas viejas
+//        cartasDisponibles = mazo.repartir(cantidad);
+//    }
+
+    public void repartirCartas() {
+        mazo.repartir(cartasDisponibles,limiteCartas);
     }
 
-    public int cantidadDeCartasEnMano(){
-        return mano.size();
+
+    public int cantidadDeCartasDisponibles(){
+        return cartasDisponibles.size();
     }
 
     public void evaluarMano(){

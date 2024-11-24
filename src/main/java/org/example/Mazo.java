@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Mazo {
     private ArrayList<Carta> cartas = new ArrayList<>();
@@ -30,11 +31,22 @@ public class Mazo {
         Collections.shuffle(cartas);
     }
 
-    public ArrayList<Carta> repartir(int cantidad) {
-        ArrayList<Carta> mano = new ArrayList<>();
-        for (int i = 0; i < cantidad && !cartas.isEmpty(); i++) {
-            mano.add(cartas.remove(0));
+//    public ArrayList<Carta> repartir(int cantidad) {
+//        ArrayList<Carta> mano = new ArrayList<>();
+//        for (int i = 0; i < cantidad && !cartas.isEmpty(); i++) {
+//            mano.add(cartas.remove(0));
+//        }
+//        return mano;
+//    }
+
+    public void repartir(ArrayList<Carta> cartasDisponibles, int limiteCartas) {
+        int cartasARepartir = limiteCartas - cartasDisponibles.size();
+
+        Random random = new Random();
+        int pos = random.nextInt(cartas.size());
+
+        for (int i = 0; i < cartasARepartir && !cartas.isEmpty(); i++) {
+            cartasDisponibles.add(cartas.remove(pos));
         }
-        return mano;
     }
 }

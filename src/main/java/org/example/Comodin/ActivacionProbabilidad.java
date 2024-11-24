@@ -13,8 +13,8 @@ public class ActivacionProbabilidad implements Activacion {
 
     @Override
     public boolean revisarCondicion(Jugador jugador) {
-        int numero = random.nextInt(probabilidad);
+        int aux = random.nextInt(probabilidad);
 
-        return numero == 0;
+        return aux == 0;
     }
 }

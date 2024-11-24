@@ -5,8 +5,8 @@ import org.example.Comodin.Comodin;
 import java.util.ArrayList;
 
 public class Jugador {
-    private Mazo mazo;
     private String nombre;
+    private Mazo mazo;
     private ArrayList<Carta> cartasDisponibles = new ArrayList<>();  // cambiar debido al problema con new
     private int limiteCartas = 8;
     private ManoPoker manoPoker;
@@ -88,6 +88,10 @@ public class Jugador {
         this.comodines = comodines;
     }
 
+    public void setMazo(Mazo mazo){
+        this.mazo = mazo;
+    }
+
     public boolean tieneManoDeTipo(String manoEsperada){
         return(manoPoker.manoNombreEsIgual(manoEsperada));
     }
@@ -112,5 +116,9 @@ public class Jugador {
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes);
         listadoJugadas.add(jugadaActual);
         jugadas = jugadas - 1;
+    }
+
+    public void evaluarJugadaActual(){
+        jugadaActual.evaluarJugada();
     }
 }

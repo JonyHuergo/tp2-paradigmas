@@ -1,5 +1,6 @@
 package org.example.Comodin;
 
+import org.example.Jugada;
 import org.example.Jugador;
 
 public abstract class Comodin {
@@ -18,4 +19,6 @@ public abstract class Comodin {
     }
 
     public abstract void usar(Jugador jugador);
+
+    public abstract void usar(Jugada jugada);
 }

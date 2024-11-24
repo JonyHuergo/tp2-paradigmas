@@ -1,5 +1,6 @@
 package org.example.Comodin;
 
+import org.example.Jugada;
 import org.example.Jugador;
 
 public class ComodinPorDescarte extends Comodin{
@@ -18,6 +19,18 @@ public class ComodinPorDescarte extends Comodin{
             jugador.actualizarPuntajeBase(puntajeAdicional);
             jugador.actualizarMult(multiplicadorAdicional);
             jugador.multiplicarMult(multiplicadorAumento);
+        }
+    }
+
+    @Override
+    public void usar(Jugada jugada) {
+        if (activacion.revisarCondicion(jugada)){
+            int puntosASumar = jugada.calcularPuntosPorDescarte(puntosPorDescarte);
+            puntajeAdicional += puntosASumar;
+
+            jugada.actualizarPuntajeBase(puntajeAdicional);
+            jugada.actualizarMult(multiplicadorAdicional);
+            jugada.multiplicarMult(multiplicadorAumento);
         }
     }
 }

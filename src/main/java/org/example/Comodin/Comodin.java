@@ -8,10 +8,10 @@ public abstract class Comodin {
     protected String descripcion;
     protected Activacion activacion;
     protected int puntajeAdicional;
-    protected int multiplicadorAdicional;
-    protected int multiplicadorAumento;
+    protected float multiplicadorAdicional;
+    protected float multiplicadorAumento;
 
-    public Comodin(int puntajeAdicional, int multiplicadorAdicional, int multiplicadorAumento, Activacion activacion) {
+    public Comodin(int puntajeAdicional, float multiplicadorAdicional, float multiplicadorAumento, Activacion activacion) {
         this.puntajeAdicional = puntajeAdicional;
         this.multiplicadorAdicional = multiplicadorAdicional;
         this.multiplicadorAumento = multiplicadorAumento;

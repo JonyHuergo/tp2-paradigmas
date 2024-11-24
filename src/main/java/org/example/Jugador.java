@@ -46,11 +46,11 @@ public class Jugador {
         manoPoker.actualizarPuntajeBase(puntajeBase);
     }
 
-    public void actualizarMult(int mult){
+    public void actualizarMult(float mult){
         manoPoker.actualizarMultiplicadorBase(mult);
     }
 
-    public void multiplicarMult(int mult){
+    public void multiplicarMult(float mult){
         manoPoker.multiplicarMultiplicadorBase(mult);
     }
 

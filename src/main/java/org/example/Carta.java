@@ -6,7 +6,7 @@ public class Carta {
     private String palo;
     private int valor;
     private int puntaje;
-    private int multiplicador;
+    private float multiplicador;
 
     public Carta(String palo, int valor) {
         this.palo = palo;
@@ -47,7 +47,7 @@ public class Carta {
         return (carta.valorEsIgual(this.valor - 1));
     }
 
-    public void modificarMultiplicador(int multiplicador){
+    public void modificarMultiplicador(float multiplicador){
         this.multiplicador = multiplicador;
     }
 
@@ -59,7 +59,7 @@ public class Carta {
         return puntajeTotal + this.puntaje;
     }
 
-    public int actualizarMultiplicadorTotal(int multiplicadorTotal) {
+    public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
         return multiplicadorTotal + multiplicador;
     }
 }

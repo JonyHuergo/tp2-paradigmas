@@ -8,11 +8,14 @@ public class Jugador {
     private Mazo mazo;
     private String nombre;
     private ArrayList<Carta> mano = new ArrayList<>();  // cambiar debido al problema con new
-    private ArrayList<Carta> manoElegida = new ArrayList<>(); // cambiar debido al problema con new
+//    private ArrayList<Carta> manoElegida = new ArrayList<>(); // cambiar debido al problema con new
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines;
     private int puntaje;
     private int descartes = 3;
+    private int jugadas = 5;
+    private Jugada jugadaActual;
+    private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
 
     public Jugador(){
         mazo = new Mazo();
@@ -24,12 +27,12 @@ public class Jugador {
         puntaje = 0;
     }
 
-    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
-        this.mazo = mazo;
-        this.mano = mano;
-        this.manoElegida = manoElegida;
-        puntaje = 0;
-    }
+//    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
+//        this.mazo = mazo;
+//        this.mano = mano;
+////        this.manoElegida = manoElegida;
+//        puntaje = 0;
+//    }
 
     public Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines){
         this.mazo = mazo;
@@ -40,7 +43,6 @@ public class Jugador {
     }
 
     public void repartirCartas(int cantidad) {
-
         mano = mazo.repartir(cantidad);
     }
 
@@ -85,24 +87,6 @@ public class Jugador {
         return(manoPoker.manoNombreEsIgual(manoEsperada));
     }
 
-        public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
-        for (int i = 0; i < posicionesCartas.size(); i++) {
-            manoElegida.add(mano.get(posicionesCartas.get(i)));
-        }
-        manoPoker = new ManoPoker(manoElegida);
-    }
-
-
-    public void jugar(ManoPoker manoJugada){
-        /*
-        puntaje = puntaje.sumarCon(manoJugada.evaluar());
-        multiplicador = manoJugada.getMultiplicadorBase();
-        puntaje = puntaje.sumarCon(manoJugada.calcularConModificadores());
-        multiplicador =
-
-        Ronda.pasarTurno();
-        */
-    }
     public boolean tieneDescartes(){
         return(descartes>0);
     }
@@ -111,5 +95,17 @@ public class Jugador {
         return(puntosPorDescarte*descartes);
     }
 
+    public void elegirCartas(ArrayList<Integer> posicionesCartas){ // Esto es raro
+//        for (int i = 0; i < posicionesCartas.size(); i++) {
+//            manoElegida.add(mano.get(posicionesCartas.get(i)));
+//        }
+//        manoPoker = new ManoPoker(manoElegida);
+    }
 
+
+    public void jugar(){
+        this.jugadaActual = new Jugada(manoPoker, comodines, descartes);
+        listadoJugadas.add(jugadaActual);
+        jugadas = jugadas - 1;
+    }
 }

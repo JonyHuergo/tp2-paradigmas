@@ -1,0 +1,242 @@
+@startuml Diagrama de Clases Completo
+
+skinparam classAttributeIconSize 0
+
+title Diagrama de Clases Completo
+
+class AnalizadorMano {
+    - EvaluadorMano evaluadorInicial
+    + AnalizadorMano()
+    + Mano analizarMano(ArrayList<Carta> cartas)
+}
+
+class Carta {
+    - String palo
+    - int valor
+    - int puntaje
+    - int multiplicador
+    + Carta(String palo, int valor)
+    + int getValor()
+    + String getPalo()
+    + boolean cartaTieneMismoValor(Carta carta)
+    - boolean valorEsIgual(int valorCarta)
+    + boolean paloEsIgual(String paloCarta)
+    + boolean paloEsIgual(Carta carta)
+    + boolean esInmediatamenteSuperior(Carta carta)
+    + boolean esInmediatamenteInferior(Carta carta)
+    + void modificarMultiplicador(int multiplicador)
+    + void agregarPuntos(int puntos)
+    + int actualizarPuntajeTotal(int puntajeTotal)
+    + int actualizarMultiplicadorTotal(int multiplicadorTotal)
+}
+
+class Juego {
+    - Jugador jugador
+    - Ronda ronda
+    - int cantidadRondas
+    - boolean juegoGanado
+    + void jugar()
+    + void PartidaPerdida()
+}
+
+class Jugador {
+    - Mazo mazo
+    - String nombre
+    - ArrayList<Carta> mano
+    - ArrayList<Carta> manoElegida
+    - ManoPoker manoPoker
+    - int puntaje
+    + Jugador()
+    + void repartirCartas(int cantidad)
+    + ArrayList<Carta> getCartasEnMano()
+    + void elegirCartas(ArrayList<Integer> posicionesCartas)
+    + void jugar(ManoPoker manoJugada)
+}
+
+class ManoPoker {
+    - ArrayList<Carta> cartas
+    - AnalizadorMano analizadorMano
+    - Mano tipoDeMano
+    + ManoPoker()
+    + ManoPoker(ArrayList<Carta> cartas)
+    + void agregarCarta(Carta carta)
+    + void removerCarta(Carta carta)
+    + int evaluar()
+    + String obtenerNombreTipoDeMano()
+    + Mano calcularMano()
+}
+
+class Mazo {
+    - ArrayList<Carta> cartas
+    + Mazo()
+    + int cantidadDeCartas()
+    + ArrayList<Carta> repartir(int cantidad)
+    - void inicializarMazo()
+}
+
+class Ronda {
+    - int numero
+    - int manos
+    - int descartes
+    - int limiteDePuntos
+    - Tienda tienda
+
+    + Ronda(int numero, int manos, int descartes, int limiteDePuntos, Tienda tienda)
+    + Ronda(int limiteDePuntos)
+    + boolean esGanada(Jugador jugador)
+}
+
+abstract class Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+class TarotAgregar10Puntos extends Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+class TarotMultiplicadorX6 extends Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+interface EvaluadorMano {
+    + evaluar(ArrayList<Carta> cartas): Mano
+}
+
+abstract class EvaluadorAbstracto implements EvaluadorMano {
+    - EvaluadorMano siguiente
+    + void setSiguiente(EvaluadorMano siguiente)
+    + Mano evaluar(ArrayList<Carta> cartas)
+    + abstract Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorColor extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean esColor(ArrayList<Carta> cartas)
+}
+
+class EvaluadorDoblePar extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorEscalera extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorEscaleraColor extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean esEscalera(ArrayList<Carta> cartas)
+    - boolean esColor(ArrayList<Carta> cartas)
+}
+
+class EvaluadorEscaleraReal extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean esColor(ArrayList<Carta> cartas)
+    - boolean esEscalera(ArrayList<Carta> cartas)
+    - boolean contieneAs(ArrayList<Carta> cartas)
+}
+
+class EvaluadorFull extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorPar extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorPoker extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean tieneRepetidos(ArrayList<Carta> cartas, int cantidad)
+}
+
+class EvaluadorTrio extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean tieneRepetidos(ArrayList<Carta> cartas, int cantidad)
+}
+
+abstract class Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class CartaAlta extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Color extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class DoblePar extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Escalera extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class EscaleraColor extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class EscaleraReal extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Full extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Par extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Poker extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+class Trio extends Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+Mazo --> Carta
+
+AnalizadorMano --> EvaluadorMano
+AnalizadorMano --> Mano
+AnalizadorMano --> Carta
+
+Juego --> Jugador
+Juego --> Ronda
+
+Jugador --> ManoPoker
+
+ManoPoker --> Carta
+ManoPoker --> AnalizadorMano
+ManoPoker --> Mano
+
+Ronda --> Tienda
+Ronda --> Jugador
+
+Tarot --> Carta
+
+@enduml

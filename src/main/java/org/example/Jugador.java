@@ -1,46 +1,131 @@
 package org.example;
 
+import org.example.Comodin.Comodin;
+
 import java.util.ArrayList;
 
 public class Jugador {
-    private Mazo mazo;
     private String nombre;
-    private ArrayList<Carta> mano = new ArrayList<>();
-    private ArrayList<Carta> manoElegida = new ArrayList<>();
+    private Mazo mazo;
+    private ArrayList<Carta> cartasDisponibles = new ArrayList<>();  // cambiar debido al problema con new
+    private int limiteCartas = 8;
     private ManoPoker manoPoker;
-    private Puntaje puntaje;
-    private Puntaje multiplicador;
+    private ArrayList<Comodin> comodines = new ArrayList<>();
+    private int puntaje;
+    private int descartes = 3;
+    private int jugadas = 5;
+    private Jugada jugadaActual;
+    private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
 
     public Jugador(){
         mazo = new Mazo();
-        puntaje = new Puntaje(0);
+        puntaje = 0;
     }
 
-    public void repartirCartas(int cantidad) {
-
-        mano = mazo.repartir(cantidad);
+    public Jugador(Mazo mazo){
+        this.mazo = mazo;
+        puntaje = 0;
     }
 
-    public ArrayList<Carta> getCartasEnMano() { // Se va a necesitar en un futuro
-        return mano;
+//    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
+//        this.mazo = mazo;
+//        this.mano = mano;
+////        this.manoElegida = manoElegida;
+//        puntaje = 0;
+//    }
+
+    public Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines){
+        this.mazo = mazo;
+        this.cartasDisponibles = mano;
+        this.manoPoker = manoPoker;
+        puntaje = 0;
+        this.comodines = comodines;
     }
 
-    public void elegirCartas(ArrayList<Integer> posicionesCartas){
-        for (int i = 0; i < posicionesCartas.size(); i++) {
-            manoElegida.add(mano.get(posicionesCartas.get(i)));
+    public void actualizarPuntajeBase(int puntajeBase){
+        manoPoker.actualizarPuntajeBase(puntajeBase);
+    }
+
+    public void actualizarMult(int mult){
+        manoPoker.actualizarMultiplicadorBase(mult);
+    }
+
+    public void multiplicarMult(int mult){
+        manoPoker.multiplicarMultiplicadorBase(mult);
+    }
+
+    public void setManoPoker(ManoPoker manoPoker) {
+        this.manoPoker = manoPoker;
+    }
+
+    public void setComodines(ArrayList<Comodin> comodines) {
+        this.comodines = comodines;
+    }
+
+    public void setMazo(Mazo mazo){
+        this.mazo = mazo;
+    }
+
+    public int cantidadDeCartasDisponibles(){
+        return cartasDisponibles.size();
+    }
+
+    public boolean puntajeEsIgual(int puntaje){
+        return(this.puntaje == puntaje);
+    }
+
+    public boolean tieneManoDeTipo(String manoEsperada){
+        return(manoPoker.manoNombreEsIgual(manoEsperada));
+    }
+
+    public boolean tieneDescartes(){
+        return(descartes>0);
+    }
+
+    public int calcularPuntosPorDescarte(int puntosPorDescarte) {
+        return(puntosPorDescarte*descartes);
+    }
+
+    public void repartirCartas() {          // como hacemos para que no se reparta una misma carta dos veces? estado de carta?
+        mazo.repartir(cartasDisponibles,limiteCartas);
+    }
+
+    public void elegirCarta(int pos){
+        Carta cartaElegida = cartasDisponibles.remove(pos);
+//        cartasDisponibles.remove(pos);
+        manoPoker.agregarCarta(cartaElegida);
+    }
+
+    public void evaluarMano(){              // este hay que cambiar, el puntaje depende de las jugadas
+        manoPoker.definirTipodeMano();
+        manoPoker.sumarValorCartas();
+        for (Comodin comodin : comodines) {
+            comodin.usar(this);
         }
-        manoPoker = new ManoPoker(manoElegida);
+        puntaje += manoPoker.hacerCalculo();
     }
 
-    public void jugar(ManoPoker manoJugada){// nose si recibe la manoPoker por parametro despues vemos
-        /*
-        puntaje = puntaje.sumarCon(manoJugada.evaluar());
-        multiplicador = manoJugada.getMultiplicadorBase();
-        puntaje = puntaje.sumarCon(manoJugada.calcularConModificadores());
-        multiplicador = 
+    public void reiniciarMano(){            // la mano que fue jugada se pierde
+        manoPoker = new ManoPoker();
+        repartirCartas();
+    }
 
-        Ronda.pasarTurno();
-        */
+    public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
+        this.jugadaActual = new Jugada(manoPoker, comodines, descartes);
+        listadoJugadas.add(jugadaActual);
+        jugadas = jugadas - 1;
+        reiniciarMano();
+    }
 
+    public int evaluarJugadaActual(){
+        return(jugadaActual.evaluarJugada());
+    }
+
+    public int evaluarJugadas(){
+        int aux = 0;
+        for (Jugada jugada : listadoJugadas) {
+            aux = jugada.evaluarJugada();
+        }
+        return(aux);
     }
 }

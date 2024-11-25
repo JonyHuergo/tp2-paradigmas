@@ -1,0 +1,18 @@
+# Ignore IDE settings
+.idea/
+
+# Ignore output directories
+out/
+target/
+
+# Ignore other irrelevant or temporary files
+*.log
+*.tmp
+*.bak
+
+# Ignore version control files
+.git/
+
+# Ignore other unnecessary files
+LICENSE
+README.md

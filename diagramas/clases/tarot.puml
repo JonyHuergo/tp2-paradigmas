@@ -1,0 +1,32 @@
+@startuml Diagrama de Clases Tarot
+
+skinparam classAttributeIconSize 0
+
+title Diagrama de Clases Tarot
+
+class Carta {
+    - String palo
+    - int valor
+    - int puntaje
+    - int multiplicador
+    + void modificarMultiplicador(int multiplicador)
+    + void agregarPuntos(int puntos)
+    + int actualizarPuntajeTotal(int puntajeTotal)
+    + int actualizarMultiplicadorTotal(int multiplicadorTotal)
+}
+
+abstract class Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+class TarotAgregar10Puntos extends Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+class TarotMultiplicadorX6 extends Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+Tarot ..> Carta
+
+@enduml

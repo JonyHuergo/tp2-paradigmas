@@ -1,0 +1,116 @@
+@startuml Diagrama de Clases Simplificado
+
+skinparam classAttributeIconSize 0
+
+title Diagrama de Clases Simplificado
+
+class AnalizadorMano {
+    + AnalizadorMano()
+    + Mano analizarMano(ArrayList<Carta> cartas)
+}
+
+class Carta {
+    - String palo
+    - int valor
+    - int puntaje
+    - int multiplicador
+    + Carta(String palo, int valor)
+    + int getValor()
+    + String getPalo()
+    + boolean cartaTieneMismoValor(Carta carta)
+    - boolean valorEsIgual(int valorCarta)
+    + boolean paloEsIgual(String paloCarta)
+    + boolean paloEsIgual(Carta carta)
+    + boolean esInmediatamenteSuperior(Carta carta)
+    + boolean esInmediatamenteInferior(Carta carta)
+    + void modificarMultiplicador(int multiplicador)
+    + void agregarPuntos(int puntos)
+    + int actualizarPuntajeTotal(int puntajeTotal)
+    + int actualizarMultiplicadorTotal(int multiplicadorTotal)
+}
+
+class Juego {
+    - int cantidadRondas
+    - boolean juegoGanado
+    + void jugar()
+    + void PartidaPerdida()
+}
+
+class Jugador {
+    - String nombre
+    - ArrayList<Carta> mano
+    - ArrayList<Carta> manoElegida
+    - ManoPoker manoPoker
+    - int puntaje
+    + Jugador()
+    + void repartirCartas(int cantidad)
+    + ArrayList<Carta> getCartasEnMano()
+    + void elegirCartas(ArrayList<Integer> posicionesCartas)
+    + void jugar(ManoPoker manoJugada)
+}
+
+class ManoPoker {
+    + ManoPoker()
+    + ManoPoker(ArrayList<Carta> cartas)
+    + void agregarCarta(Carta carta)
+    + void removerCarta(Carta carta)
+    + int evaluar()
+    + String obtenerNombreTipoDeMano()
+    + Mano calcularMano()
+}
+
+class Mazo {
+    + Mazo()
+    + int cantidadDeCartas()
+    + ArrayList<Carta> repartir(int cantidad)
+    - void inicializarMazo()
+}
+
+class Ronda {
+    - int limiteDePuntos
+    - int turno
+    + Ronda(int limiteDePuntos)
+    + void pasarTurno(int puntajeTotal)
+}
+
+abstract class Tarot {
+    + void aplicarEfecto(Carta carta)
+}
+
+interface EvaluadorMano {
+    + evaluar(ArrayList<Carta> cartas): Mano
+}
+
+abstract class EvaluadorAbstracto implements EvaluadorMano {
+    - EvaluadorMano siguiente
+    + void setSiguiente(EvaluadorMano siguiente)
+    + Mano evaluar(ArrayList<Carta> cartas)
+    + abstract Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+abstract class Mano {
+    + String getNombre()
+    + int getPuntajeBase()
+    + int getMultiplicadorBase()
+}
+
+Mazo "1" o-- "0..*" Carta
+
+AnalizadorMano "1" *-- "1" EvaluadorMano
+AnalizadorMano ..> Mano
+AnalizadorMano ..> Carta
+
+Juego "1" o-- "1" Jugador
+Juego "1" *-- "1..*" Ronda
+
+Jugador "1" o-- "1" ManoPoker
+Jugador "1" --> "1" Mazo
+Jugador ..> Carta
+
+ManoPoker "1" o-- "0..*" Carta
+ManoPoker "1" --> "1" AnalizadorMano
+ManoPoker "1" --> "1" Mano
+
+Tarot ..> Carta
+
+@enduml

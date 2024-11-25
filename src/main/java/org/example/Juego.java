@@ -1,33 +1,31 @@
 package org.example;
 
-import java.util.ArrayList;
-
 public class Juego {
     private Jugador jugador;
-    private ArrayList<Ronda> rondas = new ArrayList<Ronda>();
-    private int numeroRonda = 0;
-    private int cantidadRondas = 8;
+    private Ronda ronda;
+    private int cantidadRondas;
     private boolean juegoGanado = false;
 
-    public Juego(Puntaje[] limitesDePuntosPorRonda, Puntaje[][] limitesDePuntosPorTurno) {
-        for(int i = 0; i < cantidadRondas; i++) {
-            rondas.add(new Ronda(limitesDePuntosPorRonda[i], limitesDePuntosPorTurno[i]));
-        }
-    }
-
     public void jugar(){
+        /*
+        while(ronda.puntajeSuperoElLimite(jugador.jugar()) && cantidadRondas > 0){
 
-        while(rondas.get(numeroRonda).esGanada(jugador) && numeroRonda <= cantidadRondas){
-            numeroRonda++;
+
+
+            cantidadRondas--;
         }
 
-        if (numeroRonda == 8) {
+        if (cantidadRondas == 0) {
             juegoGanado = true;
         }
         juegoGanado = false;
+        */
     }
-
     public void PartidaPerdida(){
 
+    }
+
+    public void hacerJugada(){
+        jugador.crearJugada();
     }
 }

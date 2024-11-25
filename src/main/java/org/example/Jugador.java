@@ -117,12 +117,12 @@ public class Jugador {
         reiniciarMano();
     }
 
-    public int evaluarJugadaActual(){
+    public float evaluarJugadaActual(){
         return(jugadaActual.evaluarJugada());
     }
 
-    public int evaluarJugadas(){
-        int aux = 0;
+    public float evaluarJugadas(){
+        float aux = 0;
         for (Jugada jugada : listadoJugadas) {
             aux = jugada.evaluarJugada();
         }

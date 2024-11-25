@@ -24,7 +24,7 @@ public class JugadaTest {
         }
 
         Jugada jugada = new Jugada(manoPoker, new ArrayList<Comodin>(), 3);
-        int puntajeObtenido = jugada.evaluarJugada();
+        float puntajeObtenido = jugada.evaluarJugada();
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -43,7 +43,7 @@ public class JugadaTest {
         comodines.add(new ComodinBase(0,2,1, new ActivacionSiempre()));
 
         Jugada jugada = new Jugada(manoPoker, comodines, 3);
-        int puntajeObtenido = jugada.evaluarJugada();
+        float puntajeObtenido = jugada.evaluarJugada();
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -63,7 +63,7 @@ public class JugadaTest {
         comodines.add(new ComodinBase(0,0,10, new ActivacionSiempre()));
 
         Jugada jugada = new Jugada(manoPoker, comodines, 3);
-        int puntajeObtenido = jugada.evaluarJugada();
+        float puntajeObtenido = jugada.evaluarJugada();
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -72,7 +72,7 @@ public class JugadaTest {
     @Test
     public void test04UnaListaDeJugadasSeRealizanCorrectamente() {
         int puntajeEsperado = 1195; // 45 de Jugada1 + 1150 de Jugada2
-        int puntajeObtenido = 0;
+        float puntajeObtenido = 0;
 
         // Jugada 1: [5 por mano (carta alta) + 10 por las cartas] * (1 por mano * 3 por comodin) = 45
         ManoPoker manoPoker1 = new ManoPoker();

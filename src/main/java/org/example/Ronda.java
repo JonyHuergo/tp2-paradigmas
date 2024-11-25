@@ -1,17 +1,25 @@
 package org.example;
 
 public class Ronda {
-    private int limiteDePuntos;
-    private int turno;
+    private int numero;
+    private int manos;
+    private int descartes;
+    private int puntajeASuperar;
+    private Tienda tienda;
 
-    public Ronda(int limiteDePuntos) {
-        this.limiteDePuntos = limiteDePuntos;
+    public Ronda(int numero, int manos, int descartes, int puntajeASuperar, Tienda tienda) {
+        this.numero = numero;
+        this.manos = manos;
+        this.descartes = descartes;
+        this.puntajeASuperar = puntajeASuperar;
+        this.tienda = tienda;
     }
+
     public void pasarTurno(int puntajeTotal){
-        this.turno -= 1;
-        if(limiteDePuntos <= puntajeTotal);
+        this.manos -= 1;
+        if(puntajeASuperar <= puntajeTotal);
             System.out.println("siguiente ronda!");
-        if(turno <= 0){
+        if(manos <= 0){
             System.out.println("perdiste!");
         }
 

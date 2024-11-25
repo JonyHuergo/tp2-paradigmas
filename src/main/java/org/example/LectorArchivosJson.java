@@ -1,11 +1,15 @@
 package org.example;
 
 import jakarta.json.*;
+import org.example.Comodin.Comodin;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class LectorArchivosJson {
@@ -15,7 +19,7 @@ public class LectorArchivosJson {
     String rutaTarotsJson = "src/main/resources/tarots.json";
 
     public void leerBalatro() throws IOException {
-
+        List<Ronda> rodasLeidas = new ArrayList<>();
         try (InputStream lector = new FileInputStream(rutaBalatroJson);
              JsonReader jsonReader = Json.createReader(lector)) {
 
@@ -170,7 +174,7 @@ public class LectorArchivosJson {
                 int puntos = (int) efecto.get("puntos");
                 float multiplicador = (float) efecto.get("multiplicador");
                 System.out.println("Efecto: +" + puntos + " puntos, x" + multiplicador);
-                System.out.println();  // Separar comodines
+                System.out.println();  // separar comodines
             }
 
             //Bonus por Descarte
@@ -185,7 +189,7 @@ public class LectorArchivosJson {
                 int puntos = (int) efecto.get("puntos");
                 float multiplicador = (float) efecto.get("multiplicador");
                 System.out.println("Efecto: +" + puntos + " puntos, x" + multiplicador);
-                System.out.println();  // Separar comodines
+                System.out.println();  // separar comodines
             }
 
             //Chance de activarse aleatoriamente
@@ -200,7 +204,7 @@ public class LectorArchivosJson {
                 int puntos = (int) efecto.get("puntos");
                 float multiplicador = (float) efecto.get("multiplicador");
                 System.out.println("Efecto: +" + puntos + " puntos, x" + multiplicador);
-                System.out.println();  // Separar comodines
+                System.out.println();  // separar comodines
             }
 
             //Combinación
@@ -248,11 +252,57 @@ public class LectorArchivosJson {
                 System.out.println("Sobre: " + sobre);
                 System.out.println("Ejemplar: " + ejemplar);
 
-                System.out.println();  // Separar tarots
+                System.out.println();  // separar tarots
             }
         } catch (IOException e) {
             System.err.println("Error al leer el archivo JSON: " + e.getMessage());}
     }
+/*
+    private List<Comodin> obtenerComodines(JsonObject jsonObject) {
+        List<Comodin> listaComodines = new ArrayList<>();
+        JsonArray comodines = jsonObject.getJsonArray("comodines");
+        for (JsonObject comodin : comodines.getValuesAs(JsonObject.class)) {
+            System.out.println("  Comodín: " + comodin.getString("nombre"));
+            System.out.println("    Descripción: " + comodin.getString("descripcion"));
+
+            if (comodin.containsKey("comodines")) { //ver linea 307 del json
+                System.out.println("Subcomodines:");
+                JsonArray subcomodines = comodin.getJsonArray("comodines");
+
+                for (int j = 0; j < subcomodines.size(); j++) {
+                    JsonObject subcomodin = subcomodines.getJsonObject(j);
+                    String nombre = subcomodin.getString("nombre");
+                    String descripcion = subcomodin.getString("descripcion");
+                    JsonValue activacion = subcomodin.get("activacion");
+                    if (activacion.getValueType() == JsonValue.ValueType.OBJECT) {
+                        JsonObject activacionObj = (JsonObject) activacion;
+                        System.out.println("Activación: " + activacionObj);
+                    } else {
+                        System.out.println("Activación: " + activacion.toString());
+                    }
+                    Map<String, Object> efecto = leerEfecto(subcomodin);
+                    int puntos = (int) efecto.get("puntos");
+                    float multiplicador = (float) efecto.get("multiplicador");
+                    System.out.println("    Efecto: " + efecto);
+                };
+                //listaComodines.add(new ) IR AÑADIENDO LOS COMODINES A LA LISTA PERO ME FALTA USAR UN PATRON FACTORY CAPAZ
+                break;
+            }
+            JsonValue activacion = comodin.get("activacion");
+            if (activacion.getValueType() == JsonValue.ValueType.OBJECT) {
+                JsonObject activacionObj = (JsonObject) activacion;
+                System.out.println("Activación: " + activacionObj);
+            } else {
+                System.out.println("Activación: " + activacion.toString());
+            }
+            Map<String, Object> efecto = leerEfecto(comodin);
+            int puntos = (int) efecto.get("puntos");
+            float multiplicador = (float) efecto.get("multiplicador");
+            System.out.println("    Efecto: " + efecto);
+            //listaComodines.add(new ) IR AÑADIENDO LOS COMODINES A LA LISTA PERO ME FALTA USAR UN PATRON FACTORY CAPAZ
+        }
+        return listaComodines;}*/
+
     private Map<String, Object> leerEfecto(JsonObject objeto) {
         if (objeto.containsKey("efecto")) {
             JsonObject efecto = objeto.getJsonObject("efecto");

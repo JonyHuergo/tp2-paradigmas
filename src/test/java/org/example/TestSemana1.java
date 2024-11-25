@@ -52,7 +52,7 @@ public class TestSemana1 {
             manoJugada.agregarCarta(carta);
         }
 
-        int puntajeObtenido = manoJugada.evaluar();
+        float puntajeObtenido = manoJugada.evaluar();
         assertEquals(puntajeEsperado,puntajeObtenido);
     }
 
@@ -76,7 +76,7 @@ public class TestSemana1 {
         
         tarot.aplicarEfecto(carta);
         manoJugada.agregarCarta(carta);
-        int puntajeObtenido = manoJugada.evaluar();
+        float puntajeObtenido = manoJugada.evaluar();
 
         assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 19.");
     }
@@ -90,7 +90,7 @@ public class TestSemana1 {
         
         tarot.aplicarEfecto(carta);
         manoJugada.agregarCarta(carta);
-        int puntajeObtenido = manoJugada.evaluar();
+        float puntajeObtenido = manoJugada.evaluar();
 
         assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 63.");
     }

@@ -1,10 +1,13 @@
 package org.example;
 
 import org.example.Comodin.*;
+import org.example.Tarot.Tarot;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -139,7 +142,20 @@ public class TestSemana2 {
     }
 
     @Test
-    public void test06JSONSeLeeYConvierteCorrectamente() {
-
+    public void test06JSONSeLeeYConvierteCorrectamente() throws IOException {
+        LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
+        List<Ronda> rondas = lectorArchivosJson.leerBalatro();
+        for (Ronda ronda : rondas) {
+            assertTrue(ronda instanceof Ronda);
+            Tienda tienda = ronda.obtenerTienda();
+            for (Comodin comodin : tienda.obtenerComodines()) {
+                assertTrue(comodin instanceof Comodin);
+            }
+            for (Tarot tarot : tienda.obtenerTarots()) {
+                assertTrue(tarot instanceof Tarot);
+            }
+            Carta carta = tienda.obtenerCarta();
+            assertTrue(carta instanceof Carta);
+        }
     }
 }

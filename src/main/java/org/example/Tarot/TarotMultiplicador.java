@@ -4,14 +4,17 @@ import org.example.Carta;
 
 //Cambia multiplicador de la carta a un x6
 public class TarotMultiplicador extends Tarot {
-    private int multiplicador;
 
-    public TarotMultiplicador(int multiplicador) {
-        this.multiplicador = multiplicador;
+    public TarotMultiplicador(String nombre, String descripcion, String sobre, String ejemplar, int puntos, float multiplicador){
+        super(nombre, descripcion, sobre, ejemplar, puntos, multiplicador);
+    }
+
+    public TarotMultiplicador(float multiplicador) {
+        super(multiplicador);
     }
 
     @Override
     public void aplicarEfecto(Carta carta) {
-        carta.modificarMultiplicador(multiplicador);
+        carta.modificarMultiplicador(this.multiplicador);
     };
 }

@@ -1,8 +1,10 @@
 package org.example;
 
+import java.util.List;
+
 public class Juego {
     private Jugador jugador;
-    private Ronda ronda;
+    private List<Ronda> ronda;
     private int cantidadRondas;
     private boolean juegoGanado = false;
 

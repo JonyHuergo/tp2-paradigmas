@@ -22,7 +22,9 @@ public class Ronda {
         if(manos <= 0){
             System.out.println("perdiste!");
         }
+    }
 
-
+    public Tienda obtenerTienda(){
+        return tienda;
     }
 }

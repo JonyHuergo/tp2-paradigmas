@@ -16,4 +16,14 @@ public class Tienda {
         this.tarots = tarots;
         this.carta = carta;
     }
+
+    public List<Comodin> obtenerComodines(){
+        return comodines;
+    }
+    public List<Tarot> obtenerTarots(){
+        return tarots;
+    }
+    public Carta obtenerCarta(){
+        return carta;
+    }
 }

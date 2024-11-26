@@ -3,6 +3,7 @@ package org.example;
 import java.util.Objects;
 
 public class Carta {
+    private String nombre;
     private String palo;
     private int valor;
     private int puntaje;
@@ -13,6 +14,14 @@ public class Carta {
         this.valor = valor;
         this.multiplicador = 0;
         this.puntaje = valor;
+    }
+
+    public Carta(String nombre, String palo, String valor, int puntaje, String multiplicador) {
+        this.nombre = nombre;
+        this.palo = palo;
+        //this.valor = Integer.parseInt(valor);
+        this.puntaje = puntaje;
+        //this.multiplicador = Float.parseFloat(multiplicador);
     }
 
     public int getValor(){

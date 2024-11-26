@@ -3,16 +3,25 @@ package org.example;
 import java.util.Objects;
 
 public class Carta {
+    private String nombre;
     private String palo;
     private int valor;
     private int puntaje;
-    private int multiplicador;
+    private float multiplicador;
 
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = valor;
         this.multiplicador = 0;
         this.puntaje = valor;
+    }
+
+    public Carta(String nombre, String palo, String valor, int puntaje, String multiplicador) {
+        this.nombre = nombre;
+        this.palo = palo;
+        //this.valor = Integer.parseInt(valor);
+        this.puntaje = puntaje;
+        //this.multiplicador = Float.parseFloat(multiplicador);
     }
 
     public int getValor(){
@@ -47,7 +56,7 @@ public class Carta {
         return (carta.valorEsIgual(this.valor - 1));
     }
 
-    public void modificarMultiplicador(int multiplicador){
+    public void modificarMultiplicador(float multiplicador){
         this.multiplicador = multiplicador;
     }
 
@@ -59,7 +68,7 @@ public class Carta {
         return puntajeTotal + this.puntaje;
     }
 
-    public int actualizarMultiplicadorTotal(int multiplicadorTotal) {
+    public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
         return multiplicadorTotal + multiplicador;
     }
 }

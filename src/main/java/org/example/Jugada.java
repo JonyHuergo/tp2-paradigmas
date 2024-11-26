@@ -21,11 +21,11 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         manoPoker.actualizarPuntajeBase(puntajeBase);
     }
 
-    public void actualizarMult(int mult){
+    public void actualizarMult(float mult){
         manoPoker.actualizarMultiplicadorBase(mult);
     }
 
-    public void multiplicarMult(int mult){
+    public void multiplicarMult(float mult){
         manoPoker.multiplicarMultiplicadorBase(mult);
     }
 
@@ -41,7 +41,7 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         return(descartes * puntosPorDescarte);
     }
 
-    public int evaluarJugada(){
+    public float evaluarJugada(){
         manoPoker.definirTipodeMano();
         manoPoker.sumarValorCartas();
         for (Comodin comodin : comodines) {

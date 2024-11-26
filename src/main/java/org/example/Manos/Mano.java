@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public abstract class Mano {
     private String nombre;
     private int puntajeBase;
-    private int multiplicadorBase;
+    private float multiplicadorBase;
 
     public Mano(String nombre, int puntajeBase, int multiplicadorBase) {
         this.nombre = nombre;
@@ -24,19 +24,19 @@ public abstract class Mano {
         this.puntajeBase += puntaje;
     }
 
-    public int getMultiplicadorBase() {
+    public float getMultiplicadorBase() {
         return multiplicadorBase;
     }
 
-    public void actualizarMultiplicadorBase(int mult) {
+    public void actualizarMultiplicadorBase(float mult) {
         this.multiplicadorBase += mult;
     }
 
-    public void multiplicarMultiplicadorBase(int mult) {
+    public void multiplicarMultiplicadorBase(float mult) {
         this.multiplicadorBase = multiplicadorBase * mult;
     }
 
-    public int calcular(ArrayList<Carta> cartas){
+    public float calcular(ArrayList<Carta> cartas){
         for (Carta carta : cartas) {
             puntajeBase = carta.actualizarPuntajeTotal(puntajeBase);
             multiplicadorBase = carta.actualizarMultiplicadorTotal(multiplicadorBase);
@@ -51,7 +51,7 @@ public abstract class Mano {
         }
     }
 
-    public int hacerCalculo(){
+    public float hacerCalculo(){
         return (puntajeBase * multiplicadorBase);
     }
 

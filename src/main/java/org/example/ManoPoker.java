@@ -27,7 +27,7 @@ public class ManoPoker {
         cartas.remove(carta);
     }
 
-    public int evaluar(){
+    public float evaluar(){
         tipoDeMano = calcularMano();
         return(tipoDeMano.calcular(cartas));
     }
@@ -40,7 +40,7 @@ public class ManoPoker {
         tipoDeMano.sumarValorCartas(cartas);
     }
 
-    public int hacerCalculo(){
+    public float hacerCalculo(){
         return tipoDeMano.hacerCalculo();
     }
 
@@ -58,11 +58,11 @@ public class ManoPoker {
         tipoDeMano.actualizarPuntajeBase(puntaje);
     }
 
-    public void actualizarMultiplicadorBase(int mult) {
+    public void actualizarMultiplicadorBase(float mult) {
         tipoDeMano.actualizarMultiplicadorBase(mult);
     }
 
-    public void multiplicarMultiplicadorBase(int mult) {
+    public void multiplicarMultiplicadorBase(float mult) {
         tipoDeMano.multiplicarMultiplicadorBase(mult);
     }
 }

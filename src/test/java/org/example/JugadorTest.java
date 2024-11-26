@@ -29,7 +29,7 @@ public class JugadorTest {
         jugador.setManoPoker(manoPoker);
         jugador.crearJugada();
 
-        int puntajeObtenido = jugador.evaluarJugadaActual();
+        float puntajeObtenido = jugador.evaluarJugadaActual();
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -56,7 +56,7 @@ public class JugadorTest {
         jugador.setManoPoker(manoPoker2);
         jugador.crearJugada();
 
-        int puntajeObtenido = jugador.evaluarJugadaActual();
+        float puntajeObtenido = jugador.evaluarJugadaActual();
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }

@@ -46,11 +46,11 @@ public class Jugador {
         manoPoker.actualizarPuntajeBase(puntajeBase);
     }
 
-    public void actualizarMult(int mult){
+    public void actualizarMult(float mult){
         manoPoker.actualizarMultiplicadorBase(mult);
     }
 
-    public void multiplicarMult(int mult){
+    public void multiplicarMult(float mult){
         manoPoker.multiplicarMultiplicadorBase(mult);
     }
 
@@ -117,12 +117,12 @@ public class Jugador {
         reiniciarMano();
     }
 
-    public int evaluarJugadaActual(){
+    public float evaluarJugadaActual(){
         return(jugadaActual.evaluarJugada());
     }
 
-    public int evaluarJugadas(){
-        int aux = 0;
+    public float evaluarJugadas(){
+        float aux = 0;
         for (Jugada jugada : listadoJugadas) {
             aux = jugada.evaluarJugada();
         }

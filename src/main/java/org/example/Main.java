@@ -35,15 +35,20 @@ public class Main extends Application {
             );
             root.setBackground(new Background(backgroundImage));
 
-            // Styling del título
-            Text title = new Text("BALATRO");
-            title.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
-            title.setFill(Color.WHITE);
-
             // Carta que aparece en el título
             ImageView cardImage = new ImageView(new Image("/card.png"));
             cardImage.setFitWidth(60);
             cardImage.setFitHeight(80);
+
+            // Parte del título antes de la segunda "A"
+            Text firstPart = new Text("BAL");
+            firstPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
+            firstPart.setFill(Color.WHITE);
+
+            // Parte del título después de la segunda "A"
+            Text secondPart = new Text("TRO");
+            secondPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
+            secondPart.setFill(Color.WHITE);
 
             // Botones
             Button playButton = createStyledButton("PLAY", "#0078D7");
@@ -66,8 +71,8 @@ public class Main extends Application {
             greyBox.setPadding(new Insets(5)); // Padding de la caja gris
             greyBox.setMaxWidth(300);
 
-            // Posicionando el título y los botones
-            VBox titleBox = new VBox(10, cardImage, title);
+            // Diseño del título: poner la carta entre "BAL" y "TRO"
+            HBox titleBox = new HBox(0, firstPart, cardImage, secondPart);
             titleBox.setAlignment(Pos.TOP_CENTER);
 
             VBox layout = new VBox(50, titleBox, greyBox);

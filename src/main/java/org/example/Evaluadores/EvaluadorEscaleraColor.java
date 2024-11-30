@@ -19,10 +19,12 @@ public class EvaluadorEscaleraColor extends EvaluadorAbstracto {
 
     private boolean esEscalera(ArrayList<Carta> cartas) {
         cartas.sort(Comparator.comparingInt(Carta::getValor));
-        for (int i = 0; i < cartas.size() - 1; i++) {
-            if (cartas.get(i).getValor() + 1 != cartas.get(i + 1).getValor()) {
+        Carta cartaAnterior = null;
+        for (Carta carta : cartas) {
+            if (cartaAnterior != null && carta.getValor() != cartaAnterior.getValor() + 1) {
                 return false;
             }
+            cartaAnterior = carta;  // Actualiza la cartaAnterior para la siguiente iteración
         }
         return true;
     }

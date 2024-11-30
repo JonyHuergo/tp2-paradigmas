@@ -4,6 +4,7 @@ import org.example.Carta;
 import org.example.Comodin.Comodin;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Mano {
     private String nombre;
@@ -17,7 +18,7 @@ public abstract class Mano {
     }
 
     public boolean nombreEsIgual(String nombre){
-        return(this.nombre == nombre);
+        return(Objects.equals(this.nombre, nombre));
     }
 
     public void actualizarPuntajeBase(int puntaje) {

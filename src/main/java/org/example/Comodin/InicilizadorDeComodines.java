@@ -9,17 +9,17 @@ public class InicilizadorDeComodines {
     private static final Map<String, Class<? extends Comodin>> REGISTRO = new HashMap<>();
 
     static {
-        REGISTRO.put("Comodin", Comodin.class);
-        REGISTRO.put("Caminante", ComodinCombo.class);
-        REGISTRO.put("Comodin Astuto", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin loco", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Generoso", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Arriesgado", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Abundante", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Poderoso", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Afortunado", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Real", ComodinPorDescarte.class);
-        REGISTRO.put("Comodin Épico", ComodinPorDescarte.class);
+        REGISTRO.put("Comodin", ComodinBase.class);
+        REGISTRO.put("Caminante", ComodinBase.class);
+        REGISTRO.put("Comodin Astuto", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin loco", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Generoso", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Arriesgado", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Abundante", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Poderoso", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Afortunado", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Real", ComodinPorManoJugada.class);
+        REGISTRO.put("Comodin Épico", ComodinPorManoJugada.class);
         REGISTRO.put("Bandera", ComodinPorDescarte.class);
         REGISTRO.put("Cumbre Mistica", ComodinPorDescarte.class);
         REGISTRO.put("Descarte Dorado", ComodinPorDescarte.class);
@@ -28,19 +28,19 @@ public class InicilizadorDeComodines {
         REGISTRO.put("Descarte Sagrado", ComodinPorDescarte.class);
         REGISTRO.put("Talisman de Descarte", ComodinPorDescarte.class);
         REGISTRO.put("Portal del Infinito", ComodinPorDescarte.class);
-        REGISTRO.put("Gros Michel", ComodinPorDescarte.class);
-        REGISTRO.put("Cavendish", ComodinPorDescarte.class);
-        REGISTRO.put("Manzano Dorado", ComodinPorDescarte.class);
-        REGISTRO.put("Estrella Fugaz", ComodinPorDescarte.class);
-        REGISTRO.put("Tigre de Bengal", ComodinPorDescarte.class);
-        REGISTRO.put("Tornado de Suerte", ComodinPorDescarte.class);
-        REGISTRO.put("Flor del Cerezo", ComodinPorDescarte.class);
-        REGISTRO.put("Rayo de Fortuna", ComodinPorDescarte.class);
-        REGISTRO.put("Locura", ComodinPorDescarte.class);
-        REGISTRO.put("Bananas", ComodinPorDescarte.class);
-        REGISTRO.put("Destino Explosivo", ComodinPorDescarte.class);
-        REGISTRO.put("Suerte Suprema", ComodinPorDescarte.class);
-    }
+        REGISTRO.put("Gros Michel", ComodinBase.class);
+        REGISTRO.put("Cavendish", ComodinBase.class);
+        REGISTRO.put("Manzano Dorado", ComodinBase.class);
+        REGISTRO.put("Estrella Fugaz", ComodinBase.class);
+        REGISTRO.put("Tigre de Bengal", ComodinBase.class);
+        REGISTRO.put("Tornado de Suerte", ComodinBase.class);
+        REGISTRO.put("Flor del Cerezo", ComodinBase.class);
+        REGISTRO.put("Rayo de Fortuna", ComodinBase.class);
+        REGISTRO.put("Locura", ComodinCombo.class);
+        REGISTRO.put("Bananas", ComodinCombo.class);
+        REGISTRO.put("Destino Explosivo", ComodinCombo.class);
+        REGISTRO.put("Suerte Suprema", ComodinCombo.class);
+    }   //REGISTRO.put("Extasis Salvaje", ComodinCombo.class);
 
     public static Comodin crearComodin(String nombre, String descripcion, String activacion, int puntos, float multiplicador) {
         Class<? extends Comodin> comodinClass = REGISTRO.get(nombre);
@@ -52,7 +52,7 @@ public class InicilizadorDeComodines {
             return constructor.newInstance(nombre, descripcion, activacion, puntos, multiplicador);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error al crear el comodín", e);
+            throw new RuntimeException("Error al crear el comodin" + nombre, e);
         }
     }
     public static Comodin crearComodinCombo(String nombre, String descripcion, List<Comodin> subComodines) {

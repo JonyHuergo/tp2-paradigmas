@@ -4,12 +4,18 @@ import org.example.Jugada;
 import org.example.Jugador;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComodinCombo extends Comodin{
     private final ArrayList<Comodin> comodines;
 
+    public ComodinCombo(String nombre, String descripcion, List<Comodin> comodines) {
+        super(0, 1, new ActivacionSiempre());
+        this.comodines = new ArrayList<>(comodines);
+    }
+
     public ComodinCombo(ArrayList<Comodin> comodines) {
-        super(0, 0, 1, new ActivacionSiempre());
+        super(0, 1, new ActivacionSiempre());
         this.comodines = new ArrayList<>(comodines);
     }
 

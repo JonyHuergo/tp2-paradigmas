@@ -9,13 +9,10 @@ public class ComodinPorDescarte extends Comodin{
     private int puntosPorDescarte = 10;
 
     public ComodinPorDescarte(String nombre, String descripcion, String activacion, int puntos, float multiplicador) {
-        super(nombre, descripcion, activacion, puntos, multiplicador);
+        super(nombre, descripcion, new ActivacionDescartes(), puntos, multiplicador);
     }
-    public ComodinPorDescarte(int puntajeAdicional, int multiplicadorAdicional, int multiplicadorAumento, Activacion activacion) {
-        super(puntajeAdicional, multiplicadorAdicional, multiplicadorAumento, activacion);
-    }
-    public ComodinPorDescarte(String nombre, String descripcion, List<Comodin> subComodines){
-        super(nombre, descripcion, subComodines);
+    public ComodinPorDescarte(int puntajeAdicional, float multiplicador, String activacion) {
+        super(puntajeAdicional, multiplicador, new ActivacionDescartes());
     }
 
     @Override
@@ -25,8 +22,7 @@ public class ComodinPorDescarte extends Comodin{
             puntajeAdicional += puntosASumar;
 
             jugador.actualizarPuntajeBase(puntajeAdicional);
-            jugador.actualizarMult(multiplicadorAdicional);
-            jugador.multiplicarMult(multiplicadorAumento);
+            jugador.multiplicarMult(multiplicador);
         }
     }
 
@@ -37,8 +33,7 @@ public class ComodinPorDescarte extends Comodin{
             puntajeAdicional += puntosASumar;
 
             jugada.actualizarPuntajeBase(puntajeAdicional);
-            jugada.actualizarMult(multiplicadorAdicional);
-            jugada.multiplicarMult(multiplicadorAumento);
+            jugada.multiplicarMult(multiplicador);
         }
     }
 }

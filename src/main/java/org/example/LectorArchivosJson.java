@@ -11,10 +11,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class LectorArchivosJson {
     String rutaBalatroJson = "src/main/resources/balatro.json";
@@ -40,33 +37,11 @@ public class LectorArchivosJson {
                 JsonObject tienda = ronda.getJsonObject("tienda");
 
                 // comodines
-                List<Comodin> comodinesLeidos = new ArrayList<>();
-                comodinesLeidos = this.obtenerComodines(tienda);
+                List<Comodin> comodinesLeidos = this.obtenerComodines(tienda);
                 // tarots
-                List<Tarot> tarotsLeidos = new ArrayList<>();
-                JsonArray tarots = tienda.getJsonArray("tarots");
-                for (JsonObject tarot : tarots.getValuesAs(JsonObject.class)) {
-                    String nombre = tarot.getString("nombre");
-                    String descripcion = tarot.getString("descripcion");
-                    String sobre = tarot.getString("sobre");
-                    String ejemplar = tarot.getString("ejemplar");
-                    Map<String, Object> efecto = leerEfecto(tarot);
-                    int puntos = (int) efecto.get("puntos");
-                    float multiplicador = (float) efecto.get("multiplicador");
-                    tarotsLeidos.add(InicializadorDeTarots.crearTarot(nombre, descripcion, sobre, ejemplar, puntos, multiplicador));
-                }
-                /*
-                tarotsLeidos = obtenerTarots()*/
-
-                // Procesar carta
-                JsonObject carta = tienda.getJsonObject("carta");
-                String nombre = carta.getString("nombre");
-                String palo = carta.getString("palo");
-                String numero = carta.getString("numero");
-                int puntos = carta.getInt("puntos");
-                String mult = carta.getString("multiplicador");
-
-                Carta cartaLeida = new Carta(nombre, palo, numero, puntos, mult);
+                List<Tarot> tarotsLeidos = obtenerTarots(tienda);
+                // carta
+                Carta cartaLeida = obtenerCarta(tienda);
 
                 Tienda tiendaLeida = new Tienda(comodinesLeidos, tarotsLeidos, cartaLeida);
                 rondasLeidas.add(new Ronda(nro, manos, descartes, puntajeASuperar, tiendaLeida));
@@ -75,7 +50,8 @@ public class LectorArchivosJson {
         return rondasLeidas;
     }
 
-    public void leerMazo() {
+    public List<Carta> leerMazo() {
+        List<Carta> cartasLeidas = new ArrayList<>();
         try (InputStream reader = new FileInputStream(rutaMazoJson)) {
             JsonReader jsonReader = Json.createReader(reader);
             JsonObject jsonObject = jsonReader.readObject();
@@ -84,25 +60,17 @@ public class LectorArchivosJson {
 
             for (int i = 0; i < mazo.size(); i++) {
                 JsonObject carta = mazo.getJsonObject(i);
-
                 String nombre = carta.getString("nombre");
                 String palo = carta.getString("palo");
                 String numero = carta.getString("numero");
                 int puntos = carta.getInt("puntos");
                 String multiplicador = carta.getString("multiplicador");
-
-                System.out.println("Carta " + (i + 1) + ":");
-                System.out.println("Nombre: " + nombre);
-                System.out.println("Palo: " + palo);
-                System.out.println("Número: " + numero);
-                System.out.println("Puntos: " + puntos);
-                System.out.println("Multiplicador: " + multiplicador);
-                System.out.println("=====================================");
+                cartasLeidas.add(new Carta(nombre, palo, numero, puntos, multiplicador));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return cartasLeidas;
     }
 
     public void leerComodines(){
@@ -235,7 +203,7 @@ public class LectorArchivosJson {
             String nombre = comodin.getString("nombre");
             String descripcion = comodin.getString("descripcion");
 
-            if (comodin.containsKey("comodines")) { //ver linea 307 del json
+            if (comodin.containsKey("comodines")) {
                 JsonArray subcomodines = comodin.getJsonArray("comodines");
                 List<Comodin> subComodinesLeidos = new ArrayList<>();
                 for (int j = 0; j < subcomodines.size(); j++) {
@@ -246,7 +214,6 @@ public class LectorArchivosJson {
                     Map<String, Object> efecto = leerEfecto(subcomodin);
                     int subPuntos = (int) efecto.get("puntos");
                     float subMultiplicador = (float) efecto.get("multiplicador");
-                    System.out.println("    Efecto: " + efecto);
 
                     subComodinesLeidos.add(InicilizadorDeComodines.crearComodin(nombre, descripcion, subActivacion, subPuntos, subMultiplicador));
                 };
@@ -262,6 +229,33 @@ public class LectorArchivosJson {
         return comodinesLeidos;
     }
 
+    private List<Tarot> obtenerTarots(JsonObject jsonObject) {
+        List<Tarot> tarotsLeidos = new ArrayList<>();
+        JsonArray tarots = jsonObject.getJsonArray("tarots");
+        for (JsonObject tarot : tarots.getValuesAs(JsonObject.class)) {
+            String nombre = tarot.getString("nombre");
+            String descripcion = tarot.getString("descripcion");
+            String sobre = tarot.getString("sobre");
+            String ejemplar = tarot.getString("ejemplar");
+            Map<String, Object> efecto = leerEfecto(tarot);
+            int puntos = (int) efecto.get("puntos");
+            float multiplicador = (float) efecto.get("multiplicador");
+            tarotsLeidos.add(InicializadorDeTarots.crearTarot(nombre, descripcion, sobre, ejemplar, puntos, multiplicador));
+        }
+        return tarotsLeidos;
+    }
+
+    private Carta obtenerCarta(JsonObject jsonObject) {
+        JsonObject carta = jsonObject.getJsonObject("carta");
+        String nombre = carta.getString("nombre");
+        String palo = carta.getString("palo");
+        String numero = carta.getString("numero");
+        int puntos = carta.getInt("puntos");
+        String mult = carta.getString("multiplicador");
+
+        Carta cartaLeida = new Carta(nombre, palo, numero, puntos, mult);
+        return cartaLeida;
+    }
     private Map<String, Object> leerEfecto(JsonObject objeto) {
         if (objeto.containsKey("efecto")) {
             JsonObject efecto = objeto.getJsonObject("efecto");
@@ -281,7 +275,10 @@ public class LectorArchivosJson {
             JsonValue activacion = objeto.get("activacion");
             if (activacion.getValueType() == JsonValue.ValueType.OBJECT) {
                 JsonObject activacionObj = (JsonObject) activacion;
-                return activacionObj.toString();
+                Iterator<String> claves = activacionObj.keySet().iterator();
+                String segundaClave = claves.next();
+                String valor = activacionObj.get(segundaClave).toString();
+                return valor;
             } else {
                 return activacion.toString();
             }

@@ -10,25 +10,25 @@ public abstract class Comodin {
     protected String descripcion;
     protected Activacion activacion;
     protected int puntajeAdicional;
-    protected float multiplicadorAdicional;
-    protected float multiplicadorAumento;
+    protected float multiplicador;
 
-    public Comodin(String nombre, String descripcion, String activacion, int puntajeAdicional, float multiplicadorAdicional) {
+    public Comodin(String nombre, String descripcion, Activacion activacion, int puntajeAdicional, float multiplicador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.activacion = new ActivacionDescartes();//provisional
+        this.activacion = activacion;
         this.puntajeAdicional = puntajeAdicional;
-        this.multiplicadorAdicional = multiplicadorAdicional;
-        this.multiplicadorAumento = multiplicadorAumento;
+        this.multiplicador = multiplicador;
     }
+
+    public Comodin(int puntajeAdicional, float multiplicador, Activacion activacion) {
+        this.puntajeAdicional = puntajeAdicional;
+        this.multiplicador = multiplicador;
+        this.activacion = activacion;
+    }
+
     public Comodin(String nombre, String descripcion, List<Comodin> subComodines) {
         // Implementación
-    }
-    public Comodin(int puntajeAdicional, float multiplicadorAdicional, float multiplicadorAumento, Activacion activacion) {
-        this.puntajeAdicional = puntajeAdicional;
-        this.multiplicadorAdicional = multiplicadorAdicional;
-        this.multiplicadorAumento = multiplicadorAumento;
-        this.activacion = activacion;
+        this.multiplicador = multiplicador;
     }
 
     public abstract void usar(Jugador jugador);

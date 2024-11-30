@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.Comodin.ActivacionSiempre;
-import org.example.Comodin.ActivacionTipoDeMano;
-import org.example.Comodin.Comodin;
-import org.example.Comodin.ComodinBase;
+import org.example.Comodin.*;
 import org.example.Tarot.TarotAgregaPuntos;
 import org.example.Tarot.TarotMultiplicador;
 import org.junit.jupiter.api.Test;
@@ -40,8 +37,7 @@ public class JugadaTest {
         }
 
         ArrayList<Comodin> comodines = new ArrayList<Comodin>();
-        comodines.add(new ComodinBase(0,2,1, new ActivacionSiempre()));
-
+        comodines.add(new ComodinPorManoJugada("nombre","descripcion", new ActivacionSiempre(),0,2));
         Jugada jugada = new Jugada(manoPoker, comodines, 3);
         float puntajeObtenido = jugada.evaluarJugada();
 
@@ -59,8 +55,8 @@ public class JugadaTest {
         }
 
         ArrayList<Comodin> comodines = new ArrayList<Comodin>();
-        comodines.add(new ComodinBase(0,2,1, new ActivacionSiempre()));
-        comodines.add(new ComodinBase(0,0,10, new ActivacionSiempre()));
+        comodines.add(new ComodinPorManoJugada("nombre", "descripcion", new ActivacionSiempre(),0,2));
+        comodines.add(new ComodinBase(0,10, new ActivacionSiempre()));
 
         Jugada jugada = new Jugada(manoPoker, comodines, 3);
         float puntajeObtenido = jugada.evaluarJugada();
@@ -79,7 +75,7 @@ public class JugadaTest {
         manoPoker1.agregarCarta(new Carta("diamantes", 10));
 
         ArrayList<Comodin> comodines1 = new ArrayList<Comodin>();
-        comodines1.add(new ComodinBase(0,0,3, new ActivacionSiempre()));
+        comodines1.add(new ComodinBase(0,3, new ActivacionSiempre()));
 
         Jugada jugada2 = new Jugada(manoPoker1, comodines1, 3);
 
@@ -91,7 +87,7 @@ public class JugadaTest {
         }
 
         ArrayList<Comodin> comodines2 = new ArrayList<Comodin>();
-        comodines2.add(new ComodinBase(0,2,1, new ActivacionTipoDeMano("Escalera Color")));
+        comodines2.add(new ComodinPorManoJugada("nombre", "descripcion", new ActivacionSiempre(),0,2));
 
         Jugada jugada1 = new Jugada(manoPoker2, comodines2, 3);
 

@@ -4,16 +4,24 @@ import org.example.Jugada;
 import org.example.Jugador;
 
 public class ComodinBase extends Comodin {
-    public ComodinBase(int puntajeAdicional, int multiplicadorAdicional, int multiplicadorAumento, Activacion activacion) {
-        super(puntajeAdicional, multiplicadorAdicional, multiplicadorAumento, activacion);
+
+
+    public ComodinBase(String nombre, String descripcion, String activacion, int puntajeAdicional, float multiplicador){
+        super(nombre, descripcion, new ActivacionSiempre(), puntajeAdicional, multiplicador);
+    }
+    public ComodinBase(int puntajeAdicional, float multiplicador, String activacion) {
+        super(puntajeAdicional, multiplicador, new ActivacionSiempre());
+    }
+    public ComodinBase(int puntajeAdicional, float multiplicador, Activacion activacion) {
+        super(puntajeAdicional, multiplicador, activacion);
     }
 
     @Override
     public void usar(Jugador jugador){
         if (activacion.revisarCondicion(jugador)){
             jugador.actualizarPuntajeBase(puntajeAdicional);
-            jugador.actualizarMult(multiplicadorAdicional);
-            jugador.multiplicarMult(multiplicadorAumento);
+            jugador.multiplicarMult(multiplicador);
+
         }
     }
 
@@ -21,8 +29,8 @@ public class ComodinBase extends Comodin {
     public void usar(Jugada jugada){
         if (activacion.revisarCondicion(jugada)){
             jugada.actualizarPuntajeBase(puntajeAdicional);
-            jugada.actualizarMult(multiplicadorAdicional);
-            jugada.multiplicarMult(multiplicadorAumento);
+            jugada.multiplicarMult(multiplicador);
         }
     }
+
 }

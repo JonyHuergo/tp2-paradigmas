@@ -22,7 +22,7 @@ public class TestSemana2 {
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
-        Comodin comodin = new ComodinBase(0,8,1, new ActivacionSiempre());
+        Comodin comodin = new ComodinBase(0,9, "siempre");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();
@@ -44,8 +44,8 @@ public class TestSemana2 {
         }
 
         manoPoker.agregarCarta(new Carta("corazon", 5));
-
-        Comodin comodin = new ComodinBase(0,0,3,  new ActivacionTipoDeMano("Escalera"));
+//ComodinBase(int puntajeAdicional, float multiplicador, String activacion)
+        Comodin comodin = new ComodinBase(0,3,  "Escalera");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
 
@@ -65,7 +65,7 @@ public class TestSemana2 {
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
-        Comodin comodin = new ComodinPorDescarte(0,0,1, new ActivacionDescartes());
+        Comodin comodin = new ComodinPorDescarte(0,1, "Descarte");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();
@@ -86,7 +86,7 @@ public class TestSemana2 {
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
 
-        Comodin comodin = new ComodinBase(30, 0, 1, activacionMock);
+        Comodin comodin = new ComodinBase(30,1, activacionMock);
         ArrayList<Comodin> comodines = new ArrayList<>();
 
         Jugador jugador = new Jugador();
@@ -114,9 +114,9 @@ public class TestSemana2 {
         ActivacionProbabilidad activacionProbabilidad = Mockito.mock(ActivacionProbabilidad.class);
         when(activacionProbabilidad.revisarCondicion(any(Jugador.class))).thenReturn(true);
 
-        Comodin bonusDeMano = new ComodinBase(10, 0, 1, activacionPorMano); // Suma 10 puntos
-        Comodin puntajeAumentado = new ComodinBase(20, 0, 1, activacionSiempre); // Suma 20 puntos
-        Comodin activacionAleatoria = new ComodinBase(0, 0, 2, activacionProbabilidad); // Multiplica el puntaje por 2
+        Comodin bonusDeMano = new ComodinBase(10,  1, activacionPorMano); // Suma 10 puntos
+        Comodin puntajeAumentado = new ComodinBase(20, 1, activacionSiempre); // Suma 20 puntos
+        Comodin activacionAleatoria = new ComodinBase(0, 2, activacionProbabilidad); // Multiplica el puntaje por 2
 
         ArrayList<Comodin> comodinesEnCombo = new ArrayList<>();
         comodinesEnCombo.add(bonusDeMano);

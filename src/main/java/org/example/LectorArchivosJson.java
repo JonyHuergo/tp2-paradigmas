@@ -199,21 +199,41 @@ public class LectorArchivosJson {
     private List<Comodin> obtenerComodines(JsonObject jsonObject) {
         List<Comodin> comodinesLeidos = new ArrayList<>();
         JsonArray comodines = jsonObject.getJsonArray("comodines");
+
         for (JsonObject comodin : comodines.getValuesAs(JsonObject.class)) {
             String nombre = comodin.getString("nombre");
             String descripcion = comodin.getString("descripcion");
 
+            // Verificamos si el comodín tiene subcomodines (de tipo "Combinación")
             if (comodin.containsKey("comodines")) {
-                List<Comodin> subComodinesLeidos = obtenerSubComodines(comodin);
+                JsonArray subcomodines = comodin.getJsonArray("comodines");
+                List<Comodin> subComodinesLeidos = new ArrayList<>();
+
+                // Procesamos los subcomodines
+                for (JsonObject subcomodin : subcomodines.getValuesAs(JsonObject.class)) {
+                    String subNombre = subcomodin.getString("nombre");
+                    String subDescripcion = subcomodin.getString("descripcion");
+                    String subActivacion = leerActivacion(subcomodin);
+                    Map<String, Object> subEfecto = leerEfecto(subcomodin);
+                    int subPuntos = (int) subEfecto.get("puntos");
+                    float subMultiplicador = (float) subEfecto.get("multiplicador");
+
+                    subComodinesLeidos.add(InicilizadorDeComodines.crearComodin(subNombre, subDescripcion, subActivacion, subPuntos, subMultiplicador));
+                }
+
+                // Si el comodín es una combinación, lo agregamos como un combo
                 comodinesLeidos.add(InicilizadorDeComodines.crearComodinCombo(nombre, descripcion, subComodinesLeidos));
-                continue;
+            } else {
+                // Si no tiene subcomodines, se procesa como un comodín normal
+                String activacion = leerActivacion(comodin);
+                Map<String, Object> efecto = leerEfecto(comodin);
+                int puntos = (int) efecto.get("puntos");
+                float multiplicador = (float) efecto.get("multiplicador");
+
+                comodinesLeidos.add(InicilizadorDeComodines.crearComodin(nombre, descripcion, activacion, puntos, multiplicador));
             }
-            String activacion = leerActivacion(comodin);
-            Map<String, Object> efecto = leerEfecto(comodin);
-            int puntos = (int) efecto.get("puntos");
-            float multiplicador = (float) efecto.get("multiplicador");
-            comodinesLeidos.add(InicilizadorDeComodines.crearComodin(nombre, descripcion, activacion, puntos, multiplicador));
         }
+
         return comodinesLeidos;
     }
 
@@ -273,23 +293,5 @@ public class LectorArchivosJson {
         } else {
             throw new IllegalArgumentException("El objeto JSON no contiene la clave 'activacion'");
         }
-    }
-    private List<Comodin> obtenerSubComodines(JsonObject comodin) {
-        List<Comodin> subComodinesLeidos = new ArrayList<>();
-        if (comodin.containsKey("comodines")) {
-            JsonArray subcomodines = comodin.getJsonArray("comodines");
-            for (int j = 0; j < subcomodines.size(); j++) {
-                JsonObject subcomodin = subcomodines.getJsonObject(j);
-                String subNombre = subcomodin.getString("nombre");
-                String subDescripcion = subcomodin.getString("descripcion");
-                String subActivacion = leerActivacion(subcomodin);
-                Map<String, Object> efecto = leerEfecto(subcomodin);
-                int subPuntos = (int) efecto.get("puntos");
-                float subMultiplicador = (float) efecto.get("multiplicador");
-
-                subComodinesLeidos.add(InicilizadorDeComodines.crearComodin(subNombre, subDescripcion, subActivacion, subPuntos, subMultiplicador));
-            }
-        }
-        return subComodinesLeidos;
     }
 }

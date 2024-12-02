@@ -28,7 +28,11 @@ public class Jugador {
         puntaje = 0;
     }
 
-//    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    //    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
 //        this.mazo = mazo;
 //        this.mano = mano;
 ////        this.manoElegida = manoElegida;

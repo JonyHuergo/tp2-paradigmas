@@ -3,6 +3,7 @@ package org.example;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.example.Controladores.PantallaInicioController;
 
@@ -10,6 +11,7 @@ import org.example.Controladores.PantallaInicioController;
 public class Main extends Application {
 
     private Stage primaryStage;
+    private MediaPlayer mediaPlayer;
 
     @Override
     public void start(Stage primaryStage) {
@@ -21,7 +23,7 @@ public class Main extends Application {
             primaryStage.setResizable(false);
 
             // Inicia el controlador de la pantalla inicial
-            PantallaInicioController controller = new PantallaInicioController(primaryStage);
+            PantallaInicioController controller = new PantallaInicioController(primaryStage, mediaPlayer);
             controller.iniciarPantallaInicio();
 
             primaryStage.show();

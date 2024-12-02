@@ -15,9 +15,17 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.Pantallas.EndGamePantalla;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main extends Application {
+
+    private Stage primaryStage;
+
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         try {
 // Para probar la pantalla final
 //            EndGamePantalla endGamePantalla = new EndGamePantalla();
@@ -117,8 +125,20 @@ public class Main extends Application {
     }
 
     private void handlePlay() {
-        // TODO: Implementar funcionalidad de botón juego
-        System.out.println("Botón Play");
+        LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
+        try {
+            List<Ronda> rondas = lectorArchivosJson.leerBalatro();
+            ArrayList<Carta> mazo = lectorArchivosJson.leerMazo();
+
+            Juego juego = new Juego(new Mazo(mazo));
+            juego.setRondas(rondas);
+            System.out.println("Juego iniciado.");
+            juego.jugar(primaryStage);
+            System.out.println("Juego terminado.");
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Error al leer los archivos JSON.");
+        }
     }
 
     private void handleOptions() {

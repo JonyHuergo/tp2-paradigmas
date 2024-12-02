@@ -24,6 +24,10 @@ public class Ronda {
         }
     }
 
+    public int getPuntajeASuperar(){
+        return puntajeASuperar;
+    }
+
     public Tienda obtenerTienda(){
         return tienda;
     }

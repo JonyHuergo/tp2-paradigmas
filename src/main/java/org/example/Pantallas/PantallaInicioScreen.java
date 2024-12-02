@@ -126,11 +126,27 @@ public class PantallaInicioScreen extends VBox {
             button.setGraphic(buttonImageView);
         }
 
-        // Hacer el fondo transparente para que solo se vea la imagen
-        button.setStyle("-fx-background-color: transparent;");
-        //Efectos en los botones (tdvia no me convence)
-//        button.setOnMouseEntered(e -> button.setStyle("-fx-scale-x: 1.1; -fx-scale-y: 1.1;"));
-//        button.setOnMouseExited(e -> button.setStyle("-fx-scale-x: 1.0; -fx-scale-y: 1.0;"));
+        button.setStyle("-fx-background-radius: 30; " +
+                "-fx-border-radius: 30; " +
+                "-fx-border-width: 2px; " +
+                "-fx-border-color: transparent; " +
+                "-fx-background-color: #2775b7;");
+
+        button.setOnMouseEntered(e -> button.setStyle(
+                "-fx-background-radius: 30; " +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-color: transparent; " +
+                        "-fx-background-color: #2775b7; " +
+                        "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"));
+        
+        button.setOnMouseExited(e -> button.setStyle(
+                "-fx-background-radius: 30; " +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-color: transparent; " +
+                        "-fx-background-color: #2775b7; " +    // Fondo original
+                        "-fx-scale-x: 1.0; -fx-scale-y: 1.0;"));
 
         return button;
     }

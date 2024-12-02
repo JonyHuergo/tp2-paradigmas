@@ -22,7 +22,7 @@ public class Main extends Application {
 // Para probar la pantalla final
 //            EndGamePantalla endGamePantalla = new EndGamePantalla();
 //
-//            Scene scene = new Scene(endGamePantalla, 700, 600);
+//            Scene scene = new Scene(endGamePantalla, 700, 650);
 //            primaryStage.setTitle("Balatro");
 //            primaryStage.setScene(scene);
 //            primaryStage.show();

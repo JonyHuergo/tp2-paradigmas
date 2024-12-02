@@ -1,4 +1,5 @@
 package org.example.Pantallas;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,7 +14,7 @@ public class EndGamePantalla extends VBox {
     public EndGamePantalla() {
 
         String textColor = "#ffffff";
-        String highlightColor = "#ff6347";
+        String highlightColor = "#e8793c";
         String panelColor = "#3d4148";
 
         String backgroundImage = getClass().getResource("/background.png").toExternalForm();
@@ -25,13 +26,32 @@ public class EndGamePantalla extends VBox {
         this.setStyle(backgroundStyle);
 
         Font arcadeFont = Font.loadFont(
-                getClass().getResourceAsStream("/arcadeclassic.regular.ttf"), 36
+                getClass().getResourceAsStream("/arcadeclassic.regular.ttf"), 72
         );
 
 
         Label title = new Label("GAME OVER");
         title.setFont(arcadeFont);
         title.setTextFill(Color.web(highlightColor));
+
+        DropShadow outerShadow = new DropShadow();
+        outerShadow.setOffsetX(0);
+        outerShadow.setOffsetY(0);
+        outerShadow.setColor(Color.BLACK); // Borde exterior negro
+        outerShadow.setRadius(12); // Radio más grande para que el negro sea notorio
+
+        DropShadow innerShadow = new DropShadow();
+        innerShadow.setOffsetX(0);
+        innerShadow.setOffsetY(0);
+        innerShadow.setColor(Color.WHITE); // Borde interior blanco
+        innerShadow.setRadius(8); // Radio intermedio para el blanco
+        innerShadow.setInput(outerShadow); // Encadena con el borde negro
+
+        // Aplica los bordes al texto
+        title.setEffect(innerShadow);
+
+        // Alinear y configurar el VBox
+        this.setAlignment(Pos.CENTER); // Centra todo en el VBox
 
 
         VBox statsBox = new VBox(10);
@@ -108,12 +128,12 @@ public class EndGamePantalla extends VBox {
     private Button createMainMenuButton() {
         Button mainMenuButton = new Button();
         // Cargar la imagen
-        Image mainMenuImage = new Image(getClass().getResourceAsStream("/ExitBoton.png"));
+        Image mainMenuImage = new Image(getClass().getResourceAsStream("/Exit.png"));
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
 
-        mainMenuImageView.setFitWidth(130);
-        mainMenuImageView.setFitHeight(100);
+        mainMenuImageView.setFitWidth(160);
+        mainMenuImageView.setFitHeight(120);
 
 
         mainMenuButton.setGraphic(mainMenuImageView);
@@ -132,12 +152,12 @@ public class EndGamePantalla extends VBox {
     private Button createNewGameButton() {
         Button mainMenuButton = new Button();
 
-        Image mainMenuImage = new Image(getClass().getResourceAsStream("/NewGameBoton.png"));
+        Image mainMenuImage = new Image(getClass().getResourceAsStream("/NewGame.png"));
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
 
         mainMenuImageView.setFitWidth(170);
-        mainMenuImageView.setFitHeight(120);
+        mainMenuImageView.setFitHeight(140);
 
 
         mainMenuButton.setGraphic(mainMenuImageView);

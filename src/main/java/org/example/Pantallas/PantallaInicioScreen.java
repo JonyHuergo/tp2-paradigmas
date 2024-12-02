@@ -22,6 +22,7 @@ public class PantallaInicioScreen extends VBox {
     public Button playButton;
     public Button optionsButton;
     public Button collectionButton;
+    public Button exitButton;
 
     public PantallaInicioScreen() {
         StackPane root = new StackPane();
@@ -65,6 +66,7 @@ public class PantallaInicioScreen extends VBox {
         playButton = createStyledButton("/Botones/Play.png", 100, 60);
         optionsButton = createStyledButton("/Botones/Options.png", 150, 55);
         collectionButton = createStyledButton("/Botones/Collection.png", 150, 60);
+        exitButton = createStyledButton("/Botones/Exit.png", 100, 60);
 
         // Event handlers de los botones
 //        playButton.setOnAction(e -> handlePlay());
@@ -74,6 +76,8 @@ public class PantallaInicioScreen extends VBox {
         // Diseño para los botones
         HBox buttonsBox = new HBox(10, playButton, optionsButton, collectionButton);
         buttonsBox.setAlignment(Pos.CENTER);
+        HBox exitBox = new HBox(exitButton);
+        exitBox.setAlignment(Pos.BOTTOM_CENTER);
 
         // Caja gris alrededor de los botones usando un VBox con relleno y color de fondo
 
@@ -95,7 +99,7 @@ public class PantallaInicioScreen extends VBox {
         HBox titleBox = new HBox(0, firstPart, cardImage, secondPart);
         titleBox.setAlignment(Pos.TOP_CENTER);
 
-        VBox layout = new VBox(50, titleBox, greyBox);
+        VBox layout = new VBox(50, titleBox, greyBox, exitBox);
         layout.setAlignment(Pos.CENTER);
 
         this.getChildren().addAll(root);

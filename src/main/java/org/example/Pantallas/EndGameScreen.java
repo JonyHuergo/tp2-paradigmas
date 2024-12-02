@@ -10,8 +10,8 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class EndGamePantalla extends VBox {
-    public EndGamePantalla() {
+public class EndGameScreen extends VBox {
+    public EndGameScreen() {
 
         String textColor = "#ffffff";
         String highlightColor = "#e8793c";
@@ -128,7 +128,7 @@ public class EndGamePantalla extends VBox {
     private Button createMainMenuButton() {
         Button mainMenuButton = new Button();
         // Cargar la imagen
-        Image mainMenuImage = new Image(getClass().getResourceAsStream("/Exit.png"));
+        Image mainMenuImage = new Image(getClass().getResourceAsStream("/Botones/Exit.png"));
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
 
@@ -152,7 +152,7 @@ public class EndGamePantalla extends VBox {
     private Button createNewGameButton() {
         Button mainMenuButton = new Button();
 
-        Image mainMenuImage = new Image(getClass().getResourceAsStream("/NewGame.png"));
+        Image mainMenuImage = new Image(getClass().getResourceAsStream("/Botones/NewGame.png"));
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
 

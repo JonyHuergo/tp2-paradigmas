@@ -13,11 +13,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.Pantallas.EndGamePantalla;
 
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
+// Para probar la pantalla final
+//            EndGamePantalla endGamePantalla = new EndGamePantalla();
+//
+//            Scene scene = new Scene(endGamePantalla, 700, 600);
+//            primaryStage.setTitle("Balatro");
+//            primaryStage.setScene(scene);
+//            primaryStage.show();
             // Icono
             primaryStage.getIcons().add(new Image("logo.png")); // Usar la ruta de tu imagen
 

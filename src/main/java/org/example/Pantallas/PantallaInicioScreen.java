@@ -26,7 +26,7 @@ public class PantallaInicioScreen extends VBox {
 
     public PantallaInicioScreen() {
         StackPane root = new StackPane();
-        Image bgImage = new Image("background.png", 800, 600, false, true);
+        Image bgImage = new Image("background.png", 800, 500, false, true);
 
         BackgroundImage backgroundImage = new BackgroundImage(
                 bgImage,
@@ -49,17 +49,17 @@ public class PantallaInicioScreen extends VBox {
 
         // Carta que aparece en el título
         ImageView cardImage = new ImageView(new Image("cartas/Picas_As.png"));
-        cardImage.setFitWidth(80);
-        cardImage.setFitHeight(80);
+        cardImage.setFitWidth(120);
+        cardImage.setFitHeight(120);
 
         // Parte del título antes de la segunda "A"
         Text firstPart = new Text("BAL");
-        firstPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
+        firstPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 100));
         firstPart.setFill(Color.WHITE);
 
         // Parte del título después de la segunda "A"
         Text secondPart = new Text("TRO");
-        secondPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
+        secondPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 100));
         secondPart.setFill(Color.WHITE);
 
         // Botones

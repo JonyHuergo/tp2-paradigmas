@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.example.Pantallas.EndGameScreen;
 import org.example.Pantallas.PantallaInicioScreen;
 
 import java.io.IOException;
@@ -28,20 +29,23 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         try {
 
-// Para probar la pantalla final
-//            EndGamePantalla endGamePantalla = new EndGamePantalla();
-//
-//            Scene scene = new Scene(endGamePantalla, 700, 650);
-//            primaryStage.setTitle("Balatro");
-//            primaryStage.setScene(scene);
-//            primaryStage.show();
-            // Icono
+
 
             primaryStage.getIcons().add(new Image("logo.png")); // Usar la ruta de tu imagen
 
             // Panel raíz
             StackPane root = new StackPane();
+
+            //Para probar pantalla final
+//            EndGameScreen endGamePantalla = new EndGameScreen(root);
+//
+//            Scene scene = new Scene(endGamePantalla, 700, 650);
+//            primaryStage.setTitle("Balatro");
+//            primaryStage.setScene(scene);
+//            primaryStage.show();
+
             PantallaInicioScreen pantallaInicio = new PantallaInicioScreen(root);
+
             Scene scene = new Scene(root, 800, 600);
             primaryStage.setScene(scene);
             primaryStage.setTitle("BALATRO");

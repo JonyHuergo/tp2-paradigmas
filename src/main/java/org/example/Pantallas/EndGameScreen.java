@@ -1,5 +1,6 @@
 package org.example.Pantallas;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,7 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class EndGameScreen extends VBox {
-    public EndGameScreen() {
+    public EndGameScreen(StackPane root) {
 
         String textColor = "#ffffff";
         String highlightColor = "#e8793c";
@@ -21,6 +22,15 @@ public class EndGameScreen extends VBox {
         String backgroundStyle = "-fx-background-image: url('" + backgroundImage + "'); " +
                 "-fx-background-size: cover; " +
                 "-fx-background-position: center;";
+
+        ImageView endGameView = new ImageView(new Image("background.png"));
+        endGameView.setFitWidth(800);
+        endGameView.setFitHeight(600);
+
+
+        GaussianBlur blurEffect = new GaussianBlur(10); // Cambia el valor según la intensidad deseada
+        endGameView.setEffect(blurEffect);
+        root.getChildren().add(0, endGameView);
 
 
         this.setStyle(backgroundStyle);
@@ -132,8 +142,8 @@ public class EndGameScreen extends VBox {
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
 
-        mainMenuImageView.setFitWidth(160);
-        mainMenuImageView.setFitHeight(120);
+        mainMenuImageView.setFitWidth(100);
+        mainMenuImageView.setFitHeight(60);
 
 
         mainMenuButton.setGraphic(mainMenuImageView);
@@ -156,8 +166,8 @@ public class EndGameScreen extends VBox {
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
 
-        mainMenuImageView.setFitWidth(170);
-        mainMenuImageView.setFitHeight(140);
+        mainMenuImageView.setFitWidth(150);
+        mainMenuImageView.setFitHeight(60);
 
 
         mainMenuButton.setGraphic(mainMenuImageView);

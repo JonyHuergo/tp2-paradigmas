@@ -44,8 +44,8 @@ public class Main extends Application {
             root.setBackground(new Background(backgroundImage));
 
             // Carta que aparece en el título
-            ImageView cardImage = new ImageView(new Image("/card.png"));
-            cardImage.setFitWidth(60);
+            ImageView cardImage = new ImageView(new Image("cartas/Picas_As.png"));
+            cardImage.setFitWidth(80);
             cardImage.setFitHeight(80);
 
             // Parte del título antes de la segunda "A"

@@ -79,7 +79,7 @@ public class PantallaInicioScreen extends VBox {
 
 
         BackgroundFill backgroundFill = new BackgroundFill(
-                Color.web("#ffc16f"), // Color de fondo
+                Color.web("#2775b7"), // Color de fondo
                 new CornerRadii(30),   // Bordes redondeados (ajustar si es necesario)
                 Insets.EMPTY          // Espaciado interno
         );

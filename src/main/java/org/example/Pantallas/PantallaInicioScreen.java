@@ -63,10 +63,10 @@ public class PantallaInicioScreen extends VBox {
         secondPart.setFill(Color.WHITE);
 
         // Botones
-        playButton = createStyledButton("/Botones/Play.png", 100, 60);
+        playButton = createStyledButton("/Botones/Play.png", 120, 55);
         optionsButton = createStyledButton("/Botones/Options.png", 150, 55);
         collectionButton = createStyledButton("/Botones/Collection.png", 150, 60);
-        exitButton = createStyledButton("/Botones/Exit.png", 100, 60);
+        exitButton = createStyledButton("/Botones/Exit.png", 120, 55);
 
         // Event handlers de los botones
 //        playButton.setOnAction(e -> handlePlay());

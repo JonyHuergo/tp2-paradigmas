@@ -24,6 +24,10 @@ public class Carta {
         //this.multiplicador = Float.parseFloat(multiplicador);
     }
 
+    public String getRuta() {
+        return palo+"_"+valor;
+    }
+
     public int getValor(){
         return this.valor;
     }

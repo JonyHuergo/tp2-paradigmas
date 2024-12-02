@@ -29,9 +29,7 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         manoPoker.multiplicarMultiplicadorBase(mult);
     }
 
-    public boolean tieneDescartes(){
-        return descartes > 0;
-    }
+    public boolean tieneDescartes(){return descartes > 0;}
 
     public boolean tieneManoDeTipo(String manoEsperada){
         return(manoPoker.manoNombreEsIgual(manoEsperada));

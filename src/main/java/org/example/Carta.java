@@ -5,13 +5,12 @@ import java.util.Objects;
 public class Carta {
     private String nombre;
     private String palo;
-    private int valor;
+    private String valor;
     private int puntaje;
     private float multiplicador;
 
     public Carta(String palo, int valor) {
         this.palo = palo;
-        this.valor = valor;
         this.multiplicador = 0;
         this.puntaje = valor;
     }
@@ -19,13 +18,13 @@ public class Carta {
     public Carta(String nombre, String palo, String valor, int puntaje, String multiplicador) {
         this.nombre = nombre;
         this.palo = palo;
-        //this.valor = Integer.parseInt(valor);
+        this.valor = valor;
         this.puntaje = puntaje;
-        //this.multiplicador = Float.parseFloat(multiplicador);
+        this.multiplicador = Float.parseFloat(multiplicador);
     }
 
     public int getValor(){
-        return this.valor;
+        return this.puntaje;
     }
 
     public String getPalo(){
@@ -33,12 +32,10 @@ public class Carta {
     }
 
     public boolean cartaTieneMismoValor(Carta carta){
-        return carta.valorEsIgual(this.valor);
+        return carta.valorEsIgual(this.puntaje);
     }
 
-    private boolean valorEsIgual(int valorCarta){
-        return valorCarta == valor;
-    }
+    private boolean valorEsIgual(int valorCarta){return (valorCarta == puntaje);}
 
     public boolean paloEsIgual(String paloCarta){
         return Objects.equals(paloCarta, palo);
@@ -49,11 +46,11 @@ public class Carta {
     }
 
     public boolean esInmediatamenteSuperior(Carta carta){
-        return (carta.valorEsIgual(this.valor + 1));
+        return (carta.valorEsIgual(this.puntaje + 1));
     }
 
     public boolean esInmediatamenteInferior(Carta carta){
-        return (carta.valorEsIgual(this.valor - 1));
+        return (carta.valorEsIgual(this.puntaje - 1));
     }
 
     public void modificarMultiplicador(float multiplicador){

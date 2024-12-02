@@ -15,16 +15,20 @@ public class Ronda {
         this.tienda = tienda;
     }
 
-    public void pasarTurno(int puntajeTotal){
+    public void pasarTurno(){
         this.manos -= 1;
-        if(puntajeASuperar <= puntajeTotal);
-            System.out.println("siguiente ronda!");
         if(manos <= 0){
             System.out.println("perdiste!");
         }
     }
 
+    public boolean puntajeSuperoElLimite(float puntaje){return puntaje >= puntajeASuperar;}
+
     public Tienda obtenerTienda(){
         return tienda;
     }
+
+    public int getDescartes(){return descartes;}
+
+    public float getPuntajeASuperar(){return puntajeASuperar;}
 }

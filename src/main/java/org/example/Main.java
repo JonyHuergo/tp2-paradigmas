@@ -15,6 +15,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.Pantallas.EndGamePantalla;
 
+import java.io.IOException;
+
+/*
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
@@ -133,5 +136,13 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+}
+*/
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Mazo mazo = new Mazo();
+        Juego juego = new Juego(new Jugador(mazo));
+        juego.jugar();
     }
 }

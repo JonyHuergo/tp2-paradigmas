@@ -12,7 +12,7 @@ public class Jugador {
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines = new ArrayList<>();
     private int puntaje;
-    private int descartes = 3;
+    private int descartes = 3;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
     private int jugadas = 5;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
@@ -23,6 +23,7 @@ public class Jugador {
     }
 
     public Jugador(Mazo mazo){
+        this.manoPoker = new ManoPoker();
         this.mazo = mazo;
         puntaje = 0;
     }
@@ -38,7 +39,7 @@ public class Jugador {
         this.mazo = mazo;
         this.cartasDisponibles = mano;
         this.manoPoker = manoPoker;
-        puntaje = 0;
+        this.puntaje = 0;
         this.comodines = comodines;
     }
 
@@ -93,7 +94,7 @@ public class Jugador {
     public void elegirCarta(int pos){
         Carta cartaElegida = cartasDisponibles.remove(pos);
 //        cartasDisponibles.remove(pos);
-        manoPoker.agregarCarta(cartaElegida);
+        this.manoPoker.agregarCarta(cartaElegida);
     }
 
     public void evaluarMano(){              // este hay que cambiar, el puntaje depende de las jugadas
@@ -124,8 +125,11 @@ public class Jugador {
     public float evaluarJugadas(){
         float aux = 0;
         for (Jugada jugada : listadoJugadas) {
-            aux = jugada.evaluarJugada();
+            aux += jugada.evaluarJugada();
         }
         return(aux);
+    }
+    public ArrayList<Carta> getCartasDisponibles(){
+        return(cartasDisponibles);
     }
 }

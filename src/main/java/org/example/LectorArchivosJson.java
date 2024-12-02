@@ -50,8 +50,8 @@ public class LectorArchivosJson {
         return rondasLeidas;
     }
 
-    public List<Carta> leerMazo() {
-        List<Carta> cartasLeidas = new ArrayList<>();
+    public ArrayList<Carta> leerMazo() {
+        ArrayList<Carta> cartasLeidas = new ArrayList<>();
         try (InputStream reader = new FileInputStream(rutaMazoJson)) {
             JsonReader jsonReader = Json.createReader(reader);
             JsonObject jsonObject = jsonReader.readObject();
@@ -204,21 +204,9 @@ public class LectorArchivosJson {
             String descripcion = comodin.getString("descripcion");
 
             if (comodin.containsKey("comodines")) {
-                JsonArray subcomodines = comodin.getJsonArray("comodines");
-                List<Comodin> subComodinesLeidos = new ArrayList<>();
-                for (int j = 0; j < subcomodines.size(); j++) {
-                    JsonObject subcomodin = subcomodines.getJsonObject(j);
-                    String subNombre = subcomodin.getString("nombre");
-                    String subDescripcion = subcomodin.getString("descripcion");
-                    String subActivacion = leerActivacion(subcomodin);
-                    Map<String, Object> efecto = leerEfecto(subcomodin);
-                    int subPuntos = (int) efecto.get("puntos");
-                    float subMultiplicador = (float) efecto.get("multiplicador");
-
-                    subComodinesLeidos.add(InicilizadorDeComodines.crearComodin(nombre, descripcion, subActivacion, subPuntos, subMultiplicador));
-                };
+                List<Comodin> subComodinesLeidos = obtenerSubComodines(comodin);
                 comodinesLeidos.add(InicilizadorDeComodines.crearComodinCombo(nombre, descripcion, subComodinesLeidos));
-                break;
+                continue;
             }
             String activacion = leerActivacion(comodin);
             Map<String, Object> efecto = leerEfecto(comodin);
@@ -285,5 +273,23 @@ public class LectorArchivosJson {
         } else {
             throw new IllegalArgumentException("El objeto JSON no contiene la clave 'activacion'");
         }
+    }
+    private List<Comodin> obtenerSubComodines(JsonObject comodin) {
+        List<Comodin> subComodinesLeidos = new ArrayList<>();
+        if (comodin.containsKey("comodines")) {
+            JsonArray subcomodines = comodin.getJsonArray("comodines");
+            for (int j = 0; j < subcomodines.size(); j++) {
+                JsonObject subcomodin = subcomodines.getJsonObject(j);
+                String subNombre = subcomodin.getString("nombre");
+                String subDescripcion = subcomodin.getString("descripcion");
+                String subActivacion = leerActivacion(subcomodin);
+                Map<String, Object> efecto = leerEfecto(subcomodin);
+                int subPuntos = (int) efecto.get("puntos");
+                float subMultiplicador = (float) efecto.get("multiplicador");
+
+                subComodinesLeidos.add(InicilizadorDeComodines.crearComodin(subNombre, subDescripcion, subActivacion, subPuntos, subMultiplicador));
+            }
+        }
+        return subComodinesLeidos;
     }
 }

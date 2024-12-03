@@ -10,14 +10,18 @@ import java.util.Comparator;
 public class EvaluadorEscalera extends EvaluadorAbstracto {
     @Override
     protected Mano evaluarMano(ArrayList<Carta> cartas) {
-        cartas.sort(Comparator.comparingInt(Carta::getValor));
-        Carta cartaAnterior = null;
-        for (Carta carta : cartas) {
-            if (cartaAnterior != null && carta.getValor() != cartaAnterior.getValor() + 1) {
-                return null;  // Retorna null si las cartas no son consecutivas
+        if (cartas.size() == 5) {
+            cartas.sort(Comparator.comparingInt(Carta::getValor));
+            Carta cartaAnterior = null;
+            for (Carta carta : cartas) {
+                if (cartaAnterior != null && carta.getValor() != cartaAnterior.getValor() + 1) {
+                    return null;  // Retorna null si las cartas no son consecutivas
+                }
+                cartaAnterior = carta;  // Actualiza la carta anterior para la siguiente iteración
             }
-            cartaAnterior = carta;  // Actualiza la carta anterior para la siguiente iteración
+            return new Escalera();
+        } else {
+            return null;
         }
-        return new Escalera();
     }
 }

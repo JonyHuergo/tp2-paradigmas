@@ -109,6 +109,11 @@ public class Jugador {
         puntaje += manoPoker.hacerCalculo();
     }
 
+    public float jugar(){
+        this.crearJugada();
+        return (this.evaluarJugadas());
+    }
+
     public void reiniciarMano(){            // la mano que fue jugada se pierde
         manoPoker = new ManoPoker();
         repartirCartas();

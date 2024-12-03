@@ -32,7 +32,7 @@ public class TestSemana1 {
     public void test03JugarMano(){
         String manoEsperada = "Escalera Color";
         ManoPoker manoPoker = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
             manoPoker.agregarCarta(carta);
         }
@@ -45,9 +45,9 @@ public class TestSemana1 {
 
     @Test
     public void test04EvaluarMano(){
-        int puntajeEsperado = 920; // (100 por mano (escalera de color) + 15 por las cartas) * 8 por mano
+        int puntajeEsperado = 960; // (100 por mano (escalera de color) + 20 por las cartas) * 8 por mano
         ManoPoker manoJugada = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
             manoJugada.agregarCarta(carta);
         }
@@ -60,7 +60,7 @@ public class TestSemana1 {
     public void test05EvaluarManoConComodin(){
         int puntajeEsperado = 30;
         ManoPoker manoJugada = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta c1 = new Carta("diamantes", i);
             manoJugada.agregarCarta(c1);
         }

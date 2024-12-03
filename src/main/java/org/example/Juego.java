@@ -102,7 +102,7 @@ public class Juego {
         primaryStage.show();
     }
 
-    public void PartidaPerdida(){
+    public void partidaPerdida(){
 
     }
 

@@ -36,7 +36,7 @@ class Juego {
     - int cantidadRondas
     - boolean juegoGanado
     + void jugar()
-    + void PartidaPerdida()
+    + void partidaPerdida()
 }
 
 class Jugador {

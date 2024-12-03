@@ -35,15 +35,15 @@ public class TestSemana2 {
 
     @Test
     public void test02ComodinAumentaPor3AlMultiplicadorSiTieneEscalera() {
-        int puntajeEsperado = 540; // Escalera: 30 * 4 -> 45 * 4 por las 5 cartas -> 45 * 12 por el comodin
+        int puntajeEsperado = 600; // Escalera: 30 * 4 -> 50 * 4 por las 5 cartas -> 50 * 12 por el comodin
 
         ManoPoker manoPoker = new ManoPoker();
-        for (int i = 1; i <= 4; i++) {
+        for (int i = 2; i <= 5; i++) {
             Carta carta = new Carta("diamantes", i);
             manoPoker.agregarCarta(carta);
         }
 
-        manoPoker.agregarCarta(new Carta("corazon", 5));
+        manoPoker.agregarCarta(new Carta("corazon", 6));
 //ComodinBase(int puntajeAdicional, float multiplicador, String activacion)
         Comodin comodin = new ComodinBase(0,3,  "Escalera");
         ArrayList<Comodin> comodines = new ArrayList<>();

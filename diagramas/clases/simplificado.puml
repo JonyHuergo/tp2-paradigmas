@@ -10,43 +10,46 @@ class AnalizadorMano {
 }
 
 class Carta {
+    - String nombre
     - String palo
-    - int valor
+    - ValorCarta valor
     - int puntaje
-    - int multiplicador
+    - String multiplicador
+    + Carta(String nombre, String palo, String valor, int puntaje, String multiplicador)
     + Carta(String palo, int valor)
     + int getValor()
     + String getPalo()
+    + int getPuntaje()
+    + String getMultiplicador()
     + boolean cartaTieneMismoValor(Carta carta)
     - boolean valorEsIgual(int valorCarta)
     + boolean paloEsIgual(String paloCarta)
     + boolean paloEsIgual(Carta carta)
     + boolean esInmediatamenteSuperior(Carta carta)
     + boolean esInmediatamenteInferior(Carta carta)
-    + void modificarMultiplicador(int multiplicador)
+    + void modificarMultiplicador(float multiplicador)
     + void agregarPuntos(int puntos)
     + int actualizarPuntajeTotal(int puntajeTotal)
-    + int actualizarMultiplicadorTotal(int multiplicadorTotal)
+    + float actualizarMultiplicadorTotal(float multiplicadorTotal)
 }
 
 class Juego {
     - int cantidadRondas
     - boolean juegoGanado
     + void jugar()
-    + void PartidaPerdida()
+    + void partidaPerdida()
+    + void hacerJugada()
 }
 
 class Jugador {
     - String nombre
-    - ArrayList<Carta> mano
-    - ArrayList<Carta> manoElegida
-    - ManoPoker manoPoker
     - int puntaje
     + Jugador()
-    + void repartirCartas(int cantidad)
+    + void repartirCartas()
     + ArrayList<Carta> getCartasEnMano()
-    + void elegirCartas(ArrayList<Integer> posicionesCartas)
+    + void elegirCarta(int pos)
     + void jugar(ManoPoker manoJugada)
+    + void crearJugada()
 }
 
 class ManoPoker {
@@ -54,27 +57,73 @@ class ManoPoker {
     + ManoPoker(ArrayList<Carta> cartas)
     + void agregarCarta(Carta carta)
     + void removerCarta(Carta carta)
-    + int evaluar()
+    + float evaluar()
     + String obtenerNombreTipoDeMano()
     + Mano calcularMano()
+    + void definirTipodeMano()
+    + void sumarValorCartas()
+    + float hacerCalculo()
+    + boolean manoNombreEsIgual(String nombre)
+    + void actualizarPuntajeBase(int puntaje)
+    + void actualizarMultiplicadorBase(float mult)
+    + void multiplicarMultiplicadorBase(float mult)
 }
 
 class Mazo {
     + Mazo()
     + int cantidadDeCartas()
-    + ArrayList<Carta> repartir(int cantidad)
+    + ArrayList<Carta> repartirCartas(int cantidad)
+    + void repartir(ArrayList<Carta> cartasDisponibles, int limiteCartas)
     - void inicializarMazo()
 }
 
 class Ronda {
-    - int limiteDePuntos
-    - int turno
-    + Ronda(int limiteDePuntos)
+    - int numero
+    - int manos
+    - int descartes
+    - int puntajeASuperar
+    + Ronda(int numero, int manos, int descartes, int puntajeASuperar, Tienda tienda)
     + void pasarTurno(int puntajeTotal)
+    + int getPuntajeASuperar()
+    + Tienda obtenerTienda()
+}
+
+class Tienda {
+    - Carta carta
+    + Tienda(List<Comodin> comodines, List<Tarot> tarots, Carta carta)
+    + List<Comodin> obtenerComodines()
+    + List<Tarot> obtenerTarots()
+    + Carta obtenerCarta()
 }
 
 abstract class Tarot {
+    - String nombre
+    - String descripcion
+    - String sobre
+    - String ejemplar
+    - int puntos
+    - float multiplicador
+    + Tarot(String nombre, String descripcion, String sobre, String ejemplar, int puntos, float multiplicador)
+    + Tarot(float multiplicador)
+    + Tarot(int puntos)
     + void aplicarEfecto(Carta carta)
+}
+
+class Jugada {
+    /'- ManoPoker manoPoker
+    - ArrayList<Comodin> comodines
+    - int puntaje
+    - int descartes
+    - int numeroRonda
+
+    + Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes)
+    + void actualizarPuntajeBase(int puntajeBase)
+    + void actualizarMult(float mult)
+    + void multiplicarMult(float mult)
+    + boolean tieneDescartes()
+    + boolean tieneManoDeTipo(String manoEsperada)
+    + int calcularPuntosPorDescarte(int puntosPorDescarte)
+    + float evaluarJugada()'/
 }
 
 interface EvaluadorMano {
@@ -91,7 +140,28 @@ abstract class EvaluadorAbstracto implements EvaluadorMano {
 abstract class Mano {
     + String getNombre()
     + int getPuntajeBase()
-    + int getMultiplicadorBase()
+    + float getMultiplicadorBase()
+    + void actualizarPuntajeBase(int puntaje)
+    + void actualizarMultiplicadorBase(float mult)
+    + void multiplicarMultiplicadorBase(float mult)
+    + float calcular(ArrayList<Carta> cartas)
+    + void sumarValorCartas(ArrayList<Carta> cartas)
+    + float hacerCalculo()
+}
+
+abstract class Comodin {
+    # String nombre
+    # String descripcion
+    # Activacion activacion
+    # int puntajeAdicional
+    # float multiplicador
+    
+    + Comodin(String nombre, String descripcion, Activacion activacion, int puntajeAdicional, float multiplicador)
+    + Comodin(int puntajeAdicional, float multiplicador, Activacion activacion)
+    + Comodin(String nombre, String descripcion, List<Comodin> subComodines)
+
+    + abstract void usar(Jugador jugador)
+    + abstract void usar(Jugada jugada)
 }
 
 Mazo "1" o-- "0..*" Carta
@@ -105,12 +175,21 @@ Juego "1" *-- "1..*" Ronda
 
 Jugador "1" o-- "1" ManoPoker
 Jugador "1" --> "1" Mazo
-Jugador ..> Carta
+Jugador "1" --> "0..*" Carta
 
 ManoPoker "1" o-- "0..*" Carta
 ManoPoker "1" --> "1" AnalizadorMano
 ManoPoker "1" --> "1" Mano
 
 Tarot ..> Carta
+
+Ronda "1" --> "1" Tienda
+
+Tienda "1" --> "1..*" Comodin
+Tienda "1" --> "1..*" Tarot
+Tienda "1" --> "1" Carta
+
+Comodin ..> Jugador
+Comodin ..> Jugada
 
 @enduml

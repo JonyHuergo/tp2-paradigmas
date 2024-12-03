@@ -60,4 +60,31 @@ public class JugadorTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
+
+    @Test
+    public void test03UnJugadorRealizaDosJugadasYCalculaTodas() {
+        int puntajeEsperado = 43;
+
+        // Jugada 1
+        ManoPoker manoPoker1 = new ManoPoker();
+        for (int i = 1; i <= 2; i++) {
+            Carta carta = new Carta("diamantes", 2);
+            manoPoker1.agregarCarta(carta);
+        }
+
+        Jugador jugador = new Jugador();
+        jugador.setManoPoker(manoPoker1);
+        jugador.crearJugada();
+        jugador.evaluarJugadaActual();
+
+        // Jugada 2
+        ManoPoker manoPoker2 = new ManoPoker();
+        manoPoker2.agregarCarta(new Carta("diamantes", 10));
+        jugador.setManoPoker(manoPoker2);
+        jugador.crearJugada();
+
+        float puntajeObtenido = jugador.evaluarJugadas();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
 }

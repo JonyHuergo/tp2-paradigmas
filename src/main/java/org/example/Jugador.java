@@ -91,7 +91,7 @@ public class Jugador {
         return(puntosPorDescarte*descartes);
     }
 
-    public void repartirCartas() {          // como hacemos para que no se reparta una misma carta dos veces? estado de carta?
+    public void repartirCartas() {
         mazo.repartir(cartasDisponibles,limiteCartas);
     }
 

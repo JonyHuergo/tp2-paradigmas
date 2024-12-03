@@ -10,8 +10,7 @@ public class Mazo {
 
     public Mazo() {
         cartas = new ArrayList<>();
-        LectorArchivosJson lector = new LectorArchivosJson();
-        this.cartas = lector.leerMazo();
+        inicializarMazo();
     }
 
     public Mazo(ArrayList<Carta> cartas) {
@@ -21,6 +20,16 @@ public class Mazo {
     // Se va a necesitar en un futuro (el juego siempre muestra cuantas cartas tiene el mazo ej: 44/52)
     public int cantidadDeCartas(){
         return cartas.size();
+    }
+
+    private void inicializarMazo() {
+        String[] palos = {"corazones", "diamantes", "tréboles", "picas"};
+        for (String palo : palos) {
+            for (int i = 2; i <= 14; i++) {
+                cartas.add(new Carta(palo, i));
+            }
+        }
+        Collections.shuffle(cartas);
     }
 
 //    public ArrayList<Carta> repartir(int cantidad) {
@@ -61,6 +70,5 @@ public class Mazo {
             int pos = random.nextInt(cartas.size());
             cartasDisponibles.add(cartas.remove(pos));
         }
-
     }
 }

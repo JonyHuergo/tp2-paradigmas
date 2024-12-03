@@ -75,11 +75,11 @@ public class EvaluadorTest {
 
         // Crear las cartas para el test
         ArrayList<Carta> cartas = new ArrayList<>();
-        cartas.add(new Carta("Corazones", 1));  // 6 de Corazones
-        cartas.add(new Carta("Espadas", 9));    // 7 de Espadas
-        cartas.add(new Carta("Diamantes", 11));  // 8 de Diamantes
-        cartas.add(new Carta("Tréboles", 3));   // 9 de Tréboles
-        cartas.add(new Carta("Corazones", 2)); // 10 de Corazones
+        cartas.add(new Carta("Corazones", 6));  // 6 de Corazones
+        cartas.add(new Carta("Espadas", 7));    // 7 de Espadas
+        cartas.add(new Carta("Diamantes", 8));  // 8 de Diamantes
+        cartas.add(new Carta("Tréboles", 9));   // 9 de Tréboles
+        cartas.add(new Carta("Corazones", 11)); // 11 de Corazones
 
         // Crear una mano de póker
         ManoPoker mano = new ManoPoker(cartas);

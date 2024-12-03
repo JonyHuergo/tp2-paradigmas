@@ -10,10 +10,6 @@ public class Carta {
     private String multiplicador;
 
     public enum ValorCarta {
-        JOTA(11, "Jota"),
-        REINA(12, "Reina"),
-        REY(13, "Rey"),
-        AS(14, "As"),
         NUMERO_2(2, "2"),
         NUMERO_3(3, "3"),
         NUMERO_4(4, "4"),
@@ -22,7 +18,11 @@ public class Carta {
         NUMERO_7(7, "7"),
         NUMERO_8(8, "8"),
         NUMERO_9(9, "9"),
-        NUMERO_10(10, "10");
+        NUMERO_10(10, "10"),
+        JOTA(11, "Jota"),
+        REINA(12, "Reina"),
+        REY(13, "Rey"),
+        AS(14, "As");
 
         private final int valor;
         private final String nombre;
@@ -61,9 +61,18 @@ public class Carta {
 
     public Carta(String palo, int valor) {
         this.palo = palo;
-        this.valor = ValorCarta.values()[valor - 2]; // Get the enum by index, assuming 2 is the lowest card value
-        this.multiplicador = "1";
+        this.valor = buscarValorCarta(valor); // Metodo dedicado a buscar el enum
+        this.multiplicador = "0";
         this.puntaje = valor;
+    }
+
+    private ValorCarta buscarValorCarta(int valor) {
+        for (ValorCarta v : ValorCarta.values()) {
+            if (v.getValor() == valor) {
+                return v;
+            }
+        }
+        throw new IllegalArgumentException("Valor no válido para una carta: " + valor);
     }
 
     // Method to get the card route (palo + valor)
@@ -124,7 +133,12 @@ public class Carta {
 
     public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
         float suma = Float.parseFloat(this.multiplicador) +multiplicadorTotal;
-        this.multiplicador = Float.toString(suma);
+//        this.multiplicador = Float.toString(suma);
         return suma;
     }
+
+    public Carta clone(){
+        return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
+    }
+
 }

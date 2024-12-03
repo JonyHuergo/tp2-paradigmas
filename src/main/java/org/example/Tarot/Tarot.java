@@ -28,6 +28,6 @@ public abstract class Tarot { // Tentativo, revisar
 
     public String getRuta() {
         String nombreFormateado = nombre.replace(" ", "_");
-        return "tarots/Tarot_" + nombreFormateado + ".png";
+        return "/Tarots/Tarot_" + nombreFormateado + ".png";
     }
 }

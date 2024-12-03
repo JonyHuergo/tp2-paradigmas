@@ -103,5 +103,26 @@ public class JugadaTest {
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
+    @Test
+    public void test05unaJugadaPreviaAUnTarotCalculaCorrectamente() {
+        int puntajeEsperado = 960;
+        ManoPoker manoPoker = new ManoPoker();
+        TarotAgregaPuntos tarot = new TarotAgregaPuntos(10);
 
+        Carta aux = null;
+        for (int i = 2; i <= 6; i++) {
+            Carta carta = new Carta("diamantes", i);
+            aux = carta;
+            manoPoker.agregarCarta(carta);
+        }
+
+        Jugada jugada = new Jugada(manoPoker, new ArrayList<Comodin>(), 3);
+
+        // Se aplica el tarot
+        tarot.aplicarEfecto(aux);
+
+        float puntajeObtenido = jugada.evaluarJugada();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
 }

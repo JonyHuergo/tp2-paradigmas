@@ -12,7 +12,7 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
     private int numeroRonda;
 
     public Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes){
-        this.manoPoker = manoPoker;
+        this.manoPoker = manoPoker.clonar();
         this.comodines = comodines;
         this.descartes = descartes;
     }

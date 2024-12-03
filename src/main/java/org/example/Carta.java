@@ -137,7 +137,7 @@ public class Carta {
         return suma;
     }
 
-    public Carta clone(){
+    public Carta clonar(){
         return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
     }
 

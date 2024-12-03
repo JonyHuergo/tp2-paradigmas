@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -17,7 +18,7 @@ import static org.mockito.Mockito.when;
 public class TestSemana2 {
     @Test
     public void test01ComodinSuma8AlMultiplicador() {
-        int puntajeEsperado = 90; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 10 * 9 por el comodin
+        float puntajeEsperado = 90; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 10 * 9 por el comodin
 
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
@@ -28,9 +29,10 @@ public class TestSemana2 {
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
-        jugador.evaluarMano();
 
-        assertTrue(jugador.puntajeEsIgual(puntajeEsperado));
+        float puntajeObtenido = jugador.jugar();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
@@ -44,7 +46,7 @@ public class TestSemana2 {
         }
 
         manoPoker.agregarCarta(new Carta("corazon", 6));
-//ComodinBase(int puntajeAdicional, float multiplicador, String activacion)
+        //ComodinBase(int puntajeAdicional, float multiplicador, String activacion)
         Comodin comodin = new ComodinBase(0,3,  "Escalera");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
@@ -53,9 +55,9 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        jugador.evaluarMano();
+        float puntajeObtenido = jugador.jugar();
 
-        assertTrue(jugador.puntajeEsIgual(puntajeEsperado));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
@@ -71,9 +73,10 @@ public class TestSemana2 {
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
-        jugador.evaluarMano();
 
-        assertTrue(jugador.puntajeEsIgual(puntajeEsperado));
+        float puntajeObtenido = jugador.jugar();
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
@@ -81,7 +84,7 @@ public class TestSemana2 {
         int puntajeEsperado = 40; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 40 * 1 puntaje adicional
 
         ActivacionProbabilidad activacionMock = Mockito.mock(ActivacionProbabilidad.class);
-        when(activacionMock.revisarCondicion(any(Jugador.class))).thenReturn(true);
+        when(activacionMock.revisarCondicion(any(Jugada.class))).thenReturn(true);
 
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
@@ -95,9 +98,9 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        jugador.evaluarMano();
+        float puntajeObtenido = jugador.jugar();
 
-        assertTrue(jugador.puntajeEsIgual(puntajeEsperado));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test
@@ -112,7 +115,7 @@ public class TestSemana2 {
         ActivacionTipoDeMano activacionPorMano = new ActivacionTipoDeMano("Carta Alta");
         ActivacionSiempre activacionSiempre = new ActivacionSiempre();
         ActivacionProbabilidad activacionProbabilidad = Mockito.mock(ActivacionProbabilidad.class);
-        when(activacionProbabilidad.revisarCondicion(any(Jugador.class))).thenReturn(true);
+        when(activacionProbabilidad.revisarCondicion(any(Jugada.class))).thenReturn(true);
 
         Comodin bonusDeMano = new ComodinBase(10,  1, activacionPorMano); // Suma 10 puntos
         Comodin puntajeAumentado = new ComodinBase(20, 1, activacionSiempre); // Suma 20 puntos
@@ -135,10 +138,9 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodinesDelJugador);
 
-        jugador.evaluarMano();
-        combo.usar(jugador);
+        float puntajeObtenido = jugador.jugar();
 
-        assertTrue(jugador.puntajeEsIgual(puntajeEsperado));
+        assertEquals(puntajeEsperado, puntajeObtenido);
     }
 
     @Test

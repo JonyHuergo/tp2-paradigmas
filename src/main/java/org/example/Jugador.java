@@ -90,7 +90,7 @@ public class Jugador {
         return(puntosPorDescarte*descartes);
     }
 
-    public void repartirCartas() {          // como hacemos para que no se reparta una misma carta dos veces? estado de carta?
+    public void repartirCartas() {
         mazo.repartir(cartasDisponibles,limiteCartas);
     }
 
@@ -128,7 +128,7 @@ public class Jugador {
     public float evaluarJugadas(){
         float aux = 0;
         for (Jugada jugada : listadoJugadas) {
-            aux = jugada.evaluarJugada();
+            aux += jugada.evaluarJugada();
         }
         return(aux);
     }

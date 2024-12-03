@@ -136,4 +136,9 @@ public class Carta {
 //        this.multiplicador = Float.toString(suma);
         return suma;
     }
+
+    public Carta clone(){
+        return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
+    }
+
 }

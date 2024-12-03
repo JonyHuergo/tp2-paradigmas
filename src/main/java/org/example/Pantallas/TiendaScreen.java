@@ -6,13 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.example.Handlers.AvanzarButtonHandler;
-import org.example.Handlers.CartaButtonHandler;
 import org.example.Mazo;
 import org.example.Tienda;
 import org.example.Carta;
@@ -33,10 +30,17 @@ public class TiendaScreen extends VBox {
         this.setSpacing(10); // Espaciado entre elementos
         this.setPadding(new javafx.geometry.Insets(20));
 
+        // Título
+        Label titulo = new Label("Tienda");
+        titulo.setStyle("-fx-font-size: 32px; -fx-text-fill: white; -fx-font-weight: bold;");
+        titulo.setAlignment(Pos.CENTER);
+
+        // Añadir el título al VBox
+        this.getChildren().add(titulo);
+
         this.comodines = tienda.obtenerComodines();
         this.tarots = tienda.obtenerTarots();
         this.carta = tienda.obtenerCarta();
-
 
         FlowPane comodinesPane = new FlowPane();
         comodinesPane.setHgap(10); // Espaciado horizontal entre botones
@@ -45,7 +49,8 @@ public class TiendaScreen extends VBox {
 
         // Añadir botones al FlowPane
         for (Comodin comodin : comodines) {
-            String imagePath = "/Comodines/Bananas.png"; // Ruta de la imagen
+            String imagePath = "/Comodines/" + comodin.getRuta() + ".png";
+            System.out.println(comodin.getRuta());// Ruta de la imagen
 
             Image image = new Image(imagePath);
             ImageView imageView = new ImageView(image);
@@ -62,15 +67,14 @@ public class TiendaScreen extends VBox {
         // Añadir el FlowPane al TiendaScreen
         this.getChildren().add(comodinesPane);
 
-
         FlowPane tarotPane = new FlowPane();
         tarotPane.setHgap(10); // Espaciado horizontal entre botones
         tarotPane.setVgap(10); // Espaciado vertical entre botones
         tarotPane.setAlignment(Pos.CENTER);
 
         for (Tarot tarot : tarots) {
-//            String imagePath = tarot.getRuta(); // Ruta de la image
-            String imagePath = "/Tarots/Tarot_El_Carro.png";
+            String imagePath = tarot.getRuta(); // Ruta de la imagen
+
             Image image = new Image(imagePath);
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(100);
@@ -91,7 +95,7 @@ public class TiendaScreen extends VBox {
         cartaPane.setVgap(10); // Espaciado vertical entre botones
         cartaPane.setAlignment(Pos.CENTER);
 
-        String imagePath = "/cartas/" + carta.getRuta() + ".png"; // Ruta de la image
+        String imagePath = "/cartas/" + carta.getRuta() + ".png"; // Ruta de la imagen
 
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
@@ -107,7 +111,6 @@ public class TiendaScreen extends VBox {
         // Añadir el FlowPane al TiendaScreen
         this.getChildren().add(cartaPane);
 
-
         Button avanzarButton = new Button("Avanzar");
         avanzarButton.setStyle("-fx-font-size: 16px; -fx-background-color: yellow;");
         avanzarButton.setOnAction(new AvanzarButtonHandler(stage, mediaPlayer, mazo, puntajeASuperar)); // Asignamos el manejador
@@ -115,7 +118,5 @@ public class TiendaScreen extends VBox {
         // Centramos el botón y lo añadimos al final
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(avanzarButton);
-
     }
-
 }

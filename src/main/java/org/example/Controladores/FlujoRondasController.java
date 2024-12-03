@@ -36,16 +36,16 @@ public class FlujoRondasController {
             Juego juego = new Juego(mazo);
 
 
+            Ronda ronda = rondas.get(0);
+            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda.getPuntajeASuperar());
+            pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
 
-
-            for (int i = rondas.size() - 1; i >= 0; i--) {
-                Ronda ronda = rondas.get(i);
-                PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda.getPuntajeASuperar());
-                pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
-//                Ronda currentRonda = rondas.get(i);
-//                ArrayList<Carta> cartasIniciales = jugador.getMazo().repartirCartas(5);
-//                int puntajeASuperar = currentRonda.getPuntajeASuperar();
-//                mostrarRonda(primaryStage, cartasIniciales, puntajeASuperar);
-            }
+//            for (int i = rondas.size() - 1; i >= 0; i--) {
+//
+////                Ronda currentRonda = rondas.get(i);
+////                ArrayList<Carta> cartasIniciales = jugador.getMazo().repartirCartas(5);
+////                int puntajeASuperar = currentRonda.getPuntajeASuperar();
+////                mostrarRonda(primaryStage, cartasIniciales, puntajeASuperar);
+//            }
         }
 }

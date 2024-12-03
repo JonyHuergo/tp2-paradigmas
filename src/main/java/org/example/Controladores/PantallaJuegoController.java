@@ -1,6 +1,7 @@
 package org.example.Controladores;
 
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.example.*;
@@ -32,7 +33,12 @@ public class PantallaJuegoController {
         }
 
         Mazo mazo = new Mazo(cartasLeidas);
-        FlujoJuegoController juegoController = new FlujoJuegoController();
+
+        Label manoLabel = new Label("Mano: Ninguna");
+        manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
+
+        FlujoJuegoController juegoController = new FlujoJuegoController(manoLabel);
+
         JuegoScreen juegoScreen = new JuegoScreen(mazo.repartirCartas(8), rondas.get(0).getPuntajeASuperar(), juegoController);
 
         Scene scene = new Scene(juegoScreen, 800, 600);

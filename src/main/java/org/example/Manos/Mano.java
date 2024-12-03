@@ -17,6 +17,10 @@ public abstract class Mano {
         this.multiplicadorBase = multiplicadorBase;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public boolean nombreEsIgual(String nombre){
         return(Objects.equals(this.nombre, nombre));
     }

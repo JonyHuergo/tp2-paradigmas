@@ -46,17 +46,26 @@ public class JuegoScreen extends VBox {
 
         cartasPane.setStyle("-fx-padding: 10; -fx-hgap: -20; -fx-vgap: 0; -fx-translate-y: 500;");
 
+        // Crear un Label para mostrar el puntajeASuperar
+        Label puntajeLabel = new Label("Puntaje a superar: " + puntajeASuperar);
+        puntajeLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
+
+        // Obtener el manoLabel del controller, que ya fue configurado en PantallaJuegoController
+        Label manoLabel = controller.getManoLabel();
+        manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
+
+        // Crear un VBox para organizar los Labels verticalmente
+        VBox leftPanelContent = new VBox(10);  // 10 is the space between the labels
+        leftPanelContent.setStyle("-fx-padding: 10;");
+        leftPanelContent.getChildren().addAll(puntajeLabel, manoLabel);
+
         // Crear un Panel (Panel de la izquierda)
         StackPane leftPanel = new StackPane();
         leftPanel.setStyle("-fx-background-color: gray;");  // Establecer un color de fondo para el panel izquierdo
         leftPanel.setMinWidth(200); // Aproximadamente un cuarto del ancho total
 
-        // Crear un Label para mostrar el puntajeASuperar
-        Label puntajeLabel = new Label("Puntaje a superar: " + puntajeASuperar);
-        puntajeLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
-
-        // Agregar el Label al panel izquierdo
-        leftPanel.getChildren().add(puntajeLabel);
+        // Agregar el VBox con los Labels al panel izquierdo
+        leftPanel.getChildren().add(leftPanelContent);
 
         // Crear un StackPane para el contenido principal (Centro verde)
         StackPane contentPane = new StackPane();

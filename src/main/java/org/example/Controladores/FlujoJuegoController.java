@@ -1,13 +1,20 @@
 package org.example.Controladores;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import org.example.AnalizadorMano;
 import org.example.Carta;
+import org.example.Manos.Mano;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class FlujoJuegoController {
-    private final List<Carta> cartasSeleccionadas = new ArrayList<>();
+    private final ArrayList<Carta> cartasSeleccionadas = new ArrayList<>();
+    private Label manoLabel;  // Label to update hand name
+
+    public FlujoJuegoController(Label manoLabel) {
+        this.manoLabel = manoLabel;
+    }
 
     public void seleccionarCarta(Carta carta, Button cartaButton) {
         if (cartasSeleccionadas.contains(carta)) {
@@ -19,9 +26,25 @@ public class FlujoJuegoController {
             cartasSeleccionadas.add(carta);
             cartaButton.setStyle("-fx-background-color: transparent;-fx-padding: -5;-fx-translate-y: -10");
         }
+
+        // Si hay cartas seleccionadas, analizar la mano
+        if (!cartasSeleccionadas.isEmpty()) {
+            AnalizadorMano analizador = new AnalizadorMano();
+            Mano mano = analizador.analizarMano(cartasSeleccionadas);
+            String nombreMano = mano.getNombre();
+
+            // Actualizar el nombre de la mano en el label
+            manoLabel.setText("Mano: " + nombreMano);
+        } else {
+            manoLabel.setText("Mano: Ninguna");
+        }
     }
 
-    public List<Carta> getCartasSeleccionadas() {
+    public ArrayList<Carta> getCartasSeleccionadas() {
         return cartasSeleccionadas;
+    }
+
+    public Label getManoLabel() {
+        return manoLabel;
     }
 }

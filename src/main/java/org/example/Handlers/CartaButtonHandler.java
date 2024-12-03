@@ -19,6 +19,7 @@ public class CartaButtonHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
+        ActionHandler.actionSound();
         controller.seleccionarCarta(carta, cartaButton);
     }
 }

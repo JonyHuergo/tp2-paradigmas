@@ -26,4 +26,8 @@ public abstract class Tarot { // Tentativo, revisar
     }
     public abstract void aplicarEfecto(Carta carta);
 
+    public String getRuta() {
+        String nombreFormateado = nombre.replace(" ", "_");
+        return "tarots/Tarot_" + nombreFormateado + ".png";
+    }
 }

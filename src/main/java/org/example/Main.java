@@ -5,7 +5,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import org.example.Controladores.PantallaEndGameController;
 import org.example.Controladores.PantallaInicioController;
+import org.example.Pantallas.EndGameScreen;
 
 
 public class Main extends Application {
@@ -29,24 +31,12 @@ public class Main extends Application {
             primaryStage.show();
 
             // Panel raíz
-            StackPane root = new StackPane();
+//            StackPane root = new StackPane();
 
-            //Para probar pantalla final
-//            EndGameScreen endGamePantalla = new EndGameScreen(root);
-//
-//            Scene scene = new Scene(endGamePantalla, 700, 650);
-//            primaryStage.setTitle("Balatro");
-//            primaryStage.setScene(scene);
+//            PantallaEndGameController controller = new PantallaEndGameController(primaryStage, mediaPlayer);
+//            controller.iniciarPantallaEndGame();
 //            primaryStage.show();
 
-//            PantallaInicioScreen pantallaInicio = new PantallaInicioScreen(root);
-//
-//            Scene scene = new Scene(root, 800, 600);
-//            primaryStage.setScene(scene);
-//            primaryStage.setTitle("BALATRO");
-//            primaryStage.setResizable(false);
-//            primaryStage.show();
-            // Styling del fondo
 
         } catch (Exception e) {
             System.err.println("Error al cargar los recursos: " + e.getMessage());

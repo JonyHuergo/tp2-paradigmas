@@ -12,8 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class EndGameScreen extends VBox {
-    public EndGameScreen(StackPane root) {
-
+    public Button exitButton;
+    public EndGameScreen() {
+        StackPane root = new StackPane();
         String textColor = "#ffffff";
         String highlightColor = "#e8793c";
         String panelColor = "#3d4148";
@@ -98,8 +99,8 @@ public class EndGameScreen extends VBox {
 
         // Botones
         Button newRun = createNewGameButton();
-        Button mainMenu = createMainMenuButton();
-        HBox buttonsBox = new HBox(20, newRun, mainMenu);
+        exitButton = createMainMenuButton();
+        HBox buttonsBox = new HBox(20, newRun, exitButton);
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.setPadding(new Insets(20, 0, 0, 0));
 

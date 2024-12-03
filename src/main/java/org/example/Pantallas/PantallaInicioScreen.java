@@ -2,7 +2,6 @@ package org.example.Pantallas;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -12,11 +11,15 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import org.example.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.animation.RotateTransition;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import javafx.scene.effect.Glow;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
+import javafx.scene.paint.Color;
 
 public class PantallaInicioScreen extends VBox {
     public Button playButton;
@@ -26,7 +29,7 @@ public class PantallaInicioScreen extends VBox {
 
     public PantallaInicioScreen() {
         StackPane root = new StackPane();
-        Image bgImage = new Image("background.png", 800, 600, false, true);
+        Image bgImage = new Image("background.png", 800, 500, false, true);
 
         BackgroundImage backgroundImage = new BackgroundImage(
                 bgImage,
@@ -49,17 +52,17 @@ public class PantallaInicioScreen extends VBox {
 
         // Carta que aparece en el título
         ImageView cardImage = new ImageView(new Image("cartas/Picas_As.png"));
-        cardImage.setFitWidth(80);
-        cardImage.setFitHeight(80);
+        cardImage.setFitWidth(120);
+        cardImage.setFitHeight(120);
 
         // Parte del título antes de la segunda "A"
         Text firstPart = new Text("BAL");
-        firstPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
+        firstPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 100));
         firstPart.setFill(Color.WHITE);
 
         // Parte del título después de la segunda "A"
         Text secondPart = new Text("TRO");
-        secondPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 60));
+        secondPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 100));
         secondPart.setFill(Color.WHITE);
 
         // Botones
@@ -68,10 +71,6 @@ public class PantallaInicioScreen extends VBox {
         collectionButton = createStyledButton("/Botones/Collection.png", 150, 60);
         exitButton = createStyledButton("/Botones/Exit.png", 120, 55);
 
-        // Event handlers de los botones
-//        playButton.setOnAction(e -> handlePlay());
-//        optionsButton.setOnAction(e -> handleOptions());
-//        collectionButton.setOnAction(e -> handleCollection());
 
         // Diseño para los botones
         HBox buttonsBox = new HBox(10, playButton, optionsButton, collectionButton);
@@ -79,13 +78,12 @@ public class PantallaInicioScreen extends VBox {
         HBox exitBox = new HBox(exitButton);
         exitBox.setAlignment(Pos.BOTTOM_CENTER);
 
-        // Caja gris alrededor de los botones usando un VBox con relleno y color de fondo
 
 
         BackgroundFill backgroundFill = new BackgroundFill(
-                Color.web("#2775b7"), // Color de fondo
-                new CornerRadii(30),   // Bordes redondeados (ajustar si es necesario)
-                Insets.EMPTY          // Espaciado interno
+                Color.web("#2775b7"),
+                new CornerRadii(30),
+                Insets.EMPTY
         );
 
         VBox greyBox = new VBox(10, buttonsBox);
@@ -94,6 +92,13 @@ public class PantallaInicioScreen extends VBox {
         greyBox.setBackground(background);
         greyBox.setPadding(new Insets(2)); // Padding de la caja gris
         greyBox.setMaxWidth(300);
+
+        animateCard(cardImage);               // Animación de rotación para la carta
+        addGlowEffect(cardImage);             // Efecto de brillo para la carta
+        animateTitleColors(firstPart);        // Cambio de colores cíclicos para "BAL"
+        animateTitleColors(secondPart);       // Cambio de colores cíclicos para "TRO"
+        addHoverEffectToTitle(firstPart);     // Efecto hover para "BAL"
+        addHoverEffectToTitle(secondPart);
 
         // Diseño del título: poner la carta entre "BAL" y "TRO"
         HBox titleBox = new HBox(0, firstPart, cardImage, secondPart);
@@ -104,6 +109,15 @@ public class PantallaInicioScreen extends VBox {
 
         this.getChildren().addAll(root);
         root.getChildren().add(layout);
+
+        root.setOnMouseMoved(event -> {
+            double mouseX = event.getSceneX();
+            double mouseY = event.getSceneY();
+
+            // Mueve el fondo ligeramente en dirección opuesta al mouse
+            backgroundView.setTranslateX((mouseX - 400) * -0.01); // Ajusta el multiplicador según el efecto deseado
+            backgroundView.setTranslateY((mouseY - 300) * -0.01);
+        });
 
         // Configuración de la escena
 
@@ -126,15 +140,72 @@ public class PantallaInicioScreen extends VBox {
             button.setGraphic(buttonImageView);
         }
 
-        // Hacer el fondo transparente para que solo se vea la imagen
-        button.setStyle("-fx-background-color: transparent;");
-        //Efectos en los botones (tdvia no me convence)
-//        button.setOnMouseEntered(e -> button.setStyle("-fx-scale-x: 1.1; -fx-scale-y: 1.1;"));
-//        button.setOnMouseExited(e -> button.setStyle("-fx-scale-x: 1.0; -fx-scale-y: 1.0;"));
+        button.setStyle("-fx-background-radius: 30; " +
+                "-fx-border-radius: 30; " +
+                "-fx-border-width: 2px; " +
+                "-fx-border-color: transparent; " +
+                "-fx-background-color: #2775b7;");
+
+        button.setOnMouseEntered(e -> button.setStyle(
+                "-fx-background-radius: 30; " +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-color: transparent; " +
+                        "-fx-background-color: #2775b7; " +
+                        "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"));
+
+        button.setOnMouseExited(e -> button.setStyle(
+                "-fx-background-radius: 30; " +
+                        "-fx-border-radius: 30; " +
+                        "-fx-border-width: 2px; " +
+                        "-fx-border-color: transparent; " +
+                        "-fx-background-color: #2775b7; " +    // Fondo original
+                        "-fx-scale-x: 1.0; -fx-scale-y: 1.0;"));
 
         return button;
     }
 
+
+
+    private void animateCard(ImageView cardImage) {
+        RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), cardImage);
+        rotateTransition.setFromAngle(0);
+        rotateTransition.setToAngle(360);
+        rotateTransition.setCycleCount(RotateTransition.INDEFINITE); // Repetir indefinidamente
+        rotateTransition.setInterpolator(javafx.animation.Interpolator.LINEAR); // Rotación constante
+        rotateTransition.play();
+    }
+
+    private void addGlowEffect(ImageView cardImage) {
+        Glow glow = new Glow(0.0); // Inicialmente sin brillo
+        cardImage.setEffect(glow);
+
+        // Cambiar el brillo cíclicamente
+        Timeline glowAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(0), e -> glow.setLevel(0.0)),
+                new KeyFrame(Duration.seconds(1), e -> glow.setLevel(0.8))
+        );
+        glowAnimation.setCycleCount(Timeline.INDEFINITE);
+        glowAnimation.setAutoReverse(true); // Revertir el brillo
+        glowAnimation.play();
+    }
+
+    private void animateTitleColors(Text text) {
+        Timeline colorAnimation = new Timeline(
+                new KeyFrame(Duration.seconds(0), e -> text.setFill(Color.LIGHTBLUE)),
+                new KeyFrame(Duration.seconds(1), e -> text.setFill(Color.CORAL)),
+                new KeyFrame(Duration.seconds(2), e -> text.setFill(Color.WHITE)),
+                new KeyFrame(Duration.seconds(3), e -> text.setFill(Color.BLUE))
+        );
+        colorAnimation.setCycleCount(Timeline.INDEFINITE);
+        colorAnimation.play();
+    }
+
+
+    private void addHoverEffectToTitle(Text text) {
+        text.setOnMouseEntered(e -> text.setFill(Color.GOLD)); // Cambia a color dorado al pasar el mouse
+        text.setOnMouseExited(e -> text.setFill(Color.WHITE)); // Regresa al color original
+    }
 //
 //    private void handlePlay() {
 //        LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();

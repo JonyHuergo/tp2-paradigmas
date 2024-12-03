@@ -17,6 +17,10 @@ public abstract class Mano {
         this.multiplicadorBase = multiplicadorBase;
     }
 
+    public String getNombre() {
+        return nombre;
+    }
+
     public boolean nombreEsIgual(String nombre){
         return(Objects.equals(this.nombre, nombre));
     }
@@ -54,6 +58,10 @@ public abstract class Mano {
 
     public float hacerCalculo(){
         return (puntajeBase * multiplicadorBase);
+    }
+
+    public int getPuntajeBase(){
+        return puntajeBase;
     }
 
 }

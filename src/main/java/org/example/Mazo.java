@@ -25,7 +25,7 @@ public class Mazo {
     private void inicializarMazo() {
         String[] palos = {"corazones", "diamantes", "tréboles", "picas"};
         for (String palo : palos) {
-            for (int i = 1; i <= 13; i++) {
+            for (int i = 2; i <= 14; i++) {
                 cartas.add(new Carta(palo, i));
             }
         }

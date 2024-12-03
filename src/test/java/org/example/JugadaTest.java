@@ -13,9 +13,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class JugadaTest {
     @Test
     public void test01UnaJugadaSeRealizaCorrectamente() {
-        int puntajeEsperado = 920;
+        int puntajeEsperado = 960;
         ManoPoker manoPoker = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
             manoPoker.agregarCarta(carta);
         }
@@ -28,10 +28,10 @@ public class JugadaTest {
 
     @Test
     public void test02UnaJugadaConComodinSeRealizaCorrectamente() {
-        int puntajeEsperado = 1150; // Escalera Color: 100 * 8 por mano -> 115 * 8 por cartas -> 115 * 10 por comodin
+        int puntajeEsperado = 1200; // Escalera Color: 100 * 8 por mano -> 120 * 8 por cartas -> 120 * 10 por comodin
 
         ManoPoker manoPoker = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
             manoPoker.agregarCarta(carta);
         }
@@ -46,10 +46,10 @@ public class JugadaTest {
 
     @Test
     public void test03UnaJugadaConMultiplesComodinesSeRealizaCorrectamente() {
-        int puntajeEsperado = 11500; // Escalera Color: 100 * 8 por mano -> 115 * 8 por cartas -> 115 * 10 por comodin -> 115 * 100 por comodin
+        int puntajeEsperado = 12000; // Escalera Color: 100 * 8 por mano -> 120 * 8 por cartas -> 120 * 10 por comodin -> 120 * 100 por comodin
 
         ManoPoker manoPoker = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
             manoPoker.agregarCarta(carta);
         }
@@ -67,7 +67,7 @@ public class JugadaTest {
 
     @Test
     public void test04UnaListaDeJugadasSeRealizanCorrectamente() {
-        int puntajeEsperado = 1195; // 45 de Jugada1 + 1150 de Jugada2
+        int puntajeEsperado = 1245; // 45 de Jugada1 + 1200 de Jugada2
         float puntajeObtenido = 0;
 
         // Jugada 1: [5 por mano (carta alta) + 10 por las cartas] * (1 por mano * 3 por comodin) = 45
@@ -79,9 +79,9 @@ public class JugadaTest {
 
         Jugada jugada2 = new Jugada(manoPoker1, comodines1, 3);
 
-        // Jugada 2: [100 por mano (escalera de color) + 15 por las cartas] * (8 por mano + 2 por comodin) = 1150
+        // Jugada 2: [100 por mano (escalera de color) + 20 por las cartas] * (8 por mano + 2 por comodin) = 1200
         ManoPoker manoPoker2 = new ManoPoker();
-        for (int i = 1; i <= 5; i++) {
+        for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
             manoPoker2.agregarCarta(carta);
         }

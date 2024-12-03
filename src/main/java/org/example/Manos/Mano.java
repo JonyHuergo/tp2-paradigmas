@@ -60,4 +60,8 @@ public abstract class Mano {
         return (puntajeBase * multiplicadorBase);
     }
 
+    public int getPuntajeBase(){
+        return puntajeBase;
+    }
+
 }

@@ -10,10 +10,14 @@ import java.util.ArrayList;
 
 public class FlujoJuegoController {
     private final ArrayList<Carta> cartasSeleccionadas = new ArrayList<>();
-    private Label manoLabel;  // Label to update hand name
+    private Label manoLabel;
+    private Label puntajeLabel;
+    private Label multiplicadorLabel;// Label to update hand name
 
-    public FlujoJuegoController(Label manoLabel) {
+    public FlujoJuegoController(Label manoLabel, Label puntajeLabel, Label multiplicadorLabel) {
         this.manoLabel = manoLabel;
+        this.puntajeLabel = puntajeLabel;
+        this.multiplicadorLabel = multiplicadorLabel;
     }
 
     public void seleccionarCarta(Carta carta, Button cartaButton) {
@@ -29,14 +33,27 @@ public class FlujoJuegoController {
 
         // Si hay cartas seleccionadas, analizar la mano
         if (!cartasSeleccionadas.isEmpty()) {
+
+
             AnalizadorMano analizador = new AnalizadorMano();
             Mano mano = analizador.analizarMano(cartasSeleccionadas);
             String nombreMano = mano.getNombre();
 
+            String valorPuntaje = String.valueOf(mano.getPuntajeBase());
+            puntajeLabel.setText(valorPuntaje);
+
+            float multiplicadorBase = mano.getMultiplicadorBase();
+            String valorMultiplicador = String.format("%.0f", multiplicadorBase);
+            multiplicadorLabel.setText(valorMultiplicador);
+
+
             // Actualizar el nombre de la mano en el label
             manoLabel.setText("Mano: " + nombreMano);
+
         } else {
             manoLabel.setText("Mano: Ninguna");
+            puntajeLabel.setText("0");
+            multiplicadorLabel.setText("0");
         }
     }
 
@@ -46,5 +63,14 @@ public class FlujoJuegoController {
 
     public Label getManoLabel() {
         return manoLabel;
+    }
+
+
+    public Label getPuntajeLabel() {
+        return puntajeLabel;
+    }
+
+    public Label getMultiplicadorLabel() {
+        return multiplicadorLabel;
     }
 }

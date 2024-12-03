@@ -79,6 +79,12 @@ public class Carta {
         return this.palo;
     }
 
+    public int getPuntaje() { return this.puntaje;}
+
+    public String getMultiplicador() {
+        return this.multiplicador;
+    }
+
     public boolean cartaTieneMismoValor(Carta carta) {
         return carta.valorEsIgual(this.valor.getValor());
     }

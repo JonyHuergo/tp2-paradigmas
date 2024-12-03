@@ -7,7 +7,7 @@ public abstract class Tarot { // Tentativo, revisar
     private String descripcion;
     private String sobre;
     private String ejemplar;
-    private int puntos;
+    protected int puntos;
     protected float multiplicador;
 
     public Tarot(String nombre, String descripcion, String sobre, String ejemplar, int puntos, float multiplicador){

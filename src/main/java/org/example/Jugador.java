@@ -12,7 +12,7 @@ public class Jugador {
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines = new ArrayList<>();
     private int puntaje;
-    private int descartes = 3;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
+    private int descartes = 3;
     private int jugadas = 5;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();

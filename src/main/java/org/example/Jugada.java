@@ -4,7 +4,7 @@ import org.example.Comodin.Comodin;
 
 import java.util.ArrayList;
 
-public class Jugada { // esta clase deberia remplazar al acumulador de puntos en jugador, se guardan las jugadas y cada una hace el calculo
+public class Jugada {
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines;
     private int puntaje;

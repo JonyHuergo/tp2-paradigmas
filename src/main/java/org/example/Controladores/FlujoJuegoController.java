@@ -9,6 +9,18 @@ import org.example.Manos.Mano;
 import java.util.ArrayList;
 
 public class FlujoJuegoController {
+
+    // for 8 rondas:
+    //     muestra tiendaScreen (elije 4 cartas)
+    //     muestra JuegoScreen
+    //     for 5 turnos:
+    //          -reparten aleatoriamente 8 cartas del mazo
+    //          -jugarlas tratando de armar una mano de poker.
+    //          -aplicar algún modificador usando un tarot.
+    //          -descartar las que quiera hasta tres veces, donde debe recibir del mazo las cartas suficientes para completar
+    //          -calcular puntaje utilizando los comodines de izquierda a derecha y se suma el puntaje y se avanza al siguiente
+
+
     private final ArrayList<Carta> cartasSeleccionadas = new ArrayList<>();
     private Label manoLabel;
     private Label puntajeLabel;

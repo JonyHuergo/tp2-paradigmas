@@ -1,6 +1,6 @@
 package org.example.Pantallas;
 
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,12 +8,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import org.example.Handlers.CartaButtonHandler;
+import org.example.Controladores.FlujoJuegoController;
 import org.example.Carta;
 
 import java.util.ArrayList;
 
 public class JuegoScreen extends VBox {
-    public JuegoScreen(ArrayList<Carta> cartasIniciales, int puntajeASuperar) {
+    public JuegoScreen(ArrayList<Carta> cartasIniciales, int puntajeASuperar, FlujoJuegoController controller) {
         super();
 
         // Crear un FlowPane para contener las cartas
@@ -30,20 +32,19 @@ public class JuegoScreen extends VBox {
             imageView.setFitWidth(90);
             imageView.setFitHeight(90);
 
-            // Agregar el ImageView al FlowPane
-            cartasPane.getChildren().add(imageView);
+            // Crear un botón que contiene la carta
+            Button cartaButton = new Button();
+            cartaButton.setGraphic(imageView);
+            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
+
+            // Delegar la lógica del botón al handler
+            cartaButton.setOnAction(new CartaButtonHandler(carta, cartaButton, controller));
+
+            // Agregar el botón al FlowPane
+            cartasPane.getChildren().add(cartaButton);
         }
-        cartasPane.setStyle("-fx-padding: 0; -fx-margin: 0;");
 
-        // Crear una carta con la imagen de la parte atrás
-        String backImagePath = "/cartas/card_back.png";
-        Image backImage = new Image(backImagePath);
-        ImageView backImageView = new ImageView(backImage);
-        backImageView.setFitWidth(90);
-        backImageView.setFitHeight(90);
-
-        // Agregar la carta con la imagen de la parte de atrás al FlowPane (a la derecha)
-        cartasPane.getChildren().add(backImageView);
+        cartasPane.setStyle("-fx-padding: 10; -fx-hgap: -20; -fx-vgap: 0; -fx-translate-y: 500;");
 
         // Crear un Panel (Panel de la izquierda)
         StackPane leftPanel = new StackPane();
@@ -60,13 +61,13 @@ public class JuegoScreen extends VBox {
         // Crear un StackPane para el contenido principal (Centro verde)
         StackPane contentPane = new StackPane();
         contentPane.setStyle("-fx-background-color: green;");  // Establecer un color de fondo verde
-
-        contentPane.getChildren().add(cartasPane);  // Agregar el FlowPane con las cartas al StackPane
+        contentPane.setMinHeight(800);
+        contentPane.getChildren().add(cartasPane);
 
         // Crear un BorderPane para organizar los elementos
         BorderPane layout = new BorderPane();
-        layout.setLeft(leftPanel);  // Colocar el panel izquierdo
-        layout.setCenter(contentPane);  // Colocar el área principal con color verde en el centro
+        layout.setLeft(leftPanel); // Colocar el panel izquierdo
+        layout.setCenter(contentPane); // Colocar el área principal con color verde en el centro
 
         // Agregar el BorderPane como único hijo de esta pantalla
         this.getChildren().add(layout);

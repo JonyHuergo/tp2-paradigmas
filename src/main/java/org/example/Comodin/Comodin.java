@@ -34,4 +34,8 @@ public abstract class Comodin {
     public abstract void usar(Jugador jugador);
 
     public abstract void usar(Jugada jugada);
+
+    public String getRuta(){
+        return nombre;
+    }
 }

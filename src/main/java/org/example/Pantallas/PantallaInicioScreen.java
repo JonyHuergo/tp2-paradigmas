@@ -2,7 +2,6 @@ package org.example.Pantallas;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.Image;
@@ -12,11 +11,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import org.example.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class PantallaInicioScreen extends VBox {
     public Button playButton;
@@ -68,10 +62,6 @@ public class PantallaInicioScreen extends VBox {
         collectionButton = createStyledButton("/Botones/Collection.png", 150, 60);
         exitButton = createStyledButton("/Botones/Exit.png", 120, 55);
 
-        // Event handlers de los botones
-//        playButton.setOnAction(e -> handlePlay());
-//        optionsButton.setOnAction(e -> handleOptions());
-//        collectionButton.setOnAction(e -> handleCollection());
 
         // Diseño para los botones
         HBox buttonsBox = new HBox(10, playButton, optionsButton, collectionButton);
@@ -79,13 +69,12 @@ public class PantallaInicioScreen extends VBox {
         HBox exitBox = new HBox(exitButton);
         exitBox.setAlignment(Pos.BOTTOM_CENTER);
 
-        // Caja gris alrededor de los botones usando un VBox con relleno y color de fondo
 
 
         BackgroundFill backgroundFill = new BackgroundFill(
-                Color.web("#2775b7"), // Color de fondo
-                new CornerRadii(30),   // Bordes redondeados (ajustar si es necesario)
-                Insets.EMPTY          // Espaciado interno
+                Color.web("#2775b7"),
+                new CornerRadii(30),
+                Insets.EMPTY
         );
 
         VBox greyBox = new VBox(10, buttonsBox);
@@ -139,7 +128,7 @@ public class PantallaInicioScreen extends VBox {
                         "-fx-border-color: transparent; " +
                         "-fx-background-color: #2775b7; " +
                         "-fx-scale-x: 1.1; -fx-scale-y: 1.1;"));
-        
+
         button.setOnMouseExited(e -> button.setStyle(
                 "-fx-background-radius: 30; " +
                         "-fx-border-radius: 30; " +

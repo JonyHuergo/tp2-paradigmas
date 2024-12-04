@@ -1,6 +1,7 @@
 package org.example.Tarot;
 
 import org.example.Carta;
+import org.example.ManoPoker;
 
 public class TarotAgregaPuntos  extends Tarot {
     private int puntos;
@@ -12,7 +13,13 @@ public class TarotAgregaPuntos  extends Tarot {
     public TarotAgregaPuntos(int puntos){
         super(puntos);
     }
+
     @Override
+    public void aplicarEfecto(ManoPoker manoPoker) {
+
+    }
+
+    //@Override
     public void aplicarEfecto(Carta carta) {
         carta.agregarPuntos(10);
     };

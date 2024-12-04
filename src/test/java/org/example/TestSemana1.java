@@ -1,7 +1,9 @@
 package org.example;
 
+import org.example.Tarot.Tarot;
 import org.example.Tarot.TarotAgregaPuntos;
 import org.example.Tarot.TarotMultiplicador;
+import org.example.Tarot.TarotSobreMano;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -83,13 +85,19 @@ public class TestSemana1 {
 
     @Test
     public void test07TarotMultiplicadorX6ModificaPuntosCorrectamente(){
-        int puntajeEsperado = 63; // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
-        Carta carta = new Carta("diamantes", 4);
-        TarotMultiplicador tarot = new TarotMultiplicador(6);
+        int puntajeEsperado = 64; // (5 por mano (carta alta) + 4 por la carta) * (1 por mano (carta alta) + 6 por tarot)
+        Carta carta1 = new Carta("diamantes", 2);
+        Carta carta2 = new Carta("diamantes", 2);
+        Carta carta3 = new Carta("trebol", 4);
+        Carta carta4 = new Carta("trebol", 4);
+        Tarot tarot = new TarotSobreMano("La Suma Sacerdotisa", "Mejora la mano doble par", "mano", "doble par", 20, 2);
         ManoPoker manoJugada = new ManoPoker();
-        
-        tarot.aplicarEfecto(carta);
-        manoJugada.agregarCarta(carta);
+        manoJugada.agregarCarta(carta1);
+        manoJugada.agregarCarta(carta2);
+        manoJugada.agregarCarta(carta3);
+        manoJugada.agregarCarta(carta4);
+        manoJugada.definirTipodeMano();
+        tarot.aplicarEfecto(manoJugada);
         float puntajeObtenido = manoJugada.evaluar();
 
         assertEquals(puntajeEsperado, puntajeObtenido, "El puntaje obtenido debería ser 63.");

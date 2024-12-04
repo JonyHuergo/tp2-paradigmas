@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.Comodin.Comodin;
+import org.example.Tarot.Tarot;
 
 import java.util.ArrayList;
 
@@ -11,6 +12,7 @@ public class Jugador {
     private int limiteCartas = 8;
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines = new ArrayList<>();
+    private ArrayList<Tarot> tarotsUsados = new ArrayList<>();
     private int puntaje;
     private int descartes = 3;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
     private int jugadas = 5;
@@ -121,7 +123,7 @@ public class Jugador {
     }
 
     public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
-        this.jugadaActual = new Jugada(manoPoker, comodines, descartes);
+        this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
         listadoJugadas.add(jugadaActual);
         jugadas = jugadas - 1;
         reiniciarMano();
@@ -140,5 +142,9 @@ public class Jugador {
     }
     public ArrayList<Carta> getCartasDisponibles(){
         return(cartasDisponibles);
+    }
+
+    public void usarTarot(Tarot tarot){
+        tarotsUsados.add(tarot);
     }
 }

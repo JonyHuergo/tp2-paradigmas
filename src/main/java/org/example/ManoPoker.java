@@ -74,4 +74,5 @@ public class ManoPoker {
         return new ManoPoker(clon);
 //       return new ManoPoker((ArrayList)cartas.clone());
     }
+
 }

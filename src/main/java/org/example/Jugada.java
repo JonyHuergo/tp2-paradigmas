@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.Comodin.Comodin;
+import org.example.Tarot.Tarot;
 
 import java.util.ArrayList;
 
@@ -10,11 +11,21 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
     private int puntaje;
     private int descartes;
     private int numeroRonda;
+    private ArrayList<Tarot> tarotsUsados;
+
 
     public Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes){
         this.manoPoker = manoPoker.clonar();
         this.comodines = comodines;
         this.descartes = descartes;
+        this.tarotsUsados = new ArrayList<>();
+    }
+
+    public Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes, ArrayList<Tarot> tarotsUsados){
+        this.manoPoker = manoPoker.clonar();
+        this.comodines = comodines;
+        this.descartes = descartes;
+        this.tarotsUsados = tarotsUsados;
     }
 
     public void actualizarPuntajeBase(int puntajeBase){
@@ -42,10 +53,12 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
     public float evaluarJugada(){
         manoPoker.definirTipodeMano();
         manoPoker.sumarValorCartas();
+        for (Tarot tarot: tarotsUsados){
+            tarot.aplicarEfecto(this.manoPoker);
+        }
         for (Comodin comodin : comodines) {
             comodin.usar(this);
         }
         return(manoPoker.hacerCalculo());
-//        puntaje += manoPoker.hacerCalculo();
     }
 }

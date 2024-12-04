@@ -133,7 +133,6 @@ public class Carta {
 
     public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
         float suma = Float.parseFloat(this.multiplicador) +multiplicadorTotal;
-//        this.multiplicador = Float.toString(suma);
         return suma;
     }
 

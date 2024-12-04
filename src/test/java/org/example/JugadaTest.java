@@ -107,25 +107,23 @@ public class JugadaTest {
 
     @Test
     public void test05unaJugadaPreviaAUnTarotCalculaCorrectamente() {
-        int puntajeEsperado = 1440;//(puntajeCartas + puntajeEscaleraColor)->(20 + 100) * (4 + 8)->(mulCartas + multDeEscaleraColor)
+        int puntajeEsperado = 960; //(puntajeCartas + puntajeEscaleraColor)->(20 + 100) * (4)->(mulCartas)
         ManoPoker manoPoker = new ManoPoker();
         TarotSobreCarta tarot = new TarotSobreCarta( "La Emperatriz","Mejora 1 carta seleccionada y la convierte en una multicarta.", "carta", "cualquiera",1, 4);
 
         Carta cartaMejorada = new Carta("diamantes", 2);
-        tarot.usarSobre(cartaMejorada);//guardo la carta en el tarot
+        tarot.usarSobre(cartaMejorada); //guardo la carta en el tarot
 
         manoPoker.agregarCarta(cartaMejorada);
-        tarot.aplicarEfecto(manoPoker);
-        //Carta aux = null;
+
         for (int i = 3; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
-            //aux = carta;
             manoPoker.agregarCarta(carta);
         }
 
         Jugada jugada = new Jugada(manoPoker, new ArrayList<Comodin>(), 3);
 
-        // Se aplica el tarot
+        // Se aplica el tarot despues de haber jugado esa mano
         tarot.aplicarEfecto(manoPoker);
 
         float puntajeObtenido = jugada.evaluarJugada();

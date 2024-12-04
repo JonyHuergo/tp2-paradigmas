@@ -99,28 +99,29 @@ public class Jugador {
 
     public void elegirCarta(int pos){
         Carta cartaElegida = cartasDisponibles.remove(pos);
-//        cartasDisponibles.remove(pos);
         this.manoPoker.agregarCarta(cartaElegida);
     }
 
-    public void evaluarMano(){              // este hay que cambiar, el puntaje depende de las jugadas
-        manoPoker.definirTipodeMano();
-        manoPoker.sumarValorCartas();
-        for (Comodin comodin : comodines) {
-            comodin.usar(this);
-        }
-        puntaje += manoPoker.hacerCalculo();
-    }
-
-    public float jugar(){
-        this.crearJugada();
-        return (this.evaluarJugadas());
-    }
-
-    public void reiniciarMano(){            // la mano que fue jugada se pierde
+    public void reiniciarMano(){
         manoPoker = new ManoPoker();
         repartirCartas();
     }
+
+//    remplazado por metodo jugar
+//    public void evaluarMano(){
+//        manoPoker.definirTipodeMano();
+//        manoPoker.sumarValorCartas();
+//        for (Comodin comodin : comodines) {
+//            comodin.usar(this);
+//        }
+//        puntaje += manoPoker.hacerCalculo();
+//    }
+
+    public float jugar(){
+        crearJugada();
+        return evaluarJugadas();
+    }
+
 
     public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
@@ -140,6 +141,7 @@ public class Jugador {
         }
         return(aux);
     }
+
     public ArrayList<Carta> getCartasDisponibles(){
         return(cartasDisponibles);
     }

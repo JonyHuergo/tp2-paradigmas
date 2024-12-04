@@ -71,8 +71,34 @@ public class JuegoScreen extends VBox {
         leftPanel.setStyle("-fx-background-color: gray;");  // Establecer un color de fondo para el panel izquierdo
         leftPanel.setMinWidth(200); // Aproximadamente un cuarto del ancho total
 
-        // Agregar el VBox con los Labels al panel izquierdo
+        // Crear un HBox para contener los botones
+        HBox botonesBox = new HBox(10); // Espaciado de 10 entre botones
+        botonesBox.setAlignment(Pos.BOTTOM_LEFT); // Alinear los botones en la parte inferior izquierda
+        botonesBox.setPadding(new Insets(10)); // Espaciado interno
+
+// Crear botón "Descartar"
+        Button descartarButton = new Button("Descartar");
+        descartarButton.setFont(Font.font("RetroFont", FontWeight.BOLD, 16));
+        descartarButton.setStyle("-fx-background-color: #FF4500; -fx-text-fill: white; -fx-padding: 5; -fx-background-radius: 5;");
+//        descartarButton.setOnAction(event -> controller.descartarCarta());
+
+// Crear botón "Jugar mano"
+        Button jugarManoButton = new Button("Jugar Mano");
+        jugarManoButton.setFont(Font.font("RetroFont", FontWeight.BOLD, 16));
+        jugarManoButton.setStyle("-fx-background-color: yellow; -fx-text-fill: black; -fx-padding: 5; -fx-background-radius: 5;");
+//        jugarManoButton.setOnAction(event -> controller.jugarMano());
+
+// Agregar botones al HBox
+        botonesBox.getChildren().addAll(descartarButton, jugarManoButton);
+
+// Agregar los botones al VBox del panel izquierdo (leftPanelContent)
+        leftPanelContent.getChildren().add(botonesBox);
+
+
         leftPanel.getChildren().add(leftPanelContent);
+
+
+
 
         // Crear un StackPane para el contenido principal (Centro verde)
         StackPane contentPane = new StackPane();

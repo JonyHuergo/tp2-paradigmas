@@ -24,19 +24,6 @@ public class PantallaJuegoController {
 
     public void iniciarPantallaJuego(Mazo mazo, int puntajeASuperar) {
 
-//            LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
-//            ArrayList<Carta> cartasLeidas = null;
-//            List<Ronda> rondas = null;
-//            try {
-//                rondas = lectorArchivosJson.leerBalatro();
-//                cartasLeidas = lectorArchivosJson.leerMazo();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                System.out.println("Error al leer los archivos JSON.");
-//            }
-
-//        Mazo mazo = new Mazo(cartasLeidas);
-
         Label manoLabel = new Label("Mano: Ninguna");
 
         Label puntajeLabel = new Label("0");

@@ -22,7 +22,7 @@ public class InicilizadorDeComodines {
         REGISTRO.put("Comodin Épico", ComodinPorManoJugada.class);
         REGISTRO.put("Bandera", ComodinPorDescarte.class);
         REGISTRO.put("Cumbre Mistica", ComodinPorDescarte.class);
-        REGISTRO.put("Descarte Dorado", ComodinPorDescarte.class);
+        REGISTRO.put("Descarte Dorado", ComodinPorManoJugada.class);
         REGISTRO.put("Eco de Montaña", ComodinPorDescarte.class);
         REGISTRO.put("Ritual del Valle", ComodinPorDescarte.class);
         REGISTRO.put("Descarte Sagrado", ComodinPorDescarte.class);
@@ -65,7 +65,7 @@ public class InicilizadorDeComodines {
             return constructor.newInstance(nombre, descripcion, subComodines);
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error al crear el comodín", e);
+            throw new RuntimeException("Error al crear el comodín" + nombre, e);
         }
     }
 }

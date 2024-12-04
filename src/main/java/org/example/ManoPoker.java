@@ -65,4 +65,14 @@ public class ManoPoker {
     public void multiplicarMultiplicadorBase(float mult) {
         tipoDeMano.multiplicarMultiplicadorBase(mult);
     }
+
+    public ManoPoker clonar(){
+        ArrayList<Carta> clon = new ArrayList<>();
+        for (Carta carta : cartas){
+            clon.add(carta.clonar());
+        }
+        return new ManoPoker(clon);
+//       return new ManoPoker((ArrayList)cartas.clone());
+    }
+
 }

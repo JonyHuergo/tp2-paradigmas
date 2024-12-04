@@ -1,6 +1,7 @@
 package org.example.Tarot;
 
 import org.example.Carta;
+import org.example.ManoPoker;
 
 //Cambia multiplicador de la carta a un x6
 public class TarotMultiplicador extends Tarot {
@@ -14,6 +15,11 @@ public class TarotMultiplicador extends Tarot {
     }
 
     @Override
+    public void aplicarEfecto(ManoPoker manoPoker) {
+
+    }
+
+    //@Override
     public void aplicarEfecto(Carta carta) {
         carta.modificarMultiplicador(this.multiplicador);
     };

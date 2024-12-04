@@ -133,11 +133,10 @@ public class Carta {
 
     public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
         float suma = Float.parseFloat(this.multiplicador) +multiplicadorTotal;
-//        this.multiplicador = Float.toString(suma);
         return suma;
     }
 
-    public Carta clone(){
+    public Carta clonar(){
         return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
     }
 

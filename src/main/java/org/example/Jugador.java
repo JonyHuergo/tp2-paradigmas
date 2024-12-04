@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.Comodin.Comodin;
+import org.example.Tarot.Tarot;
 
 import java.util.ArrayList;
 
@@ -11,8 +12,9 @@ public class Jugador {
     private int limiteCartas = 8;
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines = new ArrayList<>();
+    private ArrayList<Tarot> tarotsUsados = new ArrayList<>();
     private int puntaje;
-    private int descartes = 3;
+    private int descartes = 3;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
     private int jugadas = 5;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
@@ -23,6 +25,7 @@ public class Jugador {
     }
 
     public Jugador(Mazo mazo){
+        this.manoPoker = new ManoPoker();
         this.mazo = mazo;
         puntaje = 0;
     }
@@ -42,7 +45,7 @@ public class Jugador {
         this.mazo = mazo;
         this.cartasDisponibles = mano;
         this.manoPoker = manoPoker;
-        puntaje = 0;
+        this.puntaje = 0;
         this.comodines = comodines;
     }
 
@@ -96,26 +99,32 @@ public class Jugador {
 
     public void elegirCarta(int pos){
         Carta cartaElegida = cartasDisponibles.remove(pos);
-//        cartasDisponibles.remove(pos);
-        manoPoker.agregarCarta(cartaElegida);
+        this.manoPoker.agregarCarta(cartaElegida);
     }
 
-    public void evaluarMano(){              // este hay que cambiar, el puntaje depende de las jugadas
-        manoPoker.definirTipodeMano();
-        manoPoker.sumarValorCartas();
-        for (Comodin comodin : comodines) {
-            comodin.usar(this);
-        }
-        puntaje += manoPoker.hacerCalculo();
-    }
-
-    public void reiniciarMano(){            // la mano que fue jugada se pierde
+    public void reiniciarMano(){
         manoPoker = new ManoPoker();
         repartirCartas();
     }
 
+//    remplazado por metodo jugar
+//    public void evaluarMano(){
+//        manoPoker.definirTipodeMano();
+//        manoPoker.sumarValorCartas();
+//        for (Comodin comodin : comodines) {
+//            comodin.usar(this);
+//        }
+//        puntaje += manoPoker.hacerCalculo();
+//    }
+
+    public float jugar(){
+        crearJugada();
+        return evaluarJugadas();
+    }
+
+
     public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
-        this.jugadaActual = new Jugada(manoPoker, comodines, descartes);
+        this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
         listadoJugadas.add(jugadaActual);
         jugadas = jugadas - 1;
         reiniciarMano();
@@ -131,5 +140,13 @@ public class Jugador {
             aux += jugada.evaluarJugada();
         }
         return(aux);
+    }
+
+    public ArrayList<Carta> getCartasDisponibles(){
+        return(cartasDisponibles);
+    }
+
+    public void usarTarot(Tarot tarot){
+        tarotsUsados.add(tarot);
     }
 }

@@ -22,19 +22,7 @@ public class PantallaJuegoController {
         this.mediaPlayer = mediaPlayer;
     }
 
-    public void iniciarPantallaJuego() {
-        LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
-        ArrayList<Carta> cartasLeidas = null;
-        List<Ronda> rondas = null;
-        try {
-            rondas = lectorArchivosJson.leerBalatro();
-            cartasLeidas = lectorArchivosJson.leerMazo();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error al leer los archivos JSON.");
-        }
-
-        Mazo mazo = new Mazo(cartasLeidas);
+    public void iniciarPantallaJuego(Mazo mazo, int puntajeASuperar) {
 
         Label manoLabel = new Label("Mano: Ninguna");
 
@@ -48,7 +36,7 @@ public class PantallaJuegoController {
 
         FlujoJuegoController juegoController = new FlujoJuegoController(manoLabel, puntajeLabel, multiplicadorLabel);
 
-        JuegoScreen juegoScreen = new JuegoScreen(mazo.repartirCartas(8), rondas.get(0).getPuntajeASuperar(), juegoController);
+        JuegoScreen juegoScreen = new JuegoScreen(mazo.repartirCartas(8), puntajeASuperar, juegoController);
 
         Scene scene = new Scene(juegoScreen, 800, 600);
         stage.setTitle("BALATRO");

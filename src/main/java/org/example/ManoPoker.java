@@ -14,7 +14,8 @@ public class ManoPoker {
         this.analizadorMano = new AnalizadorMano();
 
     }
-    public ManoPoker(ArrayList<Carta> cartas){
+
+    public ManoPoker(ArrayList<Carta> cartas) {
         this.cartas = cartas;
         this.analizadorMano = new AnalizadorMano(); // fijarse el new
     }
@@ -27,30 +28,30 @@ public class ManoPoker {
         cartas.remove(carta);
     }
 
-    public float evaluar(){
+    public float evaluar() {
         tipoDeMano = calcularMano();
-        return(tipoDeMano.calcular(cartas));
+        return (tipoDeMano.calcular(cartas));
     }
 
-    public void definirTipodeMano(){
+    public void definirTipodeMano() {
         tipoDeMano = calcularMano();
     }
 
-    public void sumarValorCartas(){
+    public void sumarValorCartas() {
         tipoDeMano.sumarValorCartas(cartas);
     }
 
-    public float hacerCalculo(){
+    public float hacerCalculo() {
         return tipoDeMano.hacerCalculo();
     }
 
 
-    public boolean manoNombreEsIgual(String nombre){
-        return(tipoDeMano.nombreEsIgual(nombre));
+    public boolean manoNombreEsIgual(String nombre) {
+        return (tipoDeMano.nombreEsIgual(nombre));
     }
 
 
-    public Mano calcularMano(){
+    public Mano calcularMano() {
         return analizadorMano.analizarMano(cartas);
     }
 
@@ -64,6 +65,19 @@ public class ManoPoker {
 
     public void multiplicarMultiplicadorBase(float mult) {
         tipoDeMano.multiplicarMultiplicadorBase(mult);
+    }
+
+    public void mejorarCarta(Carta carta, int puntos, float multiplicador) {
+        for (Carta c : cartas) {
+            if (c.nombreEsIgual(carta)) {
+                if (puntos > 1){
+                    c.agregarPuntos(puntos);
+                }
+                if(multiplicador > 1){
+                    c.modificarMultiplicador(multiplicador);
+                }
+            }
+        }
     }
 
     public ManoPoker clonar(){

@@ -18,6 +18,7 @@ public class TarotSobreCarta extends Tarot {
         }
     }
     public void usarSobre(Carta carta){
+
         this.carta = carta;
     }
 

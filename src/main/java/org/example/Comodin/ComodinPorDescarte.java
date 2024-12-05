@@ -6,7 +6,7 @@ import org.example.Jugador;
 import java.util.List;
 
 public class ComodinPorDescarte extends Comodin{
-    private int puntosPorDescarte = 10;
+//    private int puntosPorDescarte = 10;
 
     public ComodinPorDescarte(String nombre, String descripcion, String activacion, int puntos, float multiplicador) {
         super(nombre, descripcion, new ActivacionDescartes(), puntos, multiplicador);
@@ -17,22 +17,26 @@ public class ComodinPorDescarte extends Comodin{
 
     @Override
     public void usar(Jugador jugador) {
-        if (activacion.revisarCondicion(jugador)){
-            int puntosASumar = jugador.calcularPuntosPorDescarte(puntosPorDescarte);
-            puntajeAdicional += puntosASumar;
-
-            jugador.actualizarPuntajeBase(puntajeAdicional);
-            jugador.multiplicarMult(multiplicador);
-        }
+//        if (activacion.revisarCondicion(jugador)){
+//            int puntosASumar = jugador.calcularPuntosPorDescarte(puntosPorDescarte);
+//            puntajeAdicional += puntosASumar;
+//
+//            jugador.actualizarPuntajeBase(puntajeAdicional);
+//            jugador.multiplicarMult(multiplicador);
+//        }
     }
 
     @Override
     public void usar(Jugada jugada) {
         if (activacion.revisarCondicion(jugada)){
-            int puntosASumar = jugada.calcularPuntosPorDescarte(puntosPorDescarte);
-            puntajeAdicional += puntosASumar;
+            if (puntajeAdicional > 1) {
+                puntajeAdicional = jugada.calcularPuntosPorDescarte(puntajeAdicional);
+                jugada.actualizarPuntajeBase(puntajeAdicional);
+            }
 
-            jugada.actualizarPuntajeBase(puntajeAdicional);
+            float multplicadorASumar;
+            multplicadorASumar = ((float) jugada.calcularMultPorDescarte((int) multiplicador));
+            multiplicador = multplicadorASumar;
             jugada.multiplicarMult(multiplicador);
         }
     }

@@ -67,7 +67,7 @@ public class TestSemana2 {
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
-        Comodin comodin = new ComodinPorDescarte(0,1, "Descarte");
+        Comodin comodin = new ComodinPorDescarte(10,1, "Descarte");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();
@@ -145,6 +145,9 @@ public class TestSemana2 {
 
     @Test
     public void test06JSONSeLeeYConvierteCorrectamente() throws IOException {
+
+        // test falla porque el patron prototype esta mal implementado, los tarots se aplican a las cartas originales y no a las copias
+
         LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
         List<Ronda> rondas = lectorArchivosJson.leerBalatro();
         for (Ronda ronda : rondas) {

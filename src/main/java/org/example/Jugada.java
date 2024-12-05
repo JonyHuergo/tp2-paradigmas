@@ -52,13 +52,17 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
 
     public float evaluarJugada(){
         manoPoker.definirTipodeMano();
-        manoPoker.sumarValorCartas();
         for (Tarot tarot: tarotsUsados){
             tarot.aplicarEfecto(this.manoPoker);
         }
+        manoPoker.sumarValorCartas();
         for (Comodin comodin : comodines) {
             comodin.usar(this);
         }
         return(manoPoker.hacerCalculo());
+    }
+
+    public float calcularMultPorDescarte(float multiplicador) {
+        return (float) Math.pow(multiplicador, descartes);
     }
 }

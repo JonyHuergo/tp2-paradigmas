@@ -9,7 +9,12 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import org.example.Controladores.PantallaJuegoController;
 import org.example.Handlers.AvanzarButtonHandler;
+import org.example.Handlers.CompraCartaHandler;
+import org.example.Handlers.CompraComodinHandler;
+import org.example.Handlers.CompraTarotHandler;
+import org.example.Jugador;
 import org.example.Mazo;
 import org.example.Tienda;
 import org.example.Carta;
@@ -24,7 +29,8 @@ public class TiendaScreen extends VBox {
     private List<Tarot> tarots;
     private Carta carta;
 
-    public TiendaScreen(Tienda tienda, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, int puntajeASuperar) {
+
+    public TiendaScreen(Tienda tienda, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, int puntajeASuperar, Jugador jugador) {
         super();
         this.setStyle("-fx-background-color: green;"); // Fondo verde
         this.setSpacing(10); // Espaciado entre elementos
@@ -61,6 +67,8 @@ public class TiendaScreen extends VBox {
             cartaButton.setGraphic(imageView);
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
 
+            cartaButton.setOnAction(new CompraComodinHandler(new PantallaJuegoController(stage, mediaPlayer), mazo, puntajeASuperar, comodin, jugador));
+
             comodinesPane.getChildren().add(cartaButton); // Añadir botón al FlowPane
         }
 
@@ -84,6 +92,8 @@ public class TiendaScreen extends VBox {
             cartaButton.setGraphic(imageView);
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
 
+            cartaButton.setOnAction(new CompraTarotHandler(tarot, jugador));
+
             tarotPane.getChildren().add(cartaButton); // Añadir botón al FlowPane
         }
 
@@ -91,11 +101,11 @@ public class TiendaScreen extends VBox {
         this.getChildren().add(tarotPane);
 
         FlowPane cartaPane = new FlowPane();
-        cartaPane.setHgap(10); // Espaciado horizontal entre botones
-        cartaPane.setVgap(10); // Espaciado vertical entre botones
+        cartaPane.setHgap(10);
+        cartaPane.setVgap(10);
         cartaPane.setAlignment(Pos.CENTER);
 
-        String imagePath = "/cartas/" + carta.getRuta() + ".png"; // Ruta de la imagen
+        String imagePath = "/cartas/" + carta.getRuta() + ".png";
 
         Image image = new Image(imagePath);
         ImageView imageView = new ImageView(image);
@@ -105,6 +115,8 @@ public class TiendaScreen extends VBox {
         Button cartaButton = new Button();
         cartaButton.setGraphic(imageView);
         cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
+
+        cartaButton.setOnAction(new CompraCartaHandler(carta, mazo));
 
         cartaPane.getChildren().add(cartaButton); // Añadir botón al FlowPane
 

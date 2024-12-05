@@ -69,6 +69,14 @@ public class Jugador {
         this.comodines = comodines;
     }
 
+    public void agregarComodin(Comodin comodin){
+        comodines.add(comodin);
+    }
+
+    public void agregarTarot(Tarot tarot){
+        tarotsUsados.add(tarot);
+    }
+
     public void setMazo(Mazo mazo){
         this.mazo = mazo;
     }

@@ -23,6 +23,5 @@ public class AvanzarButtonHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         ActionHandler.actionSound();
         pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
-
     }
 }

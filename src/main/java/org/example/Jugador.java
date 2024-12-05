@@ -93,6 +93,10 @@ public class Jugador {
         return(puntosPorDescarte*descartes);
     }
 
+    public float calcularPuntosPorDescarte(float puntosPorDescarte) {
+        return(puntosPorDescarte*descartes);
+    }
+
     public void repartirCartas() {
         mazo.repartir(cartasDisponibles,limiteCartas);
     }
@@ -129,6 +133,13 @@ public class Jugador {
         jugadas = jugadas - 1;
         reiniciarMano();
     }
+/*
+    public void crearJugada(int descartes){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
+        this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
+        listadoJugadas.add(jugadaActual);
+        jugadas = jugadas - 1;
+        reiniciarMano();
+    }*/
 
     public float evaluarJugadaActual(){
         return(jugadaActual.evaluarJugada());

@@ -62,12 +62,12 @@ public class TestSemana2 {
 
     @Test
     public void test03Comodin10PuntosPorCadaDescarte() {
-        int puntajeEsperado = 40; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 40 * 1 por los tres descartes
+        int puntajeEsperado = 60; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 10 * 6 por los tres descartes
 
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
-        Comodin comodin = new ComodinPorDescarte(0,1, "Descarte");
+        Comodin comodin = new ComodinPorDescarte(0,2, "Descarte");// mas 2 de mult por cada descarte
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();

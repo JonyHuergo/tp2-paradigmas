@@ -110,6 +110,10 @@ public class Carta {
         return carta.paloEsIgual(this.palo);
     }
 
+    public boolean nombreEsIgual(Carta carta) {return carta.nombreEsIgual(this.nombre);}
+
+    public boolean nombreEsIgual(String nombreCarta) {return Objects.equals(nombreCarta, this.nombre);}
+
     public boolean esInmediatamenteSuperior(Carta carta) {
         return carta.valorEsIgual(this.valor.getValor() + 1);
     }

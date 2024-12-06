@@ -28,7 +28,7 @@ public class JuegoScreen extends VBox {
         // Iterar sobre las cartas en el mazo del jugador
         for (Carta carta : cartasIniciales) {
             // Crear la ruta de la imagen de cada carta
-            String imagePath = "/cartas/" + carta.getRuta() + ".png";
+            String imagePath = carta.getRuta();
 
             // Crear la imagen y el ImageView correspondiente
             Image image = new Image(imagePath);

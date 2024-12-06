@@ -34,6 +34,7 @@ public abstract class Tarot extends Comprable { // Tentativo, revisar
         this.puntos = puntos;
     }
 
+    @Override
     public String getRuta() {
         String nombreFormateado = nombre.replace(" ", "_");
         return "/Tarots/Tarot_" + nombreFormateado + ".png";

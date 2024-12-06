@@ -119,6 +119,9 @@ public class Jugador {
         repartirCartas();
     }
 
+    public int getCantDeComodines(){
+        return comodines.size();
+    }
 //    remplazado por metodo jugar
 //    public void evaluarMano(){
 //        manoPoker.definirTipodeMano();

@@ -91,8 +91,9 @@ public class Carta extends Comprable{
     }
 
     // Method to get the card route (palo + valor)
+    @Override
     public String getRuta() {
-        return palo + "_" + valor.getNombre();
+        return "/cartas/" + palo + "_" + valor.getNombre() + ".png";
     }
 
     public int getValor() {

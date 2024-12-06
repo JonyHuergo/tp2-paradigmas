@@ -10,6 +10,7 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
     private final Carta carta;
     private final Mazo mazo;
 
+
     public CompraCartaHandler(Carta carta, Mazo mazo) {
         this.carta = carta;
         this.mazo = mazo;
@@ -19,5 +20,6 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         System.out.println("Card purchased: " + carta.getPalo());
         mazo.agregarCarta(carta);
+
     }
 }

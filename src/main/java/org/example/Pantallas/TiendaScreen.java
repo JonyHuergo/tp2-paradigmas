@@ -18,6 +18,7 @@ import org.example.Handlers.*;
 import org.example.Comodin.Comodin;
 import org.example.Tarot.Tarot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TiendaScreen extends VBox {
@@ -25,7 +26,8 @@ public class TiendaScreen extends VBox {
     private List<Comodin> comodines;
     private List<Tarot> tarots;
     private Carta carta;
-    private Button selectedButton;  // Para almacenar el botón seleccionado
+    private Button selectedButton = null;
+    private Comprable cartaSeleccionada = null;
 
 
     public TiendaScreen(Tienda tienda, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, int puntajeASuperar, Jugador jugador) {
@@ -44,106 +46,35 @@ public class TiendaScreen extends VBox {
         this.tarots = tienda.obtenerTarots();
         this.carta = tienda.obtenerCarta();
 
-        // FlowPane para comodines
-        FlowPane comodinesPane = new FlowPane();
-        comodinesPane.setHgap(10);
-        comodinesPane.setVgap(10);
-        comodinesPane.setAlignment(Pos.CENTER);
-        for (Comodin comodin : comodines) {
-            String imagePath = "/Comodines/" + comodin.getRuta() + ".png";
-            Image image = new Image(imagePath);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(150);
-            imageView.setFitHeight(150);
+        List<Comprable> comprables = new ArrayList<>();
+        comprables.addAll(comodines);
+        comprables.addAll(tarots);
+        comprables.add(carta);
+        cartaSeleccionada = comprables.get(0);
 
-            Button cartaButton = new Button();
-            cartaButton.setGraphic(imageView);
-            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-
-            // Acción de selección de comodín
-            cartaButton.setOnAction(event -> seleccionarCarta(stage, mediaPlayer,comodin, cartaButton, mazo, jugador, puntajeASuperar));
-            comodinesPane.getChildren().add(cartaButton);
-        }
-        this.getChildren().add(comodinesPane);
-
-        // FlowPane para tarots
-        FlowPane tarotPane = new FlowPane();
-        tarotPane.setHgap(10);
-        tarotPane.setVgap(10);
-        tarotPane.setAlignment(Pos.CENTER);
-        for (Tarot tarot : tarots) {
-            String imagePath = tarot.getRuta();
-            Image image = new Image(imagePath);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(100);
-            imageView.setFitHeight(150);
-
-            Button cartaButton = new Button();
-            cartaButton.setGraphic(imageView);
-            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-
-            // Acción de selección de tarot
-            cartaButton.setOnAction(event -> seleccionarCarta(stage, mediaPlayer, tarot, cartaButton, mazo, jugador, puntajeASuperar));
-            tarotPane.getChildren().add(cartaButton);
-        }
-        this.getChildren().add(tarotPane);
-
-        // FlowPane para carta
-        FlowPane cartaPane = new FlowPane();
-        cartaPane.setHgap(10);
-        cartaPane.setVgap(10);
-        cartaPane.setAlignment(Pos.CENTER);
-        String imagePath = "/cartas/" + carta.getRuta() + ".png";
-        Image image = new Image(imagePath);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(150);
-        imageView.setFitHeight(150);
-
-        Button cartaButton = new Button();
-        cartaButton.setGraphic(imageView);
-        cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-
-        // Acción de selección de carta
-        cartaButton.setOnAction(event -> seleccionarCarta(stage, mediaPlayer, carta, cartaButton, mazo, jugador, puntajeASuperar));
-
-        cartaPane.getChildren().add(cartaButton);
-        this.getChildren().add(cartaPane);
-
-        // Botón avanzar
-        Button avanzarButton = new Button("Avanzar");
-        avanzarButton.setStyle("-fx-font-size: 16px; -fx-background-color: yellow;");
+        FlowPane cartasPane = crearYAsignarCartas(comprables,stage, mediaPlayer, mazo, jugador, puntajeASuperar );
+        this.getChildren().add(cartasPane);
 
 
-        avanzarButton.setOnAction(new AvanzarButtonHandler(stage, mediaPlayer, mazo, puntajeASuperar));
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().add(avanzarButton);
     }
 
     // Método para seleccionar una carta (comodín, tarot o carta)
-    private void seleccionarCarta(Stage stage, MediaPlayer mediaPlayer, Comprable seleccion, Button cartaButton, Mazo mazo, Jugador jugador, int puntajeASuperar) {
-        // Si ya se ha seleccionado una carta, deselecciona la carta previamente seleccionada
-        if (selectedButton != null) {
-            // Restaura el estilo de la carta previamente seleccionada
-            selectedButton.setOpacity(1.0);  // Restaura la opacidad
-            selectedButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");  // Restaura el estilo
+    private void seleccionarCarta(Comprable seleccionada, Button cartaButton) {
+        if (selectedButton != null && selectedButton != cartaButton) {
+            selectedButton.setOpacity(1.0);
+            selectedButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
         }
-
-        // Actualiza la carta seleccionada
+        cartaSeleccionada = seleccionada;
         selectedButton = cartaButton;
-        selectedButton.setOpacity(1.0);  // Asegura que la carta seleccionada no tenga opacidad reducida
-        selectedButton.setStyle("-fx-background-color: transparent; -fx-padding: -5; -fx-effect: innershadow( gaussian , rgba(255,255,255,0.8), 20, 0.5, 0, 0);");  // Agrega un brillo
 
-        // Aplica opacidad a todas las cartas que no sean la seleccionada
+        selectedButton.setOpacity(1.0);
+        selectedButton.setStyle("-fx-background-color: transparent; -fx-padding: -5; -fx-effect: innershadow(gaussian, rgba(255,255,255,0.8), 20, 0.5, 0, 0);");
+
         deseleccionarTodasLasCartas();
 
-        EventHandler<ActionEvent> handler = seleccion.crearHandler(new PantallaJuegoController(stage, mediaPlayer),mazo, jugador, puntajeASuperar);
-        cartaButton.setOnAction(handler);
-
-
-        // Aquí podrías guardar el objeto 'seleccion' si necesitas usarlo después (comodín, tarot o carta)
-        // Por ejemplo:
-        // this.cartaSeleccionada = seleccion; // O comodín o tarot
+        // Actualiza el botón de avanzar
     }
+
 
     // Método para deseleccionar todas las cartas (opacarlas)
     private void deseleccionarTodasLasCartas() {
@@ -159,6 +90,73 @@ public class TiendaScreen extends VBox {
             }
         }
     }
+    private FlowPane crearYAsignarCartas(List<Comprable> cartas, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, int puntajeASuperar) {
+        FlowPane flowPane = new FlowPane();
+        flowPane.setHgap(10);
+        flowPane.setVgap(10);
+        flowPane.setAlignment(Pos.CENTER);
+
+        // Crear el botón de avanzar
+        Button avanzarButton = new Button("Avanzar");
+        avanzarButton.setStyle("-fx-font-size: 16px; -fx-background-color: yellow;");
+        avanzarButton.getStyleClass().add("button-avanzar"); // Agregar clase para referencia futura
+
+        // Crear un manejador para el botón de avanzar
+//        if (cartaSeleccionada != null) {
+//            EventHandler<ActionEvent> handler = cartaSeleccionada.crearHandler(
+//                    new PantallaJuegoController(stage, mediaPlayer),
+//                    mazo, jugador, puntajeASuperar);
+//            avanzarButton.setOnAction(handler);
+//        }
+
+        // Un único manejador para todos los botones
+        EventHandler<ActionEvent> seleccionHandler = event -> {
+            Button cartaButton = (Button) event.getSource();
+            // Se obtiene la carta asociada al botón desde el 'UserData'
+            Comprable seleccionada = (Comprable) cartaButton.getUserData();
+
+            // Llama al método para seleccionar la carta
+            seleccionarCarta(seleccionada, cartaButton);
+
+            // Actualiza el manejador del botón de avanzar
+            actualizarHandlerAvanzar(avanzarButton, stage, mediaPlayer, mazo, jugador, puntajeASuperar);
+        };
+
+        // Crear los botones para cada carta y asociarles el manejador
+        for (Comprable carta : cartas) {
+            String imagePath = carta.getRuta();
+            Image image = new Image(imagePath);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(150);
+            imageView.setFitHeight(150);
+
+            Button cartaButton = new Button();
+            cartaButton.setGraphic(imageView);
+            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
+            cartaButton.setUserData(carta); // Asocia la carta al botón
+
+            // Asigna el manejador de acción al botón
+            cartaButton.setOnAction(seleccionHandler);
+            flowPane.getChildren().add(cartaButton);
+        }
+
+        // Agrega el botón de avanzar al diseño
+        this.setAlignment(Pos.CENTER);
+        this.getChildren().add(avanzarButton);
+
+        return flowPane;
+    }
+
+    private void actualizarHandlerAvanzar(Button avanzarButton, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, int puntajeASuperar) {
+        if (cartaSeleccionada != null) {
+            EventHandler<ActionEvent> handler = cartaSeleccionada.crearHandler(new PantallaJuegoController(stage, mediaPlayer), mazo, jugador, puntajeASuperar);
+            avanzarButton.setOnAction(handler);
+//            avanzarButton.setOnAction(new AvanzarButtonHandler(stage, mediaPlayer, mazo, puntajeASuperar));
+
+        }
+    }
+
+
 }
 
 

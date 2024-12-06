@@ -10,6 +10,7 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
     private final Tarot tarot;
     private final Jugador jugador;
 
+
     public CompraTarotHandler(Tarot tarot, Jugador jugador) {
         this.tarot = tarot;
         this.jugador = jugador;

@@ -48,7 +48,8 @@ public abstract class Comodin extends Comprable {
 
     public abstract void usar(Jugada jugada);
 
+    @Override
     public String getRuta(){
-        return nombre;
+        return "/Comodines/" + nombre + ".png";
     }
 }

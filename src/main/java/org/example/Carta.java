@@ -1,8 +1,15 @@
+
+
 package org.example;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import org.example.Controladores.PantallaJuegoController;
+import org.example.Handlers.CompraCartaHandler;
 
 import java.util.Objects;
 
-public class Carta {
+public class Carta extends Comprable{
     private String nombre;
     private String palo;
     private ValorCarta valor;
@@ -27,6 +34,7 @@ public class Carta {
         private final int valor;
         private final String nombre;
 
+
         ValorCarta(int valor, String nombre) {
             this.valor = valor;
             this.nombre = nombre;
@@ -35,6 +43,8 @@ public class Carta {
         public int getValor() {
             return valor;
         }
+
+
 
         public String getNombre() {
             return nombre;
@@ -64,6 +74,11 @@ public class Carta {
         this.valor = buscarValorCarta(valor); // Metodo dedicado a buscar el enum
         this.multiplicador = "0";
         this.puntaje = valor;
+    }
+
+    @Override
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, int puntajeASuperar) {
+        return new CompraCartaHandler(this, mazo);
     }
 
     private ValorCarta buscarValorCarta(int valor) {

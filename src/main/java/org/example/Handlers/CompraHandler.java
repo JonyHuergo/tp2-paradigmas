@@ -19,6 +19,7 @@ public abstract class CompraHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
+        System.out.println("hola");
         executeCompra();
         avanzar();
     }
@@ -29,3 +30,5 @@ public abstract class CompraHandler implements EventHandler<ActionEvent> {
         pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
     }
 }
+
+

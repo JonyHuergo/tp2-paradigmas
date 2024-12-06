@@ -18,6 +18,7 @@ public class CompraComodinHandler extends CompraHandler {
 
     @Override
     protected void executeCompra() {
+        System.out.println("hola");
         jugador.agregarComodin(comodin);
     }
 

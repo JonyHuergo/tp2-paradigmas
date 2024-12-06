@@ -43,8 +43,9 @@ public abstract class Tarot extends Comprable { // Tentativo, revisar
 
     public abstract void aplicarEfecto(ManoPoker manoPoker);
 
+
     @Override
     public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController,Mazo mazo, Jugador jugador, int puntajeASuperar) {
-        return new CompraTarotHandler(this, jugador);
+        return new CompraTarotHandler(this, jugador,pantallaJuegoController, mazo, puntajeASuperar);
     }
 }

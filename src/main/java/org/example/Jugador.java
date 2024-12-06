@@ -122,6 +122,10 @@ public class Jugador {
     public int getCantDeComodines(){
         return comodines.size();
     }
+
+    public int getCantidadDeTarots(){
+        return tarotsUsados.size();
+    }
 //    remplazado por metodo jugar
 //    public void evaluarMano(){
 //        manoPoker.definirTipodeMano();

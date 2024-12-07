@@ -22,6 +22,7 @@ public class JuegoScreen extends VBox {
     public JuegoScreen(ArrayList<Carta> cartasIniciales, int puntajeASuperar, FlujoJuegoController controller, Mazo mazo, Jugador jugador) {
         super();
 
+        System.out.println(mazo.cantidadDeCartas());
         VBox marcador = crearMarcador(controller);
 //        marcador.setStyle("-fx-border-radius: 30");
         // Crear un FlowPane para contener las cartas

@@ -1,5 +1,6 @@
 package org.example;
 
+import javafx.scene.control.Alert;
 import org.example.Comodin.Comodin;
 import org.example.Tarot.Tarot;
 
@@ -150,7 +151,7 @@ public class Jugador {
                 descartes --;
             }
             else{
-                System.out.println("Ya usaste todos tus descartes");
+                mostrarAlerta("Ya usó todos los descartes posibles.");
             }
 
 
@@ -212,5 +213,13 @@ public class Jugador {
 
     public void usarTarot(Tarot tarot){
         tarotsUsados.add(tarot);
+    }
+
+    private void mostrarAlerta(String mensaje) {
+        Alert alerta = new Alert(Alert.AlertType.WARNING);
+        alerta.setTitle("Límite de descartes alcanzado");
+        alerta.setHeaderText(null);
+        alerta.setContentText(mensaje);
+        alerta.showAndWait();
     }
 }

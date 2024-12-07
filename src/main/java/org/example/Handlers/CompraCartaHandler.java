@@ -28,9 +28,10 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Card purchased: " + carta.getPalo());
+        ActionHandler.actionSound();
         mazo.agregarCarta(carta);
         System.out.println(mazo.cantidadDeCartas());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar, jugador);
 
     }
 }

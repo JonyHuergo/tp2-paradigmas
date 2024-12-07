@@ -1,10 +1,12 @@
 package org.example.Controladores;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import org.example.AnalizadorMano;
-import org.example.Carta;
+import javafx.stage.Stage;
+import org.example.*;
 import org.example.Manos.Mano;
+import org.example.Pantallas.JuegoScreen;
 
 import java.util.ArrayList;
 
@@ -24,21 +26,31 @@ public class FlujoJuegoController {
     private final ArrayList<Carta> cartasSeleccionadas = new ArrayList<>();
     private Label manoLabel;
     private Label puntajeLabel;
-    private Label multiplicadorLabel;// Label to update hand name
+    private Label multiplicadorLabel;
+    private final ArrayList<Carta> cartasIniciales;// Label to update hand name
+    private final Jugador jugador;
+    private final Stage stage;
+    private final int puntajeASuperar;
 
-    public FlujoJuegoController(Label manoLabel, Label puntajeLabel, Label multiplicadorLabel) {
+    public FlujoJuegoController(Stage stage, int puntajeASuperar, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador) {
         this.manoLabel = manoLabel;
         this.puntajeLabel = puntajeLabel;
         this.multiplicadorLabel = multiplicadorLabel;
+        this.cartasIniciales = cartasIniciales;
+        this.jugador = jugador;
+        this.stage = stage;
+        this.puntajeASuperar = puntajeASuperar;
     }
 
-    public void seleccionarCarta(Carta carta, Button cartaButton) {
+    public void seleccionarCarta(Carta carta, Button cartaButton, Mazo mazo) {
         if (cartasSeleccionadas.contains(carta)) {
             // Deseleccionar carta
             cartasSeleccionadas.remove(carta);
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-        } else if (cartasSeleccionadas.size() < 5) {
-            // Seleccionar carta
+//        } else if (cartasSeleccionadas.size() < 5) {
+        } else{
+
+        // Seleccionar carta
             cartasSeleccionadas.add(carta);
             cartaButton.setStyle("-fx-background-color: transparent;-fx-padding: -5;-fx-translate-y: -10");
         }
@@ -62,6 +74,7 @@ public class FlujoJuegoController {
             // Actualizar el nombre de la mano en el label
             manoLabel.setText("Mano: " + nombreMano);
 
+
         } else {
             manoLabel.setText("Mano: Ninguna");
             puntajeLabel.setText("0");
@@ -71,6 +84,17 @@ public class FlujoJuegoController {
 
     public ArrayList<Carta> getCartasSeleccionadas() {
         return cartasSeleccionadas;
+    }
+
+    public ArrayList<Carta> getCartasIniciales() {
+
+        return cartasIniciales;
+    }
+
+    public void descartarCartas(Mazo mazo){
+        jugador.descartarCartas(cartasIniciales, cartasSeleccionadas, mazo);
+        mostrarNuevaPantalla(cartasIniciales, mazo);
+
     }
 
     public Label getManoLabel() {
@@ -84,5 +108,13 @@ public class FlujoJuegoController {
 
     public Label getMultiplicadorLabel() {
         return multiplicadorLabel;
+    }
+
+    private void mostrarNuevaPantalla(ArrayList<Carta> nuevasCartas, Mazo mazo) {
+        JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, puntajeASuperar, this, mazo, jugador);
+        Scene nuevaScene = new Scene(nuevaPantalla, 800, 600); // Ajusta el tamaño según tu diseño
+
+        stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal
+        System.out.println("Hasta aca llego");
     }
 }

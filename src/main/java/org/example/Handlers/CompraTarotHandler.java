@@ -28,9 +28,10 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         System.out.println("Tarot card purchased: ");
+        ActionHandler.actionSound();
         jugador.agregarTarot(tarot);
         System.out.println(jugador.getCantidadDeTarots());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar, jugador);
 
     }
 }

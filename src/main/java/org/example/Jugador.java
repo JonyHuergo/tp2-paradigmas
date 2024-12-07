@@ -119,6 +119,44 @@ public class Jugador {
         repartirCartas();
     }
 
+    public void descartarCartas(ArrayList<Carta> cartasIniciales, ArrayList<Carta> cartasSeleccionadas, Mazo mazo){
+            if (descartes > 0){
+//                cartasIniciales.removeAll(cartasSeleccionadas);
+//                int cartasARepartir = 8 - cartasIniciales.size();
+//                ArrayList<Carta> cartasRepartidas= mazo.repartirCartas(cartasARepartir);
+//                cartasIniciales.addAll(cartasRepartidas);
+
+
+                ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasIniciales);
+
+                int cartasARepartir = cartasSeleccionadas.size();
+                ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
+
+                int indiceRepartida = 0;
+
+                // Iterar sobre la copia para encontrar y reemplazar seleccionadas
+                for (int i = 0; i < copiaCartasIniciales.size(); i++) {
+                    Carta carta = copiaCartasIniciales.get(i);
+
+                    if (cartasSeleccionadas.contains(carta)) {
+                        cartasIniciales.set(i, cartasRepartidas.get(indiceRepartida));
+                        indiceRepartida++;
+                    }
+                }
+
+                // Limpiar la lista de cartas seleccionadas
+                cartasSeleccionadas.clear();
+
+                descartes --;
+            }
+            else{
+                System.out.println("Ya usaste todos tus descartes");
+            }
+
+
+
+    }
+
     public int getCantDeComodines(){
         return comodines.size();
     }

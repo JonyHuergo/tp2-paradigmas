@@ -89,4 +89,10 @@ public class ManoPoker {
 //       return new ManoPoker((ArrayList)cartas.clone());
     }
 
+    public void descartarCartas(ArrayList<Carta> cartasDescartadas) {
+        for (Carta carta : cartasDescartadas) {
+            removerCarta(carta);
+        }
+    }
+
 }

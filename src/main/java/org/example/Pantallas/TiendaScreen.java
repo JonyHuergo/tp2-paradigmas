@@ -127,9 +127,16 @@ public class TiendaScreen extends VBox {
             String imagePath = carta.getRuta();
             Image image = new Image(imagePath);
             ImageView imageView = new ImageView(image);
-            imageView.setFitWidth(150);
-            imageView.setFitHeight(150);
 
+
+            if (cartas.get(2) == carta || cartas.get(3) == carta){
+                imageView.setFitWidth(120);
+                imageView.setFitHeight(150);
+            }
+            else {
+                imageView.setFitWidth(150);
+                imageView.setFitHeight(150);
+            }
             Button cartaButton = new Button();
             cartaButton.setGraphic(imageView);
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");

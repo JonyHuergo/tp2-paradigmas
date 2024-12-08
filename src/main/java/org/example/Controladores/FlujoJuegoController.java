@@ -43,30 +43,39 @@ public class FlujoJuegoController {
     }
 
     public void seleccionarCarta(Carta carta, Button cartaButton, Mazo mazo) {
-        if (cartasSeleccionadas.contains(carta)) {
-            // Deseleccionar carta
-            cartasSeleccionadas.remove(carta);
-            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-//        } else if (cartasSeleccionadas.size() < 5) {
-        } else{
-
-        // Seleccionar carta
-            cartasSeleccionadas.add(carta);
+//        if (cartasSeleccionadas.contains(carta)) {
+//            // Deseleccionar carta
+//            cartasSeleccionadas.remove(carta);
+//            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
+////        } else if (cartasSeleccionadas.size() < 5) {
+//        } else{
+//
+//        // Seleccionar carta
+//            cartasSeleccionadas.add(carta);
+//            cartaButton.setStyle("-fx-background-color: transparent;-fx-padding: -5;-fx-translate-y: -10");
+//        }
+        if (!jugador.tieneCarta(carta) && !jugador.superaLimite()){
+            jugador.agregarCarta(carta);
             cartaButton.setStyle("-fx-background-color: transparent;-fx-padding: -5;-fx-translate-y: -10");
+
+        } else {
+            jugador.removerCarta(carta);
+            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
         }
 
         // Si hay cartas seleccionadas, analizar la mano
-        if (!cartasSeleccionadas.isEmpty()) {
+        if (jugador.getCantidadDeCartas()!=0) {
 
 
-            AnalizadorMano analizador = new AnalizadorMano();
-            Mano mano = analizador.analizarMano(cartasSeleccionadas);
-            String nombreMano = mano.getNombre();
+//            AnalizadorMano analizador = new AnalizadorMano();
+//            Mano mano = analizador.analizarMano(cartasSeleccionadas);
+//            String nombreMano = mano.getNombre();
+            String nombreMano = jugador.definirTipoDeMano();
 
-            String valorPuntaje = String.valueOf(mano.getPuntajeBase());
+            String valorPuntaje = String.valueOf(jugador.getPuntajeBase());
             puntajeLabel.setText(valorPuntaje);
 
-            float multiplicadorBase = mano.getMultiplicadorBase();
+            float multiplicadorBase = jugador.getMultiplicadorBase();
             String valorMultiplicador = String.format("%.0f", multiplicadorBase);
             multiplicadorLabel.setText(valorMultiplicador);
 
@@ -92,9 +101,16 @@ public class FlujoJuegoController {
     }
 
     public void descartarCartas(Mazo mazo){
-        jugador.descartarCartas(cartasIniciales, cartasSeleccionadas, mazo);
-        mostrarNuevaPantalla(cartasIniciales, mazo);
+//        jugador.descartarCartas(cartasIniciales, cartasSeleccionadas, mazo);
+//        mostrarNuevaPantalla(cartasIniciales, mazo);
+        jugador.reiniciarMano();
+        mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
+    }
 
+    public void jugarMano() {
+        jugador.jugar();
+        Mazo mazo = jugador.getMazo();
+        mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
     }
 
     public Label getManoLabel() {
@@ -117,4 +133,5 @@ public class FlujoJuegoController {
         stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal
         System.out.println("Hasta aca llego");
     }
+
 }

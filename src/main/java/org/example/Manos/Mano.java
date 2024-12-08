@@ -29,6 +29,10 @@ public abstract class Mano {
         this.puntajeBase += puntaje;
     }
 
+    public int getPuntajeBase(){
+        return puntajeBase;
+    }
+
     public float getMultiplicadorBase() {
         return multiplicadorBase;
     }
@@ -58,10 +62,6 @@ public abstract class Mano {
 
     public float hacerCalculo(){
         return (puntajeBase * multiplicadorBase);
-    }
-
-    public int getPuntajeBase(){
-        return puntajeBase;
     }
 
 }

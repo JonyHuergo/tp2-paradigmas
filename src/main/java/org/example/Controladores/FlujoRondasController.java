@@ -34,7 +34,7 @@ public class FlujoRondasController {
             }
             Mazo mazo = new Mazo(cartasLeidas);
             Juego juego = new Juego(mazo);
-            Jugador jugador = new Jugador();
+            Jugador jugador = juego.getJugador();
 
 
             Ronda ronda = rondas.get(0);

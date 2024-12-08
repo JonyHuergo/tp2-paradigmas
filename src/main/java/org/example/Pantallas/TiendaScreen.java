@@ -115,7 +115,7 @@ public class TiendaScreen extends VBox {
             // Se obtiene la carta asociada al botón desde el 'UserData'
             Comprable seleccionada = (Comprable) cartaButton.getUserData();
 
-            // Llama al método para seleccionar la carta
+            // Llama al metodo para seleccionar la carta
             seleccionarCarta(seleccionada, cartaButton);
 
             // Actualiza el manejador del botón de avanzar

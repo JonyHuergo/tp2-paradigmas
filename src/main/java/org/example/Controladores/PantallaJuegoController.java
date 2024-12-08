@@ -34,7 +34,8 @@ public class PantallaJuegoController {
 
         manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
-        ArrayList<Carta> cartasIniciales = mazo.repartirCartas(8);
+        jugador.repartirCartas();
+        ArrayList<Carta> cartasIniciales = jugador.getCartasDisponibles();
 
         FlujoJuegoController juegoController = new FlujoJuegoController(stage, puntajeASuperar,manoLabel, puntajeLabel, multiplicadorLabel, cartasIniciales, mazo, jugador);
 

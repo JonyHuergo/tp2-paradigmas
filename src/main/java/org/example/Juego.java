@@ -110,5 +110,7 @@ public class Juego {
         jugador.crearJugada();
     }
 
-
+    public Jugador getJugador(){
+        return this.jugador;
+    }
 }

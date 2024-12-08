@@ -165,15 +165,19 @@ public class Jugador {
     public int getCantidadDeTarots(){
         return tarotsUsados.size();
     }
-//    remplazado por metodo jugar
-//    public void evaluarMano(){
-//        manoPoker.definirTipodeMano();
-//        manoPoker.sumarValorCartas();
-//        for (Comodin comodin : comodines) {
-//            comodin.usar(this);
-//        }
-//        puntaje += manoPoker.hacerCalculo();
-//    }
+
+    public String definirTipoDeMano(){
+        manoPoker.definirTipodeMano();
+        return manoPoker.getNombreMano();
+    }
+
+    public int getPuntajeBase(){
+        return manoPoker.getPuntajeBase();
+    }
+
+    public float getMultiplicadorBase(){
+        return manoPoker.getMultiplicadorBase();
+    }
 
     public float jugar(){
         crearJugada();
@@ -221,5 +225,23 @@ public class Jugador {
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
+    }
+
+    public boolean tieneCarta(Carta carta){
+        return manoPoker.tieneCarta(carta);
+    }
+
+    public int getCantidadDeCartas(){
+        return manoPoker.getCantidadDeCartas();
+    }
+
+    public void agregarCarta(Carta carta){
+        manoPoker.agregarCarta(carta);
+    }
+
+    public void removerCarta(Carta carta) { manoPoker.removerCarta(carta); }
+
+    public Boolean superaLimite(){
+        return (getCantidadDeCartas() >= 5);
     }
 }

@@ -37,20 +37,6 @@ public class ManoPoker {
         tipoDeMano = calcularMano();
     }
 
-    public String getNombreMano(){
-        return tipoDeMano.getNombre();
-    }
-
-    public int getPuntajeBase(){
-        return tipoDeMano.getPuntajeBase();
-    }
-
-    public float getMultiplicadorBase(){
-        return tipoDeMano.getMultiplicadorBase();
-    }
-
-
-
     public void sumarValorCartas() {
         tipoDeMano.sumarValorCartas(cartas);
     }
@@ -103,17 +89,4 @@ public class ManoPoker {
 //       return new ManoPoker((ArrayList)cartas.clone());
     }
 
-    public void descartarCartas(ArrayList<Carta> cartasDescartadas) {
-        for (Carta carta : cartasDescartadas) {
-            removerCarta(carta);
-        }
-    }
-
-    public boolean tieneCarta(Carta carta) {
-        return cartas.contains(carta);
-    }
-
-    public int getCantidadDeCartas(){
-        return cartas.size();
-    }
 }

@@ -71,8 +71,4 @@ public class Mazo {
             cartasDisponibles.add(cartas.remove(pos));
         }
     }
-
-    public void agregarCarta(Carta carta) {
-        cartas.add(carta);
-    }
 }

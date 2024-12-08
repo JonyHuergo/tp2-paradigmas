@@ -34,14 +34,11 @@ public class FlujoRondasController {
             }
             Mazo mazo = new Mazo(cartasLeidas);
             Juego juego = new Juego(mazo);
-            Jugador jugador = juego.getJugador();
 
 
             Ronda ronda = rondas.get(0);
-            int descartes = ronda.getDescartes();
-            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda.getPuntajeASuperar(), jugador);
+            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda.getPuntajeASuperar());
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
-
 
 //            for (int i = rondas.size() - 1; i >= 0; i--) {
 //

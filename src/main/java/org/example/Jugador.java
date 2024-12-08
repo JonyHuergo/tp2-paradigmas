@@ -244,4 +244,8 @@ public class Jugador {
     public Boolean superaLimite(){
         return (getCantidadDeCartas() >= 5);
     }
+
+    public ArrayList<Comodin> getComodines(){
+        return comodines;
+    }
 }

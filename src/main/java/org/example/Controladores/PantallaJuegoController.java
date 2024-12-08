@@ -39,7 +39,7 @@ public class PantallaJuegoController {
 
         FlujoJuegoController juegoController = new FlujoJuegoController(stage, puntajeASuperar,manoLabel, puntajeLabel, multiplicadorLabel, cartasIniciales, mazo, jugador);
 
-        JuegoScreen juegoScreen = new JuegoScreen(cartasIniciales, puntajeASuperar, juegoController, mazo ,jugador);
+        JuegoScreen juegoScreen = new JuegoScreen(cartasIniciales, puntajeASuperar, juegoController, mazo, jugador, jugador.getComodines());
 
         Scene scene = new Scene(juegoScreen, 800, 600);
         stage.setTitle("BALATRO");

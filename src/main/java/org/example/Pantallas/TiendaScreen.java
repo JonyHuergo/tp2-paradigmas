@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -91,6 +92,10 @@ public class TiendaScreen extends VBox {
         }
     }
     private FlowPane crearYAsignarCartas(List<Comprable> cartas, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, int puntajeASuperar) {
+        Label descripcionLabel = new Label("Descripción de la carta seleccionada");
+        descripcionLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10px;");
+        this.getChildren().add(descripcionLabel);
+
         FlowPane flowPane = new FlowPane();
         flowPane.setHgap(10);
         flowPane.setVgap(10);
@@ -115,7 +120,9 @@ public class TiendaScreen extends VBox {
             // Se obtiene la carta asociada al botón desde el 'UserData'
             Comprable seleccionada = (Comprable) cartaButton.getUserData();
 
-            // Llama al metodo para seleccionar la carta
+            descripcionLabel.setText(seleccionada.getDescripcion());
+
+            // Llama al método para seleccionar la carta
             seleccionarCarta(seleccionada, cartaButton);
 
             // Actualiza el manejador del botón de avanzar
@@ -142,10 +149,12 @@ public class TiendaScreen extends VBox {
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
             cartaButton.setUserData(carta); // Asocia la carta al botón
 
+
             // Asigna el manejador de acción al botón
             cartaButton.setOnAction(seleccionHandler);
             flowPane.getChildren().add(cartaButton);
         }
+
 
         // Agrega el botón de avanzar al diseño
         this.setAlignment(Pos.CENTER);

@@ -1,7 +1,9 @@
 package org.example;
 
 import org.example.Comodin.*;
-import org.example.Tarot.*;
+import org.example.Tarot.TarotAgregaPuntos;
+import org.example.Tarot.TarotMultiplicador;
+import org.example.Tarot.TarotSobreCarta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

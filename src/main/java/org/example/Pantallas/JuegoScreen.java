@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import org.example.Comodin.Comodin;
 import org.example.Handlers.CartaButtonHandler;
 import org.example.Controladores.FlujoJuegoController;
 import org.example.Carta;
@@ -19,22 +20,15 @@ import org.example.Mazo;
 import java.util.ArrayList;
 
 public class JuegoScreen extends VBox {
-    public JuegoScreen(ArrayList<Carta> cartasIniciales, int puntajeASuperar, FlujoJuegoController controller, Mazo mazo, Jugador jugador) {
+    public JuegoScreen(ArrayList<Carta> cartasIniciales, int puntajeASuperar, FlujoJuegoController controller, Mazo mazo, Jugador jugador, ArrayList<Comodin> comodines) {
         super();
 
-        System.out.println(mazo.cantidadDeCartas());
+        FlowPane comodinesPane = mostrarComodines(comodines);
+
         VBox marcador = crearMarcador(controller);
 //        marcador.setStyle("-fx-border-radius: 30");
         // Crear un FlowPane para contener las cartas
-
-        for (Carta carta : cartasIniciales) {
-            System.out.println(carta.getPalo());
-        }
-
         FlowPane cartasPane = mostrarCartas(cartasIniciales, controller, mazo);
-
-
-
 
         // Crear un Label para mostrar el puntajeASuperar
         Label puntajeLabel = new Label("Puntaje a superar: " + puntajeASuperar);
@@ -78,24 +72,22 @@ public class JuegoScreen extends VBox {
         jugarManoButton.setStyle("-fx-background-color: yellow; -fx-text-fill: black; -fx-padding: 5; -fx-background-radius: 5;");
 //        jugarManoButton.setOnAction(event -> controller.jugarMano());
 
-// Agregar botones al HBox
+        // Agregar botones al HBox
         botonesBox.getChildren().addAll(descartarButton, jugarManoButton);
 
 
 
-// Agregar los botones al VBox del panel izquierdo (leftPanelContent)
+        // Agregar los botones al VBox del panel izquierdo (leftPanelContent)
         leftPanelContent.getChildren().add(botonesBox);
 
 
         leftPanel.getChildren().add(leftPanelContent);
 
-
-
-
         // Crear un StackPane para el contenido principal (Centro verde)
         StackPane contentPane = new StackPane();
         contentPane.setStyle("-fx-background-color: green;");  // Establecer un color de fondo verde
         contentPane.setMinHeight(800);
+        contentPane.getChildren().add(comodinesPane);
         contentPane.getChildren().add(cartasPane);
 
         // Crear un BorderPane para organizar los elementos
@@ -106,10 +98,33 @@ public class JuegoScreen extends VBox {
         this.getChildren().add(layout);
     }
 
+    private FlowPane mostrarComodines(ArrayList<Comodin> comodines) {
+        FlowPane comodinesPane = new FlowPane();
+
+        for (Comodin comodin : comodines) {
+            // Crear la ruta de la imagen de cada carta
+            String imagePath = comodin.getRuta();
+
+            // Crear la imagen y el ImageView correspondiente
+            Image image = new Image(imagePath);
+            ImageView imageView = new ImageView(image);
+            imageView.setFitWidth(90);
+            imageView.setFitHeight(90);
+
+            // Agregar el ImageView al FlowPane
+            comodinesPane.getChildren().add(imageView);
+        }
+
+        // Ajustar el estilo del FlowPane
+        comodinesPane.setStyle("-fx-padding: 10; -fx-hgap: -20; -fx-vgap: 0;");
+
+        return comodinesPane;
+    }
+
     private VBox crearMarcador( FlujoJuegoController controller) {
         // Contenedor principal
         VBox marcador = new VBox();
-// Espaciado entre las cajas
+        // Espaciado entre las cajas
         marcador.setStyle("-fx-background-color: #202020;");
         marcador.setAlignment(Pos.TOP_CENTER);
         marcador.setStyle(
@@ -197,11 +212,7 @@ public class JuegoScreen extends VBox {
     public FlowPane mostrarCartas(ArrayList<Carta> cartasIniciales,  FlujoJuegoController controller,Mazo mazo){
         // Iterar sobre las cartas en el mazo del jugador
         FlowPane cartasPane = new FlowPane();
-        System.out.println("Cantidad inicial:" + cartasIniciales.size());
 
-        for (Carta cartasInicial : cartasIniciales){
-            System.out.println(cartasInicial.getRuta());
-        }
         for (Carta carta : cartasIniciales) {
             // Crear la ruta de la imagen de cada carta
             String imagePath = carta.getRuta();
@@ -222,16 +233,12 @@ public class JuegoScreen extends VBox {
             cartaButton.setOnAction(new CartaButtonHandler(carta, cartaButton, controller, mazo));
 
             // Agregar el botón al FlowPane
-
             cartasPane.getChildren().add(cartaButton);
             cartasPane.setStyle("-fx-padding: 10; -fx-hgap: -20; -fx-vgap: 0; -fx-translate-y: 500;");
 
 
         }
-        System.out.println("Cantidad final:" + cartasIniciales.size());
-        for (Carta cartasInicial : cartasIniciales){
-            System.out.println(cartasInicial.getRuta());
-        }
+
         return cartasPane;
     }
 

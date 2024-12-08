@@ -111,7 +111,7 @@ public class FlujoJuegoController {
     }
 
     private void mostrarNuevaPantalla(ArrayList<Carta> nuevasCartas, Mazo mazo) {
-        JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, puntajeASuperar, this, mazo, jugador);
+        JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, puntajeASuperar, this, mazo, jugador, jugador.getComodines());
         Scene nuevaScene = new Scene(nuevaPantalla, 800, 600); // Ajusta el tamaño según tu diseño
 
         stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal

@@ -222,4 +222,8 @@ public class Jugador {
         alerta.setContentText(mensaje);
         alerta.showAndWait();
     }
+
+    public ArrayList<Comodin> getComodines(){
+        return comodines;
+    }
 }

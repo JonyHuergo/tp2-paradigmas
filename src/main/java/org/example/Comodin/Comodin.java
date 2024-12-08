@@ -52,4 +52,9 @@ public abstract class Comodin extends Comprable {
     public String getRuta(){
         return "/Comodines/" + nombre + ".png";
     }
+
+    @Override
+    public String getDescripcion(){
+        return descripcion;
+    }
 }

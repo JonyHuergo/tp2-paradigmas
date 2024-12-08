@@ -159,5 +159,10 @@ public class Carta extends Comprable{
     public Carta clonar(){
         return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
     }
+    @Override
+    public String getDescripcion(){
+        return nombre;
+    }
+
 
 }

@@ -116,4 +116,8 @@ public class ManoPoker {
     public int getCantidadDeCartas(){
         return cartas.size();
     }
+
+    public ArrayList<Carta> getCartas(){
+        return cartas;
+    }
 }

@@ -103,7 +103,7 @@ public class FlujoJuegoController {
     public void descartarCartas(Mazo mazo){
 //        jugador.descartarCartas(cartasIniciales, cartasSeleccionadas, mazo);
 //        mostrarNuevaPantalla(cartasIniciales, mazo);
-        jugador.reiniciarMano();
+        jugador.descartarCartas();
         mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
     }
 

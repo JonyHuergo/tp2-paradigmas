@@ -1,8 +1,15 @@
+
+
 package org.example;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import org.example.Controladores.PantallaJuegoController;
+import org.example.Handlers.CompraCartaHandler;
 
 import java.util.Objects;
 
-public class Carta {
+public class Carta extends Comprable{
     private String nombre;
     private String palo;
     private ValorCarta valor;
@@ -27,6 +34,7 @@ public class Carta {
         private final int valor;
         private final String nombre;
 
+
         ValorCarta(int valor, String nombre) {
             this.valor = valor;
             this.nombre = nombre;
@@ -35,6 +43,8 @@ public class Carta {
         public int getValor() {
             return valor;
         }
+
+
 
         public String getNombre() {
             return nombre;
@@ -66,6 +76,11 @@ public class Carta {
         this.puntaje = valor;
     }
 
+    @Override
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, int puntajeASuperar) {
+        return new CompraCartaHandler(this, mazo, pantallaJuegoController, puntajeASuperar, jugador);
+    }
+
     private ValorCarta buscarValorCarta(int valor) {
         for (ValorCarta v : ValorCarta.values()) {
             if (v.getValor() == valor) {
@@ -76,8 +91,9 @@ public class Carta {
     }
 
     // Method to get the card route (palo + valor)
+    @Override
     public String getRuta() {
-        return palo + "_" + valor.getNombre();
+        return "/cartas/" + palo + "_" + valor.getNombre() + ".png";
     }
 
     public int getValor() {
@@ -136,12 +152,17 @@ public class Carta {
     }
 
     public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
-        float suma = Float.parseFloat(this.multiplicador) +multiplicadorTotal;
+        float suma = Float.parseFloat(this.multiplicador) + multiplicadorTotal;
         return suma;
     }
 
     public Carta clonar(){
         return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
     }
+    @Override
+    public String getDescripcion(){
+        return nombre;
+    }
+
 
 }

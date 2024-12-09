@@ -37,6 +37,20 @@ public class ManoPoker {
         tipoDeMano = calcularMano();
     }
 
+    public String getNombreMano(){
+        return tipoDeMano.getNombre();
+    }
+
+    public int getPuntajeBase(){
+        return tipoDeMano.getPuntajeBase();
+    }
+
+    public float getMultiplicadorBase(){
+        return tipoDeMano.getMultiplicadorBase();
+    }
+
+
+
     public void sumarValorCartas() {
         tipoDeMano.sumarValorCartas(cartas);
     }
@@ -106,5 +120,4 @@ public class ManoPoker {
     public ArrayList<Carta> getCartas(){
         return cartas;
     }
-
 }

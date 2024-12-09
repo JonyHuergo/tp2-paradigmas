@@ -109,4 +109,8 @@ public class Juego {
     public void hacerJugada(){
         jugador.crearJugada();
     }
+
+    public Jugador getJugador(){
+        return this.jugador;
+    }
 }

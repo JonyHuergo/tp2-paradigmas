@@ -46,4 +46,9 @@ public class Ronda {
 
 
     }
+
+
+    public int getCantidadDeManos(){
+        return manos;
+    }
 }

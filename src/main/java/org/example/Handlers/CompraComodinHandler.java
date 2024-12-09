@@ -43,6 +43,6 @@ public class CompraComodinHandler implements EventHandler<ActionEvent> {
         jugador.agregarComodin(comodin);
         ActionHandler.actionSound();
         System.out.println(jugador.getCantDeComodines());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
+//        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
     }
 }

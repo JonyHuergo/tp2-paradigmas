@@ -32,7 +32,7 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
         ActionHandler.actionSound();
         jugador.agregarTarot(tarot);
         System.out.println(jugador.getCantidadDeTarots());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
+//        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
 
     }
 }

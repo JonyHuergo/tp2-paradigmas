@@ -32,7 +32,7 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
         ActionHandler.actionSound();
         mazo.agregarCarta(carta);
         System.out.println(mazo.cantidadDeCartas());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
+//        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
 
     }
 }

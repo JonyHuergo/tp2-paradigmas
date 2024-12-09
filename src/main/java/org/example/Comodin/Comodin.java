@@ -36,9 +36,9 @@ public abstract class Comodin extends Comprable {
     }
 
     @Override
-    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, Ronda ronda) {
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
         System.out.println("Handler for comodin selected");
-        return new CompraComodinHandler(pantallaJuegoController, mazo, ronda,this, jugador);
+        return new CompraComodinHandler(pantallaJuegoController, mazo, rondas, numeroRonda,this, jugador);
     }
 
     public abstract void usar(Jugador jugador);

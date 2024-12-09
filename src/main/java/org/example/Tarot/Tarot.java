@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import org.example.Controladores.PantallaJuegoController;
 import org.example.Handlers.CompraTarotHandler;
 
+import java.util.List;
+
 public abstract class Tarot extends Comprable { // Tentativo, revisar
     protected String nombre;
     protected String descripcion;
@@ -40,8 +42,8 @@ public abstract class Tarot extends Comprable { // Tentativo, revisar
 
 
     @Override
-    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController,Mazo mazo, Jugador jugador, Ronda ronda) {
-        return new CompraTarotHandler(this, jugador,pantallaJuegoController, mazo, ronda);
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
+        return new CompraTarotHandler(this, jugador,pantallaJuegoController, mazo, rondas, numeroRonda);
     }
 
     @Override

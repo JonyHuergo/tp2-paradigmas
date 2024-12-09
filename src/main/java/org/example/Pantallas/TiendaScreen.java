@@ -31,7 +31,7 @@ public class TiendaScreen extends VBox {
     private Comprable cartaSeleccionada = null;
 
 
-    public TiendaScreen(Tienda tienda, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Ronda ronda, Jugador jugador) {
+    public TiendaScreen(Tienda tienda, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, List<Ronda> rondas, int numeroRonda, Jugador jugador) {
         super();
         this.setStyle("-fx-background-color: green;");
         this.setSpacing(10);
@@ -53,7 +53,7 @@ public class TiendaScreen extends VBox {
         comprables.add(carta);
         cartaSeleccionada = comprables.get(0);
 
-        FlowPane cartasPane = crearYAsignarCartas(comprables,stage, mediaPlayer, mazo, jugador, ronda );
+        FlowPane cartasPane = crearYAsignarCartas(comprables,stage, mediaPlayer, mazo, jugador, rondas, numeroRonda );
         this.getChildren().add(cartasPane);
 
 
@@ -91,7 +91,7 @@ public class TiendaScreen extends VBox {
             }
         }
     }
-    private FlowPane crearYAsignarCartas(List<Comprable> cartas, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, Ronda ronda) {
+    private FlowPane crearYAsignarCartas(List<Comprable> cartas, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
         Label descripcionLabel = new Label("Descripción de la carta seleccionada");
         descripcionLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10px;");
         this.getChildren().add(descripcionLabel);
@@ -126,7 +126,7 @@ public class TiendaScreen extends VBox {
             seleccionarCarta(seleccionada, cartaButton);
 
             // Actualiza el manejador del botón de avanzar
-            actualizarHandlerAvanzar(avanzarButton, stage, mediaPlayer, mazo, jugador, ronda);
+            actualizarHandlerAvanzar(avanzarButton, stage, mediaPlayer, mazo, jugador, rondas, numeroRonda);
         };
 
         // Crear los botones para cada carta y asociarles el manejador
@@ -163,9 +163,9 @@ public class TiendaScreen extends VBox {
         return flowPane;
     }
 
-    private void actualizarHandlerAvanzar(Button avanzarButton, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, Ronda ronda) {
+    private void actualizarHandlerAvanzar(Button avanzarButton, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
         if (cartaSeleccionada != null) {
-            EventHandler<ActionEvent> handler = cartaSeleccionada.crearHandler(new PantallaJuegoController(stage, mediaPlayer), mazo, jugador, ronda);
+            EventHandler<ActionEvent> handler = cartaSeleccionada.crearHandler(new PantallaJuegoController(stage, mediaPlayer), mazo, jugador, rondas, numeroRonda);
             avanzarButton.setOnAction(handler);
 //            avanzarButton.setOnAction(new AvanzarButtonHandler(stage, mediaPlayer, mazo, puntajeASuperar));
 

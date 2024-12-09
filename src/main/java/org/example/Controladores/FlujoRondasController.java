@@ -49,7 +49,9 @@ public class FlujoRondasController {
                 int manos= ronda.getCantidadDeManos();
                 jugador.setCantidadDeManos(manos);
 
-                PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda, jugador);
+                int numeroRonda = 0;
+
+                PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda, jugador);
                 pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
 
 

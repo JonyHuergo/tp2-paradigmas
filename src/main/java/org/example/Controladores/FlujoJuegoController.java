@@ -10,6 +10,7 @@ import org.example.Manos.Mano;
 import org.example.Pantallas.JuegoScreen;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FlujoJuegoController {
 
@@ -31,18 +32,20 @@ public class FlujoJuegoController {
     private final ArrayList<Carta> cartasIniciales;// Label to update hand name
     private final Jugador jugador;
     private final Stage stage;
-    private final Ronda ronda;
+    private final List<Ronda> rondas;
+    private int numeroRonda;
     private int manosJugadas;
     private MediaPlayer mediaPlayer;
 
-    public FlujoJuegoController(Stage stage, Ronda ronda, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador, MediaPlayer mediaPlayer) {
+    public FlujoJuegoController(Stage stage, List<Ronda> rondas, int numeroRonda, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador, MediaPlayer mediaPlayer) {
         this.manoLabel = manoLabel;
         this.puntajeLabel = puntajeLabel;
         this.multiplicadorLabel = multiplicadorLabel;
         this.cartasIniciales = cartasIniciales;
         this.jugador = jugador;
         this.stage = stage;
-        this.ronda = ronda;
+        this.rondas = rondas;
+        this.numeroRonda = numeroRonda;
         this.manosJugadas = 0;
         this.mediaPlayer = mediaPlayer;
     }
@@ -113,12 +116,14 @@ public class FlujoJuegoController {
     }
 
     public void jugarMano() {
+        Ronda ronda = rondas.get(numeroRonda + 1);
         jugador.jugar();
         Mazo mazo = jugador.getMazo();
         mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
 
+
         if (jugador.getCantidadJugadas() == 0) {
-            PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda, jugador);
+            PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda + 1, jugador);
             nuevaPantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
         }
     }
@@ -138,7 +143,7 @@ public class FlujoJuegoController {
 
     private void mostrarNuevaPantalla(ArrayList<Carta> nuevasCartas, Mazo mazo) {
 
-
+        Ronda ronda = rondas.get(numeroRonda);
 
         if (manosJugadas != ronda.getCantidadDeManos()){
             JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, ronda, this, mazo, jugador, jugador.getComodines());

@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import org.example.Controladores.PantallaJuegoController;
 import org.example.Handlers.CompraCartaHandler;
 
+import java.util.List;
 import java.util.Objects;
 
 public class Carta extends Comprable{
@@ -77,8 +78,8 @@ public class Carta extends Comprable{
     }
 
     @Override
-    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, Ronda ronda) {
-        return new CompraCartaHandler(this, mazo, pantallaJuegoController, ronda, jugador);
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
+        return new CompraCartaHandler(this, mazo, pantallaJuegoController, rondas, numeroRonda, jugador);
     }
 
     private ValorCarta buscarValorCarta(int valor) {

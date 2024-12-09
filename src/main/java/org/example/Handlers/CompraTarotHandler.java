@@ -8,21 +8,25 @@ import org.example.Ronda;
 import org.example.Tarot.Tarot;
 import org.example.Jugador;
 
+import java.util.List;
+
 public class CompraTarotHandler implements EventHandler<ActionEvent> {
 
     private final Tarot tarot;
     private final Jugador jugador;
     private PantallaJuegoController pantallaJuegoController;
     private Mazo mazo;
-    private Ronda ronda;
+    private List<Ronda> rondas;
+    private int numeroRonda;
 
 
-    public CompraTarotHandler(Tarot tarot, Jugador jugador, PantallaJuegoController pantallaJuegoController, Mazo mazo, Ronda ronda) {
+    public CompraTarotHandler(Tarot tarot, Jugador jugador, PantallaJuegoController pantallaJuegoController, Mazo mazo, List<Ronda> rondas, int numeroRonda) {
         this.tarot = tarot;
         this.jugador = jugador;
         this.pantallaJuegoController = pantallaJuegoController;
         this.mazo = mazo;
-        this.ronda = ronda;
+        this.rondas = rondas;
+        this.numeroRonda = numeroRonda;
 
     }
 
@@ -32,7 +36,7 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
         ActionHandler.actionSound();
         jugador.agregarTarot(tarot);
         System.out.println(jugador.getCantidadDeTarots());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, rondas, numeroRonda, jugador);
 
     }
 }

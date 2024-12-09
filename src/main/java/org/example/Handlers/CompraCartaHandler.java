@@ -8,21 +8,25 @@ import org.example.Jugador;
 import org.example.Mazo;
 import org.example.Ronda;
 
+import java.util.List;
+
 public class CompraCartaHandler implements EventHandler<ActionEvent> {
 
     private final Carta carta;
     private final Mazo mazo;
     private final Jugador jugador;
     private PantallaJuegoController pantallaJuegoController;
-    private Ronda ronda;
+    private List<Ronda> rondas;
+    private int numeroRonda;
 
 
-    public CompraCartaHandler(Carta carta, Mazo mazo, PantallaJuegoController pantallaJuegoController, Ronda ronda, Jugador jugador) {
+    public CompraCartaHandler(Carta carta, Mazo mazo, PantallaJuegoController pantallaJuegoController, List<Ronda> rondas, int numeroRonda, Jugador jugador) {
         this.carta = carta;
         this.mazo = mazo;
         this.jugador = jugador;
         this.pantallaJuegoController = pantallaJuegoController;
-        this.ronda =ronda;
+        this.rondas = rondas;
+        this.numeroRonda = numeroRonda;
 
     }
 
@@ -32,7 +36,7 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
         ActionHandler.actionSound();
         mazo.agregarCarta(carta);
         System.out.println(mazo.cantidadDeCartas());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, rondas, numeroRonda, jugador);
 
     }
 }

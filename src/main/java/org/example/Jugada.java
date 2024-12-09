@@ -29,6 +29,14 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         this.tarotsUsados = tarotsUsados;
     }
 
+    public Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes, ArrayList<Tarot> tarotsUsados, int numeroRonda){
+        this.manoPoker = manoPoker.clonar();
+        this.comodines = comodines;
+        this.descartes = descartes;
+        this.tarotsUsados = tarotsUsados;
+        this.numeroRonda = numeroRonda;
+    }
+
     public void actualizarPuntajeBase(int puntajeBase){
         manoPoker.actualizarPuntajeBase(puntajeBase);
     }
@@ -79,5 +87,9 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         }
         manoPoker.sumarValorCartas();
         return(manoPoker.hacerCalculo());
+    }
+
+    public boolean tieneNumeroRonda(int numeroOtraRonda) {
+        return (numeroRonda == numeroOtraRonda);
     }
 }

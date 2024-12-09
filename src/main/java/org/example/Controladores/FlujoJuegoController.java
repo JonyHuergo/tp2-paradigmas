@@ -116,7 +116,7 @@ public class FlujoJuegoController {
     }
 
     public void jugarMano() {
-        float puntaje = jugador.jugar();
+        float puntaje = jugador.jugar(numeroRonda);
 
         Ronda ronda = rondas.get(numeroRonda);
         int numeroRondaNueva = numeroRonda + 1;
@@ -149,7 +149,7 @@ public class FlujoJuegoController {
         Ronda ronda = rondas.get(numeroRonda);
 
 //        if (manosJugadas != ronda.getCantidadDeManos()){
-            JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, ronda, this, mazo, jugador, jugador.getComodines());
+            JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, rondas, numeroRonda, this, mazo, jugador, jugador.getComodines());
             Scene nuevaScene = new Scene(nuevaPantalla, 800, 600); // Ajusta el tamaño según tu diseño
 
             stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal

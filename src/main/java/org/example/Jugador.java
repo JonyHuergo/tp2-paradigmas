@@ -15,8 +15,8 @@ public class Jugador {
     private ArrayList<Comodin> comodines = new ArrayList<>();
     private ArrayList<Tarot> tarotsUsados = new ArrayList<>();
     private int puntaje;
-    private int descartes = 3;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
-    private int jugadas = 5;
+    private int descartes;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
+    private int jugadas;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
 
@@ -180,6 +180,18 @@ public class Jugador {
         return 0;
     }
 
+    public float jugar(int numeroRonda){
+        if (jugadas != 0) {
+            crearJugada(numeroRonda);
+            reiniciarMano();
+            jugadas --;
+            return evaluarJugadas(numeroRonda);
+        } else{
+            perder();
+        }
+        return 0;
+    }
+
     private void perder() {
         mostrarAlerta("Perdiste.");
     }
@@ -187,6 +199,11 @@ public class Jugador {
 
     public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
+        listadoJugadas.add(jugadaActual);
+    }
+
+    public void crearJugada(int numeroRonda){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
+        this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados, numeroRonda);
         listadoJugadas.add(jugadaActual);
     }
 
@@ -201,6 +218,17 @@ public class Jugador {
         }
         return(aux);
     }
+
+    public float evaluarJugadas(int numeroRonda){
+        float aux = 0;
+        for (Jugada jugada : listadoJugadas) {
+            if (jugada.tieneNumeroRonda(numeroRonda)) {
+                aux += jugada.evaluarJugada();
+            }
+        }
+        return(aux);
+    }
+
 
     public ArrayList<Carta> getCartasDisponibles(){
         return(cartasDisponibles);

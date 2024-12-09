@@ -19,15 +19,16 @@ import org.example.Mazo;
 import org.example.Ronda;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class JuegoScreen extends VBox {
-    public JuegoScreen(ArrayList<Carta> cartasIniciales, Ronda ronda, FlujoJuegoController controller, Mazo mazo, Jugador jugador, ArrayList<Comodin> comodines) {
+    public JuegoScreen(ArrayList<Carta> cartasIniciales, List<Ronda> rondas, int numeroRonda, FlujoJuegoController controller, Mazo mazo, Jugador jugador, ArrayList<Comodin> comodines) {
         super();
 
-
+        Ronda ronda = rondas.get(numeroRonda);
         FlowPane comodinesPane = mostrarComodines(comodines);
 
-        VBox marcador = crearMarcador(controller, jugador);
+        VBox marcador = crearMarcador(controller, jugador, numeroRonda);
 //        marcador.setStyle("-fx-border-radius: 30");
         // Crear un FlowPane para contener las cartas
         FlowPane cartasPane = mostrarCartas(cartasIniciales, controller, mazo);
@@ -135,7 +136,7 @@ public class JuegoScreen extends VBox {
         return comodinesPane;
     }
 
-    private VBox crearMarcador( FlujoJuegoController controller, Jugador jugador) {
+    private VBox crearMarcador( FlujoJuegoController controller, Jugador jugador, int numeroRonda) {
         // Contenedor principal
         VBox marcador = new VBox();
         // Espaciado entre las cajas
@@ -158,7 +159,7 @@ public class JuegoScreen extends VBox {
         roundLabel.setFont(Font.font("RetroFont", 18));
         roundLabel.setTextFill(Color.WHITE);
 
-        Label roundScore = new Label(Float.toString(jugador.evaluarJugadas()));
+        Label roundScore = new Label(Float.toString(jugador.evaluarJugadas(numeroRonda)));
         roundScore.setFont(Font.font("RetroFont", 22));
         roundScore.setTextFill(Color.WHITE);
         roundScore.setStyle("-fx-background-color: #333333; -fx-padding: 5; -fx-background-radius: 5;");

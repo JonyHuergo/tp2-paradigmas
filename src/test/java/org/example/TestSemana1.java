@@ -75,7 +75,7 @@ public class TestSemana1 {
         Carta carta = new Carta("diamantes", 4);
         TarotAgregaPuntos tarot = new TarotAgregaPuntos(10);
         ManoPoker manoJugada = new ManoPoker();
-        
+
         tarot.aplicarEfecto(carta);
         manoJugada.agregarCarta(carta);
         float puntajeObtenido = manoJugada.evaluar();

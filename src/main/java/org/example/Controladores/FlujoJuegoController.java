@@ -111,6 +111,7 @@ public class FlujoJuegoController {
         jugador.jugar();
         Mazo mazo = jugador.getMazo();
         mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
+
     }
 
     public Label getManoLabel() {

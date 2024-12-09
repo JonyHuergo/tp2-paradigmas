@@ -62,12 +62,12 @@ public class TestSemana2 {
 
     @Test
     public void test03Comodin10PuntosPorCadaDescarte() {
-        int puntajeEsperado = 60; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 10 * 6 por los tres descartes
+        int puntajeEsperado = 40; // Carta Alta: 5 * 1 -> 10 * 1 por ser un 5 -> 40 * 1 por los tres descartes
 
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
-        Comodin comodin = new ComodinPorDescarte(0,2, "Descarte");// mas 2 de mult por cada descarte
+        Comodin comodin = new ComodinPorDescarte(10,1, "Descarte");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();
@@ -145,9 +145,6 @@ public class TestSemana2 {
 
     @Test
     public void test06JSONSeLeeYConvierteCorrectamente() throws IOException {
-
-        // test falla porque el patron prototype esta mal implementado, los tarots se aplican a las cartas originales y no a las copias
-
         LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
         List<Ronda> rondas = lectorArchivosJson.leerBalatro();
         for (Ronda ronda : rondas) {

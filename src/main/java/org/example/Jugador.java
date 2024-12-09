@@ -115,89 +115,36 @@ public class Jugador {
         this.manoPoker.agregarCarta(cartaElegida);
     }
 
-    public void reiniciarMano(){
-//        ArrayList<Carta> cartasADescartar = manoPoker.getCartas();
-//        ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasDisponibles);
-//
-//        for (Carta carta : copiaCartasIniciales) {
-//            if (cartasADescartar.contains(carta)){
-//                cartasDisponibles.remove(carta);
-//            }
-//        }
-        manoPoker = new ManoPoker();
-        repartirCartas();
-    }
-
     public void descartarCartas(){
         if (descartes > 0){
-
-            ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasDisponibles);
-
-            int cartasARepartir = manoPoker.getCantidadDeCartas();
-            ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
-
-
-            int indiceRepartida = 0;
-
-            // Iterar sobre la copia para encontrar y reemplazar seleccionadas
-            for (int i = 0; i < copiaCartasIniciales.size(); i++) {
-                Carta carta = copiaCartasIniciales.get(i);
-
-                if (manoPoker.tieneCarta(carta)) {
-                    cartasDisponibles.set(i, cartasRepartidas.get(indiceRepartida));
-                    indiceRepartida++;
-                }
-            }
-
-            // Limpiar la lista de cartas seleccionadas
-            manoPoker = new ManoPoker();;
-
+            reiniciarMano();
             descartes --;
+        } else{
+        mostrarAlerta("Ya usó todos los descartes posibles.");
         }
-        else{
-            mostrarAlerta("Ya usó todos los descartes posibles.");
-        }
-
-
-
     }
 
-    public void descartarCartas(ArrayList<Carta> cartasIniciales, ArrayList<Carta> cartasSeleccionadas, Mazo mazo){
-            if (descartes > 0){
-//                cartasIniciales.removeAll(cartasSeleccionadas);
-//                int cartasARepartir = 8 - cartasIniciales.size();
-//                ArrayList<Carta> cartasRepartidas= mazo.repartirCartas(cartasARepartir);
-//                cartasIniciales.addAll(cartasRepartidas);
+    public void reiniciarMano(){
+        ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasDisponibles);
+
+        int cartasARepartir = manoPoker.getCantidadDeCartas();
+        ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
 
 
-                ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasIniciales);
+        int indiceRepartida = 0;
 
-                int cartasARepartir = cartasSeleccionadas.size();
-                ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
+        // Iterar sobre la copia para encontrar y reemplazar seleccionadas
+        for (int i = 0; i < copiaCartasIniciales.size(); i++) {
+            Carta carta = copiaCartasIniciales.get(i);
 
-                int indiceRepartida = 0;
-
-                // Iterar sobre la copia para encontrar y reemplazar seleccionadas
-                for (int i = 0; i < copiaCartasIniciales.size(); i++) {
-                    Carta carta = copiaCartasIniciales.get(i);
-
-                    if (cartasSeleccionadas.contains(carta)) {
-                        cartasIniciales.set(i, cartasRepartidas.get(indiceRepartida));
-                        indiceRepartida++;
-                    }
-                }
-
-                // Limpiar la lista de cartas seleccionadas
-                cartasSeleccionadas.clear();
-
-                descartes --;
+            if (manoPoker.tieneCarta(carta)) {
+                cartasDisponibles.set(i, cartasRepartidas.get(indiceRepartida));
+                indiceRepartida++;
             }
-            else{
-                mostrarAlerta("Ya usó todos los descartes posibles.");
-            }
+        }
 
-
-
+        // Limpiar la lista de cartas seleccionadas
+        manoPoker = new ManoPoker();;
     }
 
     public int getCantDeComodines(){
@@ -222,8 +169,15 @@ public class Jugador {
     }
 
     public float jugar(){
-        crearJugada();
-        return evaluarJugadas();
+        if (jugadas > 0) {
+            crearJugada();
+            reiniciarMano();
+            jugadas --;
+            return evaluarJugadas();
+        } else{
+            mostrarAlerta("Ya usó todas las jugadas posibles.");
+        }
+        return 0;
     }
 
 
@@ -231,15 +185,7 @@ public class Jugador {
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
         listadoJugadas.add(jugadaActual);
         jugadas = jugadas - 1;
-        reiniciarMano();
     }
-/*
-    public void crearJugada(int descartes){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
-        this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
-        listadoJugadas.add(jugadaActual);
-        jugadas = jugadas - 1;
-        reiniciarMano();
-    }*/
 
     public float evaluarJugadaActual(){
         return(jugadaActual.evaluarJugada());

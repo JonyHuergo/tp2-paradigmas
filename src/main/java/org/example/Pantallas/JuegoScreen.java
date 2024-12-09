@@ -25,7 +25,7 @@ public class JuegoScreen extends VBox {
 
         FlowPane comodinesPane = mostrarComodines(comodines);
 
-        VBox marcador = crearMarcador(controller);
+        VBox marcador = crearMarcador(controller, jugador);
 //        marcador.setStyle("-fx-border-radius: 30");
         // Crear un FlowPane para contener las cartas
         FlowPane cartasPane = mostrarCartas(cartasIniciales, controller, mazo);
@@ -123,7 +123,7 @@ public class JuegoScreen extends VBox {
         return comodinesPane;
     }
 
-    private VBox crearMarcador( FlujoJuegoController controller) {
+    private VBox crearMarcador( FlujoJuegoController controller, Jugador jugador) {
         // Contenedor principal
         VBox marcador = new VBox();
         // Espaciado entre las cajas
@@ -146,7 +146,7 @@ public class JuegoScreen extends VBox {
         roundLabel.setFont(Font.font("RetroFont", 18));
         roundLabel.setTextFill(Color.WHITE);
 
-        Label roundScore = new Label("0");
+        Label roundScore = new Label(Float.toString(jugador.evaluarJugadas()));
         roundScore.setFont(Font.font("RetroFont", 22));
         roundScore.setTextFill(Color.WHITE);
         roundScore.setStyle("-fx-background-color: #333333; -fx-padding: 5; -fx-background-radius: 5;");

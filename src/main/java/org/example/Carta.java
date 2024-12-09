@@ -72,7 +72,7 @@ public class Carta extends Comprable{
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = buscarValorCarta(valor); // Metodo dedicado a buscar el enum
-        this.multiplicador = "0";
+        this.multiplicador = "1";
         this.puntaje = valor;
     }
 
@@ -152,12 +152,12 @@ public class Carta extends Comprable{
     }
 
     public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
-        float suma = Float.parseFloat(this.multiplicador) + multiplicadorTotal;
+        float suma = Float.parseFloat(this.multiplicador) * multiplicadorTotal;
         return suma;
     }
 
     public Carta clonar(){
-        return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
+        return new Carta(nombre, palo, valor.getNombre(), puntaje, multiplicador);
     }
     @Override
     public String getDescripcion(){

@@ -116,15 +116,18 @@ public class FlujoJuegoController {
     }
 
     public void jugarMano() {
-        Ronda ronda = rondas.get(numeroRonda + 1);
-        jugador.jugar();
+        float puntaje = jugador.jugar();
+
+        Ronda ronda = rondas.get(numeroRonda);
+        int numeroRondaNueva = numeroRonda + 1;
         Mazo mazo = jugador.getMazo();
-        mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
 
 
-        if (jugador.getCantidadJugadas() == 0) {
-            PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda + 1, jugador);
-            nuevaPantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
+        if (puntaje >= ronda.getPuntajeASuperar()) {
+            PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRondaNueva, jugador);
+            nuevaPantallaTienda.iniciarPantallaTienda(rondas.get(numeroRondaNueva).obtenerTienda());
+        } else {
+            mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
         }
     }
 
@@ -145,16 +148,16 @@ public class FlujoJuegoController {
 
         Ronda ronda = rondas.get(numeroRonda);
 
-        if (manosJugadas != ronda.getCantidadDeManos()){
+//        if (manosJugadas != ronda.getCantidadDeManos()){
             JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, ronda, this, mazo, jugador, jugador.getComodines());
             Scene nuevaScene = new Scene(nuevaPantalla, 800, 600); // Ajusta el tamaño según tu diseño
 
             stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal
             manosJugadas = manosJugadas+1;
-        }
-        else {
-            System.out.println("nueva pantalla");
-        }
+//        }
+//        else {
+//            System.out.println("nueva pantalla");
+//        }
 
 
 

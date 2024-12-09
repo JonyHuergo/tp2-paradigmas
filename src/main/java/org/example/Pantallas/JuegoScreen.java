@@ -40,15 +40,19 @@ public class JuegoScreen extends VBox {
         Label manoLabel = controller.getManoLabel();
         manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
-        Label descartesLabel = new Label("Descartes Disponibles: " + ronda.getDescartes());
+        Label descartesLabel = new Label("Descartes Disponibles: " + jugador.getDescartes());
         descartesLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
+
+        Label jugadasLabel = new Label("Jugadas Disponibles: " + jugador.getCantidadJugadas());
+        jugadasLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
+
 
         HBox titleBox = crearTitulo();
 
         // Crear un VBox para organizar los Labels verticalmente
         VBox leftPanelContent = new VBox(10);  // 10 is the space between the labels
         leftPanelContent.setStyle("-fx-padding: 5;");
-        leftPanelContent.getChildren().addAll(titleBox, puntajeLabel, manoLabel, descartesLabel ,marcador);
+        leftPanelContent.getChildren().addAll(titleBox, puntajeLabel, manoLabel, descartesLabel , jugadasLabel ,marcador);
 
         // Crear un Panel (Panel de la izquierda)
         StackPane leftPanel = new StackPane();

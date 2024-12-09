@@ -116,7 +116,7 @@ public class Jugador {
     }
 
     public void descartarCartas(){
-        if (descartes > 0){
+        if (descartes != 0){
             reiniciarMano();
             descartes --;
         } else{
@@ -169,15 +169,19 @@ public class Jugador {
     }
 
     public float jugar(){
-        if (jugadas > 0) {
+        if (jugadas != 0) {
             crearJugada();
             reiniciarMano();
             jugadas --;
             return evaluarJugadas();
         } else{
-            mostrarAlerta("Ya usó todas las jugadas posibles.");
+            perder();
         }
         return 0;
+    }
+
+    private void perder() {
+        mostrarAlerta("Perdiste.");
     }
 
 
@@ -208,7 +212,7 @@ public class Jugador {
 
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setTitle("Límite de descartes alcanzado");
+        alerta.setTitle("Límite alcanzado");
         alerta.setHeaderText(null);
         alerta.setContentText(mensaje);
         alerta.showAndWait();
@@ -247,4 +251,10 @@ public class Jugador {
     public int getCantidadJugadas(){
         return jugadas;
     }
+
+    public int getDescartes(){
+        return descartes;
+    }
+
+
 }

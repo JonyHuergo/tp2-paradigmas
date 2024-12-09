@@ -43,11 +43,11 @@ public class FlujoRondasController {
 
             PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda, jugador);
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
-
-            for (int i = ronda.getCantidadDeManos(); i>=0; i++){
-                PantallaJuegoController pantallaJuego= new PantallaJuegoController(stage, mediaPlayer);
-                pantallaJuego.iniciarPantallaJuego(mazo, ronda, jugador);
-            }
+            PantallaJuegoController pantallaJuego= new PantallaJuegoController(stage, mediaPlayer);
+            pantallaJuego.iniciarPantallaJuego(mazo, ronda, jugador);
+//            for (int i = ronda.getCantidadDeManos(); i>=0; i++){
+//                pantallaJuego.iniciarPantallaJuego(mazo, ronda, jugador);
+//            }
 
 
 //        for (int i = rondas.size() - 1; i >= 0; i--) {

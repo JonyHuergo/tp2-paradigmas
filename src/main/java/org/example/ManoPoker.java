@@ -34,6 +34,7 @@ public class ManoPoker {
     }
 
     public void definirTipodeMano() {
+//        cartas = analizadorMano.obtenerCartasDeLaMano(cartas);
         tipoDeMano = calcularMano();
     }
 
@@ -120,4 +121,9 @@ public class ManoPoker {
     public ArrayList<Carta> getCartas(){
         return cartas;
     }
+
+    public void calcularCartasRelevantes(){
+        cartas = analizadorMano.obtenerCartasDeLaMano(cartas);
+    }
+
 }

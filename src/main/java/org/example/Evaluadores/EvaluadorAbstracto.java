@@ -5,6 +5,8 @@ import org.example.Manos.CartaAlta;
 import org.example.Manos.Mano;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public abstract class EvaluadorAbstracto implements EvaluadorMano {
     private EvaluadorMano siguiente;
@@ -27,6 +29,24 @@ public abstract class EvaluadorAbstracto implements EvaluadorMano {
         }
         return new CartaAlta(); // Caso base si nadie encuentra un tipo de mano
     }
+
+    @Override
+    public ArrayList<Carta> cartasDeLaMano(ArrayList<Carta> cartas) {
+        ArrayList<Carta> cartasMano = calcularCartasRelevantes(cartas);
+        if (cartasMano != null && !cartasMano.isEmpty()) {
+            return cartasMano;
+        }
+        if (siguiente != null) {
+            return siguiente.cartasDeLaMano(cartas);
+        }
+        return cartas.stream()
+                .max(Comparator.comparing(Carta::getValor))
+                .map(carta -> new ArrayList<>(Collections.singletonList(carta)))
+                .orElse(new ArrayList<>());
+    }
+
+
+    protected abstract ArrayList<Carta> calcularCartasRelevantes(ArrayList<Carta> cartas);
 
     protected abstract Mano evaluarMano(ArrayList<Carta> cartas);
 }

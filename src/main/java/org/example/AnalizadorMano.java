@@ -32,6 +32,10 @@ public class AnalizadorMano {
         this.evaluadorInicial = escaleraReal;
     }
 
+    public ArrayList<Carta> obtenerCartasDeLaMano(ArrayList<Carta> cartas) {
+        return evaluadorInicial.cartasDeLaMano(cartas);
+    }
+
     public Mano analizarMano(ArrayList<Carta> cartas) {
         return evaluadorInicial.evaluar(cartas);
     }

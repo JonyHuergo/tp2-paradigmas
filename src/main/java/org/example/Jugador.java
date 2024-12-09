@@ -1,6 +1,5 @@
 package org.example;
 
-import javafx.scene.control.Alert;
 import org.example.Comodin.Comodin;
 import org.example.Tarot.Tarot;
 
@@ -68,14 +67,6 @@ public class Jugador {
 
     public void setComodines(ArrayList<Comodin> comodines) {
         this.comodines = comodines;
-    }
-
-    public void agregarComodin(Comodin comodin){
-        comodines.add(comodin);
-    }
-
-    public void agregarTarot(Tarot tarot){
-        tarotsUsados.add(tarot);
     }
 
     public void setMazo(Mazo mazo){
@@ -221,6 +212,7 @@ public class Jugador {
         return manoPoker.getMultiplicadorBase();
     }
 
+
     public float jugar(){
         crearJugada();
         return evaluarJugadas();
@@ -261,33 +253,7 @@ public class Jugador {
         tarotsUsados.add(tarot);
     }
 
-    private void mostrarAlerta(String mensaje) {
-        Alert alerta = new Alert(Alert.AlertType.WARNING);
-        alerta.setTitle("Límite de descartes alcanzado");
-        alerta.setHeaderText(null);
-        alerta.setContentText(mensaje);
-        alerta.showAndWait();
-    }
-
-    public boolean tieneCarta(Carta carta){
-        return manoPoker.tieneCarta(carta);
-    }
-
-    public int getCantidadDeCartas(){
-        return manoPoker.getCantidadDeCartas();
-    }
-
-    public void agregarCarta(Carta carta){
-        manoPoker.agregarCarta(carta);
-    }
-
-    public void removerCarta(Carta carta) { manoPoker.removerCarta(carta); }
-
-    public Boolean superaLimite(){
-        return (getCantidadDeCartas() >= 5);
-    }
-
-    public ArrayList<Comodin> getComodines(){
-        return comodines;
+    public void agregarComodin(Comodin comodin){
+        comodines.add(comodin);
     }
 }

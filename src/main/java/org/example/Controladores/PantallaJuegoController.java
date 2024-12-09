@@ -22,7 +22,7 @@ public class PantallaJuegoController {
         this.mediaPlayer = mediaPlayer;
     }
 
-    public void iniciarPantallaJuego(Mazo mazo, int puntajeASuperar, Jugador jugador) {
+    public void iniciarPantallaJuego(Mazo mazo, int puntajeASuperar) {
 
         Label manoLabel = new Label("Mano: Ninguna");
 
@@ -34,12 +34,9 @@ public class PantallaJuegoController {
 
         manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
-        jugador.repartirCartas();
-        ArrayList<Carta> cartasIniciales = jugador.getCartasDisponibles();
+        FlujoJuegoController juegoController = new FlujoJuegoController(manoLabel, puntajeLabel, multiplicadorLabel);
 
-        FlujoJuegoController juegoController = new FlujoJuegoController(stage, puntajeASuperar,manoLabel, puntajeLabel, multiplicadorLabel, cartasIniciales, mazo, jugador);
-
-        JuegoScreen juegoScreen = new JuegoScreen(cartasIniciales, puntajeASuperar, juegoController, mazo, jugador, jugador.getComodines());
+        JuegoScreen juegoScreen = new JuegoScreen(mazo.repartirCartas(8), puntajeASuperar, juegoController);
 
         Scene scene = new Scene(juegoScreen, 800, 600);
         stage.setTitle("BALATRO");

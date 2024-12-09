@@ -22,6 +22,7 @@ public class AvanzarButtonHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         ActionHandler.actionSound();
-//        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
+
     }
 }

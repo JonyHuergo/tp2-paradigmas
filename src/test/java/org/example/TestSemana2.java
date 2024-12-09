@@ -145,9 +145,6 @@ public class TestSemana2 {
 
     @Test
     public void test06JSONSeLeeYConvierteCorrectamente() throws IOException {
-
-        // test falla porque el patron prototype esta mal implementado, los tarots se aplican a las cartas originales y no a las copias
-
         LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
         List<Ronda> rondas = lectorArchivosJson.leerBalatro();
         for (Ronda ronda : rondas) {

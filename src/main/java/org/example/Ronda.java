@@ -31,8 +31,4 @@ public class Ronda {
     public Tienda obtenerTienda(){
         return tienda;
     }
-
-    public int getDescartes(){
-        return descartes;
-    }
 }

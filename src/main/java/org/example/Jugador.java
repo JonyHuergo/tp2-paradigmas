@@ -160,4 +160,8 @@ public class Jugador {
     public void usarTarot(Tarot tarot){
         tarotsUsados.add(tarot);
     }
+
+    public void agregarComodin(Comodin comodin){
+        comodines.add(comodin);
+    }
 }

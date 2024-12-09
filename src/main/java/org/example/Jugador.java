@@ -107,19 +107,111 @@ public class Jugador {
     }
 
     public void reiniciarMano(){
+//        ArrayList<Carta> cartasADescartar = manoPoker.getCartas();
+//        ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasDisponibles);
+//
+//        for (Carta carta : copiaCartasIniciales) {
+//            if (cartasADescartar.contains(carta)){
+//                cartasDisponibles.remove(carta);
+//            }
+//        }
         manoPoker = new ManoPoker();
         repartirCartas();
     }
 
-//    remplazado por metodo jugar
-//    public void evaluarMano(){
-//        manoPoker.definirTipodeMano();
-//        manoPoker.sumarValorCartas();
-//        for (Comodin comodin : comodines) {
-//            comodin.usar(this);
-//        }
-//        puntaje += manoPoker.hacerCalculo();
-//    }
+    public void descartarCartas(){
+        if (descartes > 0){
+
+            ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasDisponibles);
+
+            int cartasARepartir = manoPoker.getCantidadDeCartas();
+            ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
+
+
+            int indiceRepartida = 0;
+
+            // Iterar sobre la copia para encontrar y reemplazar seleccionadas
+            for (int i = 0; i < copiaCartasIniciales.size(); i++) {
+                Carta carta = copiaCartasIniciales.get(i);
+
+                if (manoPoker.tieneCarta(carta)) {
+                    cartasDisponibles.set(i, cartasRepartidas.get(indiceRepartida));
+                    indiceRepartida++;
+                }
+            }
+
+            // Limpiar la lista de cartas seleccionadas
+            manoPoker = new ManoPoker();;
+
+            descartes --;
+        }
+        else{
+            mostrarAlerta("Ya usó todos los descartes posibles.");
+        }
+
+
+
+    }
+
+    public void descartarCartas(ArrayList<Carta> cartasIniciales, ArrayList<Carta> cartasSeleccionadas, Mazo mazo){
+            if (descartes > 0){
+//                cartasIniciales.removeAll(cartasSeleccionadas);
+//                int cartasARepartir = 8 - cartasIniciales.size();
+//                ArrayList<Carta> cartasRepartidas= mazo.repartirCartas(cartasARepartir);
+//                cartasIniciales.addAll(cartasRepartidas);
+
+
+                ArrayList<Carta> copiaCartasIniciales = new ArrayList<>(cartasIniciales);
+
+                int cartasARepartir = cartasSeleccionadas.size();
+                ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
+
+                int indiceRepartida = 0;
+
+                // Iterar sobre la copia para encontrar y reemplazar seleccionadas
+                for (int i = 0; i < copiaCartasIniciales.size(); i++) {
+                    Carta carta = copiaCartasIniciales.get(i);
+
+                    if (cartasSeleccionadas.contains(carta)) {
+                        cartasIniciales.set(i, cartasRepartidas.get(indiceRepartida));
+                        indiceRepartida++;
+                    }
+                }
+
+                // Limpiar la lista de cartas seleccionadas
+                cartasSeleccionadas.clear();
+
+                descartes --;
+            }
+            else{
+                mostrarAlerta("Ya usó todos los descartes posibles.");
+            }
+
+
+
+    }
+
+    public int getCantDeComodines(){
+        return comodines.size();
+    }
+
+    public int getCantidadDeTarots(){
+        return tarotsUsados.size();
+    }
+
+    public String definirTipoDeMano(){
+        manoPoker.definirTipodeMano();
+        return manoPoker.getNombreMano();
+    }
+
+    public int getPuntajeBase(){
+        return manoPoker.getPuntajeBase();
+    }
+
+    public float getMultiplicadorBase(){
+        return manoPoker.getMultiplicadorBase();
+    }
+
 
     public float jugar(){
         crearJugada();

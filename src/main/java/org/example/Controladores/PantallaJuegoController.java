@@ -35,7 +35,7 @@ public class PantallaJuegoController {
 
         jugador.repartirCartas();
         ArrayList<Carta> cartasIniciales = jugador.getCartasDisponibles();
-        FlujoJuegoController juegoController = new FlujoJuegoController(stage, ronda,manoLabel, puntajeLabel, multiplicadorLabel, cartasIniciales, mazo, jugador);
+        FlujoJuegoController juegoController = new FlujoJuegoController(stage, ronda,manoLabel, puntajeLabel, multiplicadorLabel, cartasIniciales, mazo, jugador, mediaPlayer);
 
         JuegoScreen juegoScreen = new JuegoScreen(cartasIniciales, ronda, juegoController, mazo, jugador, jugador.getComodines());
 

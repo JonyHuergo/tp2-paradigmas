@@ -184,7 +184,6 @@ public class Jugador {
     public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
         listadoJugadas.add(jugadaActual);
-        jugadas = jugadas - 1;
     }
 
     public float evaluarJugadaActual(){
@@ -243,5 +242,9 @@ public class Jugador {
 
     public void setCantidadDeManos(int cantDeManos){
         jugadas = cantDeManos;
+    }
+
+    public int getCantidadJugadas(){
+        return jugadas;
     }
 }

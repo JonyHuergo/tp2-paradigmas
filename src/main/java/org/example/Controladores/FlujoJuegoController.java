@@ -3,6 +3,7 @@ package org.example.Controladores;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.example.*;
 import org.example.Manos.Mano;
@@ -32,8 +33,9 @@ public class FlujoJuegoController {
     private final Stage stage;
     private final Ronda ronda;
     private int manosJugadas;
+    private MediaPlayer mediaPlayer;
 
-    public FlujoJuegoController(Stage stage, Ronda ronda, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador) {
+    public FlujoJuegoController(Stage stage, Ronda ronda, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador, MediaPlayer mediaPlayer) {
         this.manoLabel = manoLabel;
         this.puntajeLabel = puntajeLabel;
         this.multiplicadorLabel = multiplicadorLabel;
@@ -42,6 +44,7 @@ public class FlujoJuegoController {
         this.stage = stage;
         this.ronda = ronda;
         this.manosJugadas = 0;
+        this.mediaPlayer = mediaPlayer;
     }
 
     public void seleccionarCarta(Carta carta, Button cartaButton, Mazo mazo) {
@@ -114,6 +117,10 @@ public class FlujoJuegoController {
         Mazo mazo = jugador.getMazo();
         mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
 
+        if (jugador.getCantidadJugadas() == 0) {
+            PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda, jugador);
+            nuevaPantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
+        }
     }
 
     public Label getManoLabel() {

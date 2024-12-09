@@ -240,4 +240,8 @@ public class Jugador {
     public void setCantidadDeDescartes(int cantDeDescartes){
         descartes = cantDeDescartes;
     }
+
+    public void setCantidadDeManos(int cantDeManos){
+        jugadas = cantDeManos;
+    }
 }

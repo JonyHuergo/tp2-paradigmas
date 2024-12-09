@@ -31,6 +31,7 @@ public class FlujoJuegoController {
     private final Jugador jugador;
     private final Stage stage;
     private final Ronda ronda;
+    private int manosJugadas;
 
     public FlujoJuegoController(Stage stage, Ronda ronda, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador) {
         this.manoLabel = manoLabel;
@@ -40,6 +41,7 @@ public class FlujoJuegoController {
         this.jugador = jugador;
         this.stage = stage;
         this.ronda = ronda;
+        this.manosJugadas = 0;
     }
 
     public void seleccionarCarta(Carta carta, Button cartaButton, Mazo mazo) {
@@ -128,11 +130,23 @@ public class FlujoJuegoController {
     }
 
     private void mostrarNuevaPantalla(ArrayList<Carta> nuevasCartas, Mazo mazo) {
-        JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, ronda, this, mazo, jugador, jugador.getComodines());
-        Scene nuevaScene = new Scene(nuevaPantalla, 800, 600); // Ajusta el tamaño según tu diseño
 
-        stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal
-        System.out.println("Hasta aca llego");
+
+
+        if (manosJugadas != ronda.getCantidadDeManos()){
+            JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, ronda, this, mazo, jugador, jugador.getComodines());
+            Scene nuevaScene = new Scene(nuevaPantalla, 800, 600); // Ajusta el tamaño según tu diseño
+
+            stage.setScene(nuevaScene); // Cambiar la escena en la ventana principal
+            manosJugadas = manosJugadas+1;
+        }
+        else {
+            System.out.println("nueva pantalla");
+        }
+
+
+
+
     }
 
 }

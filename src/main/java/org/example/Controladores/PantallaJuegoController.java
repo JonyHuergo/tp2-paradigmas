@@ -23,7 +23,6 @@ public class PantallaJuegoController {
     }
 
     public void iniciarPantallaJuego(Mazo mazo, Ronda ronda, Jugador jugador) {
-
         Label manoLabel = new Label("Mano: Ninguna");
 
         Label puntajeLabel = new Label("0");
@@ -36,7 +35,6 @@ public class PantallaJuegoController {
 
         jugador.repartirCartas();
         ArrayList<Carta> cartasIniciales = jugador.getCartasDisponibles();
-
         FlujoJuegoController juegoController = new FlujoJuegoController(stage, ronda,manoLabel, puntajeLabel, multiplicadorLabel, cartasIniciales, mazo, jugador);
 
         JuegoScreen juegoScreen = new JuegoScreen(cartasIniciales, ronda, juegoController, mazo, jugador, jugador.getComodines());
@@ -45,6 +43,7 @@ public class PantallaJuegoController {
         stage.setTitle("BALATRO");
         stage.setScene(scene);
         stage.show();
+
     }
 
 }

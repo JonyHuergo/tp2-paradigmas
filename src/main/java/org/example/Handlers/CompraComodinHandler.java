@@ -10,6 +10,7 @@ import org.example.Jugador;
 import org.example.Mazo;
 import org.example.Pantallas.JuegoScreen;
 import org.example.Pantallas.TiendaScreen;
+import org.example.Ronda;
 
 public class CompraComodinHandler implements EventHandler<ActionEvent> {
 
@@ -17,14 +18,14 @@ public class CompraComodinHandler implements EventHandler<ActionEvent> {
     private final Jugador jugador;
     private PantallaJuegoController pantallaJuegoController;
     private Mazo mazo;
-    private int puntajeASuperar;
+    private Ronda ronda;
 
-    public CompraComodinHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, int puntajeASuperar, Comodin comodin, Jugador jugador) {
+    public CompraComodinHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Ronda ronda, Comodin comodin, Jugador jugador) {
         this.comodin = comodin;
         this.jugador = jugador;
         this.pantallaJuegoController = pantallaJuegoController;
         this.mazo = mazo;
-        this.puntajeASuperar = puntajeASuperar;
+        this.ronda = ronda;
     }
 
     protected void executeCompra() {
@@ -42,6 +43,6 @@ public class CompraComodinHandler implements EventHandler<ActionEvent> {
         jugador.agregarComodin(comodin);
         ActionHandler.actionSound();
         System.out.println(jugador.getCantDeComodines());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar, jugador);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
     }
 }

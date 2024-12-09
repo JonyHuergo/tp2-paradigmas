@@ -16,12 +16,14 @@ import org.example.Controladores.FlujoJuegoController;
 import org.example.Carta;
 import org.example.Jugador;
 import org.example.Mazo;
+import org.example.Ronda;
 
 import java.util.ArrayList;
 
 public class JuegoScreen extends VBox {
-    public JuegoScreen(ArrayList<Carta> cartasIniciales, int puntajeASuperar, FlujoJuegoController controller, Mazo mazo, Jugador jugador, ArrayList<Comodin> comodines) {
+    public JuegoScreen(ArrayList<Carta> cartasIniciales, Ronda ronda, FlujoJuegoController controller, Mazo mazo, Jugador jugador, ArrayList<Comodin> comodines) {
         super();
+
 
         FlowPane comodinesPane = mostrarComodines(comodines);
 
@@ -31,19 +33,22 @@ public class JuegoScreen extends VBox {
         FlowPane cartasPane = mostrarCartas(cartasIniciales, controller, mazo);
 
         // Crear un Label para mostrar el puntajeASuperar
-        Label puntajeLabel = new Label("Puntaje a superar: " + puntajeASuperar);
+        Label puntajeLabel = new Label("Puntaje a superar: " + ronda.getPuntajeASuperar());
         puntajeLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
         // Obtener el manoLabel del controller, que ya fue configurado en PantallaJuegoController
         Label manoLabel = controller.getManoLabel();
         manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
+        Label descartesLabel = new Label("Descartes Disponibles: " + ronda.getDescartes());
+        descartesLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
+
         HBox titleBox = crearTitulo();
 
         // Crear un VBox para organizar los Labels verticalmente
         VBox leftPanelContent = new VBox(10);  // 10 is the space between the labels
         leftPanelContent.setStyle("-fx-padding: 5;");
-        leftPanelContent.getChildren().addAll(titleBox, puntajeLabel, manoLabel, marcador);
+        leftPanelContent.getChildren().addAll(titleBox, puntajeLabel, manoLabel, descartesLabel ,marcador);
 
         // Crear un Panel (Panel de la izquierda)
         StackPane leftPanel = new StackPane();
@@ -63,7 +68,10 @@ public class JuegoScreen extends VBox {
 
         descartarButton.setOnAction(event -> {
             controller.descartarCartas(mazo);
+
         });
+        ronda.descontarDescarte();
+
 
 
 // Crear botón "Jugar mano"

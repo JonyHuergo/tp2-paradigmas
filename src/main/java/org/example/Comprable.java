@@ -6,7 +6,7 @@ import org.example.Controladores.PantallaJuegoController;
 
 public abstract class Comprable {
 
-    public abstract EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, int puntajeASuperar);
+    public abstract EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, Ronda ronda);
 
     public abstract String getRuta();
 

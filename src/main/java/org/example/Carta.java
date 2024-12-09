@@ -77,8 +77,8 @@ public class Carta extends Comprable{
     }
 
     @Override
-    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, int puntajeASuperar) {
-        return new CompraCartaHandler(this, mazo, pantallaJuegoController, puntajeASuperar, jugador);
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, Ronda ronda) {
+        return new CompraCartaHandler(this, mazo, pantallaJuegoController, ronda, jugador);
     }
 
     private ValorCarta buscarValorCarta(int valor) {

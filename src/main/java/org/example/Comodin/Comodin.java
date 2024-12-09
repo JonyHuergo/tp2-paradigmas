@@ -2,13 +2,10 @@ package org.example.Comodin;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import org.example.Comprable;
+import org.example.*;
 import org.example.Controladores.PantallaJuegoController;
 import org.example.Handlers.CompraCartaHandler;
 import org.example.Handlers.CompraComodinHandler;
-import org.example.Jugada;
-import org.example.Jugador;
-import org.example.Mazo;
 
 import java.util.List;
 
@@ -39,9 +36,9 @@ public abstract class Comodin extends Comprable {
     }
 
     @Override
-    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, int puntajeASuperar) {
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, Ronda ronda) {
         System.out.println("Handler for comodin selected");
-        return new CompraComodinHandler(pantallaJuegoController, mazo, puntajeASuperar,this, jugador);
+        return new CompraComodinHandler(pantallaJuegoController, mazo, ronda,this, jugador);
     }
 
     public abstract void usar(Jugador jugador);

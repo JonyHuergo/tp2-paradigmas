@@ -6,6 +6,7 @@ import org.example.Carta;
 import org.example.Controladores.PantallaJuegoController;
 import org.example.Jugador;
 import org.example.Mazo;
+import org.example.Ronda;
 
 public class CompraCartaHandler implements EventHandler<ActionEvent> {
 
@@ -13,15 +14,15 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
     private final Mazo mazo;
     private final Jugador jugador;
     private PantallaJuegoController pantallaJuegoController;
-    private int puntajeASuperar;
+    private Ronda ronda;
 
 
-    public CompraCartaHandler(Carta carta, Mazo mazo, PantallaJuegoController pantallaJuegoController, int puntajeASuperar , Jugador jugador) {
+    public CompraCartaHandler(Carta carta, Mazo mazo, PantallaJuegoController pantallaJuegoController, Ronda ronda, Jugador jugador) {
         this.carta = carta;
         this.mazo = mazo;
         this.jugador = jugador;
         this.pantallaJuegoController = pantallaJuegoController;
-        this.puntajeASuperar = puntajeASuperar;
+        this.ronda =ronda;
 
     }
 
@@ -31,7 +32,7 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
         ActionHandler.actionSound();
         mazo.agregarCarta(carta);
         System.out.println(mazo.cantidadDeCartas());
-        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar, jugador);
+        pantallaJuegoController.iniciarPantallaJuego(mazo, ronda, jugador);
 
     }
 }

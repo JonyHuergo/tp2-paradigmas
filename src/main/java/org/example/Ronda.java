@@ -35,4 +35,15 @@ public class Ronda {
     public int getDescartes(){
         return descartes;
     }
+
+    public void descontarDescarte(){
+        if (descartes > 0){
+            descartes --;
+        }
+        else{
+            descartes = 0;
+        }
+
+
+    }
 }

@@ -236,4 +236,8 @@ public class Jugador {
     public ArrayList<Comodin> getComodines(){
         return comodines;
     }
+
+    public void setCantidadDeDescartes(int cantDeDescartes){
+        descartes = cantDeDescartes;
+    }
 }

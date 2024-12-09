@@ -39,7 +39,9 @@ public class FlujoRondasController {
 
             Ronda ronda = rondas.get(0);
             int descartes = ronda.getDescartes();
-            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda.getPuntajeASuperar(), jugador);
+            jugador.setCantidadDeDescartes(descartes);
+
+            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda, jugador);
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
 
 

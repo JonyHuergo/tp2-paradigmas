@@ -138,23 +138,15 @@ public class EndGameScreen extends VBox {
 
     private Button createMainMenuButton() {
         Button mainMenuButton = new Button();
-        // Cargar la imagen
+
         Image mainMenuImage = new Image(getClass().getResourceAsStream("/Botones/Exit.png"));
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
-
 
         mainMenuImageView.setFitWidth(100);
         mainMenuImageView.setFitHeight(60);
 
-
         mainMenuButton.setGraphic(mainMenuImageView);
-
-
         mainMenuButton.setStyle("-fx-background-color: transparent;");
-
-        mainMenuButton.setOnAction(event -> {
-            System.out.println("Volver al menú principal");
-        });
 
         return mainMenuButton;
     }
@@ -166,21 +158,11 @@ public class EndGameScreen extends VBox {
         Image mainMenuImage = new Image(getClass().getResourceAsStream("/Botones/NewGame.png"));
         ImageView mainMenuImageView = new ImageView(mainMenuImage);
 
-
         mainMenuImageView.setFitWidth(150);
         mainMenuImageView.setFitHeight(60);
 
-
         mainMenuButton.setGraphic(mainMenuImageView);
-
-
         mainMenuButton.setStyle("-fx-background-color: transparent;");
-
-
-        mainMenuButton.setOnAction(event -> {
-
-            System.out.println("Volver al menú principal");
-        });
 
         return mainMenuButton;
     }

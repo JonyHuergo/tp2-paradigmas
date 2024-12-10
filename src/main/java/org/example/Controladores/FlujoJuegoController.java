@@ -12,6 +12,7 @@ import org.example.Manos.Mano;
 import org.example.Pantallas.EndGameScreen;
 import org.example.Pantallas.JuegoScreen;
 import org.example.Pantallas.PantallaInicioScreen;
+import org.example.Pantallas.VictoryScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -135,10 +136,19 @@ public class FlujoJuegoController {
         int numeroRondaNueva = numeroRonda + 1;
         Mazo mazo = jugador.getMazo();
 
-
         if (puntaje >= ronda.getPuntajeASuperar()) {
-            PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRondaNueva, jugador);
-            nuevaPantallaTienda.iniciarPantallaTienda(rondas.get(numeroRondaNueva).obtenerTienda());
+            if (numeroRondaNueva >= rondas.size()) {
+                VictoryScreen pantallaDeVictoria = new VictoryScreen();
+                pantallaDeVictoria.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer));
+                pantallaDeVictoria.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
+                Scene scene = new Scene(pantallaDeVictoria, 800, 600);
+                stage.setScene(scene);
+            } else {
+                PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(
+                        stage, mediaPlayer, mazo, rondas, numeroRondaNueva, jugador
+                );
+                nuevaPantallaTienda.iniciarPantallaTienda(rondas.get(numeroRondaNueva).obtenerTienda());
+            }
         } else {
             mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
         }

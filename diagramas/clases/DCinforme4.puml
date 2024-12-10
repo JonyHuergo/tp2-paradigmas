@@ -1,0 +1,26 @@
+@startuml
+
+interface Activacion {
+    +activar(jugador: Jugador): void
+    +activar(jugada: Jugada): void
+}
+
+class InicializadorDeComodines{
+    - Map<String, Class<? extends Comodin>> REGISTRO
+    + Comodin crearComodin(String nombre, String descripcion, String activacion, int puntos, float multiplicador)
+    + Comodin crearComodinCombo(String nombre, String descripcion, List<Comodin> subComodines)
+}
+
+abstract class Comodin {
+    - String nombre
+    - String descripcion
+    - int puntaje
+    - float multiplicador
+    + Comodin(nombre: String, descripcion: String, activacion: Activacion, puntajeAdicional: int, multiplicador: float)
+    + usar(jugador: Jugador): void
+    + usar(jugada: Jugada): void
+}
+
+InicializadorDeComodines ..> Comodin: " instancia"
+Comodin -> Activacion
+@enduml

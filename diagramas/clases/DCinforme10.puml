@@ -1,0 +1,30 @@
+@startuml
+
+class InicializadorDeTarots {
+    - Map<String, Class<? extends Tarot>> REGISTRO
+
+}
+
+abstract Class Tarot {
+    # String nombre
+    # String descripcion
+    # String sobre
+    # String ejemplar
+    # int puntos
+    # float multiplicador
+    + Tarot(String nombre, String descripcion, String sobre, String ejemplar, int puntos, float multiplicador)
+    + void aplicarEfecto(ManoPoker manoPoker)
+    + String getRuta()
+}
+
+class TarotSobreCarta extends Tarot{
+    - Carta carta
+    + String getRuta()
+    + void aplicarEfecto(ManoPoker manoPoker)
+    + void usarSobre(Carta carta)
+}
+class TarotSobreMano extends Tarot{
+    + void aplicarEfecto(ManoPoker manoPoker)
+}
+InicializadorDeTarots ..> Tarot: " instancia"
+@enduml

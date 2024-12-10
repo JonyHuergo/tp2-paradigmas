@@ -1,0 +1,45 @@
+@startuml
+
+class Jugador {
+    - String nombre
+    - ArrayList<Carta> cartasDisponibles
+    - int limiteCartas
+    - ArrayList<Comodin> comodines
+    - int descartes
+    - int jugadas
+    - Jugada jugadaActual
+    - ManoPoker manoPoker
+    - int puntaje
+    + Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines)
+    + void repartirCartas()
+    + void evaluarMano()
+    + void elegirCarta(int pos)
+    + void jugarManoPoker(ManoPoker manoJugada)
+    + void actualizarPuntajeBase(int puntajeBase)
+    + void actualizarMult(float mult)
+    + void multiplicarMult(float mult)
+    + int calcularPuntosPorDescarte(int puntosPorDescarte)
+}
+class Jugada {
+    - ManoPoker manoPoker
+    - ArrayList<Comodin> comodines
+    - int puntaje
+    - int descartes
+    - ArrayList<Tarot> tarotsUsados
+
+    + Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes)
+    + Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes, ArrayList<Tarot> tarotsUsados)
+    + void actualizarPuntajeBase(int puntajeBase)
+    + void actualizarMult(float mult)
+    + void multiplicarMult(float mult)
+    + boolean tieneDescartes()
+    + boolean tieneManoDeTipo(String manoEsperada)
+    + int calcularPuntosPorDescarte(int puntosPorDescarte)
+    + float calcularPuntosPorDescarte(float puntosPorDescarte)
+    + float evaluarJugada()
+    + float calcularMultPorDescarte(float multiplicador)
+}
+
+Jugador ..> " * "Jugada
+
+@enduml

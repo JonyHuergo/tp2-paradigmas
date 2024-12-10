@@ -1,0 +1,41 @@
+@startuml 
+
+title Caso de "evaluarJugada()" con un TarotSobreCarta y un ComodinBase.
+actor TestCase
+participant ":Jugada"
+participant ":ManoPoker" 
+participant ":TarotSobreCarta"
+participant ":Carta" as C
+participant ":Carta" as Carta
+participant ":ComodinBase"
+participant ":ActivacionSiempre"
+
+TestCase -> ":Jugada": evaluarJugada()
+":Jugada" -> ":ManoPoker": definirTipoDeMano()
+loop por cada tarot en Jugada
+    ":Jugada"->":TarotSobreCarta":aplicarEfecto(manoPoker)
+    ":TarotSobreCarta" -> ":ManoPoker": mejorarCarta(carta, puntos, multiplicador)
+end
+loop por cada carta "C" en ManoPoker
+    ":ManoPoker" -> "C": nombreEsIgual(carta)
+    "C" -> "Carta": nombreEsIgual(nombre)
+    "Carta" --> "C": true || false
+    "C" --> ":ManoPoker": true || false
+end
+alt [true]
+    ":ManoPoker" -> "Carta": agregarPuntos(puntos)
+    ":ManoPoker" -> "Carta": agregarMultiplicador(multiplicador)
+end
+loop por cada comodin en Jugada
+    ":Jugada" -> ":ComodinBase": usar(self)
+    ":ComodinBase" -> ":ActivacionSiempre": revisarCondicion(Jugada)
+    ":ActivacionSiempre" --> ":ComodinBase": true
+    ":ComodinBase" -> ":Jugada": actualizarPuntaje(puntaje)
+    ":ComodinBase" -> ":Jugada": multiplicarMultiplicador(multiplicador)
+end
+":Jugada" -> ":ManoPoker": sumarManoPoker()
+":Jugada" -> ":ManoPoker": hacerCalculo()
+"ManoPoker" --> ":Jugada": puntajeTotal
+":Jugada" --> "TestCase": puntajeTotal
+
+@enduml

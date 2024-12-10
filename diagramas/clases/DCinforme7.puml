@@ -1,0 +1,26 @@
+@startuml
+abstract class EvaluadorAbstracto {
+    - EvaluadorMano siguiente
+    + void setSiguiente(EvaluadorMano siguiente)
+    + Mano evaluar(ArrayList<Carta> cartas)
+    + abstract Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorColor extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean esColor(ArrayList<Carta> cartas)
+}
+
+
+class EvaluadorEscalera extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+class EvaluadorEscaleraColor extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean esEscalera(ArrayList<Carta> cartas)
+    - boolean esColor(ArrayList<Carta> cartas)
+}
+
+
+@enduml

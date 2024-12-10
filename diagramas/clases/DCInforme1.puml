@@ -1,0 +1,57 @@
+@startuml
+
+class Juego {
+    - int cantidadRondas
+    - boolean juegoGanado
+    + Juego(Mazo mazo)
+    + void jugar()
+    + void PartidaPerdida()
+    + void mostrarRonda(Stage primaryStage, ArrayList<Carta> cartasIniciales, int puntajeASuperar)
+}
+
+class Jugador {
+    - String nombre
+    - ArrayList<Carta> cartasDisponibles
+    - int limiteCartas
+    - ArrayList<Comodin> comodines
+    - int descartes
+    - int jugadas
+    - Jugada jugadaActual
+    - ManoPoker manoPoker
+    - int puntaje
+    + Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines)
+    + void repartirCartas()
+    + void evaluarMano()
+    + void elegirCarta(int pos)
+    + void jugarManoPoker(ManoPoker manoJugada)
+    + void actualizarPuntajeBase(int puntajeBase)
+    + void actualizarMult(float mult)
+    + void multiplicarMult(float mult)
+    + int calcularPuntosPorDescarte(int puntosPorDescarte)
+}
+
+class Mazo {
+    - ArrayList<Carta> cartas
+    - int cantidadDeCartas()
+    + ArrayList<Carta> repartir(int cantidad)
+    + ArrayList<Carta> repartir(ArrayList<Carta> cartasDisponibles, int cantidad)
+}
+
+class Ronda {
+    - int numero
+    - int manos
+    - int descartes
+    - int limiteDePuntos
+    - Tienda tienda
+    + Ronda(int numero, int manos, int descartes, int limiteDePuntos, Tienda tienda)
+    + Ronda(int limiteDePuntos)
+    + boolean esGanada(Jugador jugador)
+}
+
+
+Juego o-- Jugador
+Jugador o-- Mazo
+Juego *-- "  *"Ronda
+Juego ..> Mazo
+
+@enduml

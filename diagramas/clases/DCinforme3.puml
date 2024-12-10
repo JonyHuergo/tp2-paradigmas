@@ -1,0 +1,54 @@
+@startuml Diagrama de Clases Completo
+
+class AnalizadorMano {
+    - EvaluadorMano evaluadorInicial
+    + Mano analizarMano(ArrayList<Carta> cartas)
+}
+
+class ManoPoker {
+    - ArrayList<Carta> cartas
+    + ManoPoker(ArrayList<Carta> cartas)
+    + void agregarCarta(Carta carta)
+    + void removerCarta(Carta carta)
+    + float evaluar()
+    + void sumarValorCartas()
+    + float hacerCalculo()
+    + boolean manoNombreEsIgual(String nombre)
+    + void definirTipodeMano()
+    + Mano calcularMano()
+    + void actualizarPuntajeBase(int puntaje)
+    + void actualizarMultiplicadorBase(float mult)
+    + void multiplicarMultiplicadorBase(float mult)
+    + void mejorarCarta(Carta carta, int puntos, float multiplicador)
+    + ManoPoker clonar()
+}
+
+abstract class EvaluadorAbstracto implements EvaluadorMano {
+    - EvaluadorMano siguiente
+    + void setSiguiente(EvaluadorMano siguiente)
+    + Mano evaluar(ArrayList<Carta> cartas)
+    + abstract Mano evaluarMano(ArrayList<Carta> cartas)
+}
+
+
+abstract class Mano {
+    - String nombre
+    - int puntajeBase
+    - float multiplicadorBase
+    + Mano(String nombre, int puntajeBase, float multiplicadorBase)
+    + boolean nombreEsIgual(String nombre)
+    + void actualizarPuntajeBase(int puntaje)
+    + void actualizarMultiplicadorBase(float mult)
+    + void multiplicarMultiplicadorBase(float mult)
+    + float calcular(ArrayList<Carta> cartas)
+    + void sumarValorCartas(ArrayList<Carta> cartas)
+    + float hacerCalculo()
+}
+interface EvaluadorMano {
+    + Mano evaluar(ArrayList<Carta> cartas)
+}
+
+ManoPoker -> Mano
+ManoPoker -> AnalizadorMano
+AnalizadorMano -> EvaluadorMano
+@enduml

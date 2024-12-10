@@ -1,0 +1,24 @@
+@startuml Diagrama de secuencia simplificado del metodo jugar de Jugador.
+
+title Diagrama de secuencia simplificado del metodo jugar de Jugador.
+actor TestCase
+participant ":Jugador"
+participant ":Jugada"
+participant ":Mazo"
+participant ":ManoPoker"
+
+TestCase -> ":Jugador": jugar()
+":Jugador" -> ":Jugador": crearJugada()
+":Jugador" -> ":Jugada": Jugada(manoPoker, comodines, descartes, tarotsUsados)
+":Jugador" -> ":Jugador": reiniciarMano()
+":Jugador" -> "Mazo": repartir(cartasDisponibles, limiteCartas)
+":Jugador" -> ":Jugador": evaluarJugada()
+loop por cada jugada en Jugador
+    ":Jugador" -> ":Jugada": evaluarJugada()
+    ":Jugada" -> "ManoPoker": definirTipoDeMano()
+end
+":Jugada" -> "ManoPoker": sumarValorCartas()
+":Jugada" -> "ManoPoker": hacerCalculo()
+":Jugada" --> ":Jugador": puntaje
+
+@enduml

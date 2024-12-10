@@ -10,8 +10,10 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.example.*;
 import org.example.Controladores.PantallaJuegoController;
@@ -33,15 +35,44 @@ public class TiendaScreen extends VBox {
 
     public TiendaScreen(Tienda tienda, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, List<Ronda> rondas, int numeroRonda, Jugador jugador) {
         super();
-        this.setStyle("-fx-background-color: green;");
+        this.setStyle(
+                "-fx-background-color: linear-gradient(to bottom, #4d7e64, #112e22);" +
+                        "-fx-border-color: #2b2b2b; -fx-border-width: 20; -fx-border-radius: 10;"
+        );
+
+
         this.setSpacing(10);
         this.setPadding(new javafx.geometry.Insets(20));
 
+
+        Image pokerChipImage = new Image(getClass().getResourceAsStream("/poker-chip.png"));
+        ImageView leftChip = new ImageView(pokerChipImage);
+        ImageView rightChip = new ImageView(pokerChipImage);
+
+// Ajusta el tamaño de las imágenes si es necesario
+        leftChip.setFitWidth(70);  // Ancho de la imagen
+        leftChip.setFitHeight(70); // Alto de la imagen
+        rightChip.setFitWidth(70);
+        rightChip.setFitHeight(70);
+
         // Título
-        Label titulo = new Label("Tienda");
-        titulo.setStyle("-fx-font-size: 32px; -fx-text-fill: white; -fx-font-weight: bold;");
+        Label titulo = new Label("TIENDA");
+        Font arcadeFont = Font.loadFont(
+                getClass().getResourceAsStream("/Roboto-Black.ttf"), 72
+        );
+        titulo.setStyle(    "-fx-text-fill: white;" +
+                "-fx-font-weight: bold;" +
+                "-fx-effect: dropshadow(gaussian, black, 4, 0.5, 0, 0);"
+        );
+        titulo.setFont(arcadeFont);
         titulo.setAlignment(Pos.CENTER);
-        this.getChildren().add(titulo);
+
+        HBox titleBox = new HBox(10); // 10 es el espacio entre los elementos
+        titleBox.setAlignment(Pos.CENTER);
+        titleBox.getChildren().addAll(leftChip, titulo, rightChip);
+
+// Agrega el HBox al diseño principal
+        this.getChildren().add(titleBox);
 
         this.comodines = tienda.obtenerComodines();
         this.tarots = tienda.obtenerTarots();
@@ -73,7 +104,7 @@ public class TiendaScreen extends VBox {
 
         deseleccionarTodasLasCartas();
 
-        // Actualiza el botón de avanzar
+
     }
 
 
@@ -92,7 +123,7 @@ public class TiendaScreen extends VBox {
         }
     }
     private FlowPane crearYAsignarCartas(List<Comprable> cartas, Stage stage, MediaPlayer mediaPlayer, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
-        Label descripcionLabel = new Label("Descripción de la carta seleccionada");
+        Label descripcionLabel = new Label(" ");
         descripcionLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10px;");
         this.getChildren().add(descripcionLabel);
 
@@ -105,14 +136,7 @@ public class TiendaScreen extends VBox {
         Button avanzarButton = new Button("Avanzar");
         avanzarButton.setStyle("-fx-font-size: 16px; -fx-background-color: yellow;");
         avanzarButton.getStyleClass().add("button-avanzar"); // Agregar clase para referencia futura
-
-        // Crear un manejador para el botón de avanzar
-//        if (cartaSeleccionada != null) {
-//            EventHandler<ActionEvent> handler = cartaSeleccionada.crearHandler(
-//                    new PantallaJuegoController(stage, mediaPlayer),
-//                    mazo, jugador, puntajeASuperar);
-//            avanzarButton.setOnAction(handler);
-//        }
+        
 
         // Un único manejador para todos los botones
         EventHandler<ActionEvent> seleccionHandler = event -> {

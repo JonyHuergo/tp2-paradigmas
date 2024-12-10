@@ -32,7 +32,7 @@ public class Juego {
 
     public void jugar(Stage primaryStage) {
         while (!juegoGanado) {
-            for (int i = ronda.size() - 1; i >= 0; i--) { // RREVISAR ITERACIÓN DE RONDA
+            for (int i = ronda.size() - 1; i >= 0; i--) {
                 Ronda currentRonda = ronda.get(i);
                 ArrayList<Carta> cartasIniciales = jugador.getMazo().repartirCartas(5);
                 int puntajeASuperar = currentRonda.getPuntajeASuperar();

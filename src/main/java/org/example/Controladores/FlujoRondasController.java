@@ -33,7 +33,7 @@ public class FlujoRondasController {
             Juego juego = new Juego(mazo);
             Jugador jugador = juego.getJugador();
 
-            int numeroRonda = 0;
+            int numeroRonda = 5;
             Ronda ronda = rondas.get(numeroRonda);
             int descartes = ronda.getDescartes();
             jugador.setCantidadDeDescartes(descartes);

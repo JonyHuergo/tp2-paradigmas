@@ -191,8 +191,6 @@ public class TiendaScreen extends VBox {
         if (cartaSeleccionada != null) {
             EventHandler<ActionEvent> handler = cartaSeleccionada.crearHandler(new PantallaJuegoController(stage, mediaPlayer), mazo, jugador, rondas, numeroRonda);
             avanzarButton.setOnAction(handler);
-//            avanzarButton.setOnAction(new AvanzarButtonHandler(stage, mediaPlayer, mazo, puntajeASuperar));
-
         }
     }
 

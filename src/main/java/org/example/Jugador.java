@@ -11,14 +11,14 @@ import java.util.ArrayList;
 public class Jugador {
     private String nombre;
     private Mazo mazo;
-    private ArrayList<Carta> cartasDisponibles = new ArrayList<>();  // cambiar debido al problema con new
+    private ArrayList<Carta> cartasDisponibles = new ArrayList<>();
     private int limiteCartas = 8;
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines = new ArrayList<>();
     private ArrayList<Tarot> tarotsUsados = new ArrayList<>();
     private int puntaje;
-    private int descartes;//CADA RONDA TIENE DISTINTOS DESCARTES Y CANTIDAD DE MANOS CAMBIAR ESTO (usar un getter?)
-    private int jugadas;
+    private int descartes = 3;
+    private int jugadas = 5;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
     private boolean perdio = false;
@@ -178,7 +178,7 @@ public class Jugador {
             jugadas --;
             return evaluarJugadas();
         } else{
-            perder();
+//            perder();
         }
         return 0;
     }
@@ -196,7 +196,7 @@ public class Jugador {
     }
 
     private void perder() {
-        mostrarAlerta("Perdiste.");
+//        mostrarAlerta("Perdiste.");
         perdio = true;
     }
 
@@ -290,5 +290,9 @@ public class Jugador {
 
     public boolean perdio() {
         return perdio;
+    }
+
+    public void agregarCartaMazo(Carta carta){
+        mazo.agregarCarta(carta);
     }
 }

@@ -34,8 +34,7 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         System.out.println("Card purchased: " + carta.getPalo());
         ActionHandler.actionSound();
-        mazo.agregarCarta(carta);
-        System.out.println(mazo.cantidadDeCartas());
+        jugador.agregarCartaMazo(carta);
         pantallaJuegoController.iniciarPantallaJuego(mazo, rondas, numeroRonda, jugador);
 
     }

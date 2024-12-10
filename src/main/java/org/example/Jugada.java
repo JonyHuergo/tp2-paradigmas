@@ -65,7 +65,6 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
 
     public float evaluarJugada(){
 
-        System.out.println("Cartas seleccionadas:");
         for (Carta carta: manoPoker.getCartas()){
             System.out.println(carta.getPalo() + " " + carta.getPuntaje());
         }
@@ -74,7 +73,6 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         manoPoker.definirTipodeMano();
         manoPoker.calcularCartasRelevantes();
 
-        System.out.println("Cartas seleccionadas:");
         for (Carta carta: manoPoker.getCartas()){
             System.out.println(carta.getPalo() + " " + carta.getPuntaje());
         }

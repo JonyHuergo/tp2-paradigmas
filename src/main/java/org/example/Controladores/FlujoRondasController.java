@@ -17,33 +17,33 @@ public class FlujoRondasController {
             this.stage = stage;
         }
 
-        public void iniciarFlujo(){
+        public void iniciarFlujo( List<Ronda> rondas, int numeroRonda, Jugador jugador){
+//            Juego juego = new Juego();
+//            LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
+//            ArrayList<Carta> cartasLeidas = null;
+////            List<Ronda> rondas = null;
+//            try {
+//                rondas = lectorArchivosJson.leerBalatro();
+//                cartasLeidas = lectorArchivosJson.leerMazo();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//                System.out.println("Error al leer los archivos JSON.");
+//            }
+//            Mazo mazo = new Mazo(cartasLeidas);
+//            Juego juego = new Juego(mazo);
+////            Jugador jugador = juego.getJugador();
+//
+////            int numeroRonda = 0;
+//            Ronda ronda = rondas.get(numeroRonda);
+//            int descartes = ronda.getDescartes();
+//            jugador.setCantidadDeDescartes(descartes);
+//
+//            int manos= ronda.getCantidadDeManos();
+//            jugador.setCantidadDeManos(manos);
 
-            LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
-            ArrayList<Carta> cartasLeidas = null;
-            List<Ronda> rondas = null;
-            try {
-                rondas = lectorArchivosJson.leerBalatro();
-                cartasLeidas = lectorArchivosJson.leerMazo();
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Error al leer los archivos JSON.");
-            }
-            Mazo mazo = new Mazo(cartasLeidas);
-            Juego juego = new Juego(mazo);
-            Jugador jugador = juego.getJugador();
-
-            int numeroRonda = 5;
             Ronda ronda = rondas.get(numeroRonda);
-            int descartes = ronda.getDescartes();
-            jugador.setCantidadDeDescartes(descartes);
 
-            int manos= ronda.getCantidadDeManos();
-            jugador.setCantidadDeManos(manos);
-
-
-
-            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda, jugador);
+            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, null, rondas, numeroRonda, jugador);
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
 
 

@@ -8,6 +8,7 @@ import org.example.Handlers.CollectionButtonHandler;
 import org.example.Handlers.ExitButtonHandler;
 import org.example.Handlers.OptionsButtonHandler;
 import org.example.Handlers.PlayButtonHandler;
+import org.example.Jugador;
 import org.example.LectorArchivosJson;
 import org.example.Pantallas.PantallaInicioScreen;
 import org.example.Ronda;
@@ -25,12 +26,12 @@ public class PantallaInicioController {
         this.mediaPlayer = mediaPlayer;
     }
 
-    public void iniciarPantallaInicio() {
+    public void iniciarPantallaInicio(List<Ronda> rondas, int numeroRonda, Jugador jugador) {
 
         PantallaInicioScreen pantallaInicio = new PantallaInicioScreen();
 
         // Asignar los controladores a cada botón
-        pantallaInicio.playButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer));
+        pantallaInicio.playButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, numeroRonda, jugador));
         pantallaInicio.optionsButton.setOnAction(new OptionsButtonHandler(stage, mediaPlayer));
         pantallaInicio.collectionButton.setOnAction(new CollectionButtonHandler(stage, mediaPlayer));
         pantallaInicio.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));

@@ -17,9 +17,6 @@ public class FlujoRondasController {
             this.stage = stage;
         }
 
-
-
-
         public void iniciarFlujo(){
 
             LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
@@ -36,11 +33,6 @@ public class FlujoRondasController {
             Juego juego = new Juego(mazo);
             Jugador jugador = juego.getJugador();
 
-
-
-
-
-
             for(int i = 0; i <= rondas.size()-1; i++) {
                 Ronda ronda = rondas.get(0);
                 int descartes = ronda.getDescartes();
@@ -53,8 +45,6 @@ public class FlujoRondasController {
 
                 PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda, jugador);
                 pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
-
-
             }
 
 

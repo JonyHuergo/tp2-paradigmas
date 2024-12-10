@@ -118,9 +118,6 @@ public class PantallaInicioScreen extends VBox {
             backgroundView.setTranslateX((mouseX - 400) * -0.01); // Ajusta el multiplicador según el efecto deseado
             backgroundView.setTranslateY((mouseY - 300) * -0.01);
         });
-
-        // Configuración de la escena
-
     }
 
     private Button createStyledButton(String imagePath, double width, double height) {
@@ -165,8 +162,6 @@ public class PantallaInicioScreen extends VBox {
         return button;
     }
 
-
-
     private void animateCard(ImageView cardImage) {
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), cardImage);
         rotateTransition.setFromAngle(0);
@@ -206,32 +201,5 @@ public class PantallaInicioScreen extends VBox {
         text.setOnMouseEntered(e -> text.setFill(Color.GOLD)); // Cambia a color dorado al pasar el mouse
         text.setOnMouseExited(e -> text.setFill(Color.WHITE)); // Regresa al color original
     }
-//
-//    private void handlePlay() {
-//        LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
-//        try {
-//            List<Ronda> rondas = lectorArchivosJson.leerBalatro();
-//            ArrayList<Carta> mazo = lectorArchivosJson.leerMazo();
-//
-//            Juego juego = new Juego(new Mazo(mazo));
-//            juego.setRondas(rondas);
-//            System.out.println("Juego iniciado.");
-////            juego.jugar(primaryStage);
-//            System.out.println("Juego terminado.");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            System.out.println("Error al leer los archivos JSON.");
-//        }
-//    }
-//
-//    private void handleOptions() {
-//        // TODO: Implementar funcionalidad de botón opciones?
-//        System.out.println("Botón Options");
-//    }
-//
-//    private void handleCollection() {
-//        // TODO: Implementar funcionalidad de botón colección?
-//        System.out.println("Botón Collection");
-//    }
 }
 

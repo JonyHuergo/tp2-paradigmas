@@ -12,7 +12,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class EndGameScreen extends VBox {
+    public Button newGameButton;
     public Button exitButton;
+
     public EndGameScreen() {
         StackPane root = new StackPane();
         String textColor = "#ffffff";
@@ -28,18 +30,15 @@ public class EndGameScreen extends VBox {
         endGameView.setFitWidth(800);
         endGameView.setFitHeight(600);
 
-
         GaussianBlur blurEffect = new GaussianBlur(10); // Cambia el valor según la intensidad deseada
         endGameView.setEffect(blurEffect);
         root.getChildren().add(0, endGameView);
-
 
         this.setStyle(backgroundStyle);
 
         Font arcadeFont = Font.loadFont(
                 getClass().getResourceAsStream("/arcadeclassic.regular.ttf"), 72
         );
-
 
         Label title = new Label("GAME OVER");
         title.setFont(arcadeFont);
@@ -65,7 +64,7 @@ public class EndGameScreen extends VBox {
         this.setAlignment(Pos.CENTER); // Centra todo en el VBox
 
 
-        VBox statsBox = new VBox(10);
+        /*VBox statsBox = new VBox(10);
         statsBox.setPadding(new Insets(20));
         statsBox.setStyle("-fx-background-color: " + panelColor + "; -fx-background-radius: 10;");
         statsBox.setAlignment(Pos.CENTER);
@@ -80,10 +79,10 @@ public class EndGameScreen extends VBox {
                 createStatRow("Times Rerolled", "0", textColor),
                 createStatRow("New Discoveries", "11", textColor),
                 createStatRow("Seed", "TUTORIAL", textColor)
-        );
+        );*/
 
         // Información adicional (derecha)
-        VBox additionalBox = new VBox(10);
+        /*VBox additionalBox = new VBox(10);
         additionalBox.setPadding(new Insets(20));
         additionalBox.setStyle("-fx-background-color: " + panelColor + "; -fx-background-radius: 10;");
         additionalBox.setAlignment(Pos.CENTER);
@@ -91,21 +90,22 @@ public class EndGameScreen extends VBox {
                 createStatRow("Ante", "2", textColor),
                 createStatRow("Round", "5", textColor),
                 createStatRow("Defeated By", "The Wall", highlightColor)
-        );
+        );*/
 
         // Contenedor principal de estadísticas
-        HBox statsContainer = new HBox(20, statsBox, additionalBox);
-        statsContainer.setAlignment(Pos.CENTER);
+        //HBox statsContainer = new HBox(20, statsBox, additionalBox);
+        //statsContainer.setAlignment(Pos.CENTER);
 
         // Botones
-        Button newRun = createNewGameButton();
+        newGameButton = createNewGameButton();
         exitButton = createMainMenuButton();
-        HBox buttonsBox = new HBox(20, newRun, exitButton);
+        HBox buttonsBox = new HBox(20, newGameButton, exitButton);
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.setPadding(new Insets(20, 0, 0, 0));
 
         // Agregar todo al VBox principal
-        this.getChildren().addAll(title, statsContainer, buttonsBox);
+        //this.getChildren().addAll(title, statsContainer, buttonsBox);
+        this.getChildren().addAll(title, buttonsBox);
         this.setAlignment(Pos.TOP_CENTER);
         this.setPadding(new Insets(20));
     }

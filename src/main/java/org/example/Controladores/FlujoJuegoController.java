@@ -6,8 +6,12 @@ import javafx.scene.control.Button;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.example.*;
+import org.example.Handlers.ExitButtonHandler;
+import org.example.Handlers.PlayButtonHandler;
 import org.example.Manos.Mano;
+import org.example.Pantallas.EndGameScreen;
 import org.example.Pantallas.JuegoScreen;
+import org.example.Pantallas.PantallaInicioScreen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,6 +121,15 @@ public class FlujoJuegoController {
 
     public void jugarMano() {
         float puntaje = jugador.jugar(numeroRonda);
+
+        if (jugador.perdio()){
+            EndGameScreen pantallaDeDerrota = new EndGameScreen();
+            pantallaDeDerrota.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer));
+            pantallaDeDerrota.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
+            Scene scene = new Scene(pantallaDeDerrota, 800, 600);
+            stage.setScene(scene);
+            return;
+        }
 
         Ronda ronda = rondas.get(numeroRonda);
         int numeroRondaNueva = numeroRonda + 1;

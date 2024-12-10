@@ -1,7 +1,9 @@
 package org.example;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import org.example.Comodin.Comodin;
+import org.example.Pantallas.PantallaInicioScreen;
 import org.example.Tarot.Tarot;
 
 import java.util.ArrayList;
@@ -19,6 +21,7 @@ public class Jugador {
     private int jugadas;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
+    private boolean perdio = false;
 
     public Jugador(){
         mazo = new Mazo();
@@ -194,6 +197,7 @@ public class Jugador {
 
     private void perder() {
         mostrarAlerta("Perdiste.");
+        perdio = true;
     }
 
 
@@ -284,5 +288,7 @@ public class Jugador {
         return descartes;
     }
 
-
+    public boolean perdio() {
+        return perdio;
+    }
 }

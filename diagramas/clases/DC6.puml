@@ -1,0 +1,18 @@
+@startuml
+abstract class EvaluadorAbstracto {
+    - EvaluadorMano siguiente
+    + void setSiguiente(EvaluadorMano siguiente)
+    + Mano evaluar(ArrayList<Carta> cartas)
+    + abstract Mano evaluarMano(ArrayList<Carta> cartas)
+}
+class EvaluadorPar extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+class EvaluadorTrio extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+    - boolean tieneRepetidos(ArrayList<Carta> cartas, int cantidad)
+}
+class EvaluadorDoblePar extends EvaluadorAbstracto {
+    + Mano evaluarMano(ArrayList<Carta> cartas)
+}
+@enduml

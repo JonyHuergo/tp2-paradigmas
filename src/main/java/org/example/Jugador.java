@@ -16,8 +16,8 @@ public class Jugador {
     private ArrayList<Comodin> comodines = new ArrayList<>();
     private ArrayList<Tarot> tarotsUsados = new ArrayList<>();
     private int puntaje;
-    private int descartes = 3;
-    private int jugadas = 5;
+    private int descartes;
+    private int jugadas;
     private Jugada jugadaActual;
     private ArrayList<Jugada> listadoJugadas = new ArrayList<>();
     private boolean perdio = false;
@@ -112,10 +112,10 @@ public class Jugador {
     }
 
     public void descartarCartas(){
-        if (descartes != 0){
+        if (descartes != 0) {
             reiniciarMano();
             descartes --;
-        } else{
+        } else {
         mostrarAlerta("Ya usó todos los descartes posibles.");
         }
     }
@@ -126,20 +126,15 @@ public class Jugador {
         int cartasARepartir = manoPoker.getCantidadDeCartas();
         ArrayList<Carta> cartasRepartidas = mazo.repartirCartas(cartasARepartir);
 
-
         int indiceRepartida = 0;
-
 
         for (int i = 0; i < copiaCartasIniciales.size(); i++) {
             Carta carta = copiaCartasIniciales.get(i);
-
             if (manoPoker.tieneCarta(carta)) {
                 cartasDisponibles.set(i, cartasRepartidas.get(indiceRepartida));
                 indiceRepartida++;
             }
         }
-
-
         manoPoker = new ManoPoker();;
     }
 
@@ -164,18 +159,6 @@ public class Jugador {
         return manoPoker.getMultiplicadorBase();
     }
 
-    public float jugar(){
-        if (jugadas != 0) {
-            crearJugada();
-            reiniciarMano();
-            jugadas --;
-            return evaluarJugadas();
-        } else{
-//            perder();
-        }
-        return 0;
-    }
-
     public float jugar(int numeroRonda){
         if (jugadas != 0) {
             crearJugada(numeroRonda);
@@ -191,7 +174,6 @@ public class Jugador {
     private void perder() {
         perdio = true;
     }
-
 
     public void crearJugada(){
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
@@ -224,7 +206,6 @@ public class Jugador {
         }
         return(aux);
     }
-
 
     public ArrayList<Carta> getCartasDisponibles(){
         return(cartasDisponibles);

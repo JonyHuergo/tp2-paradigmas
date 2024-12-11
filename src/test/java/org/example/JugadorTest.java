@@ -26,7 +26,10 @@ public class JugadorTest {
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -44,7 +47,7 @@ public class JugadorTest {
 
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker1);
-        jugador.jugar();
+        jugador.jugar(0);
 
         // Jugada 2
         ManoPoker manoPoker2 = new ManoPoker();
@@ -70,6 +73,10 @@ public class JugadorTest {
 
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker1);
+
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
         jugador.crearJugada();
 
         // Jugada 2
@@ -77,7 +84,7 @@ public class JugadorTest {
         manoPoker2.agregarCarta(new Carta("diamantes", 10));
         jugador.setManoPoker(manoPoker2);
 
-        float puntajeObtenido = jugador.jugar();
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }

@@ -8,8 +8,6 @@ import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -130,7 +128,9 @@ public class JuegoTest {
         // Ronda 2
         numeroRonda = 1;
         ronda = rondas.get(numeroRonda);
-        ronda.setAtributosJugador(jugador);
+        //ronda.setAtributosJugador(jugador);
+        jugador.setCantidadDeManos(ronda.getCantidadDeManos());
+        jugador.setCantidadDeDescartes(ronda.getDescartes());
 
         // Tienda Ronda 2
         tienda = ronda.obtenerTienda();
@@ -149,18 +149,12 @@ public class JuegoTest {
         System.out.print("  ");
         System.out.print(puntaje);
 
-        /*
-        //Ronda 3: Pierde esta ultima ronda
-        ArrayList<Carta> mazoMockeado3 = new ArrayList<>();
-
+        // Ronda 3: Pierde esta ultima ronda
         numeroRonda = 2;
         ronda = rondas.get(numeroRonda);
-
-        descartes = ronda.getDescartes();
-        jugador.setCantidadDeDescartes(descartes);
-
-        manos = ronda.getCantidadDeManos();
-        jugador.setCantidadDeManos(manos);
+        //ronda.setAtributosJugador(jugador);
+        jugador.setCantidadDeManos(ronda.getCantidadDeManos());
+        jugador.setCantidadDeDescartes(ronda.getDescartes());
 
         // Tienda Ronda 3
         tienda = ronda.obtenerTienda();
@@ -169,16 +163,12 @@ public class JuegoTest {
 
         // Juego Ronda 3
         puntaje = 0;
-        while (puntaje < ronda.getPuntajeASuperar() && jugador.getCantidadJugadas() > 0) {
-            mazoMockeado3.add(new Carta("trebol", 2));
-            for (Carta cartaElegida : mazoRonda3.repartirCartas(1)) {
+        while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {
+            for (Carta cartaElegida : mazoRonda3.repartirCartas(1)) {//(5+2+30)*(1+3)=148   es el tarot que esta bug
                 jugador.agregarCarta(cartaElegida);
             }
             puntaje = jugador.jugar(numeroRonda);
-            assertFalse(jugador.perdio());
         }
-
-        assertTrue(puntaje < ronda.getPuntajeASuperar());
-*/
+        assertTrue(jugador.perdio());
     }
 }

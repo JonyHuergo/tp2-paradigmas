@@ -19,7 +19,6 @@ public class Juego {
     private Mazo mazo;
 
     public Juego(){
-
     }
 
     public void iniciar(Stage primaryStage){

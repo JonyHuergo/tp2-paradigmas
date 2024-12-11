@@ -30,7 +30,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -55,7 +58,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -74,7 +80,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -98,7 +107,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -138,7 +150,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodinesDelJugador);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }

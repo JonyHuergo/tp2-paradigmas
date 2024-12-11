@@ -15,7 +15,8 @@ public abstract class Comodin extends Comprable {
     protected int puntajeAdicional;
     protected float multiplicador;
 
-    public Comodin(String nombre, String descripcion, Activacion activacion, int puntajeAdicional, float multiplicador) {
+    public Comodin(String nombre, String descripcion, Activacion activacion, int puntajeAdicional,
+            float multiplicador) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.activacion = activacion;
@@ -35,9 +36,9 @@ public abstract class Comodin extends Comprable {
     }
 
     @Override
-    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
-        System.out.println("Handler for comodin selected");
-        return new CompraComodinHandler(pantallaJuegoController, mazo, rondas, numeroRonda,this, jugador);
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo,
+            Jugador jugador, List<Ronda> rondas, int numeroRonda) {
+        return new CompraComodinHandler(pantallaJuegoController, mazo, rondas, numeroRonda, this, jugador);
     }
 
     public abstract void usar(Jugador jugador);
@@ -45,12 +46,12 @@ public abstract class Comodin extends Comprable {
     public abstract void usar(Jugada jugada);
 
     @Override
-    public String getRuta(){
+    public String getRuta() {
         return "/Comodines/" + nombre + ".png";
     }
 
     @Override
-    public String getDescripcion(){
+    public String getDescripcion() {
         return descripcion;
     }
 }

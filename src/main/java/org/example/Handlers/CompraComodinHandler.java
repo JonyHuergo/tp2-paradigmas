@@ -19,7 +19,8 @@ public class CompraComodinHandler implements EventHandler<ActionEvent> {
     private List<Ronda> rondas;
     private int numeroRonda;
 
-    public CompraComodinHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, List<Ronda> rondas, int numeroRonda, Comodin comodin, Jugador jugador) {
+    public CompraComodinHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, List<Ronda> rondas,
+            int numeroRonda, Comodin comodin, Jugador jugador) {
         this.comodin = comodin;
         this.jugador = jugador;
         this.pantallaJuegoController = pantallaJuegoController;
@@ -29,17 +30,14 @@ public class CompraComodinHandler implements EventHandler<ActionEvent> {
     }
 
     protected void executeCompra() {
-        System.out.println("hola");
         jugador.agregarComodin(comodin);
     }
-
 
     @Override
     public void handle(ActionEvent event) {
 
         jugador.agregarComodin(comodin);
         ActionHandler.actionSound();
-        System.out.println(jugador.getCantDeComodines());
         pantallaJuegoController.iniciarPantallaJuego(mazo, rondas, numeroRonda, jugador);
     }
 }

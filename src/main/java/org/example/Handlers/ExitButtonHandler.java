@@ -8,9 +8,9 @@ public class ExitButtonHandler extends ButtonHandler {
     public ExitButtonHandler(Stage stage, MediaPlayer mediaPlayer) {
         super(stage, mediaPlayer);
     }
+
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Saliendo del juego...");
         System.exit(0);
     }
 }

@@ -22,7 +22,8 @@ public class JuegoTest {
         List<Ronda> rondasMockeadas = new ArrayList<>();
 
         List<Comodin> comodines = new ArrayList<>();
-        comodines.add(new ComodinPorManoJugada("Comodin Afortunado", "+15 al multiplicador si la mano jugada contiene una escalera de color", "escalera de color", 1, 15));
+        comodines.add(new ComodinPorManoJugada("Comodin Afortunado",
+                "+15 al multiplicador si la mano jugada contiene una escalera de color", "escalera de color", 1, 15));
         comodines.add(new ComodinPorDescarte(50, 1, "siempre"));
 
         List<Tarot> tarots = new ArrayList<>();
@@ -115,27 +116,27 @@ public class JuegoTest {
         List<Comodin> comodinesTienda = tienda.obtenerComodines();
         jugador.agregarComodin(comodinesTienda.get(0));
 
-        // Juego Ronda 1: Pasa la primera ronda con puntaje (100 + 20) * (8 + 15) = 2760 * 2
+        // Juego Ronda 1: Pasa la primera ronda con puntaje (100 + 20) * (8 + 15) = 2760
+        // * 2
         float puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {
-           for (Carta cartaElegida : mazoRonda1.repartirCartas(5)) {
-               jugador.agregarCarta(cartaElegida);
-           }
-           puntaje = jugador.jugar(numeroRonda);
+            for (Carta cartaElegida : mazoRonda1.repartirCartas(5)) {
+                jugador.agregarCarta(cartaElegida);
+            }
+            puntaje = jugador.jugar(numeroRonda);
         }
-        System.out.println(puntaje);
 
         // Ronda 2: Pasa la segunda ronda con puntaje (60+(4x4)+30)*(7+3) = 1060 * 4
         numeroRonda = 1;
         ronda = rondas.get(numeroRonda);
-        //ronda.setAtributosJugador(jugador);
+        // ronda.setAtributosJugador(jugador);
         jugador.setCantidadDeManos(ronda.getCantidadDeManos());
         jugador.setCantidadDeDescartes(ronda.getDescartes());
 
         // Tienda Ronda 2
         tienda = ronda.obtenerTienda();
         List<Tarot> tarotsTienda = tienda.obtenerTarots();
-        jugador.agregarTarot(tarotsTienda.get(0));//"FUERZA"
+        jugador.agregarTarot(tarotsTienda.get(0));// "FUERZA"
 
         // Juego Ronda 2: Pasa la segunda ronda con puntaje
         puntaje = 0;
@@ -146,13 +147,10 @@ public class JuegoTest {
             puntaje = jugador.jugar(numeroRonda);
         }
 
-        System.out.print("  ");
-        System.out.print(puntaje);
-
         // Ronda 3: Pierde esta ultima ronda jugando carta alta
         numeroRonda = 2;
         ronda = rondas.get(numeroRonda);
-        //ronda.setAtributosJugador(jugador);
+        // ronda.setAtributosJugador(jugador);
         jugador.setCantidadDeManos(ronda.getCantidadDeManos());
         jugador.setCantidadDeDescartes(ronda.getDescartes());
 

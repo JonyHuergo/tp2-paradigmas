@@ -18,8 +18,8 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
     private List<Ronda> rondas;
     private int numeroRonda;
 
-
-    public CompraCartaHandler(Carta carta, Mazo mazo, PantallaJuegoController pantallaJuegoController, List<Ronda> rondas, int numeroRonda, Jugador jugador) {
+    public CompraCartaHandler(Carta carta, Mazo mazo, PantallaJuegoController pantallaJuegoController,
+            List<Ronda> rondas, int numeroRonda, Jugador jugador) {
         this.carta = carta;
         this.mazo = mazo;
         this.jugador = jugador;
@@ -30,7 +30,6 @@ public class CompraCartaHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Card purchased: " + carta.getPalo());
         ActionHandler.actionSound();
         mazo.agregarCarta(carta);
         jugador.setMazo(mazo.clonar());

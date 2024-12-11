@@ -24,8 +24,8 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
     private List<Ronda> rondas;
     private int numeroRonda;
 
-
-    public CompraTarotHandler(Tarot tarot, Jugador jugador, PantallaJuegoController pantallaJuegoController, Mazo mazo, List<Ronda> rondas, int numeroRonda) {
+    public CompraTarotHandler(Tarot tarot, Jugador jugador, PantallaJuegoController pantallaJuegoController, Mazo mazo,
+            List<Ronda> rondas, int numeroRonda) {
         this.tarot = tarot;
         this.jugador = jugador;
         this.pantallaJuegoController = pantallaJuegoController;
@@ -57,10 +57,7 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Tarot card purchased: ");
         ActionHandler.actionSound();
-        System.out.println(jugador.getCantidadDeTarots());
-
 
         if (tarot.esSobreCarta()) {
 
@@ -69,15 +66,13 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
                 ((TarotSobreCarta) tarot).usarSobre(cartaSeleccionada);
                 jugador.agregarTarot(tarot);
 
-            }else{
+            } else {
                 jugador.agregarTarot(tarot);
             }
-
 
         }
         pantallaJuegoController.iniciarPantallaJuego(mazo, rondas, numeroRonda, jugador);
 
     }
-
 
 }

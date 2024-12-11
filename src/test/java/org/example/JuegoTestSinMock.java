@@ -18,6 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class JuegoTestSinMock {
     private Mazo mazo;
     private Juego juego;
+
     @Test
     // Jugador compra primero un comodin juega gana la primera ronda,
     // pasa a la segunda compra un tarot y pierde
@@ -51,7 +52,7 @@ public class JuegoTestSinMock {
         // Tienda Ronda 1
         Tienda tienda = ronda.obtenerTienda();
         List<Comodin> comodines = tienda.obtenerComodines();
-        jugador.agregarComodin(comodines.get(0));//"Comodin Astuto"
+        jugador.agregarComodin(comodines.get(0));// "Comodin Astuto"
 
         // Juego Ronda 1
         float puntaje = 0;
@@ -78,11 +79,12 @@ public class JuegoTestSinMock {
         // Tienda Ronda 2
         tienda = ronda.obtenerTienda();
         List<Tarot> tarots = tienda.obtenerTarots();
-        jugador.agregarTarot(tarots.get(0));//"FUERZA"
+        jugador.agregarTarot(tarots.get(0));// "FUERZA"
 
         // Juego Ronda 2
         puntaje = 0;
-        while (puntaje < ronda.getPuntajeASuperar() && manos > 0) {//(60+(4x4)+30)*((7+3)+(15x3))=5830, deberia dar 7420 pero jugador tiene los descartes hardcodeados
+        while (puntaje < ronda.getPuntajeASuperar() && manos > 0) {// (60+(4x4)+30)*((7+3)+(15x3))=5830, deberia dar
+                                                                   // 7420 pero jugador tiene los descartes hardcodeados
             Carta carta1 = new Carta("trebol", 4);
             Carta carta2 = new Carta("picas", 4);
             Carta carta3 = new Carta("diamantes", 4);
@@ -96,7 +98,7 @@ public class JuegoTestSinMock {
         }
         assertTrue(puntaje > ronda.getPuntajeASuperar());
 
-        //Ronda 3
+        // Ronda 3
         numeroRonda = 2;
         ronda = rondas.get(numeroRonda);
 
@@ -111,8 +113,6 @@ public class JuegoTestSinMock {
         Carta carta = tienda.obtenerCarta();
         jugador.agregarCartaMazo(carta);
 
-
-
         // Juego Ronda 3
         puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && manos > 0) {
@@ -123,7 +123,6 @@ public class JuegoTestSinMock {
         }
 
         assertTrue(puntaje < ronda.getPuntajeASuperar());
-
 
     }
 }

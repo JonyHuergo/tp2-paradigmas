@@ -34,7 +34,7 @@ public class ComodinPorDescarte extends Comodin{
         if (activacion.revisarCondicion(jugada)){
             if (this.multiplicador > 1){
                 float puntosAMultiplicador = jugada.calcularPuntosPorDescarte(this.multiplicador);
-                jugada.multiplicarMult(puntosAMultiplicador);
+                jugada.actualizarMult(puntosAMultiplicador);
 
             }
             if (this.puntajeAdicional > 1){

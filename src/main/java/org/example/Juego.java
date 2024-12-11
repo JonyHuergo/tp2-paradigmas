@@ -116,7 +116,7 @@ public class Juego {
         jugador = new Jugador(mazo);
 
         // Se selecciona la primera ronda para iniciar
-        numeroRonda = 0;
+        numeroRonda = 1;
         Ronda ronda = rondas.get(numeroRonda);
 
         // esto de abajo esta muy raro, cambiar por algo del estilo: ronda.modificarJugador(jugador)
@@ -146,6 +146,10 @@ public class Juego {
 
     public void mostrarPantalla(){
         primaryStage.show();
+    }
+
+    public Jugador getJugador() {
+        return jugador;
     }
 
 }

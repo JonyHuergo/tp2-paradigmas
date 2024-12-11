@@ -15,7 +15,6 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
 
 
     public Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes){
-
         this.manoPoker = manoPoker.clonar();
         this.comodines = comodines;
         this.descartes = descartes;
@@ -64,18 +63,8 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
     }
 
     public float evaluarJugada(){
-
-        for (Carta carta: manoPoker.getCartas()){
-            System.out.println(carta.getPalo() + " " + carta.getPuntaje());
-        }
-
-
         manoPoker.definirTipodeMano();
         manoPoker.calcularCartasRelevantes();
-
-        for (Carta carta: manoPoker.getCartas()){
-            System.out.println(carta.getPalo() + " " + carta.getPuntaje());
-        }
 
         for (Tarot tarot: tarotsUsados){
             tarot.aplicarEfecto(this.manoPoker);

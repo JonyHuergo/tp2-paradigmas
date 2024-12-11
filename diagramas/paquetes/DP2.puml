@@ -1,0 +1,11 @@
+@startuml
+
+package "Modelo" as M {
+}
+
+package "JUnit" as J {
+}
+
+M --> J : Relación de testeo
+
+@enduml

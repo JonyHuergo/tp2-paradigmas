@@ -35,7 +35,7 @@ public class TestSemana1 {
 
     @Test
     public void test03JugarMano(){
-        String manoEsperada = "Escalera Color";
+        String manoEsperada = "escalera de color";
         ManoPoker manoPoker = new ManoPoker();
         for (int i = 2; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);

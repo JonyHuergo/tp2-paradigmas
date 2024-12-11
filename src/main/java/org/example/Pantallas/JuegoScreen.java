@@ -79,7 +79,7 @@ public class JuegoScreen extends VBox {
         jugarManoButton.setFont(Font.font("RetroFont", FontWeight.BOLD, 16));
         jugarManoButton.setStyle("-fx-background-color: yellow; -fx-text-fill: black; -fx-padding: 5; -fx-background-radius: 5;");
         jugarManoButton.setOnAction(event -> {
-            controller.jugarMano();
+            controller.jugarMano(mazo);
         });
 
 

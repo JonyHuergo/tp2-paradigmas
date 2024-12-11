@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-// problema 1 al emp[ezar una nueva partida despues de perder o ganar
+// problema 1 al empezar una nueva partida despues de perder o ganar
 // problema 2 al pasar de ronda no se vuelve a repartir la mano (menos importante no se nota)
 
 public class Juego {
@@ -16,6 +16,7 @@ public class Juego {
     private Jugador jugador;
     private List<Ronda> rondas;
     private int numeroRonda;
+    private Mazo mazo;
 
     public Juego(){
 
@@ -43,8 +44,8 @@ public class Juego {
             System.out.println("Error al leer los archivos JSON.");
         }
 
-        Mazo mazo = new Mazo(cartasLeidas);
-        jugador = new Jugador(mazo);
+        mazo = new Mazo(cartasLeidas);
+        jugador = new Jugador(mazo.clonar());
 
         numeroRonda = 0;
         Ronda ronda = rondas.get(numeroRonda);
@@ -60,7 +61,7 @@ public class Juego {
         try {
             rondas = lectorArchivosJson.leerBalatro();
             ArrayList<Carta> cartasLeidas = lectorArchivosJson.leerMazo();
-            Mazo mazo = new Mazo(cartasLeidas);
+            mazo = new Mazo(cartasLeidas);
             jugador = new Jugador(mazo);
 
             numeroRonda = 0;
@@ -83,7 +84,7 @@ public class Juego {
             primaryStage.setResizable(false);
 
             PantallaInicioController controller = new PantallaInicioController(primaryStage, mediaPlayer);
-            controller.iniciarPantallaInicio(rondas, numeroRonda, jugador);
+            controller.iniciarPantallaInicio(rondas, mazo, numeroRonda, jugador);
 
         } catch (Exception e) {
             System.err.println("Error al cargar los recursos: " + e.getMessage());

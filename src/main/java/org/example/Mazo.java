@@ -62,4 +62,13 @@ public class Mazo {
     public void agregarCarta(Carta carta) {
         cartas.add(carta);
     }
+
+
+    public Mazo clonar(){
+        Mazo mazoCopia = new Mazo();
+        for (Carta carta : cartas) {
+            mazoCopia.agregarCarta(carta.clonar());
+        }
+        return mazoCopia;
+    }
 }

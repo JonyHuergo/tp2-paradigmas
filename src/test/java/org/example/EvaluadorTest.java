@@ -190,7 +190,7 @@ public class EvaluadorTest {
 
     @Test
     public void testEvaluadorEscaleraColor() {
-        String valorEsperado = "Escalera Color";
+        String valorEsperado = "escalera de color";
 
         // Crear un conjunto de cartas para una mano de Escalera Color (por ejemplo, 5, 6, 7, 8, 9 de corazones)
         ArrayList<Carta> cartas = new ArrayList<>();

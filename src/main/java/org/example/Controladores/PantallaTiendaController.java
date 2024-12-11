@@ -34,11 +34,7 @@ public class PantallaTiendaController {
     }
 
     public void iniciarPantallaTienda(Tienda tienda){
-        int descartes = ronda.getDescartes();
-        jugador.setCantidadDeDescartes(descartes);
-
-        int manos= ronda.getCantidadDeManos();
-        jugador.setCantidadDeManos(manos);
+        ronda.setAtributosJugador(jugador);
 
         TiendaScreen pantallaTienda = new TiendaScreen(tienda, stage, mediaPlayer, mazo , rondas, numeroRonda, jugador);
         Scene scene = new Scene(pantallaTienda, 800, 600);

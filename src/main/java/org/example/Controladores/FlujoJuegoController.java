@@ -89,12 +89,14 @@ public class FlujoJuegoController {
         mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
     }
 
-    public void jugarMano() {
+    public void jugarMano(Mazo mazo) {
         float puntaje = jugador.jugar(numeroRonda);
+
+//         mazo = jugador.getMazo();
 
         if (jugador.perdio()){
             EndGameScreen pantallaDeDerrota = new EndGameScreen();
-            pantallaDeDerrota.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, numeroRonda, jugador));
+            pantallaDeDerrota.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, mazo, numeroRonda, jugador));
             pantallaDeDerrota.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
             Scene scene = new Scene(pantallaDeDerrota, 800, 600);
             stage.setScene(scene);
@@ -103,12 +105,12 @@ public class FlujoJuegoController {
 
         Ronda ronda = rondas.get(numeroRonda);
         int numeroRondaNueva = numeroRonda + 1;
-        Mazo mazo = jugador.getMazo();
+
 
         if (puntaje >= ronda.getPuntajeASuperar()) {
             if (numeroRondaNueva >= rondas.size()) {
                 VictoryScreen pantallaDeVictoria = new VictoryScreen();
-                pantallaDeVictoria.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, numeroRonda, jugador));
+                pantallaDeVictoria.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, mazo, numeroRonda, jugador));
                 pantallaDeVictoria.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
                 Scene scene = new Scene(pantallaDeVictoria, 800, 600);
                 stage.setScene(scene);

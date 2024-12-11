@@ -14,11 +14,11 @@ public class FlujoRondasController {
             this.stage = stage;
         }
 
-        public void iniciarFlujo( List<Ronda> rondas, int numeroRonda, Jugador jugador){
+        public void iniciarFlujo( List<Ronda> rondas,Mazo mazo, int numeroRonda, Jugador jugador){
 
             Ronda ronda = rondas.get(numeroRonda);
 
-            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, null, rondas, numeroRonda, jugador);
+            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda, jugador);
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
 
 

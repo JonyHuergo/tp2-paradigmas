@@ -43,12 +43,14 @@ public class Ronda {
         else{
             descartes = 0;
         }
-
-
     }
-
 
     public int getCantidadDeManos(){
         return manos;
+    }
+
+    public void setAtributosJugador(Jugador jugador){
+        jugador.setCantidadDeDescartes(descartes);
+        jugador.setCantidadDeManos(manos);
     }
 }

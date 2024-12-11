@@ -3,6 +3,7 @@ package org.example;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import org.example.Comodin.Comodin;
+import org.example.Manos.Mano;
 import org.example.Pantallas.PantallaInicioScreen;
 import org.example.Tarot.Tarot;
 
@@ -286,5 +287,9 @@ public class Jugador {
 
     public void agregarCartaMazo(Carta carta){
         mazo.agregarCarta(carta);
+    }
+
+    public ManoPoker getMano(){
+        return manoPoker;
     }
 }

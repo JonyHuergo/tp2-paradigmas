@@ -10,7 +10,7 @@ public class EvaluadorTest {
 
     @Test
     public void testEvaluadorEscaleraReal() {
-        String valorEsperado = "Escalera Real";
+        String valorEsperado = "escalera real";
         ArrayList<Carta> cartas = new ArrayList<>();
         cartas.add(new Carta("Corazones", 14)); // As
         cartas.add(new Carta("Corazones", 13)); // Rey
@@ -29,7 +29,7 @@ public class EvaluadorTest {
     @Test
     public void testEvaluadorPar() {
         // Valor esperado
-        String valorEsperado = "Par";
+        String valorEsperado = "par";
 
         // Crear las cartas para el test
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -50,7 +50,7 @@ public class EvaluadorTest {
     @Test
     public void testEvaluadorEscalera() {
         // Valor esperado
-        String valorEsperado = "Escalera";
+        String valorEsperado = "escalera";
 
         // Crear las cartas para el test
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -71,7 +71,7 @@ public class EvaluadorTest {
     @Test
     public void testEvaluadorCartaAlta() {
         // Valor esperado
-        String valorEsperado = "Carta Alta";
+        String valorEsperado = "carta alta";
 
         // Crear las cartas para el test
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -90,7 +90,7 @@ public class EvaluadorTest {
     }
     @Test
     public void testEvaluadorTrio() {
-        String valorEsperado = "Trio";
+        String valorEsperado = "trio";
 
         // Crear un conjunto de cartas para un Trío (por ejemplo, 3 cartas de valor 7 y 2 cartas de otros valores)
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -110,7 +110,7 @@ public class EvaluadorTest {
 
     @Test
     public void testEvaluadorColor() {
-        String valorEsperado = "Color";
+        String valorEsperado = "color";
 
         // Crear un conjunto de cartas para una mano de Color (por ejemplo, 5 cartas del mismo palo)
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -130,7 +130,7 @@ public class EvaluadorTest {
 
     @Test
     public void testEvaluadorDoblePar() {
-        String valorEsperado = "Doble Par";
+        String valorEsperado = "doble par";
 
         // Crear un conjunto de cartas para un Doble Par (por ejemplo, dos 9s, dos 5s y una carta de otro valor)
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -150,7 +150,7 @@ public class EvaluadorTest {
 
     @Test
     public void testEvaluadorFull() {
-        String valorEsperado = "Full";
+        String valorEsperado = "full";
 
         // Crear un conjunto de cartas para una mano de Full (por ejemplo, un trío de 7 y un par de 10)
         ArrayList<Carta> cartas = new ArrayList<>();
@@ -170,7 +170,7 @@ public class EvaluadorTest {
 
     @Test
     public void testEvaluadorPoker() {
-        String valorEsperado = "Poker";
+        String valorEsperado = "poker";
 
         // Crear un conjunto de cartas para una mano de Poker (por ejemplo, cuatro reyes)
         ArrayList<Carta> cartas = new ArrayList<>();

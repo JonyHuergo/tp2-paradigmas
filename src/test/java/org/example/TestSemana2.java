@@ -112,7 +112,7 @@ public class TestSemana2 {
         // Después de activacionAleatoria: x2 => 80
         int puntajeEsperado = 80;
 
-        ActivacionTipoDeMano activacionPorMano = new ActivacionTipoDeMano("Carta Alta");
+        ActivacionTipoDeMano activacionPorMano = new ActivacionTipoDeMano("carta alta");
         ActivacionSiempre activacionSiempre = new ActivacionSiempre();
         ActivacionProbabilidad activacionProbabilidad = Mockito.mock(ActivacionProbabilidad.class);
         when(activacionProbabilidad.revisarCondicion(any(Jugada.class))).thenReturn(true);

@@ -1,9 +1,14 @@
 package org.example.Tarot;
 
-import org.example.Carta;
-import org.example.ManoPoker;
+import org.example.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import org.example.Controladores.PantallaJuegoController;
+import org.example.Handlers.CompraTarotHandler;
 
-public abstract class Tarot { // Tentativo, revisar
+import java.util.List;
+
+public abstract class Tarot extends Comprable { // Tentativo, revisar
     protected String nombre;
     protected String descripcion;
     protected String sobre;
@@ -26,11 +31,25 @@ public abstract class Tarot { // Tentativo, revisar
         this.puntos = puntos;
     }
 
+    @Override
     public String getRuta() {
         String nombreFormateado = nombre.replace(" ", "_");
         return "/Tarots/Tarot_" + nombreFormateado + ".png";
     }
+
+
     public abstract void aplicarEfecto(ManoPoker manoPoker);
+
+
+    @Override
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
+        return new CompraTarotHandler(this, jugador,pantallaJuegoController, mazo, rondas, numeroRonda);
+    }
+
+    @Override
+    public String getDescripcion(){
+        return descripcion;
+    }
+
+    public abstract boolean esSobreCarta();
 }
-
-

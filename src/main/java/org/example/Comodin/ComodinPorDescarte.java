@@ -3,10 +3,8 @@ package org.example.Comodin;
 import org.example.Jugada;
 import org.example.Jugador;
 
-import java.util.List;
 
 public class ComodinPorDescarte extends Comodin{
-    private int puntosPorDescarte = 10;
 
     public ComodinPorDescarte(String nombre, String descripcion, String activacion, int puntos, float multiplicador) {
         super(nombre, descripcion, new ActivacionDescartes(), puntos, multiplicador);
@@ -18,22 +16,31 @@ public class ComodinPorDescarte extends Comodin{
     @Override
     public void usar(Jugador jugador) {
         if (activacion.revisarCondicion(jugador)){
-            int puntosASumar = jugador.calcularPuntosPorDescarte(puntosPorDescarte);
-            puntajeAdicional += puntosASumar;
-
-            jugador.actualizarPuntajeBase(puntajeAdicional);
-            jugador.multiplicarMult(multiplicador);
+            if (this.multiplicador > 1){
+                float puntosAMultiplicador = jugador.calcularPuntosPorDescarte(this.multiplicador);
+                jugador.multiplicarMult(puntosAMultiplicador);
+            }
+            if (this.puntajeAdicional > 1){
+                int puntosASumar = jugador.calcularPuntosPorDescarte(this.puntajeAdicional);
+                puntajeAdicional += puntosASumar;
+                jugador.actualizarPuntajeBase(puntosASumar);
+            }
         }
     }
 
     @Override
     public void usar(Jugada jugada) {
         if (activacion.revisarCondicion(jugada)){
-            int puntosASumar = jugada.calcularPuntosPorDescarte(puntosPorDescarte);
-            puntajeAdicional += puntosASumar;
+            if (this.multiplicador > 1){
+                float puntosAMultiplicador = jugada.calcularPuntosPorDescarte(this.multiplicador);
+                jugada.actualizarMult(puntosAMultiplicador);
 
-            jugada.actualizarPuntajeBase(puntajeAdicional);
-            jugada.multiplicarMult(multiplicador);
+            }
+            if (this.puntajeAdicional > 1){
+                int puntosASumar = jugada.calcularPuntosPorDescarte(this.puntajeAdicional);
+                puntajeAdicional += puntosASumar;
+                jugada.actualizarPuntajeBase(puntosASumar);
+            }
         }
     }
 }

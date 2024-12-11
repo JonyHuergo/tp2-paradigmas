@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.Comodin.Comodin;
 import org.example.Manos.Mano;
 
 import java.util.ArrayList;
@@ -14,7 +13,8 @@ public class ManoPoker {
         this.analizadorMano = new AnalizadorMano();
 
     }
-    public ManoPoker(ArrayList<Carta> cartas){
+
+    public ManoPoker(ArrayList<Carta> cartas) {
         this.cartas = cartas;
         this.analizadorMano = new AnalizadorMano(); // fijarse el new
     }
@@ -27,30 +27,44 @@ public class ManoPoker {
         cartas.remove(carta);
     }
 
-    public float evaluar(){
+    public float evaluar() {
         tipoDeMano = calcularMano();
-        return(tipoDeMano.calcular(cartas));
+        return (tipoDeMano.calcular(cartas));
     }
 
-    public void definirTipodeMano(){
+    public void definirTipodeMano() {
         tipoDeMano = calcularMano();
     }
 
-    public void sumarValorCartas(){
+    public String getNombreMano(){
+        return tipoDeMano.getNombre();
+    }
+
+    public int getPuntajeBase(){
+        return tipoDeMano.getPuntajeBase();
+    }
+
+    public float getMultiplicadorBase(){
+        return tipoDeMano.getMultiplicadorBase();
+    }
+
+
+
+    public void sumarValorCartas() {
         tipoDeMano.sumarValorCartas(cartas);
     }
 
-    public float hacerCalculo(){
+    public float hacerCalculo() {
         return tipoDeMano.hacerCalculo();
     }
 
 
-    public boolean manoNombreEsIgual(String nombre){
-        return(tipoDeMano.nombreEsIgual(nombre));
+    public boolean manoNombreEsIgual(String nombre) {
+        return (tipoDeMano.nombreEsIgual(nombre));
     }
 
 
-    public Mano calcularMano(){
+    public Mano calcularMano() {
         return analizadorMano.analizarMano(cartas);
     }
 
@@ -66,13 +80,47 @@ public class ManoPoker {
         tipoDeMano.multiplicarMultiplicadorBase(mult);
     }
 
+    public void mejorarCarta(Carta carta, int puntos, float multiplicador) {
+        for (Carta c : cartas) {
+            if (c.nombreEsIgual(carta)) {
+                if (puntos > 1){
+                    c.agregarPuntos(puntos);
+                }
+                if(multiplicador > 1){
+                    c.modificarMultiplicador(multiplicador);
+                }
+            }
+        }
+    }
+
     public ManoPoker clonar(){
         ArrayList<Carta> clon = new ArrayList<>();
         for (Carta carta : cartas){
             clon.add(carta.clonar());
         }
         return new ManoPoker(clon);
-//       return new ManoPoker((ArrayList)cartas.clone());
+    }
+
+    public void descartarCartas(ArrayList<Carta> cartasDescartadas) {
+        for (Carta carta : cartasDescartadas) {
+            removerCarta(carta);
+        }
+    }
+
+    public boolean tieneCarta(Carta carta) {
+        return cartas.contains(carta);
+    }
+
+    public int getCantidadDeCartas(){
+        return cartas.size();
+    }
+
+    public ArrayList<Carta> getCartas(){
+        return cartas;
+    }
+
+    public void calcularCartasRelevantes(){
+        cartas = analizadorMano.obtenerCartasDeLaMano(cartas);
     }
 
 }

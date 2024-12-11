@@ -10,15 +10,14 @@ public class TarotSobreCarta extends Tarot {
     }
     @Override
     public void aplicarEfecto(ManoPoker manoPoker) {
-        if (this.puntos > 1){
-            carta.agregarPuntos(this.puntos);
-        }
-        if (this.multiplicador > 1){
-            carta.modificarMultiplicador(this.multiplicador);
-        }
+        manoPoker.mejorarCarta(this.carta, this.puntos, this.multiplicador);
     }
     public void usarSobre(Carta carta){
         this.carta = carta;
+    }
+    @Override
+    public boolean esSobreCarta() {
+        return true;
     }
 
 }

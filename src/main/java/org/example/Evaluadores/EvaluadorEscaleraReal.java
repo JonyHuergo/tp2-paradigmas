@@ -4,8 +4,8 @@ import org.example.Carta;
 import org.example.Manos.EscaleraReal;
 import org.example.Manos.Mano;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EvaluadorEscaleraReal extends EvaluadorAbstracto {
     @Override
@@ -17,12 +17,10 @@ public class EvaluadorEscaleraReal extends EvaluadorAbstracto {
     }
 
     private boolean esColor(ArrayList<Carta> cartas) {
-        // Lógica para verificar si todas las cartas son del mismo palo
         return cartas.stream().allMatch(c -> c.getPalo().equals(cartas.get(0).getPalo()));
     }
 
     private boolean esEscalera(ArrayList<Carta> cartas) {
-        // Lógica para verificar si las cartas forman una secuencia
         cartas.sort(Comparator.comparingInt(Carta::getValor));
         for (int i = 0; i < cartas.size() - 1; i++) {
             if (cartas.get(i).getValor() + 1 != cartas.get(i + 1).getValor()) {
@@ -33,7 +31,32 @@ public class EvaluadorEscaleraReal extends EvaluadorAbstracto {
     }
 
     private boolean contieneAs(ArrayList<Carta> cartas) {
-        // Verifica si hay un As en la mano
         return cartas.stream().anyMatch(c -> c.getValor() == 14);
     }
+
+    @Override
+    protected ArrayList<Carta> calcularCartasRelevantes(ArrayList<Carta> cartas) {
+        Map<String, List<Carta>> cartasPorPalo = cartas.stream()
+                .collect(Collectors.groupingBy(Carta::getPalo));
+
+        Set<Integer> valoresEscaleraReal = new HashSet<>(Arrays.asList(10, 11, 12, 13, 14));
+
+
+        for (List<Carta> cartasDelPalo : cartasPorPalo.values()) {
+
+            Set<Integer> valoresDelPalo = cartasDelPalo.stream()
+                    .map(Carta::getValor)
+                    .collect(Collectors.toSet());
+
+            if (valoresDelPalo.containsAll(valoresEscaleraReal)) {
+                return cartasDelPalo.stream()
+                        .filter(c -> valoresEscaleraReal.contains(c.getValor()))
+                        .sorted(Comparator.comparingInt(Carta::getValor))
+                        .collect(Collectors.toCollection(ArrayList::new));
+            }
+        }
+
+        return new ArrayList<>();
+    }
+
 }

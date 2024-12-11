@@ -15,20 +15,24 @@ public class Ronda {
         this.tienda = tienda;
     }
 
-    public void pasarTurno(int puntajeTotal){
-        this.manos -= 1;
-        if(puntajeASuperar <= puntajeTotal);
-            System.out.println("siguiente ronda!");
-        if(manos <= 0){
-            System.out.println("perdiste!");
-        }
-    }
-
     public int getPuntajeASuperar(){
         return puntajeASuperar;
     }
 
     public Tienda obtenerTienda(){
         return tienda;
+    }
+
+    public int getDescartes(){
+        return descartes;
+    }
+
+    public int getCantidadDeManos(){
+        return manos;
+    }
+
+    public void setAtributosJugador(Jugador jugador){
+        jugador.setCantidadDeDescartes(descartes);
+        jugador.setCantidadDeManos(manos);
     }
 }

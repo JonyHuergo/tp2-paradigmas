@@ -1,7 +1,6 @@
 package org.example.Manos;
 
 import org.example.Carta;
-import org.example.Comodin.Comodin;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -27,6 +26,10 @@ public abstract class Mano {
 
     public void actualizarPuntajeBase(int puntaje) {
         this.puntajeBase += puntaje;
+    }
+
+    public int getPuntajeBase(){
+        return puntajeBase;
     }
 
     public float getMultiplicadorBase() {
@@ -58,10 +61,6 @@ public abstract class Mano {
 
     public float hacerCalculo(){
         return (puntajeBase * multiplicadorBase);
-    }
-
-    public int getPuntajeBase(){
-        return puntajeBase;
     }
 
 }

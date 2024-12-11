@@ -1,7 +1,4 @@
-
 package org.example.Tarot;
-
-import org.example.Carta;
 import org.example.ManoPoker;
 
 public class TarotSobreMano extends Tarot {
@@ -11,7 +8,7 @@ public class TarotSobreMano extends Tarot {
 
     @Override
     public void aplicarEfecto(ManoPoker manoPoker) {
-        if (manoPoker.manoNombreEsIgual(this.sobre)){
+        if (manoPoker.manoNombreEsIgual(ejemplar)){
             if (this.puntos > 1){
                 manoPoker.actualizarPuntajeBase(this.puntos);
             }
@@ -19,6 +16,13 @@ public class TarotSobreMano extends Tarot {
                 manoPoker.actualizarMultiplicadorBase(this.multiplicador);
             }
         }
+
+
+    }
+
+    @Override
+    public boolean esSobreCarta() {
+        return false;
     }
 
 }

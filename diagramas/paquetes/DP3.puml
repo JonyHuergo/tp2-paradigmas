@@ -1,0 +1,19 @@
+@startuml
+
+package "Modelo" as M {
+    package "Juego"
+}
+package "LectorArchivosJson"
+
+package "Evaluadores" {
+
+}
+package "Manos"{
+
+}
+
+M --> Manos
+M --> Evaluadores
+M --> LectorArchivosJson
+
+@enduml

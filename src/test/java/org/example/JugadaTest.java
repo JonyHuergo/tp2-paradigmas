@@ -1,8 +1,6 @@
 package org.example;
 
 import org.example.Comodin.*;
-import org.example.Tarot.TarotAgregaPuntos;
-import org.example.Tarot.TarotMultiplicador;
 import org.example.Tarot.TarotSobreCarta;
 import org.example.Tarot.TarotSobreMano;
 import org.junit.jupiter.api.Test;
@@ -107,23 +105,25 @@ public class JugadaTest {
 
     @Test
     public void test05unaJugadaPreviaAUnTarotCalculaCorrectamente() {
-        int puntajeEsperado = 960; //(puntajeCartas + puntajeEscaleraColor)->(20 + 100) * (4)->(mulCartas)
+        int puntajeEsperado = 3840;//(puntajeCartas + puntajeEscaleraColor)->(20 + 100) * (8 * 4)->(mulCartas + multDeEscaleraColor)
         ManoPoker manoPoker = new ManoPoker();
         TarotSobreCarta tarot = new TarotSobreCarta( "La Emperatriz","Mejora 1 carta seleccionada y la convierte en una multicarta.", "carta", "cualquiera",1, 4);
 
         Carta cartaMejorada = new Carta("diamantes", 2);
-        tarot.usarSobre(cartaMejorada); //guardo la carta en el tarot
+        tarot.usarSobre(cartaMejorada);//guardo la carta en el tarot
 
         manoPoker.agregarCarta(cartaMejorada);
-
+        tarot.aplicarEfecto(manoPoker);
+        //Carta aux = null;
         for (int i = 3; i <= 6; i++) {
             Carta carta = new Carta("diamantes", i);
+            //aux = carta;
             manoPoker.agregarCarta(carta);
         }
 
         Jugada jugada = new Jugada(manoPoker, new ArrayList<Comodin>(), 3);
 
-        // Se aplica el tarot despues de haber jugado esa mano
+        // Se aplica el tarot
         tarot.aplicarEfecto(manoPoker);
 
         float puntajeObtenido = jugada.evaluarJugada();

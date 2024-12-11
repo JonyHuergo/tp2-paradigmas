@@ -5,10 +5,9 @@ import org.example.Tarot.Tarot;
 
 import java.util.ArrayList;
 
-public class Jugada { // esta clase deberia remplazar al acumulador de puntos en jugador, se guardan las jugadas y cada una hace el calculo
+public class Jugada {
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines;
-    private int puntaje;
     private int descartes;
     private int numeroRonda;
     private ArrayList<Tarot> tarotsUsados;
@@ -26,6 +25,14 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         this.comodines = comodines;
         this.descartes = descartes;
         this.tarotsUsados = tarotsUsados;
+    }
+
+    public Jugada(ManoPoker manoPoker, ArrayList<Comodin> comodines, int descartes, ArrayList<Tarot> tarotsUsados, int numeroRonda){
+        this.manoPoker = manoPoker.clonar();
+        this.comodines = comodines;
+        this.descartes = descartes;
+        this.tarotsUsados = tarotsUsados;
+        this.numeroRonda = numeroRonda;
     }
 
     public void actualizarPuntajeBase(int puntajeBase){
@@ -50,15 +57,25 @@ public class Jugada { // esta clase deberia remplazar al acumulador de puntos en
         return(descartes * puntosPorDescarte);
     }
 
+    public float calcularPuntosPorDescarte(float puntosPorDescarte){
+        return(descartes * puntosPorDescarte);
+    }
+
     public float evaluarJugada(){
         manoPoker.definirTipodeMano();
-        manoPoker.sumarValorCartas();
+        manoPoker.calcularCartasRelevantes();
+
         for (Tarot tarot: tarotsUsados){
             tarot.aplicarEfecto(this.manoPoker);
         }
         for (Comodin comodin : comodines) {
             comodin.usar(this);
         }
+        manoPoker.sumarValorCartas();
         return(manoPoker.hacerCalculo());
+    }
+
+    public boolean tieneNumeroRonda(int numeroOtraRonda) {
+        return (numeroRonda == numeroOtraRonda);
     }
 }

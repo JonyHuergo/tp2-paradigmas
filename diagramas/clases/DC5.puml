@@ -1,0 +1,45 @@
+@startuml
+abstract class Mano {
+    - String nombre
+    - int puntajeBase
+    - float multiplicadorBase
+    + Mano(String nombre, int puntajeBase, float multiplicadorBase)
+    + boolean nombreEsIgual(String nombre)
+    + void actualizarPuntajeBase(int puntaje)
+    + void actualizarMultiplicadorBase(float mult)
+    + void multiplicarMultiplicadorBase(float mult)
+    + float calcular(ArrayList<Carta> cartas)
+    + void sumarValorCartas(ArrayList<Carta> cartas)
+    + float hacerCalculo()
+}
+class CartaAlta extends Mano {
+    + CartaAlta()
+}
+class Par extends Mano {
+    + Par()
+}
+class Trio extends Mano {
+    + Trio()
+}
+class DoblePar extends Mano {
+    + DoblePar()
+}
+class Color extends Mano {
+    + Color()
+}
+class Escalera extends Mano {
+    + Escalera()
+}
+class EscaleraColor extends Mano {
+    + EscaleraColor()
+}
+class EscaleraReal extends Mano {
+    + EscaleraReal()
+}
+class Full extends Mano {
+    + Full()
+}
+class Poker extends Mano {
+    + Poker()
+}
+@enduml

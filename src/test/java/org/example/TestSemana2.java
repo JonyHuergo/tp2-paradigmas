@@ -30,7 +30,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -55,7 +58,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -67,14 +73,17 @@ public class TestSemana2 {
         ManoPoker manoPoker = new ManoPoker();
         Carta carta = new Carta("diamantes", 5);
         manoPoker.agregarCarta(carta);
-        Comodin comodin = new ComodinPorDescarte(0,1, "Descarte");
+        Comodin comodin = new ComodinPorDescarte(10,1, "Descarte");
         ArrayList<Comodin> comodines = new ArrayList<>();
         comodines.add(comodin);
         Jugador jugador = new Jugador();
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -98,7 +107,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodines);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
@@ -112,7 +124,7 @@ public class TestSemana2 {
         // Después de activacionAleatoria: x2 => 80
         int puntajeEsperado = 80;
 
-        ActivacionTipoDeMano activacionPorMano = new ActivacionTipoDeMano("Carta Alta");
+        ActivacionTipoDeMano activacionPorMano = new ActivacionTipoDeMano("carta alta");
         ActivacionSiempre activacionSiempre = new ActivacionSiempre();
         ActivacionProbabilidad activacionProbabilidad = Mockito.mock(ActivacionProbabilidad.class);
         when(activacionProbabilidad.revisarCondicion(any(Jugada.class))).thenReturn(true);
@@ -138,7 +150,10 @@ public class TestSemana2 {
         jugador.setManoPoker(manoPoker);
         jugador.setComodines(comodinesDelJugador);
 
-        float puntajeObtenido = jugador.jugar();
+        jugador.setCantidadDeDescartes(3);
+        jugador.setCantidadDeManos(5);
+
+        float puntajeObtenido = jugador.jugar(0);
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }

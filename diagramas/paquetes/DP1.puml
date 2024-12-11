@@ -1,0 +1,18 @@
+@startuml
+
+package "Modelo" as M {
+}
+
+package "Vista" as V {
+}
+
+package "Controlador" as C {
+}
+
+M --> V : Proveer datos
+M --> C : Proveer lógica
+C --> M : Actualizar datos
+C --> V : Actualizar interfaz
+V --> C : Recibir acciones del usuario
+
+@enduml

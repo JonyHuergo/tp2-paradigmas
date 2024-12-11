@@ -4,6 +4,6 @@ import java.util.ArrayList;
 import org.example.Manos.Mano;
 
 public interface EvaluadorMano {
-    Mano evaluar(ArrayList<Carta> cartas); // Devuelve el tipo de mano o null si no aplica
-
+    Mano evaluar(ArrayList<Carta> cartas);
+    ArrayList<Carta> cartasDeLaMano(ArrayList<Carta> cartas);
 }

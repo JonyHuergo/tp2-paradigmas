@@ -1,8 +1,16 @@
+
+
 package org.example;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import org.example.Controladores.PantallaJuegoController;
+import org.example.Handlers.CompraCartaHandler;
+
+import java.util.List;
 import java.util.Objects;
 
-public class Carta {
+public class Carta extends Comprable{
     private String nombre;
     private String palo;
     private ValorCarta valor;
@@ -27,6 +35,7 @@ public class Carta {
         private final int valor;
         private final String nombre;
 
+
         ValorCarta(int valor, String nombre) {
             this.valor = valor;
             this.nombre = nombre;
@@ -35,6 +44,8 @@ public class Carta {
         public int getValor() {
             return valor;
         }
+
+
 
         public String getNombre() {
             return nombre;
@@ -62,8 +73,13 @@ public class Carta {
     public Carta(String palo, int valor) {
         this.palo = palo;
         this.valor = buscarValorCarta(valor); // Metodo dedicado a buscar el enum
-        this.multiplicador = "0";
+        this.multiplicador = "1";
         this.puntaje = valor;
+    }
+
+    @Override
+    public EventHandler<ActionEvent> crearHandler(PantallaJuegoController pantallaJuegoController, Mazo mazo, Jugador jugador, List<Ronda> rondas, int numeroRonda) {
+        return new CompraCartaHandler(this, mazo, pantallaJuegoController, rondas, numeroRonda, jugador);
     }
 
     private ValorCarta buscarValorCarta(int valor) {
@@ -75,9 +91,9 @@ public class Carta {
         throw new IllegalArgumentException("Valor no válido para una carta: " + valor);
     }
 
-    // Method to get the card route (palo + valor)
+    @Override
     public String getRuta() {
-        return palo + "_" + valor.getNombre();
+        return "/cartas/" + palo + "_" + valor.getNombre() + ".png";
     }
 
     public int getValor() {
@@ -98,7 +114,7 @@ public class Carta {
         return carta.valorEsIgual(this.valor.getValor());
     }
 
-    private boolean valorEsIgual(int valorCarta) {
+    public boolean valorEsIgual(int valorCarta) {
         return valorCarta == this.valor.getValor();
     }
 
@@ -109,6 +125,10 @@ public class Carta {
     public boolean paloEsIgual(Carta carta) {
         return carta.paloEsIgual(this.palo);
     }
+
+    public boolean nombreEsIgual(Carta carta) {return carta.nombreEsIgual(this.nombre);}
+
+    public boolean nombreEsIgual(String nombreCarta) {return Objects.equals(nombreCarta, this.nombre);}
 
     public boolean esInmediatamenteSuperior(Carta carta) {
         return carta.valorEsIgual(this.valor.getValor() + 1);
@@ -132,12 +152,17 @@ public class Carta {
     }
 
     public float actualizarMultiplicadorTotal(float multiplicadorTotal) {
-        float suma = Float.parseFloat(this.multiplicador) +multiplicadorTotal;
+        float suma = Float.parseFloat(this.multiplicador) * multiplicadorTotal;
         return suma;
     }
 
     public Carta clonar(){
-        return new Carta(nombre, palo, Integer.toString(valor.getValor()), puntaje, multiplicador);
+        return new Carta(nombre, palo, valor.getNombre(), puntaje, multiplicador);
     }
+    @Override
+    public String getDescripcion(){
+        return nombre;
+    }
+
 
 }

@@ -1,0 +1,19 @@
+@startuml
+abstract class Comodin {
+    - String nombre
+    - String descripcion
+    - int puntaje
+    - float multiplicador
+    + Comodin(nombre: String, descripcion: String, activacion: Activacion, puntajeAdicional: int, multiplicador: float)
+    + usar(jugador: Jugador): void
+    + usar(jugada: Jugada): void
+}
+class ComodinBase extends Comodin{
+    + ComodinBase(String nombre, String descripcion, String activacion, int puntajeAdicional, float multiplicador)
+}
+class ComodinCombo extends Comodin{
+    + ComodinCombo(String nombre, String descripcion, List<Comodin> comodines)
+    + usar(jugador: Jugador): void
+    + usar(jugada: Jugada): void
+}
+@enduml

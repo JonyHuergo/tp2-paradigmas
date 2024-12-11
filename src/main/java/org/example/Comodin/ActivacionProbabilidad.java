@@ -8,8 +8,16 @@ public class ActivacionProbabilidad implements Activacion {
     private int probabilidad;
     Random random = new Random();
 
-    public ActivacionProbabilidad(int probabilidad) {
-        this.probabilidad = probabilidad;
+    public ActivacionProbabilidad(String probabilidad) {
+        this.probabilidad = determinarProbabilidad(probabilidad);
+    }
+
+    private int determinarProbabilidad( String activacion){
+        activacion = activacion.replaceAll("[{}]", "");
+        String[] partes = activacion.split(":");
+        String parteProbabilidad = partes[1].trim();
+        int probabilidad = Integer.parseInt(parteProbabilidad);
+        return probabilidad;
     }
 
     @Override

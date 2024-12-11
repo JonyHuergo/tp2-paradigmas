@@ -1,66 +1,72 @@
 package org.example.Controladores;
 
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
-import org.example.AnalizadorMano;
-import org.example.Carta;
-import org.example.Manos.Mano;
+import javafx.scene.media.MediaPlayer;
+import javafx.stage.Stage;
+import org.example.*;
+import org.example.Handlers.ExitButtonHandler;
+import org.example.Handlers.PlayButtonHandler;
+import org.example.Pantallas.EndGameScreen;
+import org.example.Pantallas.JuegoScreen;
+import org.example.Pantallas.VictoryScreen;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FlujoJuegoController {
-
-    // for 8 rondas:
-    //     muestra tiendaScreen (elije 4 cartas)
-    //     muestra JuegoScreen
-    //     for 5 turnos:
-    //          -reparten aleatoriamente 8 cartas del mazo
-    //          -jugarlas tratando de armar una mano de poker.
-    //          -aplicar algún modificador usando un tarot.
-    //          -descartar las que quiera hasta tres veces, donde debe recibir del mazo las cartas suficientes para completar
-    //          -calcular puntaje utilizando los comodines de izquierda a derecha y se suma el puntaje y se avanza al siguiente
-
 
     private final ArrayList<Carta> cartasSeleccionadas = new ArrayList<>();
     private Label manoLabel;
     private Label puntajeLabel;
-    private Label multiplicadorLabel;// Label to update hand name
+    private Label multiplicadorLabel;
+    private final ArrayList<Carta> cartasIniciales;// Label to update hand name
+    private final Jugador jugador;
+    private final Stage stage;
+    private final List<Ronda> rondas;
+    private int numeroRonda;
+    private int manosJugadas;
+    private MediaPlayer mediaPlayer;
 
-    public FlujoJuegoController(Label manoLabel, Label puntajeLabel, Label multiplicadorLabel) {
+    public FlujoJuegoController(Stage stage, List<Ronda> rondas, int numeroRonda, Label manoLabel, Label puntajeLabel, Label multiplicadorLabel, ArrayList<Carta> cartasIniciales, Mazo mazo, Jugador jugador, MediaPlayer mediaPlayer) {
         this.manoLabel = manoLabel;
         this.puntajeLabel = puntajeLabel;
         this.multiplicadorLabel = multiplicadorLabel;
+        this.cartasIniciales = cartasIniciales;
+        this.jugador = jugador;
+        this.stage = stage;
+        this.rondas = rondas;
+        this.numeroRonda = numeroRonda;
+        this.manosJugadas = 0;
+        this.mediaPlayer = mediaPlayer;
     }
 
-    public void seleccionarCarta(Carta carta, Button cartaButton) {
-        if (cartasSeleccionadas.contains(carta)) {
-            // Deseleccionar carta
-            cartasSeleccionadas.remove(carta);
-            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-        } else if (cartasSeleccionadas.size() < 5) {
-            // Seleccionar carta
-            cartasSeleccionadas.add(carta);
+    public void seleccionarCarta(Carta carta, Button cartaButton, Mazo mazo) {
+        if (!jugador.tieneCarta(carta) && !jugador.superaLimite()){
+            jugador.agregarCarta(carta);
             cartaButton.setStyle("-fx-background-color: transparent;-fx-padding: -5;-fx-translate-y: -10");
+
+        } else {
+            jugador.removerCarta(carta);
+            cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
         }
 
-        // Si hay cartas seleccionadas, analizar la mano
-        if (!cartasSeleccionadas.isEmpty()) {
+
+        if (jugador.getCantidadDeCartas()!=0) {
 
 
-            AnalizadorMano analizador = new AnalizadorMano();
-            Mano mano = analizador.analizarMano(cartasSeleccionadas);
-            String nombreMano = mano.getNombre();
+            String nombreMano = jugador.definirTipoDeMano();
 
-            String valorPuntaje = String.valueOf(mano.getPuntajeBase());
+            String valorPuntaje = String.valueOf(jugador.getPuntajeBase());
             puntajeLabel.setText(valorPuntaje);
 
-            float multiplicadorBase = mano.getMultiplicadorBase();
+            float multiplicadorBase = jugador.getMultiplicadorBase();
             String valorMultiplicador = String.format("%.0f", multiplicadorBase);
             multiplicadorLabel.setText(valorMultiplicador);
 
-
-            // Actualizar el nombre de la mano en el label
             manoLabel.setText("Mano: " + nombreMano);
+
 
         } else {
             manoLabel.setText("Mano: Ninguna");
@@ -71,6 +77,56 @@ public class FlujoJuegoController {
 
     public ArrayList<Carta> getCartasSeleccionadas() {
         return cartasSeleccionadas;
+    }
+
+    public ArrayList<Carta> getCartasIniciales() {
+
+        return cartasIniciales;
+    }
+
+    public void descartarCartas(Mazo mazo){
+        jugador.descartarCartas();
+        mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
+    }
+
+    public void jugarMano(Mazo mazo) {
+        float puntaje = jugador.jugar(numeroRonda);
+
+//         mazo = jugador.getMazo();
+
+        if (jugador.perdio()){
+            EndGameScreen pantallaDeDerrota = new EndGameScreen();
+            jugador.reinicarJugador();
+            numeroRonda = 0;
+            pantallaDeDerrota.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, mazo, numeroRonda, jugador));
+            pantallaDeDerrota.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
+            Scene scene = new Scene(pantallaDeDerrota, 800, 600);
+            stage.setScene(scene);
+            return;
+        }
+
+        Ronda ronda = rondas.get(numeroRonda);
+        int numeroRondaNueva = numeroRonda + 1;
+
+
+        if (puntaje >= ronda.getPuntajeASuperar()) {
+            if (numeroRondaNueva >= rondas.size()) {
+                VictoryScreen pantallaDeVictoria = new VictoryScreen();
+                jugador.reinicarJugador();
+                numeroRonda = 0;
+                pantallaDeVictoria.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, mazo, numeroRonda, jugador));
+                pantallaDeVictoria.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
+                Scene scene = new Scene(pantallaDeVictoria, 800, 600);
+                stage.setScene(scene);
+            } else {
+                PantallaTiendaController nuevaPantallaTienda = new PantallaTiendaController(
+                        stage, mediaPlayer, mazo, rondas, numeroRondaNueva, jugador
+                );
+                nuevaPantallaTienda.iniciarPantallaTienda(rondas.get(numeroRondaNueva).obtenerTienda());
+            }
+        } else {
+            mostrarNuevaPantalla(jugador.getCartasDisponibles(), mazo);
+        }
     }
 
     public Label getManoLabel() {
@@ -85,4 +141,17 @@ public class FlujoJuegoController {
     public Label getMultiplicadorLabel() {
         return multiplicadorLabel;
     }
+
+    private void mostrarNuevaPantalla(ArrayList<Carta> nuevasCartas, Mazo mazo) {
+
+        Ronda ronda = rondas.get(numeroRonda);
+
+            JuegoScreen nuevaPantalla = new JuegoScreen(nuevasCartas, rondas, numeroRonda, this, mazo, jugador, jugador.getComodines());
+            Scene nuevaScene = new Scene(nuevaPantalla, 800, 600);
+
+            stage.setScene(nuevaScene);
+            manosJugadas = manosJugadas+1;
+
+    }
+
 }

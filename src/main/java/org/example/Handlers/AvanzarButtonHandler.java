@@ -14,7 +14,6 @@ public class AvanzarButtonHandler implements EventHandler<ActionEvent> {
     private int puntajeASuperar;
 
     public AvanzarButtonHandler(Stage stage, MediaPlayer mediaPlayer, Mazo mazo, int puntajeASuperar) {
-//        super(stage, mediaPlayer);
         this.pantallaJuegoController = new PantallaJuegoController(stage, mediaPlayer);
         this.mazo = mazo;
         this.puntajeASuperar = puntajeASuperar;
@@ -22,7 +21,5 @@ public class AvanzarButtonHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent event) {
         ActionHandler.actionSound();
-        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
-
     }
 }

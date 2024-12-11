@@ -15,17 +15,20 @@ public class ComodinPorManoJugada extends Comodin {
     @Override
     public void usar(Jugador jugador){
         if (activacion.revisarCondicion(jugador)){
-            jugador.actualizarPuntajeBase(puntajeAdicional);
-            jugador.actualizarMult(multiplicador);
-
+            if (this.puntajeAdicional > 1) {
+            jugador.actualizarPuntajeBase(puntajeAdicional);}
+            if (this.multiplicador > 1){
+            jugador.actualizarMult(multiplicador);}
         }
     }
 
     @Override
     public void usar(Jugada jugada){
         if (activacion.revisarCondicion(jugada)){
-            jugada.actualizarPuntajeBase(puntajeAdicional);
-            jugada.actualizarMult(multiplicador);
+            if (this.puntajeAdicional > 1) {
+                jugada.actualizarPuntajeBase(puntajeAdicional);
+            }if (this.multiplicador > 1){
+            jugada.actualizarMult(multiplicador);}
         }
     }
 }

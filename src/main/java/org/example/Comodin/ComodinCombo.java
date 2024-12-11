@@ -10,7 +10,7 @@ public class ComodinCombo extends Comodin{
     private final ArrayList<Comodin> comodines;
 
     public ComodinCombo(String nombre, String descripcion, List<Comodin> comodines) {
-        super(0, 1, new ActivacionSiempre());
+        super(nombre, descripcion, new ActivacionSiempre(), 0, 1);
         this.comodines = new ArrayList<>(comodines);
     }
 

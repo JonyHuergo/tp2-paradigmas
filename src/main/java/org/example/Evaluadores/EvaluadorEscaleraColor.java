@@ -6,6 +6,9 @@ import org.example.Manos.Mano;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class EvaluadorEscaleraColor extends EvaluadorAbstracto {
 
@@ -36,4 +39,39 @@ public class EvaluadorEscaleraColor extends EvaluadorAbstracto {
         }
         return true;
     }
+
+    @Override
+    protected ArrayList<Carta> calcularCartasRelevantes(ArrayList<Carta> cartas) {
+        Map<String, List<Carta>> cartasPorPalo = cartas.stream()
+                .collect(Collectors.groupingBy(Carta::getPalo));
+
+        for (List<Carta> cartasDelPalo : cartasPorPalo.values()) {
+            if (cartasDelPalo.size() >= 5) {
+                List<Carta> cartasOrdenadas = cartasDelPalo.stream()
+                        .sorted(Comparator.comparingInt(Carta::getValor))
+                        .collect(Collectors.toList());
+
+                ArrayList<Carta> escaleraColor = new ArrayList<>();
+                escaleraColor.add(cartasOrdenadas.get(0));
+
+                for (int i = 1; i < cartasOrdenadas.size(); i++) {
+                    Carta actual = cartasOrdenadas.get(i);
+                    Carta anterior = escaleraColor.get(escaleraColor.size() - 1);
+
+                    if (actual.getValor() == anterior.getValor() + 1) {
+                        escaleraColor.add(actual);
+                        if (escaleraColor.size() == 5) {
+                            return escaleraColor;
+                        }
+                    } else if (actual.getValor() != anterior.getValor()) {
+                        escaleraColor.clear();
+                        escaleraColor.add(actual);
+                    }
+                }
+            }
+        }
+
+        return new ArrayList<>();
+    }
+
 }

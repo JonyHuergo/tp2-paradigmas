@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml">
+    <ComboBox fx:id="numeroDropdown" promptText="Selecciona el número" />
+    <ComboBox fx:id="paloDropdown" promptText="Selecciona el palo" />
+    <Button fx:id="confirmarButton" text="Confirmar" />
+</VBox>

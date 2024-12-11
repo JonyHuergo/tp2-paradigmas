@@ -3,9 +3,6 @@ package org.example.Controladores;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.example.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FlujoRondasController {
@@ -17,35 +14,11 @@ public class FlujoRondasController {
             this.stage = stage;
         }
 
+        public void iniciarFlujo( List<Ronda> rondas,Mazo mazo, int numeroRonda, Jugador jugador){
 
+            Ronda ronda = rondas.get(numeroRonda);
 
-
-        public void iniciarFlujo(){
-
-            LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
-            ArrayList<Carta> cartasLeidas = null;
-            List<Ronda> rondas = null;
-            try {
-                rondas = lectorArchivosJson.leerBalatro();
-                cartasLeidas = lectorArchivosJson.leerMazo();
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Error al leer los archivos JSON.");
-            }
-            Mazo mazo = new Mazo(cartasLeidas);
-            Juego juego = new Juego(mazo);
-
-
-            Ronda ronda = rondas.get(0);
-            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, ronda.getPuntajeASuperar());
+            PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda, jugador);
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
-
-//            for (int i = rondas.size() - 1; i >= 0; i--) {
-//
-////                Ronda currentRonda = rondas.get(i);
-////                ArrayList<Carta> cartasIniciales = jugador.getMazo().repartirCartas(5);
-////                int puntajeASuperar = currentRonda.getPuntajeASuperar();
-////                mostrarRonda(primaryStage, cartasIniciales, puntajeASuperar);
-//            }
         }
 }

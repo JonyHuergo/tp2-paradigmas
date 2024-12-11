@@ -2,11 +2,17 @@ package org.example.Handlers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.example.*;
 import org.example.Controladores.PantallaJuegoController;
+import org.example.Controladores.SeleccionarCartaController;
 import org.example.Tarot.Tarot;
 import org.example.Tarot.TarotSobreCarta;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CompraTarotHandler implements EventHandler<ActionEvent> {
@@ -29,34 +35,24 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
 
     }
 
-    private Carta seleccionarCarta() {
-        // Crear un cuadro de diálogo en JavaFX
-        javafx.stage.Stage stage = new javafx.stage.Stage();
-        javafx.scene.layout.VBox layout = new javafx.scene.layout.VBox(10);
-        layout.setPadding(new javafx.geometry.Insets(10));
+    private Carta abrirPantallaSeleccionCarta() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/SeleccionarCarta.fxml"));
+            SeleccionarCartaController seleccionarCartaController = new SeleccionarCartaController(mazo);
+            loader.setController(seleccionarCartaController);
+            Parent root = loader.load();
 
-        javafx.scene.control.Label label = new javafx.scene.control.Label("Seleccione una carta para aplicar el tarot:");
-        layout.getChildren().add(label);
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.showAndWait();
+            seleccionarCartaController.initialize();
+            Carta cartaSeleccionada = seleccionarCartaController.getCartaSeleccionada();
+            return cartaSeleccionada;
 
-        // Crear botones para cada carta en la mano
-        javafx.scene.control.Button botonCancelar = new javafx.scene.control.Button("Cancelar");
-        botonCancelar.setOnAction(e -> stage.close());
-
-        Carta[] cartaSeleccionada = {null};
-        for (Carta carta : jugador.getCartasDisponibles()) {
-            javafx.scene.control.Button botonCarta = new javafx.scene.control.Button(carta.toString());
-            botonCarta.setOnAction(e -> {
-                cartaSeleccionada[0] = carta;
-                stage.close();
-            });
-            layout.getChildren().add(botonCarta);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
-        layout.getChildren().add(botonCancelar);
-
-        stage.setScene(new javafx.scene.Scene(layout));
-        stage.showAndWait();
-
-        return cartaSeleccionada[0];
     }
 
     @Override
@@ -66,20 +62,17 @@ public class CompraTarotHandler implements EventHandler<ActionEvent> {
         System.out.println(jugador.getCantidadDeTarots());
 
 
-//        if (tarot.esSobreCarta()) {
-//            // Mostrar diálogo para seleccionar la carta
-//            Carta cartaSeleccionada = seleccionarCarta();
-//            if (cartaSeleccionada != null) {
-//                ((TarotSobreCarta) tarot).usarSobre(cartaSeleccionada);
-//                System.out.println("Tarot aplicado a la carta: " + cartaSeleccionada);
-//            } else {
-//                System.out.println("No se seleccionó una carta.");
-//
-//            }
-//        }
-        if (!tarot.esSobreCarta()){
-            // Aplicar efecto directamente a la mano
-            jugador.agregarTarot(tarot);
+        if (tarot.esSobreCarta()) {
+
+            Carta cartaSeleccionada = abrirPantallaSeleccionCarta();
+            if (cartaSeleccionada != null) {
+                ((TarotSobreCarta) tarot).usarSobre(cartaSeleccionada);
+                jugador.agregarTarot(tarot);
+
+            }else{
+                jugador.agregarTarot(tarot);
+            }
+
 
         }
         pantallaJuegoController.iniciarPantallaJuego(mazo, rondas, numeroRonda, jugador);

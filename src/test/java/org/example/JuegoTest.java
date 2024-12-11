@@ -149,7 +149,7 @@ public class JuegoTest {
         System.out.print("  ");
         System.out.print(puntaje);
 
-        // Ronda 3: Pierde esta ultima ronda
+        // Ronda 3: Pierde esta ultima ronda jugando carta alta
         numeroRonda = 2;
         ronda = rondas.get(numeroRonda);
         //ronda.setAtributosJugador(jugador);
@@ -164,7 +164,7 @@ public class JuegoTest {
         // Juego Ronda 3
         puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {
-            for (Carta cartaElegida : mazoRonda3.repartirCartas(1)) { //(5+2+30)*(1+3)=148   es el tarot que esta bug
+            for (Carta cartaElegida : mazoRonda3.repartirCartas(1)) {
                 jugador.agregarCarta(cartaElegida);
             }
             puntaje = jugador.jugar(numeroRonda);

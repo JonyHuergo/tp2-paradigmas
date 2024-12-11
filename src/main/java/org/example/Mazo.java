@@ -71,4 +71,25 @@ public class Mazo {
         }
         return mazoCopia;
     }
+
+    public Carta buscarCarta(String palo, String valor){
+        int valorCarta = convertirNumero(valor);
+        for (Carta carta : cartas) {
+            if (carta.paloEsIgual(palo) && carta.valorEsIgual(valorCarta)) {
+                return carta;
+            }
+        }
+        System.out.println("No se encontro el carta " + palo + ".");
+        return null;
+    }
+
+    private int convertirNumero(String numero) {
+        switch (numero) {
+            case "J": return 11;
+            case "Q": return 12;
+            case "K": return 13;
+            case "A": return 14;
+            default: return Integer.parseInt(numero);
+        }
+    }
 }

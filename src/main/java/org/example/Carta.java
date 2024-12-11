@@ -114,7 +114,7 @@ public class Carta extends Comprable{
         return carta.valorEsIgual(this.valor.getValor());
     }
 
-    private boolean valorEsIgual(int valorCarta) {
+    public boolean valorEsIgual(int valorCarta) {
         return valorCarta == this.valor.getValor();
     }
 

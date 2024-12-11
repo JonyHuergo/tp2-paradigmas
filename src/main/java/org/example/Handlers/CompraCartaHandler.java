@@ -7,7 +7,6 @@ import org.example.Controladores.PantallaJuegoController;
 import org.example.Jugador;
 import org.example.Mazo;
 import org.example.Ronda;
-
 import java.util.List;
 
 public class CompraCartaHandler implements EventHandler<ActionEvent> {

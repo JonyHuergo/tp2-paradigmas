@@ -91,7 +91,6 @@ public class Carta extends Comprable{
         throw new IllegalArgumentException("Valor no válido para una carta: " + valor);
     }
 
-    // Method to get the card route (palo + valor)
     @Override
     public String getRuta() {
         return "/cartas/" + palo + "_" + valor.getNombre() + ".png";

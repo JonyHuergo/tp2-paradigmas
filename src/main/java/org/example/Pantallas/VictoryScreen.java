@@ -50,14 +50,12 @@ public class VictoryScreen extends VBox {
         shadow.setRadius(12);
         title.setEffect(shadow);
 
-        // Botones
         newGameButton = createNewGameButton();
         exitButton = createExitButton();
         HBox buttonsBox = new HBox(20, newGameButton, exitButton);
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.setPadding(new Insets(20, 0, 0, 0));
 
-        // Añadir todo al contenedor principal
         this.getChildren().addAll(title, buttonsBox);
         this.setAlignment(Pos.TOP_CENTER);
         this.setPadding(new Insets(20));

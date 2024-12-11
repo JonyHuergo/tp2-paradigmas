@@ -1,43 +1,71 @@
 package org.example;
-import org.example.Comodin.Comodin;
+
+import org.example.Comodin.*;
 import org.example.Tarot.Tarot;
 import org.example.Tarot.TarotSobreMano;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 public class JuegoTest {
 
-    private Mazo mazo;
-    private Juego juego;
-
-
     @Test
-    // Jugador compra primero un comodin juega gana la primera ronda,
-    // pasa a la segunda compra un tarot y pierde
-    public void end2end() {
-        // Leer archivo JSON
-        LectorArchivosJson lectorArchivosJson = new LectorArchivosJson();
-        ArrayList<Carta> cartasLeidas = null;
-        List<Ronda> rondas = null;
-        try {
-            rondas = lectorArchivosJson.leerBalatro();
-            cartasLeidas = lectorArchivosJson.leerMazo();
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error al leer los archivos JSON.");
-        }
+    public void testJuegoConLectorMockeado() throws IOException {
+        // Crear mock del lector
+        LectorArchivosJson lectorMock = mock(LectorArchivosJson.class);
 
-        // Configurar juego
+        // Crear datos mockeados
+        // Mockear cartas del mazo
+        ArrayList<Carta> mazoMockeado = new ArrayList<>();
+        mazoMockeado.add(new Carta("diamantes", 2));
+        mazoMockeado.add(new Carta("diamantes", 3));
+        mazoMockeado.add(new Carta("diamantes", 4));
+        mazoMockeado.add(new Carta("diamantes", 5));
+        mazoMockeado.add(new Carta("diamantes", 6));
+
+        // Mockear rondas
+        List<Ronda> rondasMockeadas = new ArrayList<>();
+
+        // Mockear Comodines y Tarots de la tienda
+        List<Comodin> comodines = new ArrayList<>();
+        comodines.add(new ComodinPorManoJugada("Comodin Astuto", "descripcion", "par", 50, 1));
+        comodines.add(new ComodinPorDescarte(50, 1, "par"));
+
+        List<Tarot> tarots = new ArrayList<>();
+        tarots.add(new TarotSobreMano("Fuerza", "Mejora la mano poker", "mano", "poker", 3, 30));
+        tarots.add(new TarotSobreMano("Fuerza", "Mejora la mano poker", "mano", "poker", 3, 30));
+
+        Carta carta = new Carta("corazones", 10);
+
+        when(lectorMock.crearTienda(comodines, tarots,carta)).thenReturn(new Tienda(comodines, tarots, carta));
+
+
+
+        // Agregar rondas con tienda mockeada
+        rondasMockeadas.add(new Ronda(1, 3, 3, 3000, new Tienda(comodines, tarots, carta)));
+        rondasMockeadas.add(new Ronda(2, 4, 4, 3600, new Tienda(comodines, tarots, carta)));
+        rondasMockeadas.add(new Ronda(3, 4, 4, 4320, new Tienda(comodines, tarots, carta)));
+
+        // Configurar comportamiento del mock
+        when(lectorMock.leerBalatro()).thenReturn(rondasMockeadas);
+        when(lectorMock.leerMazo()).thenReturn(mazoMockeado);
+        List<Ronda> rondas = lectorMock.leerBalatro();
+        // Crear el juego
         Juego juego = new Juego();
-        juego.leerArchivo();
+
+        // Usar el mock
+        juego.leerArchivo(lectorMock);
+
+        // Verificar que el juego se configuró correctamente
         Jugador jugador = juego.getJugador();
 
-        // Ronda 1
         int numeroRonda = 0;
         Ronda ronda = rondas.get(numeroRonda);
 
@@ -49,16 +77,15 @@ public class JuegoTest {
 
         // Tienda Ronda 1
         Tienda tienda = ronda.obtenerTienda();
-        List<Comodin> comodines = tienda.obtenerComodines();
-        jugador.agregarComodin(comodines.get(0));//"Comodin Astuto"
+        List<Comodin> comodinesTienda = tienda.obtenerComodines();
+        jugador.agregarComodin(comodinesTienda.get(0));
 
         // Juego Ronda 1
         float puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && manos > 0) {
             manos -= 1;
-            for (int i = 2; i < 7; i++) {
-                Carta carta = new Carta("diamantes", i);
-                jugador.agregarCarta(carta);
+            for (Carta cartaElegida : mazoMockeado) {
+                jugador.agregarCarta(cartaElegida);
             }
             puntaje = jugador.jugar(numeroRonda);
             assertFalse(jugador.perdio());
@@ -66,7 +93,7 @@ public class JuegoTest {
 
         // Ronda 2
         numeroRonda = 1;
-        ronda = rondas.get(numeroRonda);
+        ronda = rondasMockeadas.get(numeroRonda);
 
         descartes = ronda.getDescartes();
         jugador.setCantidadDeDescartes(descartes);
@@ -76,26 +103,32 @@ public class JuegoTest {
 
         // Tienda Ronda 2
         tienda = ronda.obtenerTienda();
-        List<Tarot> tarots = tienda.obtenerTarots();
-        jugador.agregarTarot(tarots.get(0));//"FUERZA"
+        List<Tarot> tarotsTienda = tienda.obtenerTarots();
+        jugador.agregarTarot(tarotsTienda.get(0));//"FUERZA"
+
+        ArrayList<Carta> mazoMockeado2 = new ArrayList<>();
+        mazoMockeado2.add(new Carta("trebol", 4));
+        mazoMockeado2.add(new Carta("picas", 4));
+        mazoMockeado2.add(new Carta("diamantes", 4));
+        mazoMockeado2.add(new Carta("corazones", 4));
 
         // Juego Ronda 2
         puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && manos > 0) {//(60+(4x4)+30)*((7+3)+(15x3))=5830, deberia dar 7420 pero jugador tiene los descartes hardcodeados
-            Carta carta1 = new Carta("trebol", 4);
-            Carta carta2 = new Carta("picas", 4);
-            Carta carta3 = new Carta("diamantes", 4);
-            Carta carta4 = new Carta("corazones", 4);
-            jugador.agregarCarta(carta1);
-            jugador.agregarCarta(carta2);
-            jugador.agregarCarta(carta3);
-            jugador.agregarCarta(carta4);
+
+            for (Carta cartaElegida : mazoMockeado2) {
+                jugador.agregarCarta(cartaElegida);
+            }
             puntaje = jugador.jugar(numeroRonda);
             manos -= 1;
         }
         assertTrue(puntaje > ronda.getPuntajeASuperar());
 
         //Ronda 3
+        ArrayList<Carta> mazoMockeado3 = new ArrayList<>();
+        mazoMockeado3.add(new Carta("trebol", 2));
+
+
         numeroRonda = 2;
         ronda = rondas.get(numeroRonda);
 
@@ -107,18 +140,28 @@ public class JuegoTest {
 
         // Tienda Ronda 3
         tienda = ronda.obtenerTienda();
-        Carta carta = tienda.obtenerCarta();
-        jugador.agregarCartaMazo(carta);
+        Carta cartaTienda = tienda.obtenerCarta();
+        jugador.agregarCartaMazo(cartaTienda);
 
         // Juego Ronda 3
         puntaje = 0;
-        while (puntaje < ronda.getPuntajeASuperar() && manos > 0){
-            Carta cartaDePerdedor1 = new Carta("trebol", 2);
-            jugador.agregarCarta(cartaDePerdedor1);
+        while (puntaje < ronda.getPuntajeASuperar() && manos > 0) {
+            for (Carta cartaElegida : mazoMockeado3) {
+                jugador.agregarCarta(cartaElegida);
+            }
             puntaje = jugador.jugar(numeroRonda);
             manos -= 1;
         }
 
         assertTrue(puntaje < ronda.getPuntajeASuperar());
+
+
+
+
+
+
+
     }
+
+
 }

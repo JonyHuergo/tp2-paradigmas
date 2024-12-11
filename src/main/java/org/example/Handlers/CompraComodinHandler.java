@@ -2,14 +2,10 @@ package org.example.Handlers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.example.Comodin.Comodin;
 import org.example.Controladores.PantallaJuegoController;
 import org.example.Jugador;
 import org.example.Mazo;
-import org.example.Pantallas.JuegoScreen;
-import org.example.Pantallas.TiendaScreen;
 import org.example.Ronda;
 
 import java.util.List;
@@ -37,9 +33,6 @@ public class CompraComodinHandler implements EventHandler<ActionEvent> {
         jugador.agregarComodin(comodin);
     }
 
-//    protected void avanzar() {
-//        super.avanzar();
-//    }
 
     @Override
     public void handle(ActionEvent event) {

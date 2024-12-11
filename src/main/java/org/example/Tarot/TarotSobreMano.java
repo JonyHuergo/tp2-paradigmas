@@ -1,7 +1,4 @@
-
 package org.example.Tarot;
-
-import org.example.Carta;
 import org.example.ManoPoker;
 
 public class TarotSobreMano extends Tarot {

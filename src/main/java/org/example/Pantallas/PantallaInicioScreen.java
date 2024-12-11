@@ -43,36 +43,36 @@ public class PantallaInicioScreen extends VBox {
         backgroundView.setFitWidth(800);
         backgroundView.setFitHeight(600);
 
-        GaussianBlur blurEffect = new GaussianBlur(10); // Cambia el valor según la intensidad deseada
+        GaussianBlur blurEffect = new GaussianBlur(10);
         backgroundView.setEffect(blurEffect);
 
         root.getChildren().add(0, backgroundView);
 
         root.setBackground(new Background(backgroundImage));
 
-        // Carta que aparece en el título
+
         ImageView cardImage = new ImageView(new Image("cartas/Picas_As.png"));
         cardImage.setFitWidth(120);
         cardImage.setFitHeight(120);
 
-        // Parte del título antes de la segunda "A"
+
         Text firstPart = new Text("BAL");
         firstPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 100));
         firstPart.setFill(Color.WHITE);
 
-        // Parte del título después de la segunda "A"
+
         Text secondPart = new Text("TRO");
         secondPart.setFont(Font.font("RetroFont", FontWeight.BOLD, 100));
         secondPart.setFill(Color.WHITE);
 
-        // Botones
+
         playButton = createStyledButton("/Botones/Play.png", 120, 55);
         optionsButton = createStyledButton("/Botones/Options.png", 150, 55);
         collectionButton = createStyledButton("/Botones/Collection.png", 150, 60);
         exitButton = createStyledButton("/Botones/Exit.png", 120, 55);
 
 
-        // Diseño para los botones
+
         HBox buttonsBox = new HBox(10, playButton, optionsButton, collectionButton);
         buttonsBox.setAlignment(Pos.CENTER);
         HBox exitBox = new HBox(exitButton);
@@ -90,17 +90,17 @@ public class PantallaInicioScreen extends VBox {
         greyBox.setAlignment(Pos.CENTER);
         Background background = new Background(backgroundFill);
         greyBox.setBackground(background);
-        greyBox.setPadding(new Insets(2)); // Padding de la caja gris
+        greyBox.setPadding(new Insets(2));
         greyBox.setMaxWidth(300);
 
-        animateCard(cardImage);               // Animación de rotación para la carta
-        addGlowEffect(cardImage);             // Efecto de brillo para la carta
-        animateTitleColors(firstPart);        // Cambio de colores cíclicos para "BAL"
-        animateTitleColors(secondPart);       // Cambio de colores cíclicos para "TRO"
-        addHoverEffectToTitle(firstPart);     // Efecto hover para "BAL"
+        animateCard(cardImage);
+        addGlowEffect(cardImage);
+        animateTitleColors(firstPart);
+        animateTitleColors(secondPart);
+        addHoverEffectToTitle(firstPart);
         addHoverEffectToTitle(secondPart);
 
-        // Diseño del título: poner la carta entre "BAL" y "TRO"
+
         HBox titleBox = new HBox(0, firstPart, cardImage, secondPart);
         titleBox.setAlignment(Pos.TOP_CENTER);
 
@@ -114,8 +114,7 @@ public class PantallaInicioScreen extends VBox {
             double mouseX = event.getSceneX();
             double mouseY = event.getSceneY();
 
-            // Mueve el fondo ligeramente en dirección opuesta al mouse
-            backgroundView.setTranslateX((mouseX - 400) * -0.01); // Ajusta el multiplicador según el efecto deseado
+            backgroundView.setTranslateX((mouseX - 400) * -0.01);
             backgroundView.setTranslateY((mouseY - 300) * -0.01);
         });
     }
@@ -123,17 +122,15 @@ public class PantallaInicioScreen extends VBox {
     private Button createStyledButton(String imagePath, double width, double height) {
         Button button = new Button();
 
-        // Cargar la imagen
+
         if (imagePath != null && !imagePath.isEmpty()) {
             Image buttonImage = new Image(getClass().getResourceAsStream(imagePath));
             ImageView buttonImageView = new ImageView(buttonImage);
 
-            // Ajustar tamaño de la imagen
             buttonImageView.setFitWidth(width);
             buttonImageView.setFitHeight(height);
 
 
-            // Configurar la imagen como gráfico del botón
             button.setGraphic(buttonImageView);
         }
 
@@ -172,16 +169,16 @@ public class PantallaInicioScreen extends VBox {
     }
 
     private void addGlowEffect(ImageView cardImage) {
-        Glow glow = new Glow(0.0); // Inicialmente sin brillo
+        Glow glow = new Glow(0.0);
         cardImage.setEffect(glow);
 
-        // Cambiar el brillo cíclicamente
+
         Timeline glowAnimation = new Timeline(
                 new KeyFrame(Duration.seconds(0), e -> glow.setLevel(0.0)),
                 new KeyFrame(Duration.seconds(1), e -> glow.setLevel(0.8))
         );
         glowAnimation.setCycleCount(Timeline.INDEFINITE);
-        glowAnimation.setAutoReverse(true); // Revertir el brillo
+        glowAnimation.setAutoReverse(true);
         glowAnimation.play();
     }
 
@@ -198,8 +195,8 @@ public class PantallaInicioScreen extends VBox {
 
 
     private void addHoverEffectToTitle(Text text) {
-        text.setOnMouseEntered(e -> text.setFill(Color.GOLD)); // Cambia a color dorado al pasar el mouse
-        text.setOnMouseExited(e -> text.setFill(Color.WHITE)); // Regresa al color original
+        text.setOnMouseEntered(e -> text.setFill(Color.GOLD));
+        text.setOnMouseExited(e -> text.setFill(Color.WHITE));
     }
 }
 

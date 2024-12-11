@@ -17,9 +17,9 @@ public class EvaluadorEscalera extends EvaluadorAbstracto {
             Carta cartaAnterior = null;
             for (Carta carta : cartas) {
                 if (cartaAnterior != null && carta.getValor() != cartaAnterior.getValor() + 1) {
-                    return null;  // Retorna null si las cartas no son consecutivas
+                    return null;
                 }
-                cartaAnterior = carta;  // Actualiza la carta anterior para la siguiente iteración
+                cartaAnterior = carta;
             }
             return new Escalera();
         } else {
@@ -28,21 +28,17 @@ public class EvaluadorEscalera extends EvaluadorAbstracto {
     }
     @Override
     protected ArrayList<Carta> calcularCartasRelevantes(ArrayList<Carta> cartas) {
-        // Ordenar las cartas por valor, eliminando duplicados
         List<Integer> valoresOrdenados = cartas.stream()
                 .map(Carta::getValor)
                 .distinct()
                 .sorted()
                 .collect(Collectors.toList());
 
-        // Verificar si hay una secuencia consecutiva de 5 valores
-        for (int i = 0; i <= valoresOrdenados.size() - 5; i++) {
-            // Extraer un sublista de 5 valores consecutivos
-            List<Integer> posibleEscalera = valoresOrdenados.subList(i, i + 5);
 
-            // Verificar si los valores son consecutivos
+        for (int i = 0; i <= valoresOrdenados.size() - 5; i++) {
+
+            List<Integer> posibleEscalera = valoresOrdenados.subList(i, i + 5);
             if (esConsecutiva(posibleEscalera)) {
-                // Filtrar las cartas que corresponden a los valores de la escalera
                 return cartas.stream()
                         .filter(c -> posibleEscalera.contains(c.getValor()))
                         .sorted(Comparator.comparingInt(Carta::getValor))
@@ -50,11 +46,9 @@ public class EvaluadorEscalera extends EvaluadorAbstracto {
             }
         }
 
-        // Si no hay escalera, devolver una lista vacía
         return new ArrayList<>();
     }
 
-    // Método auxiliar para verificar si los valores son consecutivos
     private boolean esConsecutiva(List<Integer> valores) {
         for (int i = 0; i < valores.size() - 1; i++) {
             if (valores.get(i) + 1 != valores.get(i + 1)) {

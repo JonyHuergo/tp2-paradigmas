@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.Comodin.Comodin;
 import org.example.Manos.Mano;
 
 import java.util.ArrayList;
@@ -34,7 +33,6 @@ public class ManoPoker {
     }
 
     public void definirTipodeMano() {
-//        cartas = analizadorMano.obtenerCartasDeLaMano(cartas);
         tipoDeMano = calcularMano();
     }
 
@@ -101,7 +99,6 @@ public class ManoPoker {
             clon.add(carta.clonar());
         }
         return new ManoPoker(clon);
-//       return new ManoPoker((ArrayList)cartas.clone());
     }
 
     public void descartarCartas(ArrayList<Carta> cartasDescartadas) {

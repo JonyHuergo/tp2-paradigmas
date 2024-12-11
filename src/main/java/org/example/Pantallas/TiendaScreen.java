@@ -49,9 +49,8 @@ public class TiendaScreen extends VBox {
         ImageView leftChip = new ImageView(pokerChipImage);
         ImageView rightChip = new ImageView(pokerChipImage);
 
-// Ajusta el tamaño de las imágenes si es necesario
-        leftChip.setFitWidth(70);  // Ancho de la imagen
-        leftChip.setFitHeight(70); // Alto de la imagen
+        leftChip.setFitWidth(70);
+        leftChip.setFitHeight(70);
         rightChip.setFitWidth(70);
         rightChip.setFitHeight(70);
 
@@ -67,11 +66,11 @@ public class TiendaScreen extends VBox {
         titulo.setFont(arcadeFont);
         titulo.setAlignment(Pos.CENTER);
 
-        HBox titleBox = new HBox(10); // 10 es el espacio entre los elementos
+        HBox titleBox = new HBox(10);
         titleBox.setAlignment(Pos.CENTER);
         titleBox.getChildren().addAll(leftChip, titulo, rightChip);
 
-// Agrega el HBox al diseño principal
+
         this.getChildren().add(titleBox);
 
         this.comodines = tienda.obtenerComodines();
@@ -90,7 +89,7 @@ public class TiendaScreen extends VBox {
 
     }
 
-    // Método para seleccionar una carta (comodín, tarot o carta)
+
     private void seleccionarCarta(Comprable seleccionada, Button cartaButton) {
         if (selectedButton != null && selectedButton != cartaButton) {
             selectedButton.setOpacity(1.0);
@@ -108,15 +107,15 @@ public class TiendaScreen extends VBox {
     }
 
 
-    // Método para deseleccionar todas las cartas (opacarlas)
+
     private void deseleccionarTodasLasCartas() {
-        // Desactiva la opacidad en todas las cartas (comodines, tarots y la carta)
+
         for (Node node : this.getChildren()) {
             if (node instanceof FlowPane) {
                 FlowPane pane = (FlowPane) node;
                 for (Node subNode : pane.getChildren()) {
                     if (subNode instanceof Button && subNode != selectedButton) {
-                        subNode.setOpacity(0.5);  // Baja la opacidad de las demás cartas
+                        subNode.setOpacity(0.5);
                     }
                 }
             }
@@ -132,28 +131,23 @@ public class TiendaScreen extends VBox {
         flowPane.setVgap(10);
         flowPane.setAlignment(Pos.CENTER);
 
-        // Crear el botón de avanzar
         Button avanzarButton = new Button("Avanzar");
         avanzarButton.setStyle("-fx-font-size: 16px; -fx-background-color: yellow;");
-        avanzarButton.getStyleClass().add("button-avanzar"); // Agregar clase para referencia futura
+        avanzarButton.getStyleClass().add("button-avanzar");
         
 
-        // Un único manejador para todos los botones
+
         EventHandler<ActionEvent> seleccionHandler = event -> {
             Button cartaButton = (Button) event.getSource();
-            // Se obtiene la carta asociada al botón desde el 'UserData'
             Comprable seleccionada = (Comprable) cartaButton.getUserData();
 
             descripcionLabel.setText(seleccionada.getDescripcion());
 
-            // Llama al método para seleccionar la carta
             seleccionarCarta(seleccionada, cartaButton);
 
-            // Actualiza el manejador del botón de avanzar
             actualizarHandlerAvanzar(avanzarButton, stage, mediaPlayer, mazo, jugador, rondas, numeroRonda);
         };
 
-        // Crear los botones para cada carta y asociarles el manejador
         for (Comprable carta : cartas) {
             String imagePath = carta.getRuta();
             Image image = new Image(imagePath);
@@ -171,16 +165,14 @@ public class TiendaScreen extends VBox {
             Button cartaButton = new Button();
             cartaButton.setGraphic(imageView);
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
-            cartaButton.setUserData(carta); // Asocia la carta al botón
+            cartaButton.setUserData(carta);
 
 
-            // Asigna el manejador de acción al botón
             cartaButton.setOnAction(seleccionHandler);
             flowPane.getChildren().add(cartaButton);
         }
 
 
-        // Agrega el botón de avanzar al diseño
         this.setAlignment(Pos.CENTER);
         this.getChildren().add(avanzarButton);
 

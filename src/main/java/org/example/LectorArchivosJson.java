@@ -1,14 +1,12 @@
 package org.example;
 
 import jakarta.json.*;
-import org.example.Comodin.Activacion;
 import org.example.Comodin.Comodin;
 import org.example.Comodin.InicilizadorDeComodines;
 import org.example.Tarot.InicializadorDeTarots;
 import org.example.Tarot.Tarot;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.*;
@@ -33,17 +31,16 @@ public class LectorArchivosJson {
                 int descartes = ronda.getInt("descartes");
                 int puntajeASuperar = ronda.getInt("puntajeASuperar");
 
-                // tienda
+
                 JsonObject tienda = ronda.getJsonObject("tienda");
 
-                // comodines
                 List<Comodin> comodinesLeidos = this.obtenerComodines(tienda);
-                // tarots
+
                 List<Tarot> tarotsLeidos = obtenerTarots(tienda);
-                // carta
+
                 Carta cartaLeida = obtenerCarta(tienda);
 
-                Tienda tiendaLeida = new Tienda(comodinesLeidos, tarotsLeidos, cartaLeida);
+                Tienda tiendaLeida = crearTienda(comodinesLeidos,tarotsLeidos, cartaLeida);
                 rondasLeidas.add(new Ronda(nro, manos, descartes, puntajeASuperar, tiendaLeida));
             }
         }
@@ -293,5 +290,8 @@ public class LectorArchivosJson {
         } else {
             throw new IllegalArgumentException("El objeto JSON no contiene la clave 'activacion'");
         }
+    }
+    public Tienda crearTienda(List<Comodin> comodinesLeidos, List<Tarot> tarotsLeidos, Carta cartaLeida){
+        return new Tienda(comodinesLeidos, tarotsLeidos, cartaLeida);
     }
 }

@@ -1,7 +1,6 @@
 package org.example.Manos;
 
 import org.example.Carta;
-import org.example.Comodin.Comodin;
 
 import java.util.ArrayList;
 import java.util.Objects;

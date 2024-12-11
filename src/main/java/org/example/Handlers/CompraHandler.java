@@ -27,7 +27,7 @@ public abstract class CompraHandler implements EventHandler<ActionEvent> {
     protected abstract void executeCompra();
 
     protected void avanzar() {
-//        pantallaJuegoController.iniciarPantallaJuego(mazo, puntajeASuperar);
+
     }
 }
 

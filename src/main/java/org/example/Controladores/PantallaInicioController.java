@@ -30,7 +30,6 @@ public class PantallaInicioController {
 
         PantallaInicioScreen pantallaInicio = new PantallaInicioScreen();
 
-        // Asignar los controladores a cada botón
         pantallaInicio.playButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, numeroRonda, jugador));
         pantallaInicio.optionsButton.setOnAction(new OptionsButtonHandler(stage, mediaPlayer));
         pantallaInicio.collectionButton.setOnAction(new CollectionButtonHandler(stage, mediaPlayer));

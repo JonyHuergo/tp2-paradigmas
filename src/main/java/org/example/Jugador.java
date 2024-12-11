@@ -9,7 +9,6 @@ import org.example.Tarot.Tarot;
 import java.util.ArrayList;
 
 public class Jugador {
-    private String nombre;
     private Mazo mazo;
     private ArrayList<Carta> cartasDisponibles = new ArrayList<>();
     private int limiteCartas = 8;
@@ -38,12 +37,6 @@ public class Jugador {
         return mazo;
     }
 
-    //    public Jugador(Mazo mazo, ArrayList<Carta> mano, ArrayList<Carta> manoElegida){
-//        this.mazo = mazo;
-//        this.mano = mano;
-////        this.manoElegida = manoElegida;
-//        puntaje = 0;
-//    }
 
     public Jugador(Mazo mazo, ArrayList<Carta> mano, ManoPoker manoPoker, ArrayList<Comodin> comodines){
         this.mazo = mazo;
@@ -136,7 +129,7 @@ public class Jugador {
 
         int indiceRepartida = 0;
 
-        // Iterar sobre la copia para encontrar y reemplazar seleccionadas
+
         for (int i = 0; i < copiaCartasIniciales.size(); i++) {
             Carta carta = copiaCartasIniciales.get(i);
 
@@ -146,7 +139,7 @@ public class Jugador {
             }
         }
 
-        // Limpiar la lista de cartas seleccionadas
+
         manoPoker = new ManoPoker();;
     }
 
@@ -196,17 +189,16 @@ public class Jugador {
     }
 
     private void perder() {
-//        mostrarAlerta("Perdiste.");
         perdio = true;
     }
 
 
-    public void crearJugada(){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
+    public void crearJugada(){
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados);
         listadoJugadas.add(jugadaActual);
     }
 
-    public void crearJugada(int numeroRonda){              // el estado actual se guarda en la jugada para que ese no se vea alterado por futuros cambios
+    public void crearJugada(int numeroRonda){
         this.jugadaActual = new Jugada(manoPoker, comodines, descartes, tarotsUsados, numeroRonda);
         listadoJugadas.add(jugadaActual);
     }

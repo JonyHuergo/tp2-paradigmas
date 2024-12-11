@@ -35,23 +35,21 @@ public class EvaluadorColor extends EvaluadorAbstracto {
 
     @Override
     protected ArrayList<Carta> calcularCartasRelevantes(ArrayList<Carta> cartas) {
-        // Agrupar cartas por palo
+
         Map<String, List<Carta>> cartasPorPalo = cartas.stream()
                 .collect(Collectors.groupingBy(Carta::getPalo));
 
-        // Buscar el grupo con al menos 5 cartas del mismo palo
         for (Map.Entry<String, List<Carta>> entrada : cartasPorPalo.entrySet()) {
             List<Carta> cartasDelMismoPalo = entrada.getValue();
             if (cartasDelMismoPalo.size() >= 5) {
-                // Retornar las primeras 5 cartas del mismo palo ordenadas por valor
+
                 return cartasDelMismoPalo.stream()
-                        .sorted(Comparator.comparingInt(Carta::getValor).reversed()) // Ordenar por valor descendente
-                        .limit(5) // Tomar las primeras 5 cartas
+                        .sorted(Comparator.comparingInt(Carta::getValor).reversed())
+                        .limit(5)
                         .collect(Collectors.toCollection(ArrayList::new));
             }
         }
 
-        // Si no hay Color, devolver lista vacía
         return new ArrayList<>();
     }
 

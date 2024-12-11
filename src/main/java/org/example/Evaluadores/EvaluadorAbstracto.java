@@ -22,12 +22,12 @@ public abstract class EvaluadorAbstracto implements EvaluadorMano {
             return new CartaAlta();
         }
         if (resultado != null) {
-            return resultado; // Si encuentra el tipo de mano, lo devuelve
+            return resultado;
         }
         if (siguiente != null) {
-            return siguiente.evaluar(cartas); // Pasa al siguiente en la cadena
+            return siguiente.evaluar(cartas);
         }
-        return new CartaAlta(); // Caso base si nadie encuentra un tipo de mano
+        return new CartaAlta();
     }
 
     @Override

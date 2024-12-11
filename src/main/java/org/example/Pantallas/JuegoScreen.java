@@ -29,15 +29,12 @@ public class JuegoScreen extends VBox {
         FlowPane comodinesPane = mostrarComodines(comodines);
 
         VBox marcador = crearMarcador(controller, jugador, numeroRonda);
-//        marcador.setStyle("-fx-border-radius: 30");
-        // Crear un FlowPane para contener las cartas
         FlowPane cartasPane = mostrarCartas(cartasIniciales, controller, mazo);
 
-        // Crear un Label para mostrar el puntajeASuperar
+
         Label puntajeLabel = new Label("Puntaje a superar: " + ronda.getPuntajeASuperar());
         puntajeLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
-        // Obtener el manoLabel del controller, que ya fue configurado en PantallaJuegoController
         Label manoLabel = controller.getManoLabel();
         manoLabel.setStyle("-fx-font-size: 16px; -fx-text-fill: white; -fx-padding: 10;");
 
@@ -50,22 +47,21 @@ public class JuegoScreen extends VBox {
 
         HBox titleBox = crearTitulo();
 
-        // Crear un VBox para organizar los Labels verticalmente
-        VBox leftPanelContent = new VBox(10);  // 10 is the space between the labels
+        VBox leftPanelContent = new VBox(10);
         leftPanelContent.setStyle("-fx-padding: 5;");
         leftPanelContent.getChildren().addAll(titleBox, puntajeLabel, manoLabel, descartesLabel , jugadasLabel ,marcador);
 
-        // Crear un Panel (Panel de la izquierda)
+
         StackPane leftPanel = new StackPane();
-        leftPanel.setStyle("-fx-background-color: gray;");  // Establecer un color de fondo para el panel izquierdo
-        leftPanel.setMinWidth(200); // Aproximadamente un cuarto del ancho total
+        leftPanel.setStyle("-fx-background-color: gray;");
+        leftPanel.setMinWidth(200);
 
-        // Crear un HBox para contener los botones
-        HBox botonesBox = new HBox(10); // Espaciado de 10 entre botones
-        botonesBox.setAlignment(Pos.BOTTOM_LEFT); // Alinear los botones en la parte inferior izquierda
-        botonesBox.setPadding(new Insets(10)); // Espaciado interno
 
-// Crear botón "Descartar"
+        HBox botonesBox = new HBox(10);
+        botonesBox.setAlignment(Pos.BOTTOM_LEFT);
+        botonesBox.setPadding(new Insets(10));
+
+
         Button descartarButton = new Button("Descartar");
         descartarButton.setFont(Font.font("RetroFont", FontWeight.BOLD, 16));
 
@@ -79,7 +75,6 @@ public class JuegoScreen extends VBox {
 
 
 
-// Crear botón "Jugar mano"
         Button jugarManoButton = new Button("Jugar Mano");
         jugarManoButton.setFont(Font.font("RetroFont", FontWeight.BOLD, 16));
         jugarManoButton.setStyle("-fx-background-color: yellow; -fx-text-fill: black; -fx-padding: 5; -fx-background-radius: 5;");
@@ -87,29 +82,26 @@ public class JuegoScreen extends VBox {
             controller.jugarMano();
         });
 
-        // Agregar botones al HBox
+
         botonesBox.getChildren().addAll(descartarButton, jugarManoButton);
 
 
 
-        // Agregar los botones al VBox del panel izquierdo (leftPanelContent)
         leftPanelContent.getChildren().add(botonesBox);
 
 
         leftPanel.getChildren().add(leftPanelContent);
 
-        // Crear un StackPane para el contenido principal (Centro verde)
         StackPane contentPane = new StackPane();
-        contentPane.setStyle("-fx-background-color: green;");  // Establecer un color de fondo verde
+        contentPane.setStyle("-fx-background-color: green;");
         contentPane.setMinHeight(800);
         contentPane.getChildren().add(comodinesPane);
         contentPane.getChildren().add(cartasPane);
 
-        // Crear un BorderPane para organizar los elementos
+
         BorderPane layout = new BorderPane();
-        layout.setLeft(leftPanel); // Colocar el panel izquierdo
-        layout.setCenter(contentPane); // Colocar el área principal con color verde en el centro
-        // Agregar el BorderPane como único hijo de esta pantalla
+        layout.setLeft(leftPanel);
+        layout.setCenter(contentPane);
         this.getChildren().add(layout);
     }
 
@@ -117,29 +109,23 @@ public class JuegoScreen extends VBox {
         FlowPane comodinesPane = new FlowPane();
 
         for (Comodin comodin : comodines) {
-            // Crear la ruta de la imagen de cada carta
             String imagePath = comodin.getRuta();
 
-            // Crear la imagen y el ImageView correspondiente
             Image image = new Image(imagePath);
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(90);
             imageView.setFitHeight(90);
 
-            // Agregar el ImageView al FlowPane
             comodinesPane.getChildren().add(imageView);
         }
 
-        // Ajustar el estilo del FlowPane
         comodinesPane.setStyle("-fx-padding: 10; -fx-hgap: -20; -fx-vgap: 0;");
 
         return comodinesPane;
     }
 
     private VBox crearMarcador( FlujoJuegoController controller, Jugador jugador, int numeroRonda) {
-        // Contenedor principal
         VBox marcador = new VBox();
-        // Espaciado entre las cajas
         marcador.setStyle("-fx-background-color: #202020;");
         marcador.setAlignment(Pos.TOP_CENTER);
         marcador.setStyle(
@@ -151,7 +137,6 @@ public class JuegoScreen extends VBox {
                         "-fx-border-width: 2;"              // Ancho del borde
         );
 
-        // Round Score
         VBox roundScoreBox = new VBox();
         roundScoreBox.setAlignment(Pos.CENTER);
 
@@ -203,7 +188,6 @@ public class JuegoScreen extends VBox {
     }
 
     public HBox crearTitulo() {
-        FlowPane cartasPane = new FlowPane();
         ImageView cardImage = new ImageView(new Image("cartas/Picas_As.png"));
         cardImage.setFitWidth(45);
         cardImage.setFitHeight(45);
@@ -225,29 +209,26 @@ public class JuegoScreen extends VBox {
     }
 
     public FlowPane mostrarCartas(ArrayList<Carta> cartasIniciales,  FlujoJuegoController controller,Mazo mazo){
-        // Iterar sobre las cartas en el mazo del jugador
         FlowPane cartasPane = new FlowPane();
 
         for (Carta carta : cartasIniciales) {
-            // Crear la ruta de la imagen de cada carta
             String imagePath = carta.getRuta();
 
 
-            // Crear la imagen y el ImageView correspondiente
             Image image = new Image(imagePath);
             ImageView imageView = new ImageView(image);
             imageView.setFitWidth(90);
             imageView.setFitHeight(90);
 
-            // Crear un botón que contiene la carta
+
             Button cartaButton = new Button();
             cartaButton.setGraphic(imageView);
             cartaButton.setStyle("-fx-background-color: transparent; -fx-padding: -5;");
 
-            // Delegar la lógica del botón al handler
+
             cartaButton.setOnAction(new CartaButtonHandler(carta, cartaButton, controller, mazo));
 
-            // Agregar el botón al FlowPane
+
             cartasPane.getChildren().add(cartaButton);
             cartasPane.setStyle("-fx-padding: 10; -fx-hgap: -20; -fx-vgap: 0; -fx-translate-y: 500;");
 

@@ -31,7 +31,7 @@ public class EvaluadorPoker extends EvaluadorAbstracto {
 
         for (List<Carta> grupo : grupos.values()) {
             if (grupo.size() == 4) {
-                return new ArrayList<>(grupo); // Retornar las 4 cartas directamente
+                return new ArrayList<>(grupo);
             }
         }
 

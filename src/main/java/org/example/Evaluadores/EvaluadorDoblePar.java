@@ -27,14 +27,14 @@ public class EvaluadorDoblePar extends EvaluadorAbstracto {
                 .collect(Collectors.groupingBy(Carta::getValor));
 
         List<Carta> pares = grupos.values().stream()
-                .filter(grupo -> grupo.size() >= 2) // Grupos con al menos dos cartas
-                .flatMap(grupo -> grupo.stream().limit(2)) // Tomar dos cartas de cada grupo
+                .filter(grupo -> grupo.size() >= 2)
+                .flatMap(grupo -> grupo.stream().limit(2))
                 .collect(Collectors.toList());
 
         if (pares.size() >= 4) {
             return pares.stream()
-                    .sorted(Comparator.comparingInt(Carta::getValor).reversed()) // Ordenar por valor descendente
-                    .limit(4) // Tomar las 4 mejores cartas
+                    .sorted(Comparator.comparingInt(Carta::getValor).reversed())
+                    .limit(4)
                     .collect(Collectors.toCollection(ArrayList::new));
         }
 

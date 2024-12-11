@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import org.example.*;
 import org.example.Controladores.PantallaJuegoController;
-import org.example.Handlers.CompraCartaHandler;
 import org.example.Handlers.CompraComodinHandler;
 
 import java.util.List;

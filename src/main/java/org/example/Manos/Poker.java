@@ -6,18 +6,4 @@ public class Poker extends Mano{
         super("Poker", 60, 7);
     }
 
-//    @Override
-//    public String getNombre() {
-//        return "Poker";
-//    }
-//
-//    @Override
-//    public int getPuntajeBase(){
-//        return 60;
-//    }
-//
-//    @Override
-//    public int getMultiplicadorBase(){
-//        return 7;
-//    }
 }

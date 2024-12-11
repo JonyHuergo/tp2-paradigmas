@@ -47,64 +47,29 @@ public class EndGameScreen extends VBox {
         DropShadow outerShadow = new DropShadow();
         outerShadow.setOffsetX(0);
         outerShadow.setOffsetY(0);
-        outerShadow.setColor(Color.BLACK); // Borde exterior negro
-        outerShadow.setRadius(12); // Radio más grande para que el negro sea notorio
+        outerShadow.setColor(Color.BLACK);
+        outerShadow.setRadius(12);
 
         DropShadow innerShadow = new DropShadow();
         innerShadow.setOffsetX(0);
         innerShadow.setOffsetY(0);
-        innerShadow.setColor(Color.WHITE); // Borde interior blanco
-        innerShadow.setRadius(8); // Radio intermedio para el blanco
-        innerShadow.setInput(outerShadow); // Encadena con el borde negro
+        innerShadow.setColor(Color.WHITE);
+        innerShadow.setRadius(8);
+        innerShadow.setInput(outerShadow);
 
-        // Aplica los bordes al texto
+
         title.setEffect(innerShadow);
 
-        // Alinear y configurar el VBox
-        this.setAlignment(Pos.CENTER); // Centra todo en el VBox
+
+        this.setAlignment(Pos.CENTER);
 
 
-        /*VBox statsBox = new VBox(10);
-        statsBox.setPadding(new Insets(20));
-        statsBox.setStyle("-fx-background-color: " + panelColor + "; -fx-background-radius: 10;");
-        statsBox.setAlignment(Pos.CENTER);
-
-
-        statsBox.getChildren().addAll(
-                createStatRow("Best Hand", "★ 1,014", highlightColor),
-                createStatRow("Most Played Hand", "Two Pair [8]", textColor),
-                createStatRow("Cards Played", "59", textColor),
-                createStatRow("Cards Discarded", "26", textColor),
-                createStatRow("Cards Purchased", "6", textColor),
-                createStatRow("Times Rerolled", "0", textColor),
-                createStatRow("New Discoveries", "11", textColor),
-                createStatRow("Seed", "TUTORIAL", textColor)
-        );*/
-
-        // Información adicional (derecha)
-        /*VBox additionalBox = new VBox(10);
-        additionalBox.setPadding(new Insets(20));
-        additionalBox.setStyle("-fx-background-color: " + panelColor + "; -fx-background-radius: 10;");
-        additionalBox.setAlignment(Pos.CENTER);
-        additionalBox.getChildren().addAll(
-                createStatRow("Ante", "2", textColor),
-                createStatRow("Round", "5", textColor),
-                createStatRow("Defeated By", "The Wall", highlightColor)
-        );*/
-
-        // Contenedor principal de estadísticas
-        //HBox statsContainer = new HBox(20, statsBox, additionalBox);
-        //statsContainer.setAlignment(Pos.CENTER);
-
-        // Botones
         newGameButton = createNewGameButton();
         exitButton = createMainMenuButton();
         HBox buttonsBox = new HBox(20, newGameButton, exitButton);
         buttonsBox.setAlignment(Pos.CENTER);
         buttonsBox.setPadding(new Insets(20, 0, 0, 0));
 
-        // Agregar todo al VBox principal
-        //this.getChildren().addAll(title, statsContainer, buttonsBox);
         this.getChildren().addAll(title, buttonsBox);
         this.setAlignment(Pos.TOP_CENTER);
         this.setPadding(new Insets(20));

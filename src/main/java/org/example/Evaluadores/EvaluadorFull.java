@@ -26,13 +26,13 @@ public class EvaluadorFull extends EvaluadorAbstracto {
                 .collect(Collectors.groupingBy(Carta::getValor));
 
         List<Carta> trio = grupos.values().stream()
-                .filter(grupo -> grupo.size() >= 3) // Buscar el trío
-                .flatMap(grupo -> grupo.stream().limit(3)) // Tomar tres cartas
+                .filter(grupo -> grupo.size() >= 3)
+                .flatMap(grupo -> grupo.stream().limit(3))
                 .collect(Collectors.toList());
 
         List<Carta> par = grupos.values().stream()
-                .filter(grupo -> grupo.size() >= 2 && !trio.containsAll(grupo)) // Buscar el par distinto al trío
-                .flatMap(grupo -> grupo.stream().limit(2)) // Tomar dos cartas
+                .filter(grupo -> grupo.size() >= 2 && !trio.containsAll(grupo))
+                .flatMap(grupo -> grupo.stream().limit(2))
                 .collect(Collectors.toList());
 
         if (trio.size() == 3 && par.size() == 2) {

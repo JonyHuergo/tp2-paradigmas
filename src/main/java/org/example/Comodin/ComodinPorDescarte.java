@@ -3,7 +3,6 @@ package org.example.Comodin;
 import org.example.Jugada;
 import org.example.Jugador;
 
-import java.util.List;
 
 public class ComodinPorDescarte extends Comodin{
 

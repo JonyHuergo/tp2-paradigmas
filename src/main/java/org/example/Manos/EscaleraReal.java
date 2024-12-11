@@ -3,6 +3,6 @@ package org.example.Manos;
 public class EscaleraReal extends Mano{
 
     public EscaleraReal (){
-        super("escalera real", 100, 8);
+        super("Escalera Real", 100, 8);
     }
 }

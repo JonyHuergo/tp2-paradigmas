@@ -50,7 +50,4 @@ public abstract class Tarot extends Comprable { // Tentativo, revisar
     public String getDescripcion(){
         return descripcion;
     }
-
-
-    public abstract boolean esSobreCarta();
 }

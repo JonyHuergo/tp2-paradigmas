@@ -165,6 +165,4 @@ public class Carta extends Comprable{
     }
 
 
-
-
 }

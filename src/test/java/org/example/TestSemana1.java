@@ -91,7 +91,7 @@ public class TestSemana1 {
         manoJugada.agregarCarta(carta);
 
         // Tarots
-        TarotSobreMano tarot = new TarotSobreMano("agregador10pts", "agrega10pts", "mano", "carta alta", 10, 0);
+        TarotSobreMano tarot = new TarotSobreMano("agregador10pts", "agrega10pts", "mano", "cualquiera", 10, 0);
         ArrayList<Tarot> tarots = new ArrayList<>();
         tarots.add(tarot);
 

@@ -8,20 +8,12 @@ public class TarotSobreMano extends Tarot {
 
     @Override
     public void aplicarEfecto(ManoPoker manoPoker) {
-        if (manoPoker.manoNombreEsIgual(ejemplar)){
-            if (this.puntos > 1){
-                manoPoker.actualizarPuntajeBase(this.puntos);
-            }
-            if (this.multiplicador > 1){
-                manoPoker.actualizarMultiplicadorBase(this.multiplicador);
-            }
+        if (this.puntos > 1){
+            manoPoker.actualizarPuntajeBase(this.puntos);
+        }
+        if (this.multiplicador > 1){
+            manoPoker.actualizarMultiplicadorBase(this.multiplicador);
         }
     }
-
-    @Override
-    public boolean esSobreCarta() {
-        return false;
-    }
-
 
 }

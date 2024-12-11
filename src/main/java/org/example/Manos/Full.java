@@ -3,6 +3,6 @@ package org.example.Manos;
 public class Full extends Mano{
 
     public Full (){
-        super("full", 40, 4);
+        super("Full", 40, 4);
     }
 }

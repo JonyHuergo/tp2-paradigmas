@@ -16,5 +16,9 @@ public class TarotSobreCarta extends Tarot {
 
         this.carta = carta;
     }
+    @Override
+    public boolean esSobreCarta() {
+        return true;
+    }
 
 }

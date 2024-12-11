@@ -268,4 +268,8 @@ public class Jugador {
     public void agregarCartaMazo(Carta carta){
         mazo.agregarCarta(carta);
     }
+
+    public ManoPoker getManoPoker(){
+        return(manoPoker);
+    }
 }

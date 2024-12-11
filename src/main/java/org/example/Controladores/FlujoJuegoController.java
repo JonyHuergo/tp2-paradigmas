@@ -96,6 +96,8 @@ public class FlujoJuegoController {
 
         if (jugador.perdio()){
             EndGameScreen pantallaDeDerrota = new EndGameScreen();
+            jugador.reinicarJugador();
+            numeroRonda = 0;
             pantallaDeDerrota.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, mazo, numeroRonda, jugador));
             pantallaDeDerrota.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
             Scene scene = new Scene(pantallaDeDerrota, 800, 600);
@@ -110,6 +112,8 @@ public class FlujoJuegoController {
         if (puntaje >= ronda.getPuntajeASuperar()) {
             if (numeroRondaNueva >= rondas.size()) {
                 VictoryScreen pantallaDeVictoria = new VictoryScreen();
+                jugador.reinicarJugador();
+                numeroRonda = 0;
                 pantallaDeVictoria.newGameButton.setOnAction(new PlayButtonHandler(stage, mediaPlayer, rondas, mazo, numeroRonda, jugador));
                 pantallaDeVictoria.exitButton.setOnAction(new ExitButtonHandler(stage, mediaPlayer));
                 Scene scene = new Scene(pantallaDeVictoria, 800, 600);

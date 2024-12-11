@@ -15,7 +15,6 @@ public class Jugador {
     private ManoPoker manoPoker;
     private ArrayList<Comodin> comodines = new ArrayList<>();
     private ArrayList<Tarot> tarotsUsados = new ArrayList<>();
-    private int puntaje;
     private int descartes;
     private int jugadas;
     private Jugada jugadaActual;
@@ -24,13 +23,11 @@ public class Jugador {
 
     public Jugador(){
         mazo = new Mazo();
-        puntaje = 0;
     }
 
     public Jugador(Mazo mazo){
         this.manoPoker = new ManoPoker();
         this.mazo = mazo;
-        puntaje = 0;
     }
 
     public Mazo getMazo() {
@@ -42,7 +39,6 @@ public class Jugador {
         this.mazo = mazo;
         this.cartasDisponibles = mano;
         this.manoPoker = manoPoker;
-        this.puntaje = 0;
         this.comodines = comodines;
     }
 
@@ -82,10 +78,6 @@ public class Jugador {
         return cartasDisponibles.size();
     }
 
-    public boolean puntajeEsIgual(int puntaje){
-        return(this.puntaje == puntaje);
-    }
-
     public boolean tieneManoDeTipo(String manoEsperada){
         return(manoPoker.manoNombreEsIgual(manoEsperada));
     }
@@ -106,10 +98,10 @@ public class Jugador {
         mazo.repartir(cartasDisponibles,limiteCartas);
     }
 
-    public void elegirCarta(int pos){
-        Carta cartaElegida = cartasDisponibles.remove(pos);
-        this.manoPoker.agregarCarta(cartaElegida);
-    }
+//    public void elegirCarta(int pos){
+//        Carta cartaElegida = cartasDisponibles.remove(pos);
+//        this.manoPoker.agregarCarta(cartaElegida);
+//    }
 
     public void descartarCartas(){
         if (descartes != 0) {
@@ -189,13 +181,13 @@ public class Jugador {
         return(jugadaActual.evaluarJugada());
     }
 
-    public float evaluarJugadas(){
-        float aux = 0;
-        for (Jugada jugada : listadoJugadas) {
-            aux += jugada.evaluarJugada();
-        }
-        return(aux);
-    }
+//    public float evaluarJugadas(){
+//        float aux = 0;
+//        for (Jugada jugada : listadoJugadas) {
+//            aux += jugada.evaluarJugada();
+//        }
+//        return(aux);
+//    }
 
     public float evaluarJugadas(int numeroRonda){
         float aux = 0;
@@ -211,9 +203,9 @@ public class Jugador {
         return(cartasDisponibles);
     }
 
-    public void usarTarot(Tarot tarot){
-        tarotsUsados.add(tarot);
-    }
+//    public void usarTarot(Tarot tarot){
+//        tarotsUsados.add(tarot);
+//    }
 
     private void mostrarAlerta(String mensaje) {
         Alert alerta = new Alert(Alert.AlertType.WARNING);
@@ -271,5 +263,13 @@ public class Jugador {
 
     public ManoPoker getManoPoker(){
         return(manoPoker);
+    }
+
+    public void reinicarJugador(){
+        listadoJugadas = new ArrayList<>();
+        tarotsUsados = new ArrayList<>();
+        comodines = new ArrayList<>();
+        cartasDisponibles = new ArrayList<>();
+        perdio = false;
     }
 }

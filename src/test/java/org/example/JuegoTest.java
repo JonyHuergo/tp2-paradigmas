@@ -46,12 +46,29 @@ public class JuegoTest {
 
         when(lectorMock.crearTienda(comodines, tarots,carta)).thenReturn(new Tienda(comodines, tarots, carta));
 
+        Ronda ronda1Mock = mock(Ronda.class);
+        when(ronda1Mock.getPuntajeASuperar()).thenReturn(3000);
+        when(ronda1Mock.getDescartes()).thenReturn(3);
+        when(ronda1Mock.getCantidadDeManos()).thenReturn(3);
+        when(ronda1Mock.obtenerTienda()).thenReturn(new Tienda(comodines, tarots, carta));
+
+        Ronda ronda2Mock = mock(Ronda.class);
+        when(ronda2Mock.getPuntajeASuperar()).thenReturn(3600);
+        when(ronda2Mock.getDescartes()).thenReturn(4);
+        when(ronda2Mock.getCantidadDeManos()).thenReturn(4);
+        when(ronda2Mock.obtenerTienda()).thenReturn(new Tienda(comodines, tarots, carta));
+
+        Ronda ronda3Mock = mock(Ronda.class);
+        when(ronda3Mock.getPuntajeASuperar()).thenReturn(4320);
+        when(ronda3Mock.getDescartes()).thenReturn(4);
+        when(ronda3Mock.getCantidadDeManos()).thenReturn(4);
+        when(ronda3Mock.obtenerTienda()).thenReturn(new Tienda(comodines, tarots, carta));
 
 
         // Agregar rondas con tienda mockeada
-        rondasMockeadas.add(new Ronda(1, 3, 3, 3000, new Tienda(comodines, tarots, carta)));
-        rondasMockeadas.add(new Ronda(2, 4, 4, 3600, new Tienda(comodines, tarots, carta)));
-        rondasMockeadas.add(new Ronda(3, 4, 4, 4320, new Tienda(comodines, tarots, carta)));
+        rondasMockeadas.add(ronda1Mock);
+        rondasMockeadas.add(ronda2Mock);
+        rondasMockeadas.add(ronda3Mock);
 
         // Configurar comportamiento del mock
         when(lectorMock.leerBalatro()).thenReturn(rondasMockeadas);

@@ -15,15 +15,6 @@ public class Ronda {
         this.tienda = tienda;
     }
 
-    public void pasarTurno(int puntajeTotal){
-        this.manos -= 1;
-        if(puntajeASuperar <= puntajeTotal);
-            System.out.println("siguiente ronda!");
-        if(manos <= 0){
-            System.out.println("perdiste!");
-        }
-    }
-
     public int getPuntajeASuperar(){
         return puntajeASuperar;
     }
@@ -34,15 +25,6 @@ public class Ronda {
 
     public int getDescartes(){
         return descartes;
-    }
-
-    public void descontarDescarte(){
-        if (descartes > 0){
-            descartes --;
-        }
-        else{
-            descartes = 0;
-        }
     }
 
     public int getCantidadDeManos(){

@@ -270,6 +270,7 @@ public class Jugador {
         tarotsUsados = new ArrayList<>();
         comodines = new ArrayList<>();
         cartasDisponibles = new ArrayList<>();
+        reiniciarMano();
         perdio = false;
     }
 }

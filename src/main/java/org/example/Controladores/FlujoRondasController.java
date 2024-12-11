@@ -20,10 +20,5 @@ public class FlujoRondasController {
 
             PantallaTiendaController pantallaTienda = new PantallaTiendaController(stage, mediaPlayer, mazo, rondas, numeroRonda, jugador);
             pantallaTienda.iniciarPantallaTienda(ronda.obtenerTienda());
-
-
-
-            PantallaJuegoController pantallaJuego= new PantallaJuegoController(stage, mediaPlayer);
-
         }
 }

@@ -71,7 +71,7 @@ public class JuegoScreen extends VBox {
             controller.descartarCartas(mazo);
 
         });
-        ronda.descontarDescarte();
+//        ronda.descontarDescarte();
 
 
 

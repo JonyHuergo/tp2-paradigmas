@@ -35,7 +35,6 @@ public class Mazo {
 
 
         if (cantidad > cartas.size()) {
-            System.out.println("No hay suficientes cartas en el mazo.");
             return cartas;
         }
 

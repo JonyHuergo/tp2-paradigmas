@@ -13,7 +13,6 @@ public class TarotSobreCarta extends Tarot {
         manoPoker.mejorarCarta(this.carta, this.puntos, this.multiplicador);
     }
     public void usarSobre(Carta carta){
-
         this.carta = carta;
     }
     @Override

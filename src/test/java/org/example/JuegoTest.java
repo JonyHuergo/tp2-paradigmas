@@ -115,7 +115,7 @@ public class JuegoTest {
         List<Comodin> comodinesTienda = tienda.obtenerComodines();
         jugador.agregarComodin(comodinesTienda.get(0));
 
-        // Juego Ronda 1: Pasa la primera ronda con puntaje (100 + 20) * (8 + 15) = 2760
+        // Juego Ronda 1: Pasa la primera ronda con puntaje (100 + 20) * (8 + 15) = 2760 * 2
         float puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {
            for (Carta cartaElegida : mazoRonda1.repartirCartas(5)) {
@@ -125,7 +125,7 @@ public class JuegoTest {
         }
         System.out.println(puntaje);
 
-        // Ronda 2
+        // Ronda 2: Pasa la segunda ronda con puntaje (60+(4x4)+30)*(7+3) = 1060 * 4
         numeroRonda = 1;
         ronda = rondas.get(numeroRonda);
         //ronda.setAtributosJugador(jugador);
@@ -139,7 +139,7 @@ public class JuegoTest {
 
         // Juego Ronda 2: Pasa la segunda ronda con puntaje
         puntaje = 0;
-        while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {//(60+(4x4)+30)*(7+3)=1060
+        while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {
             for (Carta cartaElegida : mazoRonda2.repartirCartas(4)) {
                 jugador.agregarCarta(cartaElegida);
             }
@@ -164,7 +164,7 @@ public class JuegoTest {
         // Juego Ronda 3
         puntaje = 0;
         while (puntaje < ronda.getPuntajeASuperar() && !jugador.perdio()) {
-            for (Carta cartaElegida : mazoRonda3.repartirCartas(1)) {//(5+2+30)*(1+3)=148   es el tarot que esta bug
+            for (Carta cartaElegida : mazoRonda3.repartirCartas(1)) { //(5+2+30)*(1+3)=148   es el tarot que esta bug
                 jugador.agregarCarta(cartaElegida);
             }
             puntaje = jugador.jugar(numeroRonda);

@@ -1,9 +1,7 @@
 package org.example;
 
-import org.example.Comodin.ActivacionSiempre;
-import org.example.Comodin.ActivacionTipoDeMano;
-import org.example.Comodin.Comodin;
-import org.example.Comodin.ComodinBase;
+import org.example.Comodin.*;
+import org.example.Tarot.TarotSobreCarta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -88,29 +86,40 @@ public class JugadorTest {
 
         assertEquals(puntajeEsperado, puntajeObtenido);
     }
+
+    @Test
+    public void test04UnJugadorRealizaUnaJugadaConUnComodinYUnTarot() {
+        int puntajeEsperado = 448; //(puntajePar + puntajeCartas)<-(10 + 4) * (2+(2x3)4))->((multiplicarParmultiplicadorPorComodin) + multiplicadorCartas)
+
+        ManoPoker manoPoker = new ManoPoker();
+        Jugador jugador = new Jugador();
+
+        // Comodín
+        Comodin comodin = new ComodinPorDescarte(0, 2, "Descarte");
+        ArrayList<Comodin> comodines = new ArrayList<Comodin>();
+        comodines.add(comodin);
+        jugador.setComodines(comodines);
+
+        // Tarot
+        TarotSobreCarta tarot = new TarotSobreCarta("La Emperatriz", "Mejora 1 carta seleccionada y la convierte en una multicarta.", "carta", "cualquiera", 1, 4);
+
+        // Cartas (Pareja de 2)
+        Carta carta = new Carta("carta", "diamantes", "2", 2, "1");
+        manoPoker.agregarCarta(carta);
+
+        Carta cartaMejorada = new Carta("cartaAMejorar", "diamantes", "2", 2, "1");
+        tarot.usarSobre(cartaMejorada);
+        manoPoker.agregarCarta(cartaMejorada);
+
+        jugador.setManoPoker(manoPoker);
+        jugador.agregarTarot(tarot);
+        jugador.setCantidadDeManos(5);
+        jugador.setCantidadDeDescartes(3);
+
+        // Jugar
+        float puntajeObtenido = jugador.jugar(0);
+
+        assertEquals(puntajeEsperado, puntajeObtenido);
+    }
+
 }
-/*
-@Test
-public void test04UnJugadorRealizaUnaJugadaConUnComodinYUnTarot() {
-    int puntajeEsperado = 224;//(puntajePar + puntajeCartas)<-(10 + 4)*(2x(2x3)+4))->((multiplicarPar*multiplicadorPorComodin) + multiplicadorCartas)
-
-    ManoPoker manoPoker = new ManoPoker();
-    TarotSobreCarta tarot = new TarotSobreCarta( "La Emperatriz","Mejora 1 carta seleccionada y la convierte en una multicarta.", "carta", "cualquiera",1, 4);
-    Comodin comodin = new ComodinPorDescarte(0,2, "Descarte");
-
-    Carta cartaMejorada = new Carta("cartaAMejorar", "diamantes", "2", 2, "0");
-    Carta carta = new Carta("carta", "diamantes", "2", 2, "0");;
-    manoPoker.agregarCarta(cartaMejorada);
-    manoPoker.agregarCarta(carta);
-    Jugador jugador = new Jugador();
-    jugador.setManoPoker(manoPoker);
-    ArrayList<Comodin> comodines = new ArrayList<Comodin>();
-    comodines.add(comodin);
-    jugador.setComodines(comodines);
-    tarot.usarSobre(cartaMejorada);
-    jugador.usarTarot(tarot);
-
-    float puntajeObtenido = jugador.jugar();
-    assertEquals(puntajeEsperado, puntajeObtenido);
-}
-}*/

@@ -22,7 +22,67 @@ public class JuegoTest {
         LectorArchivosJson lectorMock = mock(LectorArchivosJson.class);
 
         // Crear datos mockeados
-        // Mockear cartas del mazo
+        List<Ronda> rondasMockeadas = new ArrayList<>();
+
+        // Crear datos de prueba
+        List<Comodin> comodines = new ArrayList<>();
+        comodines.add(new ComodinPorManoJugada("Comodin Astuto", "descripcion", "par", 50, 1));
+        comodines.add(new ComodinPorDescarte(50, 1, "par"));
+        // Crear datos de prueba
+
+        List<Tarot> tarots = new ArrayList<>();
+        tarots.add(new TarotSobreMano("Fuerza", "Mejora la mano poker", "mano", "poker", 3, 30));
+        tarots.add(new TarotSobreMano("Fuerza", "Mejora la mano poker", "mano", "poker", 3, 30));
+
+        Carta carta = new Carta("corazones", 10);
+
+        // Mockear tiendas
+        Tienda tiendaMock1 = mock(Tienda.class);
+        Tienda tiendaMock2 = mock(Tienda.class);
+        Tienda tiendaMock3 = mock(Tienda.class);
+
+        when(tiendaMock1.obtenerComodines()).thenReturn(comodines);
+        when(tiendaMock1.obtenerTarots()).thenReturn(tarots);
+        when(tiendaMock1.obtenerCarta()).thenReturn(carta);
+
+        when(tiendaMock2.obtenerComodines()).thenReturn(comodines);
+        when(tiendaMock2.obtenerTarots()).thenReturn(tarots);
+        when(tiendaMock2.obtenerCarta()).thenReturn(carta);
+
+        when(tiendaMock3.obtenerComodines()).thenReturn(comodines);
+        when(tiendaMock3.obtenerTarots()).thenReturn(tarots);
+        when(tiendaMock3.obtenerCarta()).thenReturn(carta);
+
+        // Mockear rondas
+        Ronda rondaMock1 = mock(Ronda.class);
+        Ronda rondaMock2 = mock(Ronda.class);
+        Ronda rondaMock3 = mock(Ronda.class);
+
+        when(rondaMock1.getPuntajeASuperar()).thenReturn(3000);
+        when(rondaMock1.getDescartes()).thenReturn(3);
+        when(rondaMock1.getCantidadDeManos()).thenReturn(3);
+        when(rondaMock1.obtenerTienda()).thenReturn(tiendaMock1);
+
+        when(rondaMock2.getPuntajeASuperar()).thenReturn(3600);
+        when(rondaMock2.getDescartes()).thenReturn(4);
+        when(rondaMock2.getCantidadDeManos()).thenReturn(4);
+        when(rondaMock2.obtenerTienda()).thenReturn(tiendaMock2);
+
+        when(rondaMock3.getPuntajeASuperar()).thenReturn(4320);
+        when(rondaMock3.getDescartes()).thenReturn(4);
+        when(rondaMock3.getCantidadDeManos()).thenReturn(4);
+        when(rondaMock3.obtenerTienda()).thenReturn(tiendaMock3);
+
+        // Agregar rondas a la lista
+        rondasMockeadas.add(rondaMock1);
+        rondasMockeadas.add(rondaMock2);
+        rondasMockeadas.add(rondaMock3);
+
+        // Configurar el lector para devolver las rondas mockeadas
+        when(lectorMock.leerBalatro()).thenReturn(rondasMockeadas);
+
+
+        // Configurar el lector para devolver un mazo realista
         ArrayList<Carta> mazoMockeado = new ArrayList<>();
         mazoMockeado.add(new Carta("diamantes", 2));
         mazoMockeado.add(new Carta("diamantes", 3));
@@ -31,54 +91,13 @@ public class JuegoTest {
         mazoMockeado.add(new Carta("diamantes", 6));
 
         // Mockear rondas
-        List<Ronda> rondasMockeadas = new ArrayList<>();
-
-        // Mockear Comodines y Tarots de la tienda
-        List<Comodin> comodines = new ArrayList<>();
-        comodines.add(new ComodinPorManoJugada("Comodin Astuto", "descripcion", "par", 50, 1));
-        comodines.add(new ComodinPorDescarte(50, 1, "par"));
-
-        List<Tarot> tarots = new ArrayList<>();
-        tarots.add(new TarotSobreMano("Fuerza", "Mejora la mano poker", "mano", "poker", 3, 30));
-        tarots.add(new TarotSobreMano("Fuerza", "Mejora la mano poker", "mano", "poker", 3, 30));
-
-        Carta carta = new Carta("corazones", 10);
-
-        when(lectorMock.crearTienda(comodines, tarots,carta)).thenReturn(new Tienda(comodines, tarots, carta));
-
-        Ronda ronda1Mock = mock(Ronda.class);
-        when(ronda1Mock.getPuntajeASuperar()).thenReturn(3000);
-        when(ronda1Mock.getDescartes()).thenReturn(3);
-        when(ronda1Mock.getCantidadDeManos()).thenReturn(3);
-        when(ronda1Mock.obtenerTienda()).thenReturn(new Tienda(comodines, tarots, carta));
-
-        Ronda ronda2Mock = mock(Ronda.class);
-        when(ronda2Mock.getPuntajeASuperar()).thenReturn(3600);
-        when(ronda2Mock.getDescartes()).thenReturn(4);
-        when(ronda2Mock.getCantidadDeManos()).thenReturn(4);
-        when(ronda2Mock.obtenerTienda()).thenReturn(new Tienda(comodines, tarots, carta));
-
-        Ronda ronda3Mock = mock(Ronda.class);
-        when(ronda3Mock.getPuntajeASuperar()).thenReturn(4320);
-        when(ronda3Mock.getDescartes()).thenReturn(4);
-        when(ronda3Mock.getCantidadDeManos()).thenReturn(4);
-        when(ronda3Mock.obtenerTienda()).thenReturn(new Tienda(comodines, tarots, carta));
-
-
-        // Agregar rondas con tienda mockeada
-        rondasMockeadas.add(ronda1Mock);
-        rondasMockeadas.add(ronda2Mock);
-        rondasMockeadas.add(ronda3Mock);
-
-        // Configurar comportamiento del mock
-        when(lectorMock.leerBalatro()).thenReturn(rondasMockeadas);
         when(lectorMock.leerMazo()).thenReturn(mazoMockeado);
-        List<Ronda> rondas = lectorMock.leerBalatro();
-        // Crear el juego
+
+        // Crear el juego y configurar el lector mockeado
         Juego juego = new Juego();
 
-        // Usar el mock
         juego.leerArchivo(lectorMock);
+        List<Ronda> rondas = lectorMock.leerBalatro();
 
         // Verificar que el juego se configuró correctamente
         Jugador jugador = juego.getJugador();
@@ -110,7 +129,7 @@ public class JuegoTest {
 
         // Ronda 2
         numeroRonda = 1;
-        ronda = rondasMockeadas.get(numeroRonda);
+        ronda = rondas.get(numeroRonda);
 
         descartes = ronda.getDescartes();
         jugador.setCantidadDeDescartes(descartes);
